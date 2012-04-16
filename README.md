@@ -6,6 +6,3 @@ Om Github te gebruiken heb je een account nodig. Deze kan je gratis aanmaken, da
 
 ## Planning
 De projectplanning vindt je vooralsnog op http://thomasbaart.github.com/ISM2IKBS.V111/.
-
-## Overwegingen
-Ik heb een beetje gewerkt met branchen/forks op github, en als je met verschillende branches werkt moet Dropbox de hele folder weer updaten. Lijkt me handig dat we óf Dropbox gebruiken, óf github voor alle code.
