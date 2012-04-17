@@ -16,8 +16,13 @@ public class Main {
    */
   public static void main( String[] args ) {
     // TODO: Application logic here
-      System.out.println("test");
+      
       
       System.out.println("jormen!");
+      System.out.println("jormen!");
+      System.out.println("jormen!");
+      System.out.println("jormen!");
+      System.out.println("jormen!");
+      
   }
 }
