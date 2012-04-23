@@ -1,11 +1,11 @@
-package infoserver;
+package gfy;
 
 /**
- * De infoserver.
+ * De master client.
  * 
  * @author thomasbaart
  */
-public class InfoServer {
+public class MasterClient {
 
   /**
    * @param args the command line arguments

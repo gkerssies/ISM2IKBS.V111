@@ -1,11 +1,11 @@
-package infoclient;
+package gfy;
 
 /**
- * De info client.
+ * De infoserver.
  * 
  * @author thomasbaart
  */
-public class InfoClient {
+public class InfoServer {
 
   /**
    * @param args the command line arguments

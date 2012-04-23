@@ -1,11 +1,11 @@
-package masterclient;
+package gfy;
 
 /**
- * De master client.
+ * De info client.
  * 
  * @author thomasbaart
  */
-public class MasterClient {
+public class InfoClient {
 
   /**
    * @param args the command line arguments
