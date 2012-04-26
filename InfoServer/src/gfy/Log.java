@@ -12,10 +12,28 @@ import java.util.ArrayList;
  */
 public class Log {
   
-  static ArrayList<String> logitem = new ArrayList<String>();
-  static ArrayList<String> javaexception = new ArrayList<String>();
-  static ArrayList<String> friendlyerror = new ArrayList<String>();
-  static ArrayList<LogType> jexception = new ArrayList<LogType>();
+  private static ArrayList<String> logitem = new ArrayList<String>();
+  private static ArrayList<String> jxception = new ArrayList<String>();
+  private static ArrayList<String> friendlyerror = new ArrayList<String>();
+  private static ArrayList<LogType> type = new ArrayList<LogType>();
+  
+  public static void addItem(String l,String j,String f,LogType t)
+  {
+    logitem.add(l);
+    jxception.add(j);
+    friendlyerror.add(f);
+    type.add(t);
+  }
+  @Override
+  public String toString()
+  {
+    String temp = "";
+    for(String t : logitem)
+    {
+      temp += t;
+    }
+    return temp;
+  }
   
   
 }

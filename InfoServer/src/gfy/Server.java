@@ -38,9 +38,12 @@ public class Server extends Thread{
   {
     try {
       serversocket = new ServerSocket(config.getServerport());
-    } catch ( IOException ex ) {
-      Logger.getLogger( Server.class.getName() ).log( Level.SEVERE, null, ex );
+      
     }
+    catch ( IOException ex ) {
+      Log.addItem("Thread exception", ex.getMessage(),"Er is een fout opgetreden tijdens het starten van de server", LogType.Error);
+    }
+    System.out.println(new Log().toString());
   }
   
 }
