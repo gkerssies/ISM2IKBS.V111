@@ -32,7 +32,9 @@ public class InlogListener implements ActionListener {
   public void actionPerformed( ActionEvent ae ) {
     if ( ae.getSource() == frame.getCancelButton() ) {
       System.exit( 0 );
-      System.out.println( "Hoi" );
+    } else if ( ae.getSource() == frame.getLoginButton() ) {
+      System.out.println( "Login button clicked." );
+      InfoClient.openOverviewFrame();
     }
   }
 }
