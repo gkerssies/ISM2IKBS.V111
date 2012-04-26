@@ -3,6 +3,8 @@ package gfy;
 import UserInterface.*;
 import java.awt.*;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 
@@ -13,11 +15,9 @@ import javax.swing.border.LineBorder;
  * @author thomasbaart
  */
 public class InlogFrame extends JFrame {
-  
+
   /*
    * TODO: Add actionlistener class
-   * TODO: Add getters for the buttons and fields
-   * TODO: Clean up the setup method! Way too crowded!
    */
   private InputPanel usernamePanel, passwordPanel, buttonPanel, loginFormPanel;
   private TexturedPanel mainPanel;
@@ -31,6 +31,8 @@ public class InlogFrame extends JFrame {
   private static final String passwordLabelImage = "resources/images/labels/passwordLabel.png";
   private static final String cancelButtonImage = "resources/images/buttons/cancelButton.png";
   private static final String loginButtonImage = "resources/images/buttons/loginButton.png";
+  private static final Color transparant = new Color( 0, 0, 0, 0 );
+  private static final Color transparantGray = new Color( 255, 255, 255, 150 );
 
   /**
    * Default constructor.
@@ -44,43 +46,15 @@ public class InlogFrame extends JFrame {
    * Sets up the InlogFrame.
    */
   private void setup() {
-    mainPanel = new TexturedPanel( mainPanelBackground );
-    mainPanel.setLayout( new BorderLayout() );
+    CompoundBorder border = new CompoundBorder( new LineBorder( transparant, 3 ),
+                                                new LineBorder( Color.GRAY, 1 ) );
 
-    loginFormPanel = new InputPanel();
-    loginFormPanel.setLayout( new BorderLayout() );
-    LineBorder outerBorder = new LineBorder( new Color( 0, 0, 0, 0 ), 4 );
-    LineBorder innerBorder = new LineBorder( Color.GRAY, 1 );
-    CompoundBorder border = new CompoundBorder( outerBorder, innerBorder );
-    loginFormPanel.setBorder( border );
+    setupUsernamePanel( border );
+    setupPasswordPanel( border );
+    setupButtonPanel();
+    setupLoginFormPanel( usernamePanel, passwordPanel );
+    setupMainPanel( loginFormPanel, buttonPanel );
 
-    usernamePanel = new InputPanel( userNameLabelImage );
-    usernamePanel.setBackground( new Color( 255, 255, 255, 150 ) );
-    passwordPanel = new InputPanel( passwordLabelImage );
-    passwordPanel.setBackground( new Color( 255, 255, 255, 150 ) );
-    buttonPanel = new InputPanel();
-
-    outerBorder = new LineBorder( Color.GRAY, 1 );
-    innerBorder = new LineBorder( new Color( 0, 0, 0, 0 ), 3 );
-    border = new CompoundBorder( outerBorder, innerBorder );
-
-    usernameField = new TexturedTextField( fieldBackground, 15 );
-    usernameField.setBorder( border );
-    passwordField = new TexturedPasswordField( fieldBackground, 15 );
-    passwordField.setBorder( border );
-
-    cancelButton = new ImgButton( cancelButtonImage );
-    loginButton = new ImgButton( loginButtonImage );
-
-    usernamePanel.add( usernameField );
-    passwordPanel.add( passwordField );
-    buttonPanel.add( cancelButton );
-    buttonPanel.add( loginButton );
-
-    loginFormPanel.add( usernamePanel, BorderLayout.NORTH );
-    loginFormPanel.add( passwordPanel, BorderLayout.SOUTH );
-    mainPanel.add( loginFormPanel, BorderLayout.NORTH );
-    mainPanel.add( buttonPanel, BorderLayout.SOUTH );
     add( mainPanel );
 
     userMonitorDim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -96,5 +70,131 @@ public class InlogFrame extends JFrame {
 
     setResizable( false );
     setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+  }
+
+  /**
+   * Sets up the usernamePanel with the appropriate label, field and style
+   * settings.
+   *
+   * @param border Border to style the TexturedTextField with.
+   *
+   * @return The set up usernamePanel.
+   */
+  private InputPanel setupUsernamePanel( Border border ) {
+    usernamePanel = new InputPanel( userNameLabelImage );
+    usernamePanel.setBackground( transparantGray );
+
+    usernameField = new TexturedTextField( fieldBackground, 15 );
+    getUsernameField().setBorder( border );
+
+    usernamePanel.add( getUsernameField() );
+
+    return usernamePanel;
+  }
+
+  /**
+   * Sets up the passwordPanel with the appropriate label, field and style
+   * settings.
+   *
+   * @param border Border to style the TexturedPasswordField with.
+   *
+   * @return The set up passwordPanel.
+   */
+  private InputPanel setupPasswordPanel( Border border ) {
+    passwordPanel = new InputPanel( passwordLabelImage );
+    passwordPanel.setBackground( transparantGray );
+
+    passwordField = new TexturedPasswordField( fieldBackground, 15 );
+    getPasswordField().setBorder( border );
+
+    passwordPanel.add( getPasswordField() );
+
+    return passwordPanel;
+  }
+
+  /**
+   * Sets up the buttonPanel with the appropriate buttons.
+   *
+   * @return The set up buttonPanel.
+   */
+  private InputPanel setupButtonPanel() {
+    buttonPanel = new InputPanel();
+
+    cancelButton = new ImgButton( cancelButtonImage );
+    loginButton = new ImgButton( loginButtonImage );
+
+    buttonPanel.add( getCancelButton() );
+    buttonPanel.add( getLoginButton() );
+
+    return buttonPanel;
+  }
+
+  /**
+   * Sets up the inputPanel with the appropriate subpanels.
+   *
+   * @param topPanel    Panel to use as the top panel.
+   * @param bottomPanel Panel to use as the bottom panel.
+   *
+   * @return The set up inputPanel.
+   */
+  private InputPanel setupLoginFormPanel( JPanel topPanel, JPanel bottomPanel ) {
+    loginFormPanel = new InputPanel();
+    loginFormPanel.setLayout( new BorderLayout() );
+
+    LineBorder outerBorder = new LineBorder( transparant, 4 );
+    LineBorder innerBorder = new LineBorder( Color.GRAY, 1 );
+    CompoundBorder border = new CompoundBorder( outerBorder, innerBorder );
+    loginFormPanel.setBorder( border );
+
+    loginFormPanel.add( topPanel, BorderLayout.NORTH );
+    loginFormPanel.add( bottomPanel, BorderLayout.SOUTH );
+
+    return loginFormPanel;
+  }
+
+  /**
+   * Sets up the mainPanel with the appropriate subpanels.
+   *
+   * @param topPanel    Panel to use as the top panel.
+   * @param bottomPanel Panel to use as the bottom panel.
+   *
+   * @return The set up mainPanel.
+   */
+  private TexturedPanel setupMainPanel( JPanel topPanel, JPanel bottomPanel ) {
+    mainPanel = new TexturedPanel( mainPanelBackground );
+    mainPanel.setLayout( new BorderLayout() );
+
+    mainPanel.add( topPanel, BorderLayout.NORTH );
+    mainPanel.add( bottomPanel, BorderLayout.SOUTH );
+
+    return mainPanel;
+  }
+
+  /**
+   * @return the usernameField
+   */
+  public TexturedTextField getUsernameField() {
+    return usernameField;
+  }
+
+  /**
+   * @return the passwordField
+   */
+  public TexturedPasswordField getPasswordField() {
+    return passwordField;
+  }
+
+  /**
+   * @return the cancelButton
+   */
+  public ImgButton getCancelButton() {
+    return cancelButton;
+  }
+
+  /**
+   * @return the loginButton
+   */
+  public ImgButton getLoginButton() {
+    return loginButton;
   }
 }
