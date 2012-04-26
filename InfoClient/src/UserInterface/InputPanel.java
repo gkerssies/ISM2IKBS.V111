@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
+ * Right aligned JPanel with a transparent background and optional label
+ * generated from an image file.
  *
  * @author thomasbaart
  */
