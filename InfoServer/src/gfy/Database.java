@@ -10,24 +10,25 @@ package gfy;
  * @version 0.1 - 26 april 2012
  */
 public class Database {
-  
+
   private String name;
   private String host;
   private String port;
   private String username;
   private String password;
-  
-  /** Discription of the constructor from the database class
-   * @param name the name of the database
-   * @param host the database host of the database
-   * @param port the port of the databaseserver
+
+  /**
+   * Discription of the constructor from the database class
+   *
+   * @param name     the name of the database
+   * @param host     the database host of the database
+   * @param port     the port of the databaseserver
    * @param username the username of the database
    * @param password the password of the database
    */
-  public Database(String name,String host,String port,String username,String password)
-  {
-    this.name= name;
-    this.host= host;
+  public Database( String name, String host, String port, String username, String password ) {
+    this.name = name;
+    this.host = host;
     this.port = port;
     this.username = username;
     this.password = password;
@@ -67,5 +68,4 @@ public class Database {
   public String getPassword() {
     return password;
   }
-  
 }
