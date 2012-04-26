@@ -21,8 +21,9 @@ public class InputPanel extends JPanel {
    * background.
    */
   public InputPanel() {
-    super( new FlowLayout( FlowLayout.RIGHT ) );
-    setBackground( new Color( 0, 0, 0, 0 ) );
+    super();
+    setLayout( new FlowLayout( FlowLayout.RIGHT ) );
+    setBackground( new Color( 255, 255, 255, 0 ) );
   }
 
   /**
@@ -32,8 +33,9 @@ public class InputPanel extends JPanel {
    * @param fileName Image file to make the label from.
    */
   public InputPanel( String fileName ) {
-    super( new FlowLayout( FlowLayout.RIGHT ) );
-    setBackground( new Color( 0, 0, 0, 0 ) );
+    super();
+    setLayout( new FlowLayout( FlowLayout.RIGHT ) );
+    setBackground( new Color( 255, 255, 255, 0 ) );
     label = new JLabel( new ImageIcon( fileName ) );
     this.add( label );
   }
