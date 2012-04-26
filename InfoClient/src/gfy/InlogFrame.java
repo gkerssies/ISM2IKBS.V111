@@ -1,14 +1,10 @@
 package gfy;
 
-import UserInterface.ImgButton;
-import UserInterface.InputPanel;
-import UserInterface.TexturedPanel;
-import UserInterface.TexturedPasswordField;
-import UserInterface.TexturedTextField;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
+import UserInterface.*;
+import java.awt.*;
 import javax.swing.JFrame;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
 
 /**
  * Frame that shows when launching the application, users need to enter their
@@ -17,7 +13,12 @@ import javax.swing.JFrame;
  * @author thomasbaart
  */
 public class InlogFrame extends JFrame {
-
+  
+  /*
+   * TODO: Add actionlistener class
+   * TODO: Add getters for the buttons and fields
+   * TODO: Clean up the setup method! Way too crowded!
+   */
   private InputPanel usernamePanel, passwordPanel, buttonPanel, loginFormPanel;
   private TexturedPanel mainPanel;
   private TexturedTextField usernameField;
@@ -31,20 +32,42 @@ public class InlogFrame extends JFrame {
   private static final String cancelButtonImage = "resources/images/buttons/cancelButton.png";
   private static final String loginButtonImage = "resources/images/buttons/loginButton.png";
 
+  /**
+   * Default constructor.
+   */
   public InlogFrame() {
     super();
     setup();
   }
 
+  /**
+   * Sets up the InlogFrame.
+   */
   private void setup() {
     mainPanel = new TexturedPanel( mainPanelBackground );
+    mainPanel.setLayout( new BorderLayout() );
+
     loginFormPanel = new InputPanel();
+    loginFormPanel.setLayout( new BorderLayout() );
+    LineBorder outerBorder = new LineBorder( new Color( 0, 0, 0, 0 ), 4 );
+    LineBorder innerBorder = new LineBorder( Color.GRAY, 1 );
+    CompoundBorder border = new CompoundBorder( outerBorder, innerBorder );
+    loginFormPanel.setBorder( border );
+
     usernamePanel = new InputPanel( userNameLabelImage );
+    usernamePanel.setBackground( new Color( 255, 255, 255, 150 ) );
     passwordPanel = new InputPanel( passwordLabelImage );
+    passwordPanel.setBackground( new Color( 255, 255, 255, 150 ) );
     buttonPanel = new InputPanel();
 
+    outerBorder = new LineBorder( Color.GRAY, 1 );
+    innerBorder = new LineBorder( new Color( 0, 0, 0, 0 ), 3 );
+    border = new CompoundBorder( outerBorder, innerBorder );
+
     usernameField = new TexturedTextField( fieldBackground, 15 );
+    usernameField.setBorder( border );
     passwordField = new TexturedPasswordField( fieldBackground, 15 );
+    passwordField.setBorder( border );
 
     cancelButton = new ImgButton( cancelButtonImage );
     loginButton = new ImgButton( loginButtonImage );
@@ -54,10 +77,10 @@ public class InlogFrame extends JFrame {
     buttonPanel.add( cancelButton );
     buttonPanel.add( loginButton );
 
-    loginFormPanel.add( usernamePanel );
-    loginFormPanel.add( passwordPanel );
-    mainPanel.add( loginFormPanel );
-    mainPanel.add( buttonPanel );
+    loginFormPanel.add( usernamePanel, BorderLayout.NORTH );
+    loginFormPanel.add( passwordPanel, BorderLayout.SOUTH );
+    mainPanel.add( loginFormPanel, BorderLayout.NORTH );
+    mainPanel.add( buttonPanel, BorderLayout.SOUTH );
     add( mainPanel );
 
     userMonitorDim = Toolkit.getDefaultToolkit().getScreenSize();
