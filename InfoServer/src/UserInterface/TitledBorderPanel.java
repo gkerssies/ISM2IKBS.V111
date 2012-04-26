@@ -5,14 +5,17 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 /**
+ * This class creates a panel with a border around it which contains a title.
+ * This panel is only meant to create a nice look and doesn't contain server
+ * functionalities.
  *
  * @author Ido Bosman (s1047979)
  */
 public class TitledBorderPanel extends JPanel {
 
   /**
-   * Constructor for the TitledBorderPanel class
-   * 
+   * Constructor for the TitledBorderPanel class.
+   *
    * @param title  sets the title of the panel
    * @param margin sets the free space around the panel
    */

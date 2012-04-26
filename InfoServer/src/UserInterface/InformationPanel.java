@@ -3,6 +3,8 @@ package UserInterface;
 import javax.swing.*;
 
 /**
+ * Creates all information components. The number of connected clients will be
+ * shown here.
  *
  * @author Ido Bosman (s1047979)
  */

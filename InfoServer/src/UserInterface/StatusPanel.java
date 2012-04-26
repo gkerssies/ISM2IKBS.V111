@@ -1,12 +1,13 @@
 package UserInterface;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
+ * The server status information is shown here and the server state can be
+ * changed in this panel. The server status will be shown as a red or green
+ * image icon and there is a plain text status description. There is a "start"
+ * button and a "stop" button to change the state of the server.
  *
  * @author Ido Bosman (s1047979)
  */
@@ -14,9 +15,13 @@ public class StatusPanel extends JPanel {
 
   private JLabel statusImage, serverStatus;
   private JButton startServer, stopServer;
+  protected static final ImageIcon ICON_SERVER_STOPPED = new ImageIcon( "./resources/images/status-red.png" );
+  protected static final ImageIcon ICON_SERVER_STARTED = new ImageIcon( "./resources/images/status-green.png" );
+  protected static final String TEXT_SERVER_STOPPED = "De server staat uit.";
+  protected static final String TEXT_SERVER_STARTED = "De server staat aan.";
 
   /**
-   * Constructor for the StatusPanel class
+   * Constructor for the StatusPanel class.
    */
   public StatusPanel() {
     // Create BorderLayout to set the label and the buttons below eachother
@@ -28,15 +33,13 @@ public class StatusPanel extends JPanel {
 
     // Try to load the server status icon
     try {
-      File imageFile = new File( "./resources/images/status-red.png" );
-      BufferedImage image = ImageIO.read( imageFile );
-      statusImage = new JLabel( new ImageIcon( image ) );
+      statusImage = new JLabel( StatusPanel.ICON_SERVER_STOPPED );
       statusPanel.add( statusImage );
     } catch ( Exception e ) {
     }
 
     // Create label with the server status information
-    serverStatus = new JLabel( "De server staat uit." );
+    serverStatus = new JLabel( StatusPanel.TEXT_SERVER_STOPPED );
     serverStatus.setFont( null );
     statusPanel.add( serverStatus );
 
@@ -87,6 +90,10 @@ public class StatusPanel extends JPanel {
     return stopServer;
   }
 
+  /**
+   * 
+   * @return the red or green image icon which shows de server status
+   */
   public JLabel getStatusImage() {
     return statusImage;
   }
