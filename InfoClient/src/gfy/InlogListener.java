@@ -12,9 +12,18 @@ public class InlogListener implements ActionListener {
 
   private InlogFrame frame;
 
+  /**
+   * Default constructor.
+   */
   public InlogListener() {
   }
-  
+
+  /**
+   * Constructor. Sets the frame to listen for actions on. This ActionListener
+   * only supports an InlogFrame.
+   *
+   * @param frame The frame to listen on.
+   */
   public InlogListener( InlogFrame frame ) {
     this.frame = frame;
   }
