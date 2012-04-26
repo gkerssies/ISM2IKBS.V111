@@ -3,6 +3,7 @@ package UserInterface;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -38,12 +39,13 @@ public class TexturedPanel extends JPanel {
   /**
    * Creates a new TexturedPanel that tiles the provided icon.
    *
-   * @param textureIcon The icon resource to build a texture from
+   * @param fileName Image file to generate the texture from.
    */
-  public TexturedPanel( Icon textureIcon ) {
+  public TexturedPanel( String fileName ) {
     super();
 
-    if ( textureIcon != null ) {
+    if ( fileName != null ) {
+      ImageIcon textureIcon = new ImageIcon( fileName );
       setupIconPainter( textureIcon );
     }
   }
