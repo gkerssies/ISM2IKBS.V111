@@ -1,6 +1,8 @@
 package gfy;
 
+import UserInterface.TexturedPanel;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
@@ -11,13 +13,19 @@ import javax.swing.JFrame;
  */
 public class OverviewFrame extends JFrame {
   private Dimension overviewFrameDim, userMonitorDim;
+  private TexturedPanel mainPanel;
   
   public OverviewFrame() {
     super();
+    mainPanel = new TexturedPanel( "resources/images/backgrounds/mainPanelPattern.png");
+    mainPanel.setLayout( new FlowLayout());
+    generateOverviewFrames();
+    
+    add(mainPanel);
     userMonitorDim = Toolkit.getDefaultToolkit().getScreenSize();
 
     setLayout( new GridLayout() );
-    setTitle( "Info Client - Login" );
+    setTitle( "Info Client - Weergave overzicht" );
     setVisible( true );
     pack();
     overviewFrameDim = getSize();
@@ -27,4 +35,8 @@ public class OverviewFrame extends JFrame {
     setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
   }
   
+  private void generateOverviewFrames() {
+    mainPanel.add(new OverviewPanel());
+    mainPanel.add(new OverviewPanel());
+  }
 }
