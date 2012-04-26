@@ -5,13 +5,16 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
+ * This is the class from where the info server application is built. All
+ * components from classes InformationPanel, LogPanel, PortPanel and StatusPanel
+ * are loaded into this class and get a posoition in a BorderLayout.
  *
  * @author Ido Bosman (s1047979)
  */
 public class InfoServer extends JFrame {
 
   /**
-   * Constructor for the InfoServer class
+   * Constructor for the InfoServer class.
    */
   public InfoServer() {
     // Set standard frame settings
@@ -49,7 +52,7 @@ public class InfoServer extends JFrame {
   }
 
   /**
-   * Run the info server application
+   * Method where the server application begins when it is launched.
    *
    * @param args the command line arguments
    */

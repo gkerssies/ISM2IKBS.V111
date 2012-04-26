@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
+ * Handles all the user actions on the info server application. Actions like
+ * starting and stopping the server, configuring the portnumber and inspecting
+ * the logs are processed here.
  *
  * @author Ido Bosman (s1047979)
  */
@@ -42,15 +45,15 @@ public class ServerActionListener implements ActionListener {
     if ( e.getSource() == startServer ) {
       startServer.setEnabled( false );
       stopServer.setEnabled( true );
-      statusImage.setIcon( new ImageIcon( "./resources/images/status-green.png" ) );
-      serverStatus.setText( "De server is gestart." );
+      statusImage.setIcon( StatusPanel.ICON_SERVER_STARTED );
+      serverStatus.setText( StatusPanel.TEXT_SERVER_STARTED );
       port.setEnabled( false );
     } else if ( e.getSource() == stopServer ) {
       startServer.setEnabled( true );
       stopServer.setEnabled( false );
       statusPanel.repaint();
-      statusImage.setIcon( new ImageIcon( "./resources/images/status-red.png" ) );
-      serverStatus.setText( "De server is gestopt." );
+      statusImage.setIcon( StatusPanel.ICON_SERVER_STOPPED );
+      serverStatus.setText( StatusPanel.TEXT_SERVER_STOPPED );
       port.setEnabled( true );
     }
   }
