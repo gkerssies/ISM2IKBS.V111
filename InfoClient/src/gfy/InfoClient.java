@@ -5,6 +5,7 @@ package gfy;
  * 
  * @author thomasbaart
  * @author GerjanKerssies
+ * @author Ido Bosman
  */
 public class InfoClient {
 
