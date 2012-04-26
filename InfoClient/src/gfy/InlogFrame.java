@@ -46,8 +46,8 @@ public class InlogFrame extends JFrame {
    * Sets up the InlogFrame.
    */
   private void setup() {
-    CompoundBorder border = new CompoundBorder( new LineBorder( transparant, 3 ),
-                                                new LineBorder( Color.GRAY, 1 ) );
+    CompoundBorder border = new CompoundBorder( new LineBorder( Color.GRAY, 1 ),
+                                                new LineBorder( transparant, 3 ) );
 
     setupUsernamePanel( border );
     setupPasswordPanel( border );
