@@ -5,7 +5,7 @@ import javax.swing.*;
 
 /**
  *
- * @author Ido Bosman <ido_bosman@hotmail.com>
+ * @author Ido Bosman (s1047979)
  */
 public class PortPanel extends JPanel {
 

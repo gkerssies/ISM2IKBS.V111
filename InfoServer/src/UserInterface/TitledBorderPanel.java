@@ -6,7 +6,7 @@ import javax.swing.border.*;
 
 /**
  *
- * @author Ido Bosman
+ * @author Ido Bosman (s1047979)
  */
 public class TitledBorderPanel extends JPanel {
 

@@ -6,7 +6,7 @@ import javax.swing.*;
 
 /**
  *
- * @author Ido Bosman
+ * @author Ido Bosman (s1047979)
  */
 public class ServerActionListener implements ActionListener {
 

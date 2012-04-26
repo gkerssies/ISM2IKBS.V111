@@ -6,7 +6,7 @@ import javax.swing.*;
 
 /**
  *
- * @author Ido Bosman
+ * @author Ido Bosman (s1047979)
  */
 public class InfoServer extends JFrame {
 
@@ -21,24 +21,31 @@ public class InfoServer extends JFrame {
     setResizable( false );
 
     // Create the server status panel
-    JPanel statusPanel = new TitledBorderPanel( "Status", new int[] { 5, 5, 0, 5 } );
-    statusPanel.add( new StatusPanel() );
-    add( statusPanel, BorderLayout.NORTH );
+    JPanel panelNorth = new TitledBorderPanel( "Status", new int[] { 5, 5, 0, 5 } );
+    StatusPanel statusPanel = new StatusPanel();
+    panelNorth.add( statusPanel );
+    add( panelNorth, BorderLayout.NORTH );
 
     // Create the log panel
-    JPanel logPanel = new TitledBorderPanel( "Logs", new int[] { 5, 5, 5, 4 } );
-    logPanel.add( new LogPanel() );
-    add( logPanel, BorderLayout.WEST );
+    JPanel panelWest = new TitledBorderPanel( "Logs", new int[] { 5, 5, 5, 4 } );
+    LogPanel logPanel = new LogPanel();
+    panelWest.add( logPanel );
+    add( panelWest, BorderLayout.WEST );
 
     // Create the port panel
-    JPanel portPanel = new TitledBorderPanel( "Poort", new int[] { 5, 5, 5, 5 } );
-    portPanel.add( new PortPanel() );
-    add( portPanel, BorderLayout.EAST );
+    JPanel panelEeast = new TitledBorderPanel( "Poort", new int[] { 5, 5, 5, 5 } );
+    PortPanel portPanel = new PortPanel();
+    panelEeast.add( portPanel );
+    add( panelEeast, BorderLayout.EAST );
 
     // Create the information panel
-    JPanel informationPanel = new TitledBorderPanel( "Informatie", new int[] { 0, 5, 5, 5 } );
-    informationPanel.add( new InformationPanel() );
-    add( informationPanel, BorderLayout.SOUTH );
+    JPanel panelSouth = new TitledBorderPanel( "Informatie", new int[] { 0, 5, 5, 5 } );
+    InformationPanel informationPanel = new InformationPanel();
+    panelSouth.add( informationPanel );
+    add( panelSouth, BorderLayout.SOUTH );
+
+    // Create custom ActionListener to process the user actions
+    ServerActionListener sal = new ServerActionListener( statusPanel, portPanel );
   }
 
   /**
