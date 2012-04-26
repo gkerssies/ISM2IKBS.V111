@@ -34,16 +34,13 @@ public class UsernamePanel extends InputPanel {
 
   /**
    * Generates the TextField for the user to enter his username into.
-   *
-   * @return
    */
-  public final TexturedTextField generateTextField() {
+  private void generateTextField() {
     inputField = new TexturedTextField( "resources/images/backgrounds/fieldPattern.png", 15 );
     LineBorder outerBorder = new LineBorder( Color.gray, 1 );
     LineBorder innerBorder = new LineBorder( new Color( 0, 0, 0, 0 ), 3 );
     CompoundBorder compoundBorder = new CompoundBorder( outerBorder, innerBorder );
     inputField.setBorder( compoundBorder );
     add( inputField );
-    return inputField;
   }
 }
