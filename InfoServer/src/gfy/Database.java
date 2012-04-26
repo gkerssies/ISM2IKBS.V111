@@ -13,7 +13,7 @@ public class Database {
 
   private String name;
   private String host;
-  private String port;
+  private int port;
   private String username;
   private String password;
 
@@ -26,7 +26,7 @@ public class Database {
    * @param username the username of the database
    * @param password the password of the database
    */
-  public Database( String name, String host, String port, String username, String password ) {
+  public Database( String name, String host, int port, String username, String password ) {
     this.name = name;
     this.host = host;
     this.port = port;
@@ -51,7 +51,7 @@ public class Database {
   /**
    * @return the port of the databaseserver
    */
-  public String getPort() {
+  public int getPort() {
     return port;
   }
 

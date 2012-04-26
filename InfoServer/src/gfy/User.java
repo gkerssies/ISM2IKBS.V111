@@ -96,6 +96,7 @@ public class User implements Serializable {
           position++;
         }
       }
+      this.username.remove( position );
       this.password.remove( position );
       this.userType.remove( position );
       return true;
