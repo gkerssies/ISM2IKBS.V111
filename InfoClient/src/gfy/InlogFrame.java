@@ -2,6 +2,7 @@ package gfy;
 
 import UserInterface.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -16,15 +17,13 @@ import javax.swing.border.LineBorder;
  */
 public class InlogFrame extends JFrame {
 
-  /*
-   * TODO: Add actionlistener class
-   */
   private InputPanel usernamePanel, passwordPanel, buttonPanel, loginFormPanel;
   private TexturedPanel mainPanel;
   private TexturedTextField usernameField;
   private TexturedPasswordField passwordField;
   private ImgButton cancelButton, loginButton;
   private Dimension inlogFrameDim, userMonitorDim;
+  private ActionListener listener;
   private static final String fieldBackground = "resources/images/backgrounds/fieldPattern.png";
   private static final String mainPanelBackground = "resources/images/backgrounds/mainPanelPattern.png";
   private static final String userNameLabelImage = "resources/images/labels/usernameLabel.png";
@@ -39,6 +38,7 @@ public class InlogFrame extends JFrame {
    */
   public InlogFrame() {
     super();
+    listener = new InlogListener( this );
     setup();
   }
 
@@ -123,6 +123,9 @@ public class InlogFrame extends JFrame {
     cancelButton = new ImgButton( cancelButtonImage );
     loginButton = new ImgButton( loginButtonImage );
 
+    cancelButton.addActionListener( listener );
+    loginButton.addActionListener( listener );
+    
     buttonPanel.add( getCancelButton() );
     buttonPanel.add( getLoginButton() );
 

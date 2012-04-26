@@ -2,7 +2,7 @@ package gfy;
 
 /**
  * De info client.
- * 
+ *
  * @author thomasbaart
  */
 public class InfoClient {
