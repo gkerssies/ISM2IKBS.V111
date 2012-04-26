@@ -8,11 +8,11 @@ import javax.swing.*;
 
 /**
  *
- * @author Ido Bosman <ido_bosman@hotmail.com>
+ * @author Ido Bosman (s1047979)
  */
 public class StatusPanel extends JPanel {
 
-  private JLabel statusIcon, serverStatus;
+  private JLabel statusImage, serverStatus;
   private JButton startServer, stopServer;
 
   /**
@@ -28,14 +28,15 @@ public class StatusPanel extends JPanel {
 
     // Try to load the server status icon
     try {
-      BufferedImage image = ImageIO.read( new File( "./resources/images/status-red.png" ) );
-      statusIcon = new JLabel( new ImageIcon( image ) );
-      statusPanel.add( statusIcon );
+      File imageFile = new File( "./resources/images/status-red.png" );
+      BufferedImage image = ImageIO.read( imageFile );
+      statusImage = new JLabel( new ImageIcon( image ) );
+      statusPanel.add( statusImage );
     } catch ( Exception e ) {
     }
 
     // Create label with the server status information
-    serverStatus = new JLabel( "De server staat momenteel uit." );
+    serverStatus = new JLabel( "De server staat uit." );
     serverStatus.setFont( null );
     statusPanel.add( serverStatus );
 
@@ -60,5 +61,33 @@ public class StatusPanel extends JPanel {
 
     // Add container to the StatusPanel
     add( container );
+  }
+
+  /**
+   *
+   * @return the label which contains the status of the server as a string
+   */
+  public JLabel getServerStatus() {
+    return serverStatus;
+  }
+
+  /**
+   *
+   * @return the button which starts the server
+   */
+  public JButton getStartServer() {
+    return startServer;
+  }
+
+  /**
+   *
+   * @return the button which stops the server
+   */
+  public JButton getStopServer() {
+    return stopServer;
+  }
+
+  public JLabel getStatusImage() {
+    return statusImage;
   }
 }
