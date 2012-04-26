@@ -68,4 +68,13 @@ public class Database {
   public String getPassword() {
     return password;
   }
+  
+  /**
+   * method for database settings (Development purpose!!!)
+   * @return the complete database setting 
+   */
+  @Override
+  public String toString(){
+    return name + " " + host + " " + port + " " + username + " " + password;
+  }
 }
