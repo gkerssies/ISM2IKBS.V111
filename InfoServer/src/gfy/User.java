@@ -79,10 +79,88 @@ public class User implements Serializable {
   }
 
   /**
-   * Method for returining the complete user database(Testing purpose)
+   * Method for removing a user.
    *
+   * @param username the username from user that should be removed
+   *
+   * @return returns true if the user is succesfully removed
+   *
+   */
+  public boolean removeUser( String username ) {
+    int position = 0;
+    if ( this.username.contains( username ) ) {
+      for ( String u : this.username ) {
+        if ( u.equals( username ) ) {
+          break;
+        } else {
+          position++;
+        }
+      }
+      this.password.remove( position );
+      this.userType.remove( position );
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Method for verifying a user credential.
+   *
+   * @param username the username for the credential
+   * @param password the username for the credential
+   *
+   * @return returns true if the credential is succesfully verified
+   */
+  public boolean verifyCredential( String username, String password ) {
+    int position = 0;
+    if ( this.username.contains( username ) ) {
+      for ( String u : this.username ) {
+        if ( u.equals( username ) ) {
+          break;
+        } else {
+          position++;
+        }
+      }
+      String dbPassword = this.password.get( position );
+      if ( dbPassword.equals( password ) ) {
+        return true;
+      } else {
+        return false;
+      }
+
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Method for getting the user type.
+   *
+   * @param username the username
+   *
+   * @return returns the type of the current user
+   */
+  public UserType getUserType( String username ) {
+    int position = 0;
+    if ( this.username.contains( username ) ) {
+      for ( String u : this.username ) {
+        if ( u.equals( username ) ) {
+          break;
+        } else {
+          position++;
+        }
+      }
+
+    } else {
+      return null;
+    }
+    return this.userType.get( position );
+  }
+
+  /**
+   * Method for returning the complete user database(Testing purpose)
    * @return returns the complete userdatabase as a string
-   *
    */
   @Override
   public String toString() {
