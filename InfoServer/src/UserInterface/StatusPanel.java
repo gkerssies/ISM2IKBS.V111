@@ -1,7 +1,13 @@
 package UserInterface;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * The server status information is shown here and the server state can be
@@ -13,88 +19,86 @@ import javax.swing.*;
  */
 public class StatusPanel extends JPanel {
 
-  private JLabel statusImage, serverStatus;
-  private JButton startServer, stopServer;
-  protected static final ImageIcon ICON_SERVER_STOPPED = new ImageIcon( "./resources/images/status-red.png" );
-  protected static final ImageIcon ICON_SERVER_STARTED = new ImageIcon( "./resources/images/status-green.png" );
-  protected static final String TEXT_SERVER_STOPPED = "De server staat uit.";
-  protected static final String TEXT_SERVER_STARTED = "De server staat aan.";
+  private JLabel statusIconLabel, statusTextLabel;
+  private JButton startButton, stopButton;
+  protected static final ImageIcon SERVER_STOPPED_ICON = new ImageIcon( "./resources/images/status-red.png" );
+  protected static final ImageIcon SERVER_STARTED_ICON = new ImageIcon( "./resources/images/status-green.png" );
+  protected static final String SERVER_STOPPED_TEXT = "De server staat uit.";
+  protected static final String SERVER_STARTED_TEXT = "De server staat aan.";
 
   /**
    * Constructor for the StatusPanel class.
    */
   public StatusPanel() {
     // Create BorderLayout to set the label and the buttons below eachother
-    JPanel container = new JPanel( new BorderLayout() );
+    JPanel containerPanel = new JPanel( new BorderLayout() );
 
     // Create panel for the status image and text
     JPanel statusPanel = new JPanel( new FlowLayout( FlowLayout.LEFT ) );
     statusPanel.setPreferredSize( new Dimension( 200, 20 ) );
 
-    // Try to load the server status icon
-    try {
-      statusImage = new JLabel( StatusPanel.ICON_SERVER_STOPPED );
-      statusPanel.add( statusImage );
-    } catch ( Exception e ) {
-    }
+    // Load the image icon that shows the server status
+    statusIconLabel = new JLabel( StatusPanel.SERVER_STOPPED_ICON );
+    statusPanel.add( statusIconLabel );
 
     // Create label with the server status information
-    serverStatus = new JLabel( StatusPanel.TEXT_SERVER_STOPPED );
-    serverStatus.setFont( null );
-    statusPanel.add( serverStatus );
+    statusTextLabel = new JLabel( StatusPanel.SERVER_STOPPED_TEXT );
+    statusTextLabel.setFont( null );
+    statusPanel.add( statusTextLabel );
 
     // Add the status panel to the top of the container
-    container.add( statusPanel, BorderLayout.NORTH );
+    containerPanel.add( statusPanel, BorderLayout.NORTH );
 
     // Create panel for buttons to change the server state
-    JPanel btnPanel = new JPanel( new FlowLayout( FlowLayout.LEFT ) );
+    JPanel buttonPanel = new JPanel( new FlowLayout( FlowLayout.LEFT ) );
 
     // Create button to start the server
-    startServer = new JButton( "Start" );
-    startServer.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
-    btnPanel.add( startServer );
+    startButton = new JButton( "Start" );
+    startButton.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+    buttonPanel.add( startButton );
 
     // Create button to stop the server
-    stopServer = new JButton( "Stop" );
-    stopServer.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
-    btnPanel.add( stopServer );
+    stopButton = new JButton( "Stop" );
+    stopButton.setEnabled( false );
+    stopButton.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+    buttonPanel.add( stopButton );
 
     // Add buttons panel to the bottom of the container
-    container.add( btnPanel, BorderLayout.SOUTH );
+    containerPanel.add( buttonPanel, BorderLayout.SOUTH );
 
     // Add container to the StatusPanel
-    add( container );
+    add( containerPanel );
+  }
+
+  /**
+   *
+   * @return the red or green image icon which shows de server status
+   */
+  public JLabel getStatusIconLabel() {
+    return statusIconLabel;
   }
 
   /**
    *
    * @return the label which contains the status of the server as a string
    */
-  public JLabel getServerStatus() {
-    return serverStatus;
+  public JLabel getStatusTextLabel() {
+    return statusTextLabel;
   }
 
   /**
    *
    * @return the button which starts the server
    */
-  public JButton getStartServer() {
-    return startServer;
+  public JButton getStartButton() {
+    return startButton;
   }
 
   /**
    *
    * @return the button which stops the server
    */
-  public JButton getStopServer() {
-    return stopServer;
-  }
-
-  /**
-   * 
-   * @return the red or green image icon which shows de server status
-   */
-  public JLabel getStatusImage() {
-    return statusImage;
+  public JButton getStopButton() {
+    return stopButton;
   }
 }

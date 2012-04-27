@@ -1,8 +1,9 @@
 package gfy;
 
 import UserInterface.*;
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * This is the class from where the info server application is built. All
@@ -24,28 +25,28 @@ public class InfoServer extends JFrame {
     setResizable( false );
 
     // Create the server status panel
-    JPanel panelNorth = new TitledBorderPanel( "Status", new int[] { 5, 5, 0, 5 } );
+    JPanel northPanel = new TitledBorderPanel( "Status", new int[] { 5, 5, 0, 5 } );
     StatusPanel statusPanel = new StatusPanel();
-    panelNorth.add( statusPanel );
-    add( panelNorth, BorderLayout.NORTH );
+    northPanel.add( statusPanel );
+    add( northPanel, BorderLayout.NORTH );
 
     // Create the log panel
-    JPanel panelWest = new TitledBorderPanel( "Logs", new int[] { 5, 5, 5, 4 } );
+    JPanel westPanel = new TitledBorderPanel( "Logs", new int[] { 5, 5, 5, 4 } );
     LogPanel logPanel = new LogPanel();
-    panelWest.add( logPanel );
-    add( panelWest, BorderLayout.WEST );
+    westPanel.add( logPanel );
+    add( westPanel, BorderLayout.WEST );
 
     // Create the port panel
-    JPanel panelEeast = new TitledBorderPanel( "Poort", new int[] { 5, 5, 5, 5 } );
+    JPanel eastPanel = new TitledBorderPanel( "Poort", new int[] { 5, 5, 5, 5 } );
     PortPanel portPanel = new PortPanel();
-    panelEeast.add( portPanel );
-    add( panelEeast, BorderLayout.EAST );
+    eastPanel.add( portPanel );
+    add( eastPanel, BorderLayout.EAST );
 
     // Create the information panel
-    JPanel panelSouth = new TitledBorderPanel( "Informatie", new int[] { 0, 5, 5, 5 } );
+    JPanel southPanel = new TitledBorderPanel( "Informatie", new int[] { 0, 5, 5, 5 } );
     InformationPanel informationPanel = new InformationPanel();
-    panelSouth.add( informationPanel );
-    add( panelSouth, BorderLayout.SOUTH );
+    southPanel.add( informationPanel );
+    add( southPanel, BorderLayout.SOUTH );
 
     // Create custom ActionListener to process the user actions
     ServerActionListener sal = new ServerActionListener( statusPanel, portPanel );
