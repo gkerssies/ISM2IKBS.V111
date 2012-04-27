@@ -1,27 +1,35 @@
 package gfy;
 
 import UserInterface.TexturedPanel;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import javax.swing.JFrame;
+import java.awt.*;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+import javax.swing.*;
 
 /**
  *
  * @author thomasbaart
  */
 public class OverviewFrame extends JFrame {
+
   private Dimension overviewFrameDim, userMonitorDim;
   private TexturedPanel mainPanel;
-  
+  private JPanel overViewPanelContainer;
+
   public OverviewFrame() {
     super();
-    mainPanel = new TexturedPanel( "resources/images/backgrounds/mainPanelPattern.png");
-    mainPanel.setLayout( new FlowLayout());
+    overViewPanelContainer = new JPanel();
+    overViewPanelContainer.setLayout( new BoxLayout( overViewPanelContainer, BoxLayout.Y_AXIS) );
+    overViewPanelContainer.setBackground( new Color( 0, 0, 0, 0 ) );
+
     generateOverviewFrames();
+
+    mainPanel = new TexturedPanel( "resources/images/backgrounds/mainPanelPattern.png" );
+    mainPanel.setLayout( new BorderLayout() );
+    mainPanel.add(overViewPanelContainer, BorderLayout.CENTER);
     
-    add(mainPanel);
+    add( mainPanel );
+
     userMonitorDim = Toolkit.getDefaultToolkit().getScreenSize();
 
     setLayout( new GridLayout() );
@@ -30,13 +38,22 @@ public class OverviewFrame extends JFrame {
     pack();
     overviewFrameDim = getSize();
 
-    setLocation( ( userMonitorDim.width / 2 ) - ( overviewFrameDim.width / 2 ),
-                 ( int ) ( userMonitorDim.height / 2.75 ) - ( overviewFrameDim.height / 2 ) );
+    setLocation( ( userMonitorDim.width / 2 )
+                 - ( overviewFrameDim.width / 2 ),
+                 ( int ) ( userMonitorDim.height / 2.75 )
+                 - ( overviewFrameDim.height / 2 ) );
     setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
   }
-  
+
   private void generateOverviewFrames() {
-    mainPanel.add(new OverviewPanel());
-    mainPanel.add(new OverviewPanel());
+    String testIcon = "resources/images/icons/testIcon.png";
+    overViewPanelContainer.add( new OverviewPanel( testIcon,
+                                                   "TestTitel",
+                                                   "Mauris Iaculis Porttitor Posuere. Praesent Id Metus Massa, Ut Blandit Odio. Proin",
+                                                   1 ) );
+    overViewPanelContainer.add( new OverviewPanel( testIcon,
+                                                   "Andere query",
+                                                   "Mauris Iaculis Porttitor Posuere. Praesent Id Metus Massa, Ut Blandit Odio. Proin",
+                                                   2 ) );
   }
 }

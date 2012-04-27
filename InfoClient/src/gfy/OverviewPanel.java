@@ -3,6 +3,7 @@ package gfy;
 import UserInterface.ImgButton;
 import UserInterface.InputPanel;
 import UserInterface.TexturedPanel;
+import UserInterface.WrappableJLabel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -10,7 +11,8 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
@@ -19,66 +21,85 @@ import javax.swing.border.MatteBorder;
  * @author thomasbaart
  */
 public class OverviewPanel extends TexturedPanel {
+  /*
+   * TODO: Kleur lichter maken van de lijn onder de contenttitel
+   * TODO: Code dusdanig herschrijven dat er inputs zijn voor de foto, titel en
+   * content
+   * TODO: ActionListener toevoegen die goed onderscheid kan maken tussen de
+   * twee knoppen, wellicht met een genummerd veld die je meegeeft in de
+   * constructor
+   * TODO: Velden logisch hernoemen
+   */
 
-  private JPanel imagePanel, contentPanel, buttonPanel;
-  private TexturedPanel mainPanel;
+  private JPanel imagePanel, titlePanel, descriptionPanel, contentPanel, buttonPanel;
   private static final String buttonIcon = "resources/images/buttons/nextButton.png";
+  private static final Color transparant = new Color( 0, 0, 0, 0 );
+  private static final Color transparantGray = new Color( 255, 255, 255, 150 );
+  private static final EmptyBorder emptyBorder = new EmptyBorder( 3, 3, 3, 3 );
+  private static final LineBorder grayBorder = new LineBorder( Color.GRAY, 1 );
+  private final int ID;
 
-  public OverviewPanel() {
+  public OverviewPanel( String imageFilePath, String title, String description, int ID ) {
     super();
-    setupImagePanel( "resources/images/icons/testIcon.png" );
-    setupContentPanel();
+    setupImagePanel( imageFilePath );
+    setupContentPanel( title, description );
     setupButtonPanel();
     setupOverviewPanel();
+    this.ID = ID;
   }
 
-  /**
-   * Sets up the imagePanel with the appropriate image and styles.
-   *
-   * @param fileName
-   */
   private void setupImagePanel( String fileName ) {
     imagePanel = new InputPanel();
     imagePanel.setLayout( new BorderLayout() );
-    imagePanel.setBackground( new Color( 0, 0, 0, 0 ) );
-    imagePanel.setBorder( new LineBorder( new Color( 0, 0, 0, 0 ), 3 ) );
+    imagePanel.setBackground( transparantGray );
+    imagePanel.setBorder( emptyBorder );
 
     JLabel label = new JLabel( new ImageIcon( fileName ) );
-    label.setBorder( new LineBorder( Color.GRAY, 1 ) );
+    label.setBorder( grayBorder );
     imagePanel.add( label, BorderLayout.NORTH );
   }
 
-  private void setupContentPanel() {
-    contentPanel = new InputPanel();
+  private void setupContentPanel( String title, String description ) {
+    JLabel titleLabel = new JLabel( title );
+    titleLabel.setFont( new Font( Font.SANS_SERIF, Font.BOLD, 13 ) );
+    titleLabel.setBackground( transparant );
+
+    WrappableJLabel descriptionLabel = new WrappableJLabel( "<html>" + description + "</html>", 200);
+    descriptionLabel.setFont( new Font( Font.SANS_SERIF, Font.PLAIN, 13 ) );
+    descriptionLabel.setBackground( transparant );
+
+    titlePanel = new JPanel();
+    titlePanel.setBorder( new MatteBorder( 0, 0, 1, 0, Color.GRAY ) );
+    titlePanel.setBackground( transparant );
+    titlePanel.add( titleLabel );
+
+    descriptionPanel = new JPanel();
+    descriptionPanel.setBackground( transparant );
+    descriptionPanel.add( descriptionLabel );
+
+    contentPanel = new JPanel();
     contentPanel.setLayout( new BorderLayout() );
-    contentPanel.setBorder( new LineBorder( new Color( 0, 0, 0, 0 ), 3 ) );
-
-    JLabel description = new JLabel( "Testcontent" );
-    description.setFont( new Font( Font.SANS_SERIF, Font.BOLD, 13 ) );
-    description.setBorder( new MatteBorder( 0, 0, 1, 0, Color.GRAY ) );
-    contentPanel.add( description, BorderLayout.NORTH );
-
-    JTextArea content = new JTextArea( "Een iets langere omschrijving dan gewoonlijk, om te kijken hoe het werkt.", 2, 15 );
-    content.setLineWrap( true );
-    content.setWrapStyleWord( true );
-    content.setEditable( false );
-    content.setBackground( Color.white );
-    contentPanel.add( content, BorderLayout.CENTER );
+    contentPanel.setBackground( transparantGray );
+    contentPanel.setBorder( emptyBorder );
+    contentPanel.add( titlePanel, BorderLayout.NORTH );
+    contentPanel.add( descriptionPanel, BorderLayout.CENTER );
   }
 
   private void setupButtonPanel() {
+    ImgButton button = new ImgButton( buttonIcon );
+    
     buttonPanel = new InputPanel();
     buttonPanel.setLayout( new GridLayout() );
-    buttonPanel.setBorder( new LineBorder( new Color( 0, 0, 0, 0 ), 3 ) );
-
-    ImgButton button = new ImgButton( buttonIcon );
+    buttonPanel.setBorder( emptyBorder );
+    buttonPanel.setBackground( transparantGray );
     buttonPanel.add( button );
   }
 
   private void setupOverviewPanel() {
     setLayout( new BorderLayout() );
-    setBackground( Color.WHITE );
-    setBorder( new LineBorder( Color.GRAY, 1 ) );
+    setBackground( transparant );
+    CompoundBorder border = new CompoundBorder( emptyBorder, grayBorder );
+    setBorder( border );
 
     add( imagePanel, BorderLayout.WEST );
     add( contentPanel, BorderLayout.CENTER );
