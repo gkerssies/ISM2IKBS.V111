@@ -2,15 +2,12 @@ package gfy;
 
 import UserInterface.ImgButton;
 import UserInterface.InputPanel;
-import UserInterface.TexturedPanel;
 import UserInterface.WrappableJLabel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -20,7 +17,7 @@ import javax.swing.border.MatteBorder;
  *
  * @author thomasbaart
  */
-public class OverviewPanel extends TexturedPanel {
+public class OverviewPanel extends JPanel {
   /*
    * TODO: Kleur lichter maken van de lijn onder de contenttitel
    * TODO: Code dusdanig herschrijven dat er inputs zijn voor de foto, titel en
@@ -31,21 +28,27 @@ public class OverviewPanel extends TexturedPanel {
    * TODO: Velden logisch hernoemen
    */
 
-  private JPanel imagePanel, titlePanel, descriptionPanel, contentPanel, buttonPanel;
+  private JPanel imagePanel, contentPanel, buttonPanel, buttonPanelContainer;
   private static final String buttonIcon = "resources/images/buttons/nextButton.png";
   private static final Color transparant = new Color( 0, 0, 0, 0 );
   private static final Color transparantGray = new Color( 255, 255, 255, 150 );
   private static final EmptyBorder emptyBorder = new EmptyBorder( 3, 3, 3, 3 );
   private static final LineBorder grayBorder = new LineBorder( Color.GRAY, 1 );
-  private final int ID;
+  private final int preferredWidth = 350;
 
-  public OverviewPanel( String imageFilePath, String title, String description, int ID ) {
+  /**
+   * Constructor of OverviewPanel.
+   * 
+   * @param imageFilePath Path to the image file to display on the left of the panel.
+   * @param title Title to display on the panel.
+   * @param description Description to put on the panel.
+   */
+  public OverviewPanel( String imageFilePath, String title, String description) {
     super();
     setupImagePanel( imageFilePath );
     setupContentPanel( title, description );
     setupButtonPanel();
     setupOverviewPanel();
-    this.ID = ID;
   }
 
   private void setupImagePanel( String fileName ) {
@@ -63,36 +66,33 @@ public class OverviewPanel extends TexturedPanel {
     JLabel titleLabel = new JLabel( title );
     titleLabel.setFont( new Font( Font.SANS_SERIF, Font.BOLD, 13 ) );
     titleLabel.setBackground( transparant );
+    titleLabel.setBorder( new MatteBorder( 0, 0, 1, 0, Color.GRAY ) );
 
-    WrappableJLabel descriptionLabel = new WrappableJLabel( "<html>" + description + "</html>", 200);
+    WrappableJLabel descriptionLabel = new WrappableJLabel( "<html>" + description + "</html>", 250 );
     descriptionLabel.setFont( new Font( Font.SANS_SERIF, Font.PLAIN, 13 ) );
-    descriptionLabel.setBackground( transparant );
-
-    titlePanel = new JPanel();
-    titlePanel.setBorder( new MatteBorder( 0, 0, 1, 0, Color.GRAY ) );
-    titlePanel.setBackground( transparant );
-    titlePanel.add( titleLabel );
-
-    descriptionPanel = new JPanel();
-    descriptionPanel.setBackground( transparant );
-    descriptionPanel.add( descriptionLabel );
+    descriptionLabel.setBackground( Color.white );
+    descriptionLabel.setVerticalAlignment( SwingConstants.NORTH );
 
     contentPanel = new JPanel();
     contentPanel.setLayout( new BorderLayout() );
     contentPanel.setBackground( transparantGray );
     contentPanel.setBorder( emptyBorder );
-    contentPanel.add( titlePanel, BorderLayout.NORTH );
-    contentPanel.add( descriptionPanel, BorderLayout.CENTER );
+    contentPanel.add( titleLabel, BorderLayout.NORTH );
+    contentPanel.add( descriptionLabel, BorderLayout.CENTER );
   }
 
   private void setupButtonPanel() {
     ImgButton button = new ImgButton( buttonIcon );
-    
+
     buttonPanel = new InputPanel();
     buttonPanel.setLayout( new GridLayout() );
     buttonPanel.setBorder( emptyBorder );
-    buttonPanel.setBackground( transparantGray );
+    buttonPanel.setBackground( transparant );
     buttonPanel.add( button );
+
+    buttonPanelContainer = new JPanel();
+    buttonPanelContainer.setBackground( transparantGray );
+    buttonPanelContainer.add( buttonPanel );
   }
 
   private void setupOverviewPanel() {
@@ -103,6 +103,7 @@ public class OverviewPanel extends TexturedPanel {
 
     add( imagePanel, BorderLayout.WEST );
     add( contentPanel, BorderLayout.CENTER );
-    add( buttonPanel, BorderLayout.EAST );
+    add( buttonPanelContainer, BorderLayout.EAST );
+    setPreferredSize( new Dimension( 350, 65) );
   }
 }
