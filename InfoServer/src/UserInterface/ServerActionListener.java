@@ -2,7 +2,9 @@ package UserInterface;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  * Handles all the user actions on the info server application. Actions like
@@ -13,48 +15,47 @@ import javax.swing.*;
  */
 public class ServerActionListener implements ActionListener {
 
-  private StatusPanel statusPanel;
-  private PortPanel portPanel;
-  private JLabel statusImage, serverStatus;
-  private JButton startServer, stopServer;
-  private JTextField port;
+  private JLabel statusIconLabel, statusTextLabel;
+  private JButton startButton, stopButton;
+  private JTextField portTextField;
 
   /**
+   * Constructor for the ServerActionListener class.
    *
    * @param statusPanel the panel to manage the server status
    * @param portPanel   the panel to set the portnumber
    */
   public ServerActionListener( StatusPanel statusPanel, PortPanel portPanel ) {
-    this.statusPanel = statusPanel;
-    this.portPanel = portPanel;
+    startButton = statusPanel.getStartButton();
+    startButton.addActionListener( this );
 
-    startServer = statusPanel.getStartServer();
-    startServer.addActionListener( this );
+    stopButton = statusPanel.getStopButton();
+    stopButton.addActionListener( this );
 
-    stopServer = statusPanel.getStopServer();
-    stopServer.addActionListener( this );
+    statusIconLabel = statusPanel.getStatusIconLabel();
+    statusTextLabel = statusPanel.getStatusTextLabel();
 
-    statusImage = statusPanel.getStatusImage();
-    serverStatus = statusPanel.getServerStatus();
-
-    port = portPanel.getPort();
+    portTextField = portPanel.getPortTextField();
   }
 
   @Override
   public void actionPerformed( ActionEvent e ) {
-    if ( e.getSource() == startServer ) {
-      startServer.setEnabled( false );
-      stopServer.setEnabled( true );
-      statusImage.setIcon( StatusPanel.ICON_SERVER_STARTED );
-      serverStatus.setText( StatusPanel.TEXT_SERVER_STARTED );
-      port.setEnabled( false );
-    } else if ( e.getSource() == stopServer ) {
-      startServer.setEnabled( true );
-      stopServer.setEnabled( false );
-      statusPanel.repaint();
-      statusImage.setIcon( StatusPanel.ICON_SERVER_STOPPED );
-      serverStatus.setText( StatusPanel.TEXT_SERVER_STOPPED );
-      port.setEnabled( true );
+    if ( e.getSource() == startButton ) {
+      startButton.setEnabled( false );
+      stopButton.setEnabled( true );
+
+      statusIconLabel.setIcon( StatusPanel.SERVER_STARTED_ICON );
+      statusTextLabel.setText( StatusPanel.SERVER_STARTED_TEXT );
+
+      portTextField.setEnabled( false );
+    } else if ( e.getSource() == stopButton ) {
+      startButton.setEnabled( true );
+      stopButton.setEnabled( false );
+
+      statusIconLabel.setIcon( StatusPanel.SERVER_STOPPED_ICON );
+      statusTextLabel.setText( StatusPanel.SERVER_STOPPED_TEXT );
+
+      portTextField.setEnabled( true );
     }
   }
 }

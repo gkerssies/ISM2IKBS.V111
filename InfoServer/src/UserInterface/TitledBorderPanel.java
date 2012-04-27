@@ -1,7 +1,7 @@
 package UserInterface;
 
 import java.awt.FlowLayout;
-import javax.swing.*;
+import javax.swing.JPanel;
 import javax.swing.border.*;
 
 /**
@@ -22,10 +22,14 @@ public class TitledBorderPanel extends JPanel {
   public TitledBorderPanel( String title, int[] margin ) {
     setLayout( new FlowLayout( FlowLayout.LEFT ) );
 
-    // Create a titled border around the panel
+    // Create empty border that functions as margin
     Border emptyBorder = new EmptyBorder( margin[0], margin[1], margin[2], margin[3] );
+
+    // Create titled border 
     Border etchedBorder = new EtchedBorder( EtchedBorder.LOWERED );
     Border titledBorder = new TitledBorder( etchedBorder, title );
+
+    // Set the created borders around the panel
     setBorder( new CompoundBorder( emptyBorder, titledBorder ) );
   }
 }
