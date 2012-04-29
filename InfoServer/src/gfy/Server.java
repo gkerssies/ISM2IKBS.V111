@@ -31,7 +31,6 @@ public class Server extends Thread{
   
   /**
    * Method for multithreaded code to execute (implements Runable).
-   * @param config for the server
    */
   @Override
   public void run()
@@ -39,6 +38,9 @@ public class Server extends Thread{
     try {
       serversocket = new ServerSocket(config.getServerport());
       
+      
+      
+      Log.addItem("Server start","","De server wordt gestart", LogType.Info);
     }
     catch ( IOException ex ) {
       Log.addItem("Thread exception", ex.getMessage(),"Er is een fout opgetreden tijdens het starten van de server", LogType.Error);
