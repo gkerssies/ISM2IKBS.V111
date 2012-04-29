@@ -4,8 +4,11 @@
  */
 package gfy;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,6 +38,17 @@ public class Client extends Thread{
  @Override
  public void run()
  {
+    try 
+    {
+      socketclient = socketserver.accept();
+      Log.addItem("Client verbonden @ "+socketclient.getInetAddress(),"", "Cl", LogType.Event);
+    } 
+    
+    catch (IOException ex) 
+    {
+      Log.addItem("IO Exception @ client", ex.getMessage(), "Er is een IO fout opgetreden tijdens het opzetten van de verbinding", LogType.Error);
+      Logger.getLogger( Client.class.getName() ).log( Level.SEVERE, null, ex );
+    }
    
  }
  

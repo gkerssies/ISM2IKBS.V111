@@ -15,5 +15,6 @@ public enum LogType {
  Info,
  Transaction,
  LowLevel,
+ Event
   
 }

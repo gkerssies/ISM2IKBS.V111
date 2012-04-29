@@ -38,12 +38,12 @@ public class Server extends Thread{
   {
     try {
       serversocket = new ServerSocket(config.getServerport());
-       Log.addItem("Server start","","De server wordt gestart", LogType.Info);
+       Log.addItem("Server start","","De server wordt gestart", LogType.Event);
        while(true)
        {
          try
          {
-           currentclient = new Client(this);
+           //currentclient = new Client(this);
          }
          
          catch(Exception ex)
@@ -57,7 +57,6 @@ public class Server extends Thread{
     catch ( IOException ex ) {
       Log.addItem("Thread exception", ex.getMessage(),"Er is een fout opgetreden tijdens het starten van de server", LogType.Error);
     }
-    System.out.println(new Log().toString());
   }
   
   /**
