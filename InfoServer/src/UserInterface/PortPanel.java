@@ -1,13 +1,10 @@
 package UserInterface;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.border.*;
 
 /**
  * Creates the textfield to configure the portnumber. This portnumber will be
@@ -27,11 +24,11 @@ public class PortPanel extends JPanel {
 
     // Create textfield where the user fills in the portnumber
     portTextField = new JTextField();
-    portTextField.setPreferredSize( new Dimension( 50, 22 ) );
+    portTextField.setPreferredSize( new Dimension( 50, 24 ) );
     portTextField.setBorder(
             new CompoundBorder(
-            new EtchedBorder( EtchedBorder.LOWERED, new Color( 238, 238, 238 ), Color.WHITE ),
-            new LineBorder( new Color( 110, 0, 0, 0 ), 3 ) ) );
+            new BevelBorder( BevelBorder.LOWERED ),
+            new EmptyBorder( 3, 3, 3, 3 ) ) );
     add( portTextField );
   }
 
