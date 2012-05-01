@@ -1,6 +1,8 @@
 package UserInterface;
 
 import java.awt.Cursor;
+import java.awt.FlowLayout;
+import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -18,8 +20,12 @@ public class LogPanel extends JPanel {
    * Constructor for the LogPanel class.
    */
   public LogPanel() {
+    setLayout( new FlowLayout( FlowLayout.LEFT, 0, 0 ) );
+
     // Create button that opens a dialog with the logs when clicking on it
     logButton = new JButton( "Logs inzien" );
+    logButton.setMargin( new Insets( 0, 5, 0, 5 ) );
+    logButton.setFocusPainted( false );
     logButton.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
     add( logButton );
   }

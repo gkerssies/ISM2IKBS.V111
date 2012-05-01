@@ -1,13 +1,11 @@
 package UserInterface;
 
-import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.Insets;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 /**
  * The server status information is shown here and the server state can be
@@ -30,44 +28,48 @@ public class StatusPanel extends JPanel {
    * Constructor for the StatusPanel class.
    */
   public StatusPanel() {
-    // Create BorderLayout to set the label and the buttons below eachother
-    JPanel containerPanel = new JPanel( new BorderLayout() );
+    setLayout( new BoxLayout( this, BoxLayout.Y_AXIS ) );
 
-    // Create panel for the status image and text
-    JPanel statusPanel = new JPanel( new FlowLayout( FlowLayout.LEFT ) );
-    statusPanel.setPreferredSize( new Dimension( 200, 20 ) );
+    // Create a new panel for the server status text
+    JPanel statusPanel = new JPanel( new FlowLayout( FlowLayout.LEFT, 0, 0 ) );
 
     // Load the image icon that shows the server status
     statusIconLabel = new JLabel( StatusPanel.SERVER_STOPPED_ICON );
+    statusIconLabel.setBorder( new EmptyBorder( 0, 0, 0, 5 ) );
     statusPanel.add( statusIconLabel );
 
     // Create label with the server status information
     statusTextLabel = new JLabel( StatusPanel.SERVER_STOPPED_TEXT );
+    statusTextLabel.setPreferredSize( new Dimension( 110, 25 ) );
     statusTextLabel.setFont( null );
     statusPanel.add( statusTextLabel );
 
-    // Add the status panel to the top of the container
-    containerPanel.add( statusPanel, BorderLayout.NORTH );
+    // Add the statusPanel to StatusPanel
+    add( statusPanel );
 
-    // Create panel for buttons to change the server state
-    JPanel buttonPanel = new JPanel( new FlowLayout( FlowLayout.LEFT ) );
+    // Create a new panel for the start and stop buttons
+    JPanel buttonPanel = new JPanel( new FlowLayout( FlowLayout.LEFT, 0, 1 ) );
 
     // Create button to start the server
     startButton = new JButton( "Start" );
+    startButton.setMargin( new Insets( 0, 5, 0, 5 ) );
+    startButton.setFocusPainted( false );
     startButton.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
     buttonPanel.add( startButton );
 
+    // Create space between the status panel and the panel for the buttons
+    buttonPanel.add( Box.createHorizontalStrut( 7 ) );
+
     // Create button to stop the server
     stopButton = new JButton( "Stop" );
-    stopButton.setEnabled( false );
+    stopButton.setPreferredSize( startButton.getPreferredSize() );
+    stopButton.setMargin( new Insets( 0, 5, 0, 5 ) );
+    stopButton.setFocusPainted( false );
     stopButton.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
     buttonPanel.add( stopButton );
 
-    // Add buttons panel to the bottom of the container
-    containerPanel.add( buttonPanel, BorderLayout.SOUTH );
-
-    // Add container to the StatusPanel
-    add( containerPanel );
+    // Add the buttonPanel to StatusPanel
+    add( buttonPanel );
   }
 
   /**
