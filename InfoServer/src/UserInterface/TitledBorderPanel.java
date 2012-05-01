@@ -20,12 +20,12 @@ public class TitledBorderPanel extends JPanel {
    * @param margin sets the free space around the panel
    */
   public TitledBorderPanel( String title, int[] margin ) {
-    setLayout( new FlowLayout( FlowLayout.LEFT ) );
+    setLayout( new FlowLayout( FlowLayout.LEFT, 5, 5 ) );
 
     // Create empty border that functions as margin
     Border emptyBorder = new EmptyBorder( margin[0], margin[1], margin[2], margin[3] );
 
-    // Create titled border 
+    // Create titled border
     Border etchedBorder = new EtchedBorder( EtchedBorder.LOWERED );
     Border titledBorder = new TitledBorder( etchedBorder, title );
 
