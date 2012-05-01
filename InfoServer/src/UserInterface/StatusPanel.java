@@ -1,9 +1,7 @@
 package UserInterface;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Insets;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -51,21 +49,14 @@ public class StatusPanel extends JPanel {
     JPanel buttonPanel = new JPanel( new FlowLayout( FlowLayout.LEFT, 0, 1 ) );
 
     // Create button to start the server
-    startButton = new JButton( "Start" );
-    startButton.setMargin( new Insets( 0, 5, 0, 5 ) );
-    startButton.setFocusPainted( false );
-    startButton.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+    startButton = new CustomButton( "Start" );
     buttonPanel.add( startButton );
 
-    // Create space between the status panel and the panel for the buttons
+    // Create space between the start and the stop button
     buttonPanel.add( Box.createHorizontalStrut( 7 ) );
 
     // Create button to stop the server
-    stopButton = new JButton( "Stop" );
-    stopButton.setPreferredSize( startButton.getPreferredSize() );
-    stopButton.setMargin( new Insets( 0, 5, 0, 5 ) );
-    stopButton.setFocusPainted( false );
-    stopButton.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+    stopButton = new CustomButton( "Stop", false );
     buttonPanel.add( stopButton );
 
     // Add the buttonPanel to StatusPanel
