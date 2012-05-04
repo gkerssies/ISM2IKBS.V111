@@ -48,8 +48,8 @@ public class InfoServer extends JFrame {
     southPanel.add( informationPanel );
     add( southPanel, BorderLayout.SOUTH );
 
-    // Create custom ActionListener to process the user actions
-    ServerActionListener sal = new ServerActionListener( statusPanel, portPanel );
+    // Create object that processes all the user actions
+    ActionHandler ah = new ActionHandler( statusPanel, portPanel );
   }
 
   /**

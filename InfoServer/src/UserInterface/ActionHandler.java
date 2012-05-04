@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  *
  * @author Ido Bosman (s1047979)
  */
-public class ServerActionListener implements ActionListener, KeyListener {
+public class ActionHandler implements ActionListener, KeyListener {
 
   private JLabel statusIconLabel, statusTextLabel;
   private JButton startButton, stopButton;
@@ -24,12 +24,12 @@ public class ServerActionListener implements ActionListener, KeyListener {
   private static final Color ERROR_RED = new Color( 255, 240, 240 );
 
   /**
-   * Constructor for the ServerActionListener class.
+   * Constructor for the ActionHandler class.
    *
    * @param statusPanel the panel to manage the server status
    * @param portPanel   the panel to set the portnumber
    */
-  public ServerActionListener( StatusPanel statusPanel, PortPanel portPanel ) {
+  public ActionHandler( StatusPanel statusPanel, PortPanel portPanel ) {
     startButton = statusPanel.getStartButton();
     startButton.addActionListener( this );
 
