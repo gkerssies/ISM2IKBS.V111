@@ -1,7 +1,10 @@
 package UserInterface;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -13,11 +16,12 @@ import javax.swing.JTextField;
  *
  * @author Ido Bosman (s1047979)
  */
-public class ServerActionListener implements ActionListener {
+public class ServerActionListener implements ActionListener, KeyListener {
 
   private JLabel statusIconLabel, statusTextLabel;
   private JButton startButton, stopButton;
   private JTextField portTextField;
+  private static final Color ERROR_RED = new Color( 255, 240, 240 );
 
   /**
    * Constructor for the ServerActionListener class.
@@ -36,11 +40,12 @@ public class ServerActionListener implements ActionListener {
     statusTextLabel = statusPanel.getStatusTextLabel();
 
     portTextField = portPanel.getPortTextField();
+    portTextField.addKeyListener( this );
   }
 
   @Override
-  public void actionPerformed( ActionEvent e ) {
-    if ( e.getSource() == startButton ) {
+  public void actionPerformed( ActionEvent ae ) {
+    if ( ae.getSource() == startButton ) {
       startButton.setEnabled( false );
       stopButton.setEnabled( true );
 
@@ -48,7 +53,7 @@ public class ServerActionListener implements ActionListener {
       statusTextLabel.setText( StatusPanel.SERVER_STARTED_TEXT );
 
       portTextField.setEnabled( false );
-    } else if ( e.getSource() == stopButton ) {
+    } else if ( ae.getSource() == stopButton ) {
       startButton.setEnabled( true );
       stopButton.setEnabled( false );
 
@@ -56,6 +61,34 @@ public class ServerActionListener implements ActionListener {
       statusTextLabel.setText( StatusPanel.SERVER_STOPPED_TEXT );
 
       portTextField.setEnabled( true );
+    }
+  }
+
+  @Override
+  public void keyTyped( KeyEvent ke ) {
+  }
+
+  @Override
+  public void keyPressed( KeyEvent ke ) {
+  }
+
+  @Override
+  public void keyReleased( KeyEvent ke ) {
+    try {
+      // Try to cast the input String from portTextfield to an integer
+      int portNumber = Integer.parseInt( portTextField.getText() );
+
+      // Check if the portNumber is inside a specific range
+      if ( portNumber > 1024 && portNumber < 49151 ) {
+        startButton.setEnabled( true );
+        portTextField.setBackground( Color.WHITE );
+      } else {
+        startButton.setEnabled( false );
+        portTextField.setBackground( ERROR_RED );
+      }
+    } catch ( Exception ex ) {
+      startButton.setEnabled( false );
+      portTextField.setBackground( ERROR_RED );
     }
   }
 }

@@ -1,5 +1,6 @@
 package UserInterface;
 
+import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,9 +18,10 @@ public class InformationPanel extends JPanel {
    * Constructor for the InformationPanel class.
    */
   public InformationPanel() {
+    setLayout( new FlowLayout( FlowLayout.LEFT, 0, 0 ) );
+
     // Create label with information about the number of connected clients
     connectedClientsLabel = new JLabel( "Aantal verbonden clients: 23" );
-    connectedClientsLabel.setHorizontalTextPosition( JLabel.CENTER );
     connectedClientsLabel.setFont( null );
     add( connectedClientsLabel );
   }
