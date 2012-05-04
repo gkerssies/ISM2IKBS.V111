@@ -4,10 +4,7 @@ import UserInterface.ImgButton;
 import UserInterface.InputPanel;
 import UserInterface.WrappableJLabel;
 import java.awt.*;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -38,12 +35,13 @@ public class OverviewPanel extends JPanel {
 
   /**
    * Constructor of OverviewPanel.
-   * 
-   * @param imageFilePath Path to the image file to display on the left of the panel.
-   * @param title Title to display on the panel.
-   * @param description Description to put on the panel.
+   *
+   * @param imageFilePath Path to the image file to display on the left of the
+   *                      panel.
+   * @param title         Title to display on the panel.
+   * @param description   Description to put on the panel.
    */
-  public OverviewPanel( String imageFilePath, String title, String description) {
+  public OverviewPanel( String imageFilePath, String title, String description ) {
     super();
     setupImagePanel( imageFilePath );
     setupContentPanel( title, description );
@@ -85,14 +83,14 @@ public class OverviewPanel extends JPanel {
     ImgButton button = new ImgButton( buttonIcon );
 
     buttonPanel = new InputPanel();
-    buttonPanel.setLayout( new GridLayout() );
+    buttonPanel.setLayout(new GridLayout());
     buttonPanel.setBorder( emptyBorder );
     buttonPanel.setBackground( transparant );
     buttonPanel.add( button );
-
-    buttonPanelContainer = new JPanel();
+    
+    buttonPanelContainer = new JPanel(new BorderLayout());
     buttonPanelContainer.setBackground( transparantGray );
-    buttonPanelContainer.add( buttonPanel );
+    buttonPanelContainer.add( buttonPanel, BorderLayout.CENTER );
   }
 
   private void setupOverviewPanel() {
@@ -104,6 +102,6 @@ public class OverviewPanel extends JPanel {
     add( imagePanel, BorderLayout.WEST );
     add( contentPanel, BorderLayout.CENTER );
     add( buttonPanelContainer, BorderLayout.EAST );
-    setPreferredSize( new Dimension( 350, 65) );
+    setPreferredSize( new Dimension( 350, 65 ) );
   }
 }
