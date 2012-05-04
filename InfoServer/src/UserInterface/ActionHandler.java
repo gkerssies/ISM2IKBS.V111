@@ -5,9 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  * Handles all the user actions on the info server application. Actions like
@@ -18,6 +16,7 @@ import javax.swing.JTextField;
  */
 public class ActionHandler implements ActionListener, KeyListener {
 
+  private JFrame frame;
   private JLabel statusIconLabel, statusTextLabel;
   private JButton startButton, stopButton;
   private JTextField portTextField;
@@ -26,10 +25,13 @@ public class ActionHandler implements ActionListener, KeyListener {
   /**
    * Constructor for the ActionHandler class.
    *
+   * @param frame       the server application frame
    * @param statusPanel the panel to manage the server status
    * @param portPanel   the panel to set the portnumber
    */
-  public ActionHandler( StatusPanel statusPanel, PortPanel portPanel ) {
+  public ActionHandler( JFrame frame, StatusPanel statusPanel, PortPanel portPanel ) {
+    this.frame = frame;
+
     startButton = statusPanel.getStartButton();
     startButton.addActionListener( this );
 
@@ -53,14 +55,27 @@ public class ActionHandler implements ActionListener, KeyListener {
       statusTextLabel.setText( StatusPanel.SERVER_STARTED_TEXT );
 
       portTextField.setEnabled( false );
+      portTextField.setToolTipText( null );
     } else if ( ae.getSource() == stopButton ) {
-      startButton.setEnabled( true );
-      stopButton.setEnabled( false );
+      // Create dialog that forces user confirmation before stopping the server
+      int allowToStopServer = JOptionPane.showConfirmDialog(
+              frame,
+              "Weet u zeker dat u de server wilt stoppen?",
+              "U staat op het punt de server te stoppen.",
+              JOptionPane.YES_NO_OPTION,
+              JOptionPane.WARNING_MESSAGE );
 
-      statusIconLabel.setIcon( StatusPanel.SERVER_STOPPED_ICON );
-      statusTextLabel.setText( StatusPanel.SERVER_STOPPED_TEXT );
+      // If the 'Yes' button is clicked in the confirm dialog the server will be stopped
+      if ( allowToStopServer == 0 ) {
+        startButton.setEnabled( true );
+        stopButton.setEnabled( false );
 
-      portTextField.setEnabled( true );
+        statusIconLabel.setIcon( StatusPanel.SERVER_STOPPED_ICON );
+        statusTextLabel.setText( StatusPanel.SERVER_STOPPED_TEXT );
+
+        portTextField.setEnabled( true );
+        portTextField.setToolTipText( PortPanel.PORTTEXTFIELD_TOOLTIP );
+      }
     }
   }
 
