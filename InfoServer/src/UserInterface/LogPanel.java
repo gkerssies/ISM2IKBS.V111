@@ -24,4 +24,12 @@ public class LogPanel extends JPanel {
     logButton = new CustomButton( "Logs inzien" );
     add( logButton );
   }
+
+  /**
+   *
+   * @return the button which opens a dialog with logs when you click on it
+   */
+  public JButton getLogButton() {
+    return logButton;
+  }
 }
