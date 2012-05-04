@@ -18,7 +18,7 @@ public class ActionHandler implements ActionListener, KeyListener {
 
   private JFrame frame;
   private JLabel statusIconLabel, statusTextLabel;
-  private JButton startButton, stopButton;
+  private JButton startButton, stopButton, logButton;
   private JTextField portTextField;
   private static final Color ERROR_RED = new Color( 255, 240, 240 );
 
@@ -29,7 +29,7 @@ public class ActionHandler implements ActionListener, KeyListener {
    * @param statusPanel the panel to manage the server status
    * @param portPanel   the panel to set the portnumber
    */
-  public ActionHandler( JFrame frame, StatusPanel statusPanel, PortPanel portPanel ) {
+  public ActionHandler( JFrame frame, StatusPanel statusPanel, LogPanel logPanel, PortPanel portPanel ) {
     this.frame = frame;
 
     startButton = statusPanel.getStartButton();
@@ -40,6 +40,9 @@ public class ActionHandler implements ActionListener, KeyListener {
 
     statusIconLabel = statusPanel.getStatusIconLabel();
     statusTextLabel = statusPanel.getStatusTextLabel();
+
+    logButton = logPanel.getLogButton();
+    logButton.addActionListener( this );
 
     portTextField = portPanel.getPortTextField();
     portTextField.addKeyListener( this );
@@ -76,6 +79,8 @@ public class ActionHandler implements ActionListener, KeyListener {
         portTextField.setEnabled( true );
         portTextField.setToolTipText( PortPanel.PORTTEXTFIELD_TOOLTIP );
       }
+    } else if ( ae.getSource() == logButton ) {
+      // Code that opens the log dialog here!
     }
   }
 

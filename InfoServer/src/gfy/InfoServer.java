@@ -49,7 +49,7 @@ public class InfoServer extends JFrame {
     add( southPanel, BorderLayout.SOUTH );
 
     // Create object that processes all the user actions
-    ActionHandler ah = new ActionHandler( this, statusPanel, portPanel );
+    ActionHandler ah = new ActionHandler( this, statusPanel, logPanel, portPanel );
   }
 
   /**
