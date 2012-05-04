@@ -4,7 +4,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 /**
  * Creates the textfield to configure the portnumber. This portnumber will be
@@ -15,6 +17,7 @@ import javax.swing.border.*;
 public class PortPanel extends JPanel {
 
   private JTextField portTextField;
+  protected static final String PORTTEXTFIELD_TOOLTIP = "Vul een poortnummer in tussen de 1024 en 49150.";
 
   /**
    * Constructor for the PortPanel class.
@@ -25,6 +28,7 @@ public class PortPanel extends JPanel {
     // Create textfield where the user fills in the portnumber
     portTextField = new JTextField();
     portTextField.setPreferredSize( new Dimension( 50, 24 ) );
+    portTextField.setToolTipText( PortPanel.PORTTEXTFIELD_TOOLTIP );
     portTextField.setBorder(
             new CompoundBorder(
             new BevelBorder( BevelBorder.LOWERED ),
