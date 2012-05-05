@@ -27,6 +27,7 @@ public class ActionHandler implements ActionListener, KeyListener {
    *
    * @param frame       the server application frame
    * @param statusPanel the panel to manage the server status
+   * @param logPanel    the panel with the button that opens the log dialog
    * @param portPanel   the panel to set the portnumber
    */
   public ActionHandler( JFrame frame, StatusPanel statusPanel, LogPanel logPanel, PortPanel portPanel ) {
@@ -80,7 +81,8 @@ public class ActionHandler implements ActionListener, KeyListener {
         portTextField.setToolTipText( PortPanel.PORTTEXTFIELD_TOOLTIP );
       }
     } else if ( ae.getSource() == logButton ) {
-      // Code that opens the log dialog here!
+      // Create dialog that contains the log information
+      LogDialog logDialog = new LogDialog( frame );
     }
   }
 
