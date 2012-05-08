@@ -17,10 +17,14 @@ import javax.swing.text.TableView;
 public class AuthorizationManagement extends JFrame implements ActionListener {
 
   private JPanel panel;
+  private JTable userTable;
   private JButton buttonAdd, buttonEdit, buttonDelete;
 
   public AuthorizationManagement() {
     panel = new JPanel();
+    
+    UserTable table = new UserTable();
+    userTable = table.getTable() ;
     
     buttonAdd = new JButton();
     buttonAdd.setText( "Toevoegen" );
@@ -37,6 +41,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     buttonDelete.setPreferredSize( new Dimension( 100, 25 ) );
     buttonDelete.addActionListener( this );
 
+    panel.add( userTable );
     panel.add( buttonAdd );
     panel.add( buttonEdit );
     panel.add( buttonDelete );

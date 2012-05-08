@@ -56,8 +56,8 @@ public class ServerSettings extends JFrame implements ActionListener {
     panel.add( username );
     panel.add( label4 );
     panel.add( password );
-    /*panel.add( buttonCancel, BorderLayout.EAST );
-    panel.add( buttonSave, BorderLayout.EAST );*/
+    panel.add( buttonCancel );
+    panel.add( buttonSave );
     
     /*panelLabel.add( label1 );
     panelInput.add( connectionString );
