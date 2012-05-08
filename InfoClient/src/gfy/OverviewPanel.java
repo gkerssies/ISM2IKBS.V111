@@ -3,8 +3,14 @@ package gfy;
 import UserInterface.ImgButton;
 import UserInterface.InputPanel;
 import UserInterface.WrappableJLabel;
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -17,12 +23,9 @@ import javax.swing.border.MatteBorder;
 public class OverviewPanel extends JPanel {
   /*
    * TODO: Kleur lichter maken van de lijn onder de contenttitel
-   * TODO: Code dusdanig herschrijven dat er inputs zijn voor de foto, titel en
-   * content
    * TODO: ActionListener toevoegen die goed onderscheid kan maken tussen de
    * twee knoppen, wellicht met een genummerd veld die je meegeeft in de
    * constructor
-   * TODO: Velden logisch hernoemen
    */
 
   private JPanel imagePanel, contentPanel, buttonPanel, buttonPanelContainer;
@@ -37,7 +40,7 @@ public class OverviewPanel extends JPanel {
    * Constructor of OverviewPanel.
    *
    * @param imageFilePath Path to the image file to display on the left of the
-   *                      panel.
+   * panel.
    * @param title         Title to display on the panel.
    * @param description   Description to put on the panel.
    */
@@ -81,14 +84,14 @@ public class OverviewPanel extends JPanel {
 
   private void setupButtonPanel() {
     ImgButton button = new ImgButton( buttonIcon );
+    button.setBackground( transparant );
 
     buttonPanel = new InputPanel();
-    buttonPanel.setLayout(new GridLayout());
     buttonPanel.setBorder( emptyBorder );
-    buttonPanel.setBackground( transparant );
+    buttonPanel.setBackground( transparantGray );
     buttonPanel.add( button );
-    
-    buttonPanelContainer = new JPanel(new BorderLayout());
+
+    buttonPanelContainer = new JPanel( new BorderLayout() );
     buttonPanelContainer.setBackground( transparantGray );
     buttonPanelContainer.add( buttonPanel, BorderLayout.CENTER );
   }

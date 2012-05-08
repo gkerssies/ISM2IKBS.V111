@@ -14,6 +14,7 @@ public class ImgButton extends JButton {
    */
   public ImgButton() {
     super();
+    setOpaque( false );
   }
 
   /**
@@ -23,6 +24,7 @@ public class ImgButton extends JButton {
    */
   public ImgButton( String fileName ) {
     super( new ImageIcon( fileName ) );
+    setOpaque( false );
     setBorder( null );
   }
 }

@@ -38,9 +38,8 @@ public class OverviewFrame extends JFrame {
 
     userMonitorDim = Toolkit.getDefaultToolkit().getScreenSize();
 
-
     setTitle( "Info Client - Weergave overzicht" );
-    setSize( 357, 163 );
+    pack();
 
     overviewFrameDim = getSize();
 
