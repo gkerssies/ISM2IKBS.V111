@@ -1,26 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author Janssen-laptop
+ * @author Ido Bosman (s1047979)
  * @version 0.1 - 8 mei 2012
  */
 public class NavQueryOverview implements Serializable {
-  
- private ArrayList<NavQuery> navQuerys;
- 
- public NavQueryOverview()
- {
-   
- }
- 
-  
-  
-  
+
+  private ArrayList<NavQuery> navQuerys;
+
+  public NavQueryOverview() {
+  }
 }

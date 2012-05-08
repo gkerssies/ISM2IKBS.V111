@@ -58,18 +58,6 @@ public class InfoServer extends JFrame {
   }
 
   /**
-   * Method where the server application begins when it is launched.
-   *
-   * @param args the command line arguments
-   */
-  public static void main( String[] args ) {
-    InfoServer server = new InfoServer();
-    server.pack();
-    server.setLocationRelativeTo( server.getRootPane() ); // Center the frame
-    server.setVisible( true );
-  }
-
-  /**
    * Creates the server. All necessery settings are set/loaded.
    */
   public void createServer() {
@@ -81,5 +69,17 @@ public class InfoServer extends JFrame {
 
     // Add test user
     users.addUser( "admin", "admin", UserType.gebruiker );
+  }
+
+  /**
+   * Method where the server application begins when it is launched.
+   *
+   * @param args the command line arguments
+   */
+  public static void main( String[] args ) {
+    InfoServer server = new InfoServer();
+    server.pack();
+    server.setLocationRelativeTo( server.getRootPane() ); // Center the frame
+    server.setVisible( true );
   }
 }
