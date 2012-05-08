@@ -53,7 +53,11 @@ public class Client extends Thread {
    * @return a boolean witch holds the connection
    */
   public boolean isConnected() {
-    return socketclient.isConnected();
+    if ( getPendingStatus() ) {
+      return false;
+    } else {
+      return socketclient.isConnected();
+    }
   }
 
   /**
@@ -68,7 +72,7 @@ public class Client extends Thread {
 
       getProtocol().setServer( server );
       getProtocol().bindStreams( socketclient );
-      getProtocol().setClientproperty(clientproperty);
+      getProtocol().setClientproperty( clientproperty );
 
       while ( socketclient.isConnected() ) {
         if ( getProtocol().isBusy() == false ) {
