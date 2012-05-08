@@ -22,11 +22,11 @@ public class PortPanel extends JPanel {
   /**
    * Constructor for the PortPanel class.
    */
-  public PortPanel() {
+  public PortPanel( int portNumber ) {
     setLayout( new FlowLayout( FlowLayout.LEFT, 0, 0 ) );
 
     // Create textfield where the user fills in the portnumber
-    portTextField = new JTextField();
+    portTextField = new JTextField( portNumber + "" );
     portTextField.setPreferredSize( new Dimension( 50, 24 ) );
     portTextField.setToolTipText( PortPanel.PORTTEXTFIELD_TOOLTIP );
     portTextField.setBorder(

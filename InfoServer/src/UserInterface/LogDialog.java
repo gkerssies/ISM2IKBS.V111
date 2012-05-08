@@ -1,13 +1,13 @@
 package UserInterface;
 
+import gfy.Log;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -17,9 +17,10 @@ import javax.swing.border.EmptyBorder;
  *
  * @author Ido Bosman (s1047979)
  */
-public class LogDialog extends JDialog {
+public class LogDialog extends JDialog implements ActionListener {
 
-  private JScrollPane scrollPane;
+  private WrappableJLabel label;
+  private Timer timer;
 
   /**
    * Constructor for the LogDialog class.
@@ -35,8 +36,19 @@ public class LogDialog extends JDialog {
     setResizable( false );
     setLocationRelativeTo( frame );
 
+    // Create a new timer to refresh every .. seconds so the number of connected clients is shown realtime
+    timer = new Timer( 400, this );
+    timer.start();
+
+    // Create the label for the log information
+    label = new WrappableJLabel( 370 );
+    label.setBorder( new EmptyBorder( -3, 2, 0, 0 ) );
+    label.setFont( new Font( Font.MONOSPACED, Font.PLAIN, 11 ) );
+    label.setBackground( Color.YELLOW );
+    label.setVerticalAlignment( SwingConstants.NORTH );
+
     // Create scrollpane and add label with log information to the scrollpane
-    scrollPane = new JScrollPane( logLabel( "Log informatie hier includen!" ) );
+    JScrollPane scrollPane = new JScrollPane( label );
     scrollPane.setPreferredSize( new Dimension( 390, 364 ) );
     scrollPane.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
     add( scrollPane );
@@ -45,19 +57,19 @@ public class LogDialog extends JDialog {
     setVisible( true );
   }
 
-  /**
-   *
-   * @param text the log information
-   *
-   * @return wrapped label that contains the log information
-   */
-  public WrappableJLabel logLabel( String text ) {
-    WrappableJLabel label = new WrappableJLabel( "<html>" + text + "</html>", 370 );
-    label.setBorder( new EmptyBorder( -3, 2, 0, 0 ) );
-    label.setFont( new Font( Font.MONOSPACED, Font.PLAIN, 11 ) );
-    label.setBackground( Color.YELLOW );
-    label.setVerticalAlignment( SwingConstants.NORTH );
+  @Override
+  public void actionPerformed( ActionEvent ae ) {
+    // If timer is started, run this code everty .. seconds
+    if ( ae.getSource() == timer ) {
+      // Set all log information into a String typed variable
+      String logText = new Log().toString();
 
-    return label;
+      // Set standard text if there aren't any logs available
+      if ( !logText.equals( "" ) ) {
+        label.setText( "<html>" + logText + "</html>" );
+      } else {
+        label.setText( "<html>Er is (nog) geen log informatie beschikbaar.</html>" );
+      }
+    }
   }
 }
