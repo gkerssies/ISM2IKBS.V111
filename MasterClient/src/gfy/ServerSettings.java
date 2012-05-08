@@ -15,7 +15,7 @@ import javax.swing.*;
  */
 public class ServerSettings extends JFrame implements ActionListener {
 
-  private JPanel panel, panelLabel, panelInput;
+  private JPanel panel, panelLabels, panelInput, panelButtons;
   private JLabel label1, label2, label3, label4;
   private JTextArea connectionString;
   private JTextField database, username, password;
@@ -23,15 +23,20 @@ public class ServerSettings extends JFrame implements ActionListener {
 
   public ServerSettings() {
     panel = new JPanel();
-    /*
-     * panelLabel = new JPanel(); panelLabel. panelInput = new JPanel();
-     * panelInput.setLayout( new GridLayout( 4, 1) );
-     */
+    panelLabels = new JPanel();
+    panelLabels.setPreferredSize( new Dimension( 110, 140 ) );
+    panelInput = new JPanel();
+    panelInput.setPreferredSize( new Dimension( 190, 140 ) );
+    panelButtons = new JPanel();
 
     label1 = new JLabel( "Connectiestring" );
+    label1.setPreferredSize( new Dimension( 100, 25 ) );
     label2 = new JLabel( "Databasenaam" );
+    label2.setPreferredSize( new Dimension( 100, 25 ) );
     label3 = new JLabel( "Gebruikersnaam" );
+    label3.setPreferredSize( new Dimension( 100, 25 ) );
     label4 = new JLabel( "Wachtwoord" );
+    label4.setPreferredSize( new Dimension( 100, 25 ) );
 
     connectionString = new JTextArea( 3, 15 );
     database = new JTextField( 15 );
@@ -48,33 +53,26 @@ public class ServerSettings extends JFrame implements ActionListener {
     buttonSave.setPreferredSize( new Dimension( 100, 25 ) );
     buttonSave.addActionListener( this );
 
-    panel.add( label1 );
-    panel.add( connectionString );
-    panel.add( label2 );
-    panel.add( database );
-    panel.add( label3 );
-    panel.add( username );
-    panel.add( label4 );
-    panel.add( password );
-    panel.add( buttonCancel );
-    panel.add( buttonSave );
+    panel.add(panelLabels);
+    panel.add(panelInput);
+    panel.add(panelButtons);
+    
+    panelLabels.add( label1 );
+    panelLabels.add( label2 );
+    panelLabels.add( label3 );
+    panelLabels.add( label4 );
+    
+    panelInput.add( connectionString );
+    panelInput.add( database );
+    panelInput.add( username );
+    panelInput.add( password );
+    
+    panelButtons.add( buttonCancel );
+    panelButtons.add( buttonSave );
 
-    /*
-     * panelLabel.add( label1 ); panelInput.add( connectionString );
-     * panelLabel.add( label2 ); panelInput.add( database ); panelLabel.add(
-     * label3 ); panelInput.add( username ); panelLabel.add( label4 );
-     * panelInput.add( password ); panel.add( buttonCancel ); panel.add(
-     * buttonSave );
-     *
-     * panel.add( panelLabel, BorderLayout.WEST ); panel.add( panelInput,
-     * BorderLayout.EAST );
-     */
-
-    //setLayout( new BoxLayout( panel, WIDTH) );
-    //setLayout( new BorderLayout() );
     setLayout( new GridLayout( 4, 1 ) );
     setContentPane( panel );
-    setSize( 350, 300 );
+    setSize( 330, 220 );
     setResizable( false );
     setTitle( "Serverinstellingen" );
     setVisible( true );
