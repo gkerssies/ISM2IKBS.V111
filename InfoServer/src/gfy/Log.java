@@ -32,6 +32,23 @@ public class Log {
     friendlyerror.add(f);
     type.add(t);
   }
+  
+  
+  
+  /** 
+   * method for clearing al log messages.
+   */
+  public static void Clear()
+  {
+    logitem.clear();
+    jxception.clear();
+    friendlyerror.clear();
+    type.clear();
+  }
+  
+  /** method for returning al log messages
+   * @return all log items as a string
+   */
   @Override
   public String toString()
   {

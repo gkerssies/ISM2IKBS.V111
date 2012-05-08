@@ -21,6 +21,8 @@ public class Client extends Thread{
  private ServerSocket socketserver;
  private Server server;
  private Protocol protocol;
+ private boolean ispending;
+ 
  
  /**
 * Constructor for new client
@@ -28,8 +30,18 @@ public class Client extends Thread{
  */
  public Client(Server server)
  {
+   protocol = new ServerProtocol();
    this.server = server;
    this.socketserver = server.getServerSocket();
+   ispending = true;
+ }
+ /**
+   * Method for checking if the socket is still waiting for a client
+   * @return a boolean witch holds the pending status of the active client socket
+ */
+ public boolean getPendingStatus()
+ {
+  return ispending;
  }
  
  /**
@@ -41,10 +53,21 @@ public class Client extends Thread{
     try 
     {
       socketclient = socketserver.accept();
+      ispending = false;
       Log.addItem("Client verbonden @ "+socketclient.getInetAddress(),"", "Cl", LogType.Event);
+      
+      protocol.setServer(server);
+      System.out.println(protocol.bindStreams(socketclient));
+     
+      
+      while(socketclient.isConnected())
+      {
+        protocol.proccesCommand();
+      }
+      
     } 
     
-    catch (IOException ex) 
+    catch (Exception ex) 
     {
       Log.addItem("IO Exception @ client", ex.getMessage(), "Er is een IO fout opgetreden tijdens het opzetten van de verbinding", LogType.Error);
       Logger.getLogger( Client.class.getName() ).log( Level.SEVERE, null, ex );
