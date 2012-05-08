@@ -49,7 +49,7 @@ public abstract class Protocol
     catch(Exception ex)
     {
       
-      System.out.println( "Fout tijdens het lezen " + ex.getMessage());
+      System.out.println( "Fout tijdens het lezen" + ex.getMessage());
       return t;
     }
     
