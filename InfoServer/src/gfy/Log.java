@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 import java.util.ArrayList;
@@ -11,6 +7,7 @@ import java.util.ConcurrentModificationException;
  * The static log for the server application
  *
  * @author Jormen Janssen
+ * @author Ido Bosman (s1047979)
  * @version 0.1 - 29 april 2012
  */
 public class Log {
@@ -68,18 +65,16 @@ public class Log {
     try {
       for ( String t : logitem ) {
         if ( !jxception.get( y ).equals( "" ) ) {
-          temp += "[" + type.get( y ) + "] " + jxception.get( y ) + "; " + friendlyerror.get( y ) + "<br />";
+          temp += "[" + type.get( y ) + "] " + t + "<br />";
         } else {
-          temp += "[" + type.get( y ) + "] " + friendlyerror.get( y ) + "<br />";
+          temp += "[" + type.get( y ) + "] " + t + "<br />";
         }
         // temp += "[" + type.get( y ) + "] " + t + "; " + jxception.get( y ) + "; " + friendlyerror.get( y ) + "<br />";
         y++;
       }
     } catch ( ConcurrentModificationException ex ) {
-      Clear();
-      System.out.println( "problem" );
+      temp += "[Error] Er is een fout opgetreden tijdens het opvragen van de logs<br />";
     }
-
 
     return temp;
   }

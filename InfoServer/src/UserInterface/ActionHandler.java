@@ -91,6 +91,12 @@ public class ActionHandler implements ActionListener, KeyListener {
 
       // If the 'Yes' button is clicked in the confirm dialog the server will be stopped
       if ( allowToStopServer == 0 ) {
+        // Stop the application core (the server)
+        server.stopServer();
+
+        // Stop the timer to refresh the number of connected clients
+        timer.stop();
+
         startButton.setEnabled( true );
         stopButton.setEnabled( false );
 
