@@ -43,7 +43,7 @@ public abstract class Protocol
     }
     catch(Exception ex)
     {
-      System.out.println( "Fout tijdens het lezen van een commando" );
+      System.out.println( "Fout tijdens het lezen van een commando 1" + ex.getMessage());
       return t;
     }
     
@@ -62,7 +62,7 @@ public abstract class Protocol
     }
     catch(IOException ex)
     {
-      System.out.println( "Fout tijdens het lezen van een commando" + ex.getMessage() );
+      System.out.println( "Fout tijdens het lezen van een object" + ex.getMessage() );
       return null;
     }
     catch(ClassNotFoundException ex)
