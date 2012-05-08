@@ -6,20 +6,26 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
+ * The overviewFrame.
  *
  * @author thomasbaart
  */
 public class OverviewFrame extends JFrame {
+  // Todo: Adjust the generateOverViewFrames() method to accept input
 
   private Dimension overviewFrameDim, userMonitorDim;
   private TexturedPanel mainPanel, overViewPanelContainer;
   private JPanel panel1, panel2;
   private GridBagConstraints gbc;
 
+  /**
+   * Constructor of OverviewFrame.
+   */
   public OverviewFrame() {
     super();
     setLayout( new BorderLayout() );
-    overViewPanelContainer = new TexturedPanel( "resources/images/backgrounds/mainPanelPattern.png" );
+    overViewPanelContainer = new TexturedPanel(
+            "resources/images/backgrounds/mainPanelPattern.png" );
     overViewPanelContainer.setLayout( new GridBagLayout() );
 
     gbc = new GridBagConstraints();
@@ -43,15 +49,16 @@ public class OverviewFrame extends JFrame {
 
     overviewFrameDim = getSize();
 
-    setLocation( ( userMonitorDim.width / 2 )
-                 - ( overviewFrameDim.width / 2 ),
-                 ( int ) ( userMonitorDim.height / 2.75 )
-                 - ( overviewFrameDim.height / 2 ) );
+    setLocation( ( userMonitorDim.width / 2 ) - ( overviewFrameDim.width / 2 ),
+                 ( int ) ( userMonitorDim.height / 2.75 ) - ( overviewFrameDim.height / 2 ) );
     setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     setVisible( true );
     repaint();
   }
 
+  /**
+   * Generates the separate panels for each view.
+   */
   private void generateOverviewFrames() {
     String testIcon = "resources/images/icons/testIcon.png";
 
