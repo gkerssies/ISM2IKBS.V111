@@ -68,18 +68,16 @@ public class Log {
     try {
       for ( String t : logitem ) {
         if ( !jxception.get( y ).equals( "" ) ) {
-          temp += "[" + type.get( y ) + "] " + jxception.get( y ) + "; " + friendlyerror.get( y ) + "<br />";
+          temp += "[" + type.get( y ) + "] " + t + "<br />";
         } else {
-          temp += "[" + type.get( y ) + "] " + friendlyerror.get( y ) + "<br />";
+          temp += "[" + type.get( y ) + "] " + t + "<br />";
         }
         // temp += "[" + type.get( y ) + "] " + t + "; " + jxception.get( y ) + "; " + friendlyerror.get( y ) + "<br />";
         y++;
       }
     } catch ( ConcurrentModificationException ex ) {
-      Clear();
-      System.out.println( "problem" );
+      temp += "[Error] Er is een fout opgetreden tijdens het opvragen van de logs<br />";
     }
-
 
     return temp;
   }
