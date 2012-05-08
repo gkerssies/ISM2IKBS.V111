@@ -67,6 +67,7 @@ public class InfoServer extends JFrame {
     server.pack();
     server.setLocationRelativeTo( server.getRootPane() ); // Center the frame
     server.setVisible( true );
+    
   }
 
   /**
