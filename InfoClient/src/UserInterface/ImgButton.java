@@ -9,9 +9,7 @@ import javax.swing.JButton;
  * @author thomasbaart
  */
 public class ImgButton extends JButton {
-  /*
-   * Bug: Clicking an ImgButton makes the transparant pixels opaque.
-   */
+  // Bug: Clicking an ImgButton makes the transparant pixels opaque.
 
   /**
    * Default constructor for ImgButton. Generates a normal JButton.

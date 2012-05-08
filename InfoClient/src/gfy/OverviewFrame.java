@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  * @author thomasbaart
  */
 public class OverviewFrame extends JFrame {
-  // Todo: Adjust the generateOverViewFrames() method to accept input
+  // To do: Adjust the generateOverViewFrames() method to accept input
 
   private Dimension overviewFrameDim, userMonitorDim;
   private TexturedPanel mainPanel, overViewPanelContainer;

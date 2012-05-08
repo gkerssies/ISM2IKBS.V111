@@ -23,15 +23,11 @@ import javax.swing.border.MatteBorder;
  * @author thomasbaart
  */
 public class OverviewPanel extends JPanel {
-  /*
-   * To do: ActionListener toevoegen die goed onderscheid kan maken tussen de
-   * twee knoppen, wellicht met een genummerd veld die je meegeeft in de
-   * constructor
-   * To do: resize overview panel based on contents
-   */
+  // To do: resize overview panel based on contents
 
   private JPanel imagePanel, contentPanel, buttonPanel, buttonPanelContainer;
-  private InlogListener listener;
+  private ImgButton button;
+  private ActionListener OverviewListener = new OverviewListener( this );
   private static final String buttonIcon = "resources/images/buttons/nextButton.png";
   private static final Color transparant = new Color( 0, 0, 0, 0 );
   private static final Color transparantGray = new Color( 255, 255, 255, 150 );
@@ -100,8 +96,9 @@ public class OverviewPanel extends JPanel {
    * Sets up the panels button.
    */
   private void setupButtonPanel() {
-    ImgButton button = new ImgButton( buttonIcon );
+    button = new ImgButton( buttonIcon );
     button.setBackground( transparant );
+    button.addActionListener( OverviewListener );
 
     buttonPanel = new InputPanel();
     buttonPanel.setBorder( emptyBorder );
@@ -127,5 +124,14 @@ public class OverviewPanel extends JPanel {
     add( contentPanel, BorderLayout.CENTER );
     add( buttonPanelContainer, BorderLayout.EAST );
     setPreferredSize( preferredSize );
+  }
+
+  /**
+   * Getter for this panels only button.
+   *
+   * @return This panels only button.
+   */
+  public ImgButton getButton() {
+    return button;
   }
 }
