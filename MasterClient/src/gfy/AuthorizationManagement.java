@@ -16,39 +16,43 @@ import javax.swing.text.TableView;
  */
 public class AuthorizationManagement extends JFrame implements ActionListener {
 
-  private JPanel panel;
-  private JTable userTable;
+  private JPanel panel = new JPanel();
   private JButton buttonAdd, buttonEdit, buttonDelete;
 
   public AuthorizationManagement() {
-    panel = new JPanel();
-    
-    UserTable table = new UserTable();
-    userTable = table.getTable() ;
-    
+    setLayout( new BorderLayout() );
+
+    UserTable userTable = new UserTable();
+    userTable.setOpaque( true );
+    userTable.setPreferredSize( new Dimension( 500, 500 ) );
+
+    JPanel panelButtons = new JPanel();
+    panelButtons.setPreferredSize( new Dimension( 140, 500 ) );
+
     buttonAdd = new JButton();
     buttonAdd.setText( "Toevoegen" );
-    buttonAdd.setPreferredSize( new Dimension( 100, 25 ) );
+    buttonAdd.setPreferredSize( new Dimension( 110, 25 ) );
     buttonAdd.addActionListener( this );
 
     buttonEdit = new JButton();
     buttonEdit.setText( "Aanpassen" );
-    buttonEdit.setPreferredSize( new Dimension( 100, 25 ) );
+    buttonEdit.setPreferredSize( new Dimension( 110, 25 ) );
     buttonEdit.addActionListener( this );
 
     buttonDelete = new JButton();
     buttonDelete.setText( "Verwijderen" );
-    buttonDelete.setPreferredSize( new Dimension( 100, 25 ) );
+    buttonDelete.setPreferredSize( new Dimension( 110, 25 ) );
     buttonDelete.addActionListener( this );
 
-    panel.add( userTable );
-    panel.add( buttonAdd );
-    panel.add( buttonEdit );
-    panel.add( buttonDelete );
+    panel.add( userTable, BorderLayout.WEST );
+    panel.add( panelButtons, BorderLayout.EAST );
 
-    setLayout( new BorderLayout() );
+    panelButtons.add( buttonAdd );
+    panelButtons.add( buttonEdit );
+    panelButtons.add( buttonDelete );
     setContentPane( panel );
-    setSize( 500, 300 );
+
+    setSize( 660, 540 );
     setResizable( false );
     setTitle( "Authorisatiebeheer" );
     setVisible( true );
