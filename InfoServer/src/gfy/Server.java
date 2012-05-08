@@ -4,20 +4,18 @@
  */
 package gfy;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException;
 
 /**
- *
+ * Server core 
  * @author Jormen Janssen
  * @version 0.1 - 29 april 2012
  */
 public class Server extends Thread{
 
-  Config config;
+  private Config config;
   ArrayList<Client> client;
   ServerSocket serversocket;
   Client currentclient;
@@ -27,7 +25,7 @@ public class Server extends Thread{
    */
   public Server( Config config ){
     this.config = config;
-    client = new ArrayList<Client>();
+    client = new ArrayList<>();
   }
   
   /**
@@ -37,27 +35,33 @@ public class Server extends Thread{
   public void run()
   {
     try {
-      serversocket = new ServerSocket(config.getServerport());
-       Log.addItem("Server start","","De server wordt gestart", LogType.Info);
-       while(true)
+      serversocket = new ServerSocket(getConfig().getServerport());
+       Log.addItem("Server start","","de server wordt gestart", LogType.Event);
+       while(serversocket.isClosed() == false)
        {
          try
          {
            currentclient = new Client(this);
+           client.add(currentclient);
+           currentclient.start();
+           while(currentclient.getPendingStatus())
+           {
+             Thread.sleep(100);
+           }
+           
          }
          
          catch(Exception ex)
          {
-           
+            Log.addItem("Client socket fout", ex.getMessage(),"Er is een fout opgetreden", LogType.Error);
          }
        }
       
      
     }
     catch ( IOException ex ) {
-      Log.addItem("Thread exception", ex.getMessage(),"Er is een fout opgetreden tijdens het starten van de server", LogType.Error);
+      Log.addItem("IO Fout", ex.getMessage(),"Er is een fout opgetreden tijdens het starten van de server", LogType.Error);
     }
-    System.out.println(new Log().toString());
   }
   
   /**
@@ -67,6 +71,13 @@ public class Server extends Thread{
   public ServerSocket getServerSocket()
   {
     return this.serversocket;
+  }
+
+  /**
+   * @return the config
+   */
+  public Config getConfig() {
+    return config;
   }
   
 }
