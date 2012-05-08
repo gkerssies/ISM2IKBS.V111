@@ -5,7 +5,7 @@
 package gfy;
 
 /**
- *
+ * Config class for the server configuration holds : Global settings, Navison Settings and the user database.
  * @author Jormen Janssen
  * @version 0.1 - 26 april 2012
  */
