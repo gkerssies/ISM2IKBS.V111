@@ -22,6 +22,7 @@ public class Client extends Thread {
   private Server server;
   private Protocol protocol;
   private boolean ispending;
+  private ClientProperty clientproperty;
 
   /**
    * Constructor for new client
@@ -33,6 +34,7 @@ public class Client extends Thread {
     this.server = server;
     this.socketserver = server.getServerSocket();
     ispending = true;
+    this.clientproperty = new ClientProperty();
   }
 
   /**
@@ -62,15 +64,15 @@ public class Client extends Thread {
     try {
       socketclient = socketserver.accept();
       ispending = false;
-      Log.addItem( "Client verbonden @ " + socketclient.getInetAddress(), "", "Cl", LogType.Event );
+      Log.addItem( "Client verbonden @ " + socketclient.getInetAddress(), "", "", LogType.Event );
 
-      protocol.setServer( server );
-      System.out.println( protocol.bindStreams( socketclient ) );
-
+      getProtocol().setServer( server );
+      getProtocol().bindStreams( socketclient );
+      getProtocol().setClientproperty(clientproperty);
 
       while ( socketclient.isConnected() ) {
-        if ( protocol.isBusy() == false ) {
-          protocol.proccesCommand();
+        if ( getProtocol().isBusy() == false ) {
+          getProtocol().proccesCommand();
         }
       }
 
@@ -79,5 +81,12 @@ public class Client extends Thread {
       Logger.getLogger( Client.class.getName() ).log( Level.SEVERE, null, ex );
     }
 
+  }
+
+  /**
+   * @return the protocol
+   */
+  public Protocol getProtocol() {
+    return protocol;
   }
 }
