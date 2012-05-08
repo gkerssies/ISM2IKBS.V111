@@ -77,19 +77,18 @@ public class Server extends Thread{
   
   public void stopServer()
   {
-    for(Client myclient : client)
-    {
-      if(myclient.isConnected())
+      for(Client myclient : client)
       {
-        try {
           myclient.getProtocol().unbindStreams();
-          serversocket.close();
-        } catch ( IOException ex ) {
-          Log.addItem("Fout tijdens server verbinding verbreken", ex.getMessage(), "", LogType.Critical);
-        }
       }
+    try {
+      serversocket.close();
+    } catch ( IOException ex ) {
+      Logger.getLogger( Server.class.getName() ).log( Level.SEVERE, null, ex );
     }
-  }
+    }
+  
+  
 
   /**
    * @return the config

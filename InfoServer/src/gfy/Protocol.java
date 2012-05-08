@@ -104,7 +104,10 @@ public abstract class Protocol
   {
     return true;
   }
-  
+  /**
+   * Method for disconnecting an stream.
+   *
+   */
   public void unbindStreams()
   {
     try
@@ -117,7 +120,6 @@ public abstract class Protocol
     }
     catch(Exception ex)
     {
-      System.out.println( "lalalalaalla" );
       Log.addItem("Fout tijdens loskoppelen client verbinding", ex.getMessage(),"Fout tijdens verbreken van een stream", LogType.Error);
     }
   }
