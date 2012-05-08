@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,24 +18,26 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 /**
+ * The panels to make the overview from.
  *
  * @author thomasbaart
  */
 public class OverviewPanel extends JPanel {
   /*
-   * TODO: Kleur lichter maken van de lijn onder de contenttitel
-   * TODO: ActionListener toevoegen die goed onderscheid kan maken tussen de
+   * To do: ActionListener toevoegen die goed onderscheid kan maken tussen de
    * twee knoppen, wellicht met een genummerd veld die je meegeeft in de
    * constructor
+   * To do: resize overview panel based on contents
    */
 
   private JPanel imagePanel, contentPanel, buttonPanel, buttonPanelContainer;
+  private InlogListener listener;
   private static final String buttonIcon = "resources/images/buttons/nextButton.png";
   private static final Color transparant = new Color( 0, 0, 0, 0 );
   private static final Color transparantGray = new Color( 255, 255, 255, 150 );
   private static final EmptyBorder emptyBorder = new EmptyBorder( 3, 3, 3, 3 );
   private static final LineBorder grayBorder = new LineBorder( Color.GRAY, 1 );
-  private final int preferredWidth = 350;
+  private static final Dimension preferredSize = new Dimension( 350, 65 );
 
   /**
    * Constructor of OverviewPanel.
@@ -123,6 +126,6 @@ public class OverviewPanel extends JPanel {
     add( imagePanel, BorderLayout.WEST );
     add( contentPanel, BorderLayout.CENTER );
     add( buttonPanelContainer, BorderLayout.EAST );
-    setPreferredSize( new Dimension( 350, 65 ) );
+    setPreferredSize( preferredSize );
   }
 }
