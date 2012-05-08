@@ -7,6 +7,8 @@ package gfy;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Server core 
@@ -79,7 +81,12 @@ public class Server extends Thread{
     {
       if(myclient.isConnected())
       {
-        myclient.getProtocol().unbindStreams();
+        try {
+          myclient.getProtocol().unbindStreams();
+          serversocket.close();
+        } catch ( IOException ex ) {
+          Log.addItem("Fout tijdens server verbinding verbreken", ex.getMessage(), "", LogType.Critical);
+        }
       }
     }
   }
