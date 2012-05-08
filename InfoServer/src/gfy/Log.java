@@ -4,6 +4,7 @@
  */
 package gfy;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 /**
  * The static log for the server application
@@ -61,13 +62,25 @@ public class Log {
   @Override
   public String toString()
   {
+    
     int y =0;
     String temp = "";
-    for(String t : logitem)
+    
+    try
     {
+      for(String t : logitem)
+      {
       temp += t + " " + jxception.get(y) + " " + friendlyerror.get( y ) + " " + type;
       y++;
+      }
     }
+    catch(ConcurrentModificationException ex)
+    {
+     Clear();
+      System.out.println( "problem" );
+    }
+    
+    
     return temp;
   }
   

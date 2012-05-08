@@ -112,9 +112,11 @@ public abstract class Protocol
     objectlineout.close();
     os.close();
     is.close();
+    socket.close();
     }
     catch(Exception ex)
     {
+      System.out.println( "lalalalaalla" );
       Log.addItem("Fout tijdens loskoppelen client verbinding", ex.getMessage(),"Fout tijdens verbreken van een stream", LogType.Error);
     }
   }

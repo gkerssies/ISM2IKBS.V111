@@ -37,7 +37,7 @@ public class ServerProtocol extends Protocol
       }
       else if (t.equals("CLOSE") )
       {
-      
+        super.setBusy(true);
         super.unbindStreams();
       
       

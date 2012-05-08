@@ -41,7 +41,7 @@ public class JormenTest
     while(true)
     {
       try {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
       } catch ( InterruptedException ex ) {
         
       }
