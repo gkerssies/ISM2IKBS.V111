@@ -49,7 +49,7 @@ public class StatusPanel extends JPanel {
     JPanel buttonPanel = new JPanel( new FlowLayout( FlowLayout.LEFT, 0, 1 ) );
 
     // Create button to start the server
-    startButton = new CustomButton( "Start", false );
+    startButton = new CustomButton( "Start" );
     buttonPanel.add( startButton );
 
     // Create space between the start and the stop button

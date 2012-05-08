@@ -14,6 +14,8 @@ import javax.swing.JPanel;
  */
 public class InfoServer extends JFrame {
 
+  private Server server;
+
   /**
    * Constructor for the InfoServer class.
    */
@@ -23,6 +25,9 @@ public class InfoServer extends JFrame {
     setLayout( new BorderLayout() );
     setDefaultCloseOperation( EXIT_ON_CLOSE );
     setResizable( false );
+
+    // Run method which loads the settings and creates an instance of the server
+    createServer();
 
     // Create the server status panel
     JPanel northPanel = new TitledBorderPanel( "Status", new int[] { 5, 5, 0, 5 } );
@@ -38,7 +43,7 @@ public class InfoServer extends JFrame {
 
     // Create the port panel
     JPanel eastPanel = new TitledBorderPanel( "Poort", new int[] { 5, 5, 5, 5 } );
-    PortPanel portPanel = new PortPanel();
+    PortPanel portPanel = new PortPanel( server.getConfig().getServerport() );
     eastPanel.add( portPanel );
     add( eastPanel, BorderLayout.EAST );
 
@@ -49,7 +54,7 @@ public class InfoServer extends JFrame {
     add( southPanel, BorderLayout.SOUTH );
 
     // Create object that processes all the user actions
-    ActionHandler ah = new ActionHandler( this, statusPanel, logPanel, portPanel );
+    ActionHandler ah = new ActionHandler( this, server, statusPanel, logPanel, portPanel, informationPanel );
   }
 
   /**
@@ -62,5 +67,19 @@ public class InfoServer extends JFrame {
     server.pack();
     server.setLocationRelativeTo( server.getRootPane() ); // Center the frame
     server.setVisible( true );
+  }
+
+  /**
+   * Creates the server. All necessery settings are set/loaded.
+   */
+  public void createServer() {
+    User users = new User();
+    Database database = new Database( "Navision", "SQLSERVER", 11000, "Gebruikersnaam", "Password" );
+    Config config = new Config( 4444, database, users );
+
+    server = new Server( config );
+
+    // Add test user
+    users.addUser( "admin", "admin", UserType.gebruiker );
   }
 }

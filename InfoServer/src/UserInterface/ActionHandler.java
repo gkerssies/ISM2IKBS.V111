@@ -1,5 +1,6 @@
 package UserInterface;
 
+import gfy.Server;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,9 @@ import javax.swing.*;
 public class ActionHandler implements ActionListener, KeyListener {
 
   private JFrame frame;
+  private Server server;
+  private InformationPanel informationPanel;
+  private Timer timer;
   private JLabel statusIconLabel, statusTextLabel;
   private JButton startButton, stopButton, logButton;
   private JTextField portTextField;
@@ -25,13 +29,20 @@ public class ActionHandler implements ActionListener, KeyListener {
   /**
    * Constructor for the ActionHandler class.
    *
-   * @param frame       the server application frame
-   * @param statusPanel the panel to manage the server status
-   * @param logPanel    the panel with the button that opens the log dialog
-   * @param portPanel   the panel to set the portnumber
+   * @param frame            the server application frame
+   * @param server           the application core
+   * @param statusPanel      the panel to manage the server status
+   * @param logPanel         the panel with the button that opens the log dialog
+   * @param portPanel        the panel to set the portnumber
+   * @param informationPanel the panel with the number of the connected clients
    */
-  public ActionHandler( JFrame frame, StatusPanel statusPanel, LogPanel logPanel, PortPanel portPanel ) {
+  public ActionHandler( JFrame frame, Server server, StatusPanel statusPanel, LogPanel logPanel, PortPanel portPanel, InformationPanel informationPanel ) {
     this.frame = frame;
+    this.server = server;
+    this.informationPanel = informationPanel;
+
+    // Create a new timer to refresh every .. seconds so the number of connected clients is shown realtime
+    timer = new Timer( 1000, this );
 
     startButton = statusPanel.getStartButton();
     startButton.addActionListener( this );
@@ -51,7 +62,16 @@ public class ActionHandler implements ActionListener, KeyListener {
 
   @Override
   public void actionPerformed( ActionEvent ae ) {
-    if ( ae.getSource() == startButton ) {
+    if ( ae.getSource() == timer ) {
+      // Update the number of connected clients every .. seconds
+      informationPanel.setConnectedClients( server.getCurrentConnectedClientsCount() );
+    } else if ( ae.getSource() == startButton ) {
+      // Start the application core (the server)
+      server.start();
+
+      // Start the timer to refresh the number of connected clients
+      timer.start();
+
       startButton.setEnabled( false );
       stopButton.setEnabled( true );
 
