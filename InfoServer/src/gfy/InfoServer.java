@@ -31,10 +31,10 @@ public class InfoServer extends JFrame {
     add( northPanel, BorderLayout.NORTH );
 
     // Create the log panel
-    JPanel westPanel = new TitledBorderPanel( "Logs", new int[] { 5, 5, 5, 4 } );
+    JPanel centerPanel = new TitledBorderPanel( "Logs", new int[] { 5, 5, 5, 4 } );
     LogPanel logPanel = new LogPanel();
-    westPanel.add( logPanel );
-    add( westPanel, BorderLayout.WEST );
+    centerPanel.add( logPanel );
+    add( centerPanel, BorderLayout.CENTER );
 
     // Create the port panel
     JPanel eastPanel = new TitledBorderPanel( "Poort", new int[] { 5, 5, 5, 5 } );
@@ -48,8 +48,8 @@ public class InfoServer extends JFrame {
     southPanel.add( informationPanel );
     add( southPanel, BorderLayout.SOUTH );
 
-    // Create custom ActionListener to process the user actions
-    ServerActionListener sal = new ServerActionListener( statusPanel, portPanel );
+    // Create object that processes all the user actions
+    ActionHandler ah = new ActionHandler( this, statusPanel, logPanel, portPanel );
   }
 
   /**

@@ -3,7 +3,10 @@ package gfy;
 import UserInterface.ImgButton;
 import UserInterface.InputPanel;
 import UserInterface.WrappableJLabel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,12 +23,9 @@ import javax.swing.border.MatteBorder;
 public class OverviewPanel extends JPanel {
   /*
    * TODO: Kleur lichter maken van de lijn onder de contenttitel
-   * TODO: Code dusdanig herschrijven dat er inputs zijn voor de foto, titel en
-   * content
    * TODO: ActionListener toevoegen die goed onderscheid kan maken tussen de
    * twee knoppen, wellicht met een genummerd veld die je meegeeft in de
    * constructor
-   * TODO: Velden logisch hernoemen
    */
 
   private JPanel imagePanel, contentPanel, buttonPanel, buttonPanelContainer;
@@ -38,12 +38,13 @@ public class OverviewPanel extends JPanel {
 
   /**
    * Constructor of OverviewPanel.
-   * 
-   * @param imageFilePath Path to the image file to display on the left of the panel.
-   * @param title Title to display on the panel.
-   * @param description Description to put on the panel.
+   *
+   * @param imageFilePath Path to the image file to display on the left of the
+   * panel.
+   * @param title         Title to display on the panel.
+   * @param description   Description to put on the panel.
    */
-  public OverviewPanel( String imageFilePath, String title, String description) {
+  public OverviewPanel( String imageFilePath, String title, String description ) {
     super();
     setupImagePanel( imageFilePath );
     setupContentPanel( title, description );
@@ -51,17 +52,28 @@ public class OverviewPanel extends JPanel {
     setupOverviewPanel();
   }
 
-  private void setupImagePanel( String fileName ) {
+  /**
+   * Sets up the ImagePanel, part of the OverviewPanel.
+   *
+   * @param filePath The file path of the image
+   */
+  private void setupImagePanel( String filePath ) {
     imagePanel = new InputPanel();
     imagePanel.setLayout( new BorderLayout() );
     imagePanel.setBackground( transparantGray );
     imagePanel.setBorder( emptyBorder );
 
-    JLabel label = new JLabel( new ImageIcon( fileName ) );
+    JLabel label = new JLabel( new ImageIcon( filePath ) );
     label.setBorder( grayBorder );
     imagePanel.add( label, BorderLayout.NORTH );
   }
 
+  /**
+   * Sets up the ContentPanel with a title and description.
+   *
+   * @param title       The title text
+   * @param description The body text
+   */
   private void setupContentPanel( String title, String description ) {
     JLabel titleLabel = new JLabel( title );
     titleLabel.setFont( new Font( Font.SANS_SERIF, Font.BOLD, 13 ) );
@@ -81,20 +93,27 @@ public class OverviewPanel extends JPanel {
     contentPanel.add( descriptionLabel, BorderLayout.CENTER );
   }
 
+  /**
+   * Sets up the panels button.
+   */
   private void setupButtonPanel() {
     ImgButton button = new ImgButton( buttonIcon );
+    button.setBackground( transparant );
 
     buttonPanel = new InputPanel();
-    buttonPanel.setLayout( new GridLayout() );
     buttonPanel.setBorder( emptyBorder );
-    buttonPanel.setBackground( transparant );
+    buttonPanel.setBackground( transparantGray );
     buttonPanel.add( button );
 
-    buttonPanelContainer = new JPanel();
+    buttonPanelContainer = new JPanel( new BorderLayout() );
     buttonPanelContainer.setBackground( transparantGray );
-    buttonPanelContainer.add( buttonPanel );
+    buttonPanelContainer.add( buttonPanel, BorderLayout.CENTER );
   }
 
+  /**
+   * Sets up the OverviewPanel with the previously made imagePanel, contentPanel
+   * and buttonPanel.
+   */
   private void setupOverviewPanel() {
     setLayout( new BorderLayout() );
     setBackground( transparant );
@@ -104,6 +123,6 @@ public class OverviewPanel extends JPanel {
     add( imagePanel, BorderLayout.WEST );
     add( contentPanel, BorderLayout.CENTER );
     add( buttonPanelContainer, BorderLayout.EAST );
-    setPreferredSize( new Dimension( 350, 65) );
+    setPreferredSize( new Dimension( 350, 65 ) );
   }
 }

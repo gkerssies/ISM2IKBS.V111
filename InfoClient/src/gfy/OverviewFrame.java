@@ -6,28 +6,34 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
+ * The overviewFrame.
  *
  * @author thomasbaart
  */
 public class OverviewFrame extends JFrame {
+  // Todo: Adjust the generateOverViewFrames() method to accept input
 
   private Dimension overviewFrameDim, userMonitorDim;
   private TexturedPanel mainPanel, overViewPanelContainer;
   private JPanel panel1, panel2;
   private GridBagConstraints gbc;
 
+  /**
+   * Constructor of OverviewFrame.
+   */
   public OverviewFrame() {
     super();
     setLayout( new BorderLayout() );
-    overViewPanelContainer = new TexturedPanel( "resources/images/backgrounds/mainPanelPattern.png" );
+    overViewPanelContainer = new TexturedPanel(
+            "resources/images/backgrounds/mainPanelPattern.png" );
     overViewPanelContainer.setLayout( new GridBagLayout() );
-    
+
     gbc = new GridBagConstraints();
-    gbc.insets = new Insets( 2, 2, 2, 2);
+    gbc.insets = new Insets( 2, 2, 2, 2 );
     gbc.weightx = 0;
     gbc.weighty = 0;
     gbc.gridwidth = GridBagConstraints.REMAINDER;
-    
+
     generateOverviewFrames();
 
     mainPanel = new TexturedPanel();
@@ -39,26 +45,29 @@ public class OverviewFrame extends JFrame {
     userMonitorDim = Toolkit.getDefaultToolkit().getScreenSize();
 
     setTitle( "Info Client - Weergave overzicht" );
-    setVisible( true );
-    setSize( 357,163);
+    pack();
+
     overviewFrameDim = getSize();
 
-    setLocation( ( userMonitorDim.width / 2 )
-                 - ( overviewFrameDim.width / 2 ),
-                 ( int ) ( userMonitorDim.height / 2.75 )
-                 - ( overviewFrameDim.height / 2 ) );
+    setLocation( ( userMonitorDim.width / 2 ) - ( overviewFrameDim.width / 2 ),
+                 ( int ) ( userMonitorDim.height / 2.75 ) - ( overviewFrameDim.height / 2 ) );
     setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+    setVisible( true );
+    repaint();
   }
 
+  /**
+   * Generates the separate panels for each view.
+   */
   private void generateOverviewFrames() {
     String testIcon = "resources/images/icons/testIcon.png";
 
     panel1 = new OverviewPanel( testIcon,
-                                "TestTitel",
-                                "Mauris Iaculis Porttitor Posuere. Praesent Id Metus Massa, Ut Blandit Odio. Proin" );
+                                "Contactgegevens",
+                                "Klantenbestand afdeling Customer Service" );
     panel2 = new OverviewPanel( testIcon,
-                                "Andere query",
-                                "Ut Blandit Odio. Proin" );
+                                "Sales data Q1 2012",
+                                "Fietsenverkoop gedurende financieel kwartaal 1, 2012" );
 
     overViewPanelContainer.add( panel1, gbc );
     overViewPanelContainer.add( panel2, gbc );
