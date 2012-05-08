@@ -52,17 +52,28 @@ public class OverviewPanel extends JPanel {
     setupOverviewPanel();
   }
 
-  private void setupImagePanel( String fileName ) {
+  /**
+   * Sets up the ImagePanel, part of the OverviewPanel.
+   *
+   * @param filePath The file path of the image
+   */
+  private void setupImagePanel( String filePath ) {
     imagePanel = new InputPanel();
     imagePanel.setLayout( new BorderLayout() );
     imagePanel.setBackground( transparantGray );
     imagePanel.setBorder( emptyBorder );
 
-    JLabel label = new JLabel( new ImageIcon( fileName ) );
+    JLabel label = new JLabel( new ImageIcon( filePath ) );
     label.setBorder( grayBorder );
     imagePanel.add( label, BorderLayout.NORTH );
   }
 
+  /**
+   * Sets up the ContentPanel with a title and description.
+   *
+   * @param title       The title text
+   * @param description The body text
+   */
   private void setupContentPanel( String title, String description ) {
     JLabel titleLabel = new JLabel( title );
     titleLabel.setFont( new Font( Font.SANS_SERIF, Font.BOLD, 13 ) );
@@ -82,6 +93,9 @@ public class OverviewPanel extends JPanel {
     contentPanel.add( descriptionLabel, BorderLayout.CENTER );
   }
 
+  /**
+   * Sets up the panels button.
+   */
   private void setupButtonPanel() {
     ImgButton button = new ImgButton( buttonIcon );
     button.setBackground( transparant );
@@ -96,6 +110,10 @@ public class OverviewPanel extends JPanel {
     buttonPanelContainer.add( buttonPanel, BorderLayout.CENTER );
   }
 
+  /**
+   * Sets up the OverviewPanel with the previously made imagePanel, contentPanel
+   * and buttonPanel.
+   */
   private void setupOverviewPanel() {
     setLayout( new BorderLayout() );
     setBackground( transparant );
