@@ -53,20 +53,20 @@ public class ServerSettings extends JFrame implements ActionListener {
     buttonSave.setPreferredSize( new Dimension( 100, 25 ) );
     buttonSave.addActionListener( this );
 
-    panel.add(panelLabels);
-    panel.add(panelInput);
-    panel.add(panelButtons);
-    
+    panel.add( panelLabels );
+    panel.add( panelInput );
+    panel.add( panelButtons );
+
     panelLabels.add( label1 );
     panelLabels.add( label2 );
     panelLabels.add( label3 );
     panelLabels.add( label4 );
-    
+
     panelInput.add( connectionString );
     panelInput.add( database );
     panelInput.add( username );
     panelInput.add( password );
-    
+
     panelButtons.add( buttonCancel );
     panelButtons.add( buttonSave );
 

@@ -15,7 +15,7 @@ import javax.swing.*;
  */
 public class AddUser extends JFrame implements ActionListener {
 
-  private JPanel panel;
+  private JPanel panel, panelLabels, panelInput, panelButtons;
   private JLabel label1, label2, label3, label4;
   private JTextField username, password, confirmPassword;
   private JComboBox userType;
@@ -23,6 +23,11 @@ public class AddUser extends JFrame implements ActionListener {
 
   public AddUser() {
     panel = new JPanel();
+    panelLabels = new JPanel();
+    panelLabels.setPreferredSize( new Dimension( 110, 140 ) );
+    panelInput = new JPanel();
+    panelInput.setPreferredSize( new Dimension( 190, 140 ) );
+    panelButtons = new JPanel();
 
     label1 = new JLabel( "Gebruikersnaam" );
     label2 = new JLabel( "Wachtwoord" );
@@ -45,12 +50,13 @@ public class AddUser extends JFrame implements ActionListener {
     buttonSave.addActionListener( this );
 
     panel.add( label1 );
-    panel.add( username );
     panel.add( label2 );
-    panel.add( password );
     panel.add( label3 );
-    panel.add( confirmPassword );
     panel.add( label4 );
+
+    panel.add( username );
+    panel.add( password );
+    panel.add( confirmPassword );
     panel.add( userType );
     panel.add( buttonCancel );
     panel.add( buttonSave );

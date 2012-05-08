@@ -16,10 +16,19 @@ import javax.swing.text.TableView;
  */
 public class AuthorizationManagement extends JFrame implements ActionListener {
 
+  private User user = new User();
   private JPanel panel = new JPanel();
   private JButton buttonAdd, buttonEdit, buttonDelete;
 
   public AuthorizationManagement() {
+    user.addUser( "Henk", null, UserType.beheerder );
+    user.addUser( "Jan", null, UserType.gebruiker );
+    user.addUser( "Sjaak", null, UserType.gebruiker );
+    user.addUser( "Klaas", null, UserType.gebruiker );
+    user.addUser( "Piet", null, UserType.gebruiker );
+
+    System.out.println( user.toString() );
+
     setLayout( new BorderLayout() );
 
     UserTable userTable = new UserTable();
