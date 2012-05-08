@@ -30,6 +30,7 @@ public class ClientProtocol extends Protocol{
     super.sendCommand("GET-USERS");
     if (super.recieveCommand().equals("OK") )
     {
+      super.setBusy(false);
       return (User) super.recieveObject();
     }
     else
