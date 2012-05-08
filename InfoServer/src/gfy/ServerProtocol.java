@@ -77,9 +77,8 @@ public class ServerProtocol extends Protocol
   public void getUsers()
   {
         System.out.println( "fase2" );
-       
-        //super.sendCommand("OK");
-        //super.sendObject(super.getServer().getConfig().getUserdatabase());
+        super.sendCommand("OK");
+        super.sendObject(super.getServer().getConfig().getUserdatabase());
         super.setBusy(false);
   }
 }
