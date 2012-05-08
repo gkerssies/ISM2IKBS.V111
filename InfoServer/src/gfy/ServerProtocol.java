@@ -57,7 +57,8 @@ public class ServerProtocol extends Protocol
     User user = super.getServer().getConfig().getUserdatabase();
     if (user.verifyCredential(clientAuth.getUsername(), clientAuth.getPassword()))
     {
-      Log.addItem("Client login succesvol @ " + super.getServer().getServerSocket().getInetAddress() , "", "", LogType.Event);
+      Log.addItem("Client login succesvol @ " + super.getSocket().getInetAddress() , "", "", LogType.Event);
+      super.getClientproperty().setLoggedin( true, clientAuth.getUsername(), clientAuth.getUsertype() );
     }
     else
     {

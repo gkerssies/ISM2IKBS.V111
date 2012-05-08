@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  */
 public abstract class Protocol 
 {
+   private ClientProperty clientproperty;
    private ObjectOutputStream objectlineout;
    private ObjectInputStream objectlinein;
    private Socket socket;
@@ -186,6 +187,20 @@ public abstract class Protocol
    */
   public void setBusy( boolean busy ) {
     this.busy = busy;
+  }
+
+  /**
+   * @return the clientproperty
+   */
+  public ClientProperty getClientproperty() {
+    return clientproperty;
+  }
+
+  /**
+   * @param clientproperty the clientproperty to set
+   */
+  public void setClientproperty( ClientProperty clientproperty ) {
+    this.clientproperty = clientproperty;
   }
   
   

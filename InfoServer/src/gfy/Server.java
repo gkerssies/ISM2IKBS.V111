@@ -72,6 +72,17 @@ public class Server extends Thread{
   {
     return this.serversocket;
   }
+  
+  public void stopServer()
+  {
+    for(Client myclient : client)
+    {
+      if(myclient.isConnected())
+      {
+        myclient.getProtocol().unbindStreams();
+      }
+    }
+  }
 
   /**
    * @return the config
@@ -81,7 +92,7 @@ public class Server extends Thread{
   }
   
   /**
-   * @return the config
+   * @return the number of connected clients
    */
   public int getCurrentConnectedClientsCount() {
     
