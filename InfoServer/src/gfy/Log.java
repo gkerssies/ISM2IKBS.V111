@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 import java.util.ArrayList;
@@ -11,6 +7,7 @@ import java.util.ConcurrentModificationException;
  * The static log for the server application
  *
  * @author Jormen Janssen
+ * @author Ido Bosman (s1047979)
  * @version 0.1 - 29 april 2012
  */
 public class Log {
