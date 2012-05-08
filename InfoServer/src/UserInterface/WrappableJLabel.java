@@ -24,8 +24,7 @@ public class WrappableJLabel extends JLabel {
 
   /**
    * Constructor of WrappableJLabel, directly sets the labels text. Note that
-   * the preferredWidth isn't honored
-   * in all the layoutmanagers.
+   * the preferredWidth isn't honored in all the layoutmanagers.
    *
    * @param string         The text to set this label to.
    * @param preferredWidth The preferred width in pixels.

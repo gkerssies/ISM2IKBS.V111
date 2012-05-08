@@ -41,12 +41,15 @@ public class JormenTest
     while(true)
     {
       try {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
       } catch ( InterruptedException ex ) {
         
       }
+      if(Log.getCount() != 0)
+      {
        System.out.println(new Log());
        Log.Clear();
+      }
     }
     
    

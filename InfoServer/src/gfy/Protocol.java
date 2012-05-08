@@ -10,41 +10,50 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Protocol base class
  * @author Jormen Janssen
- * @version 0.1 - 29 april 2012
+ * @version 0.2 - 8 mei 2012
  */
 public abstract class Protocol 
 {
-   private PrintWriter commandlineout;
    private ObjectOutputStream objectlineout;
-   private BufferedReader commandlinein;
    private ObjectInputStream objectlinein;
    private Socket socket;
    private Server server;
+   private boolean busy = false;
+   private InputStream is;
+   private OutputStream os;
   
   public abstract String getProtocol();
   public abstract void proccesCommand();
   
+  /**
+ * Method for recieving a command
+ * @return the command as an string
+ */
   public String recieveCommand()
   {
+    String t = "CLOSE";
     try
     {
-    String t;
-    t = commandlinein.readLine();
     
-    
+    t = objectlinein.readUTF();
     String[] strings = t.split(">");
     t = strings[0];
     return t;
     }
     catch(Exception ex)
     {
-      System.out.println();
-      return null;
+      Log.addItem("Stream fout", ex.getMessage(), "Fout tijdens het lezen van een commando", LogType.Error);
+      return t;
     }
     
   }
+  
+  /**
+   * Method for recieving an object to a client
+   * @return the object which is recieved through a socket
+   */
   public Object recieveObject()
   {
     try
@@ -52,26 +61,41 @@ public abstract class Protocol
       Object t = objectlinein.readObject();
     return t;
     }
-    catch(Exception ex)
+    catch(IOException ex)
     {
-      System.out.println( "geen object verbinding" + ex.getMessage());
+      Log.addItem("Object stream fout", ex.getMessage(), "Er is een fout opgetreden tijdens het lezen van een object", LogType.Error);
+      return null;
+    }
+    catch(ClassNotFoundException ex)
+    {
+      Log.addItem("Object niet gevonden", ex.getMessage(), "Het ontvangen object wordt niet herkend", LogType.Error);
       return null;
     }
   }
   public void sendCommand(String text)
   {
-    String strings[] = text.split(">");
-    text = strings[0];
-    commandlineout.println(text);
-    commandlineout.flush();
+    try {
+      String strings[] = text.split(">");
+      text = strings[0];
+      objectlineout.writeUTF(text);
+      objectlineout.flush();
+    } catch ( IOException ex ) {
+      Log.addItem("Error send utf command", ex.getMessage(),"Er is een fout opgetreden tijdens het sturen van een command", LogType.Error);
+      
+    }
   }
+  
+  /**
+   * Method for sending an object to a client
+   * @param object the sending object
+   */
   public void sendObject(Object o)
   {
     try{
        objectlineout.writeObject(o);
     } 
     catch ( IOException ex ) {
-      Logger.getLogger( Protocol.class.getName() ).log( Level.SEVERE, null, ex );
+      Log.addItem("Stream fout", ex.getMessage(), "Fout tijdens het zenden van een object", LogType.Error);
     }
   }
   
@@ -79,27 +103,48 @@ public abstract class Protocol
   {
     return true;
   }
- 
+  
+  public void unbindStreams()
+  {
+    try
+    {
+    objectlinein.close();
+    objectlineout.close();
+    os.close();
+    is.close();
+    socket.close();
+    }
+    catch(Exception ex)
+    {
+      System.out.println( "lalalalaalla" );
+      Log.addItem("Fout tijdens loskoppelen client verbinding", ex.getMessage(),"Fout tijdens verbreken van een stream", LogType.Error);
+    }
+  }
+  
+  /**
+   * 
+   * @return status the status of the streams if the stream is succesfully connected
+   */
   public boolean bindStreams(Socket clientSocket)
   {
     socket = clientSocket;
     boolean bind = true;
     try
     {
-      commandlinein = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-      commandlineout = new PrintWriter(getSocket().getOutputStream(),true);
-      objectlineout = new ObjectOutputStream(getSocket().getOutputStream());
-      objectlinein = new ObjectInputStream(getSocket().getInputStream());
+      is = clientSocket.getInputStream();
+      os = clientSocket.getOutputStream();
+      objectlineout = new ObjectOutputStream(os);
+      objectlinein = new ObjectInputStream(is);
        
     }
     catch(IOException ex)
     {
-      System.out.println(ex.getMessage());
+      Log.addItem("Stream fout", ex.getMessage(), "Fout tijdens het koppelen van de verbinding", LogType.Error);
       bind = false;
     }
     catch(Exception ex)
     {
-      System.out.println( "dikke fail" );
+      Log.addItem("Fatale Stream fout", ex.getMessage(), "Fout tijdens het koppelen van de verbinding", LogType.Error);
     }
             
     finally
@@ -127,6 +172,20 @@ public abstract class Protocol
    */
   public Socket getSocket() {
     return socket;
+  }
+
+  /**
+   * @return the busy
+   */
+  public boolean isBusy() {
+    return busy;
+  }
+
+  /**
+   * @param busy the busy to set
+   */
+  public void setBusy( boolean busy ) {
+    this.busy = busy;
   }
   
   
