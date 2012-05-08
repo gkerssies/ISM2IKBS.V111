@@ -17,6 +17,8 @@ public class MasterClient {
    * @param args the command line arguments
    */
   public static void main( String[] args ) {
-    JFrame frame = new HomeScreen();
+    ClientConnection clientconnection = new ClientConnection("Localhost", 4444);
+    clientconnection.start();
+    JFrame frame = new HomeScreen(clientconnection);
   }
 }

@@ -20,10 +20,11 @@ public class HomeScreen extends JFrame implements ActionListener {
   private JMenuItem itemClient, itemServer, itemInfo;
   private JPanel panel;
   private JButton buttonAuth, buttonSQL;
+  private ClientConnection clientconnetion;
 
-  public HomeScreen() {
+  public HomeScreen(ClientConnection clientconnection) {
+    this.clientconnetion = clientconnection;
     menuBar = new JMenuBar();
-
     menuClient = new JMenu( "Client" );
     itemClient = new JMenuItem( "Client" );
     itemClient.addActionListener( this );
@@ -77,7 +78,7 @@ public class HomeScreen extends JFrame implements ActionListener {
     } else if ( e.getSource() == itemInfo ) {
       System.out.println( "itemInfo" );
     } else if ( e.getSource() == buttonAuth ) {
-      JFrame frame = new AuthorizationManagement();
+      JFrame frame = new AuthorizationManagement(clientconnetion);
     } else if ( e.getSource() == buttonSQL ) {
       JFrame frame = new ServerSettings();
     }

@@ -78,9 +78,9 @@ public abstract class Protocol
       text = strings[0];
       objectlineout.writeUTF(text);
       objectlineout.flush();
-    } catch ( IOException ex ) {
-      
-      
+    } catch ( IOException ex ) 
+    {
+      System.out.println( "fout tijdens verzenden" );
     }
   }
   

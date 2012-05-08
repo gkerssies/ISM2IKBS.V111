@@ -23,19 +23,24 @@ public class ClientConnection extends Thread {
   private Socket clientsocket;
   private ObjectOutputStream objectlineout;
   private ObjectInputStream objectlinein;
-  private String Host;
-  private String Port;
-  private Protocol protocol;
+  private String host;
+  private int port;
+  private ClientProtocol protocol;
 
   /**
    * Constructor for the client connection.
    * @param Host the host ipadress
    * @param Port the server port application
    */
-  public ClientConnection( String Host, String Port ) {
-    this.Host = Host;
-    this.Port = Port;
+  public ClientConnection( String host, int port ) {
+    this.host = host;
+    this.port = port;
   }
+  
+ public ClientProtocol getProtocol()
+ {
+   return this.protocol;
+ }
 
   @Override
   public void run()
@@ -44,9 +49,10 @@ public class ClientConnection extends Thread {
     {
     clientsocket = new Socket( "Localhost", 4444 );
     protocol = new ClientProtocol();
-    protocol.bindStreams(clientsocket);
+      System.out.println(protocol.bindStreams(getClientsocket()));
+      
     
-    while(clientsocket.isConnected())
+    while(getClientsocket().isConnected())
     {
       if(protocol.isBusy() == false)
       {
@@ -63,6 +69,13 @@ public class ClientConnection extends Thread {
   }
   public boolean isConnected() 
   {
-    return clientsocket.isConnected();
+    return getClientsocket().isConnected();
+  }
+
+  /**
+   * @return the clientsocket
+   */
+  public Socket getClientsocket() {
+    return clientsocket;
   }
 }
