@@ -80,4 +80,20 @@ public class Server extends Thread{
     return config;
   }
   
+  /**
+   * @return the config
+   */
+  public int getCurrentConnectedClientsCount() {
+    
+    int i=0;
+    for(Client myclient : client)
+    {
+      if(myclient.isConnected())
+      {
+        i++;
+      }
+    }
+    return i;
+  }
+  
 }
