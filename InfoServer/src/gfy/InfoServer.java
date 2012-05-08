@@ -83,4 +83,7 @@ public class InfoServer extends JFrame {
     // Add test user
     users.addUser( "admin", "admin", UserType.gebruiker );
   }
+
+  
+ 
 }

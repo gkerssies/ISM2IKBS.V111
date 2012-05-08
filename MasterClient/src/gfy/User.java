@@ -161,6 +161,7 @@ public class User implements Serializable {
 
   /**
    * Method for returning the complete user database(Testing purpose)
+   *
    * @return returns the complete userdatabase as a string
    */
   @Override
