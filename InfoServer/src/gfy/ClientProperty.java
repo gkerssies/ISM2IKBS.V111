@@ -31,7 +31,6 @@ public class ClientProperty {
 
   /**
    * @param the usertype
-   *
    * @return if the usertype is a specified user type
    */
   public boolean isUserType( UserType t ) {

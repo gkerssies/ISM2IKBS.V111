@@ -15,13 +15,17 @@ import java.util.logging.Logger;
  */
 public class ServerProtocol extends Protocol 
 {
+  Client client;
   @Override
   public String getProtocol()
   {
   
     return "Server";
   }
-  
+  public ServerProtocol(Client client)
+  {
+    this.client = client;
+  }
   /**
    * this method overides the proccescommand and parses the commands being sent.
    */
@@ -38,9 +42,12 @@ public class ServerProtocol extends Protocol
       else if (t.equals("CLOSE") )
       {
         super.setBusy(true);
-        super.unbindStreams();
-      
-      
+        client.forceStop();
+      }
+      else if (t.equals("GET-USERS") )
+      {
+        super.setBusy(true);
+        getUsers();
       }
       else
       {
@@ -65,6 +72,15 @@ public class ServerProtocol extends Protocol
       Log.addItem("Client login failed", "", "", LogType.Event);
     }
     super.setBusy(false);
+  }
+  
+  public void getUsers()
+  {
+        System.out.println( "fase2" );
+       
+        //super.sendCommand("OK");
+        //super.sendObject(super.getServer().getConfig().getUserdatabase());
+        super.setBusy(false);
   }
 }
 

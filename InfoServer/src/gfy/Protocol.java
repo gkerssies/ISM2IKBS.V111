@@ -45,11 +45,23 @@ public abstract class Protocol
     }
     catch(Exception ex)
     {
-      Log.addItem("Stream fout", ex.getMessage(), "Fout tijdens het lezen van een commando", LogType.Error);
+      Log.addItem("Stream fout tijdens ontvangen", ex.getMessage(), "Fout tijdens het lezen van een commando", LogType.Error);
+      try
+      {
+      
+      unbindStreams();
+      socket.close();
+      Log.addItem("Stream ontkoppelen", ex.getMessage(), "Fout tijdens het lezen van een commando", LogType.Event);
+      }
+      catch(Exception exx)
+      {
+        Log.addItem("Fout tijdens ontkoppelen bij IO Fout", exx.getMessage(), "", LogType.Critical);
+      }
+     }
       return t;
     }
     
-  }
+  
   
   /**
    * Method for recieving an object to a client
@@ -143,6 +155,7 @@ public abstract class Protocol
     catch(IOException ex)
     {
       Log.addItem("Stream fout", ex.getMessage(), "Fout tijdens het koppelen van de verbinding", LogType.Error);
+      clientSocket.close();
       bind = false;
     }
     catch(Exception ex)

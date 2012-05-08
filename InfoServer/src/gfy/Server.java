@@ -76,8 +76,9 @@ public class Server extends Thread {
     }
     try {
       serversocket.close();
+     
     } catch ( IOException ex ) {
-      Logger.getLogger( Server.class.getName() ).log( Level.SEVERE, null, ex );
+     Log.addItem("Server gestopt", ex.getMessage(), null, LogType.Info);
     }
   }
 
@@ -95,7 +96,7 @@ public class Server extends Thread {
 
     int i = 0;
     for ( Client myclient : client ) {
-      if ( myclient.isConnected() ) {
+      if ( myclient.isConnected() && myclient.isForcedStopped() != true ) {
         i++;
       }
     }
