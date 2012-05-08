@@ -30,7 +30,7 @@ public class ClientProtocol extends Protocol{
     super.setBusy(true);
     System.out.println( "fase2" );
     super.sendCommand("GET-USERS");
-    System.out.println( "fase3" );
+    System.out.println( "faerererse3" );
     if (super.recieveCommand().equals("OK") )
     {
       System.out.println( "fase4" );

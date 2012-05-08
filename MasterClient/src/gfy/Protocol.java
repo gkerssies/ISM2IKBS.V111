@@ -35,7 +35,7 @@ public abstract class Protocol
     String t = "CLOSE";
     try
     {
-    
+      System.out.println( " erererererererer" );
     t = objectlinein.readUTF();
     String[] strings = t.split(">");
     t = strings[0];
