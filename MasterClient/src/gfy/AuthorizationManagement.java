@@ -17,15 +17,19 @@ import javax.swing.text.TableView;
 public class AuthorizationManagement extends JFrame implements ActionListener {
 
   private JPanel panel;
-  private JTable userTable;
   private JButton buttonAdd, buttonEdit, buttonDelete;
 
   public AuthorizationManagement() {
     panel = new JPanel();
+
+    UserTable userTable = new UserTable();
     
-    UserTable table = new UserTable();
-    userTable = table.getTable() ;
+    add( userTable);
     
+    /*UserTable newContentPane = new UserTable();
+    newContentPane.setOpaque(true); 
+    setContentPane(newContentPane);*/
+
     buttonAdd = new JButton();
     buttonAdd.setText( "Toevoegen" );
     buttonAdd.setPreferredSize( new Dimension( 100, 25 ) );
@@ -48,7 +52,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
 
     setLayout( new BorderLayout() );
     setContentPane( panel );
-    setSize( 500, 300 );
+    setSize( 650, 600 );
     setResizable( false );
     setTitle( "Authorisatiebeheer" );
     setVisible( true );

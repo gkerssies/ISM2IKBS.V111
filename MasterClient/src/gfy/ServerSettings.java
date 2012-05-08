@@ -23,16 +23,16 @@ public class ServerSettings extends JFrame implements ActionListener {
 
   public ServerSettings() {
     panel = new JPanel();
-    /*panelLabel = new JPanel();
-    panelLabel.
-    panelInput = new JPanel();
-    panelInput.setLayout( new GridLayout( 4, 1) );*/
+    /*
+     * panelLabel = new JPanel(); panelLabel. panelInput = new JPanel();
+     * panelInput.setLayout( new GridLayout( 4, 1) );
+     */
 
     label1 = new JLabel( "Connectiestring" );
     label2 = new JLabel( "Databasenaam" );
     label3 = new JLabel( "Gebruikersnaam" );
     label4 = new JLabel( "Wachtwoord" );
-    
+
     connectionString = new JTextArea( 3, 15 );
     database = new JTextField( 15 );
     username = new JTextField( 15 );
@@ -58,24 +58,21 @@ public class ServerSettings extends JFrame implements ActionListener {
     panel.add( password );
     panel.add( buttonCancel );
     panel.add( buttonSave );
-    
-    /*panelLabel.add( label1 );
-    panelInput.add( connectionString );
-    panelLabel.add( label2 );
-    panelInput.add( database );
-    panelLabel.add( label3 );
-    panelInput.add( username );
-    panelLabel.add( label4 );
-    panelInput.add( password );
-    panel.add( buttonCancel );
-    panel.add( buttonSave );
-    
-    panel.add( panelLabel, BorderLayout.WEST );
-    panel.add( panelInput, BorderLayout.EAST );*/
-    
+
+    /*
+     * panelLabel.add( label1 ); panelInput.add( connectionString );
+     * panelLabel.add( label2 ); panelInput.add( database ); panelLabel.add(
+     * label3 ); panelInput.add( username ); panelLabel.add( label4 );
+     * panelInput.add( password ); panel.add( buttonCancel ); panel.add(
+     * buttonSave );
+     *
+     * panel.add( panelLabel, BorderLayout.WEST ); panel.add( panelInput,
+     * BorderLayout.EAST );
+     */
+
     //setLayout( new BoxLayout( panel, WIDTH) );
     //setLayout( new BorderLayout() );
-    setLayout( new GridLayout( 4, 1) );
+    setLayout( new GridLayout( 4, 1 ) );
     setContentPane( panel );
     setSize( 350, 300 );
     setResizable( false );
