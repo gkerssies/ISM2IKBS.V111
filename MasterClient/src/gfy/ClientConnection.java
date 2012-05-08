@@ -35,6 +35,7 @@ public class ClientConnection extends Thread {
   public ClientConnection( String host, int port ) {
     this.host = host;
     this.port = port;
+     protocol = new ClientProtocol();
   }
   
  public ClientProtocol getProtocol()
@@ -48,7 +49,7 @@ public class ClientConnection extends Thread {
     try
     {
     clientsocket = new Socket( "Localhost", 4444 );
-    protocol = new ClientProtocol();
+   
       System.out.println(protocol.bindStreams(getClientsocket()));
       
     
@@ -63,7 +64,7 @@ public class ClientConnection extends Thread {
     }
     catch(Exception ex)
     {
-      System.out.println( "Fout" + ex.getMessage() );
+      System.out.println( "Fout tijdens verbinden" + ex.getMessage() );
     }
   
   }

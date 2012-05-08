@@ -19,6 +19,8 @@ public class MasterClient {
   public static void main( String[] args ) {
     ClientConnection clientconnection = new ClientConnection("Localhost", 4444);
     clientconnection.start();
+   
+    
     JFrame frame = new HomeScreen(clientconnection);
   }
 }

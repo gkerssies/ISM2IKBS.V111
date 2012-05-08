@@ -41,9 +41,15 @@ public abstract class Protocol
     t = strings[0];
     return t;
     }
+    catch(UTFDataFormatException fault)
+    {
+      System.out.println( "formaat fout" );
+      return t;
+    }
     catch(Exception ex)
     {
-      System.out.println( "Fout tijdens het lezen van een commando 1" + ex.getMessage());
+      
+      System.out.println( "Fout tijdens het lezen " + ex.getMessage());
       return t;
     }
     
@@ -112,8 +118,6 @@ public abstract class Protocol
     {
     objectlinein.close();
     objectlineout.close();
-    os.close();
-    is.close();
     }
     catch(Exception ex)
     {
@@ -130,10 +134,8 @@ public abstract class Protocol
     boolean bind = true;
     try
     {
-      is = clientSocket.getInputStream();
-      os = clientSocket.getOutputStream();
-      objectlineout = new ObjectOutputStream(os);
-      objectlinein = new ObjectInputStream(is);
+      objectlineout = new ObjectOutputStream(clientSocket.getOutputStream());
+      objectlinein = new ObjectInputStream(clientSocket.getInputStream());
        
     }
     catch(IOException ex)
