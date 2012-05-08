@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author Janssen-laptop
+ * @version 0.2 - 08-m
  */
 public class ServerProtocol extends Protocol 
 {
@@ -20,15 +21,26 @@ public class ServerProtocol extends Protocol
   
     return "Server";
   }
-
+  
+  /**
+   * this method overides the proccescommand and parses the commands being sent.
+   */
   @Override
   public void proccesCommand()
   {
       String t = "";
       t = super.recieveCommand();
-      if (t.equals("AUTH") )
+      if(t.equals("AUTH") )
       {
+        super.setBusy(true);
         authenticate();
+      }
+      else if (t.equals("CLOSE") )
+      {
+      
+        super.unbindStreams();
+      
+      
       }
       else
       {
@@ -36,7 +48,9 @@ public class ServerProtocol extends Protocol
       }
               
   }
-  
+  /**
+   * this is method for the authetication
+   */
   public void authenticate()
   {
     Auth clientAuth = (Auth) super.recieveObject();
@@ -49,6 +63,7 @@ public class ServerProtocol extends Protocol
     {
       Log.addItem("Client login failed", "", "", LogType.Event);
     }
+    super.setBusy(false);
   }
 }
 

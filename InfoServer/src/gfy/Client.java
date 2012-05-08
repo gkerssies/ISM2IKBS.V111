@@ -62,7 +62,10 @@ public class Client extends Thread{
       
       while(socketclient.isConnected())
       {
+        if (protocol.isBusy() == false)
+        {
         protocol.proccesCommand();
+        }
       }
       
     } 

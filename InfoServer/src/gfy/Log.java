@@ -45,8 +45,17 @@ public class Log {
     friendlyerror.clear();
     type.clear();
   }
+   /** 
+   * method for returning the count of messages
+   * @return the count of curring messages in queue
+   */
+  static int getCount()
+  {
+    return logitem.size();
+  }
   
-  /** method for returning al log messages
+  /**
+   * method for returning al log messages
    * @return all log items as a string
    */
   @Override

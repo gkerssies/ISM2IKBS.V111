@@ -45,8 +45,11 @@ public class JormenTest
       } catch ( InterruptedException ex ) {
         
       }
+      if(Log.getCount() != 0)
+      {
        System.out.println(new Log());
        Log.Clear();
+      }
     }
     
    
