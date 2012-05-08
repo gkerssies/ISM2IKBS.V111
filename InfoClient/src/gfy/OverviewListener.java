@@ -31,6 +31,7 @@ public class OverviewListener implements ActionListener {
   public void actionPerformed( ActionEvent ae ) {
     if ( ae.getSource() == panel.getButton() ) {
       System.out.println( "(button) " + panel.getButton().hashCode() + " was pushed!" );
+      new DataviewFrame( panel.getButton().hashCode() );
     }
   }
 }
