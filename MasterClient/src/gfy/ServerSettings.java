@@ -20,10 +20,12 @@ public class ServerSettings extends JFrame implements ActionListener {
   private JTextArea connectionString;
   private JTextField database, username, password;
   private JButton buttonCancel, buttonSave;
+  private Database databasesettings;
+  private ClientConnection connection;
 
   public ServerSettings(ClientConnection connection) {
-    Database databasesettings = connection.getDatabase();
-    System.out.println(databasesettings.toString());
+    this.databasesettings = connection.getDatabase();
+    this.connection = connection;
     
     panel = new JPanel();
     panelLabels = new JPanel();
@@ -81,11 +83,27 @@ public class ServerSettings extends JFrame implements ActionListener {
     setTitle( "Serverinstellingen" );
     setVisible( true );
   }
-
+  
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonCancel ) {
       dispose();
-    } else if ( e.getSource() == buttonSave ) {
+    } else if ( e.getSource() == buttonSave ) 
+    {
+      String[] t = new String[5];
+      t = connectionString.getText().split(":");
+      
+      try
+      {
+        databasesettings = new Database(database.getText(),t[0], Integer.parseInt(t[1]), username.getText(), password.getText());
+        connection.setDatabase(databasesettings);
+        dispose();
+      }
+      catch(Exception ex)
+      {
+        JOptionPane.showMessageDialog(this, "De database connectie string is niet juist ingevuld.\nCorrect input formaat \"Server:port\"");
+      }
+      
+      
     }
   }
 }
