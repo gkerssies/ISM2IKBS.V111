@@ -21,8 +21,8 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
   private JButton buttonAdd, buttonEdit, buttonDelete;
   private ClientConnection clientconnection;
 
-  public AuthorizationManagement(ClientConnection clientconnection) {
-    
+  public AuthorizationManagement( ClientConnection clientconnection ) {
+
     this.clientconnection = clientconnection;
     User user = clientconnection.getUser();
 
@@ -30,7 +30,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
 
     setLayout( new BorderLayout() );
 
-    UserTable userTable = new UserTable();
+    UserTable userTable = new UserTable( user, clientconnection );
     userTable.setOpaque( true );
     userTable.setPreferredSize( new Dimension( 500, 500 ) );
 

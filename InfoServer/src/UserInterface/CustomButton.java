@@ -21,9 +21,8 @@ public class CustomButton extends JButton {
   public CustomButton( String text ) {
     setText( text );
     setEnabled( true );
-    setMargin( new Insets( 0, 5, 0, 5 ) );
-    setFocusPainted( false );
-    setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+
+    setButtonSettings();
   }
 
   /**
@@ -36,6 +35,14 @@ public class CustomButton extends JButton {
   public CustomButton( String text, Boolean enabled ) {
     setText( text );
     setEnabled( enabled );
+
+    setButtonSettings();
+  }
+
+  /**
+   * Set the button settings that are configured in all constructors.
+   */
+  private void setButtonSettings() {
     setMargin( new Insets( 0, 5, 0, 5 ) );
     setFocusPainted( false );
     setCursor( new Cursor( Cursor.HAND_CURSOR ) );

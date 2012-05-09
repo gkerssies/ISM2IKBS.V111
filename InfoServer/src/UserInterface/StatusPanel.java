@@ -64,6 +64,7 @@ public class StatusPanel extends JPanel {
   }
 
   /**
+   * Get the label which contains the server status icon.
    *
    * @return the red or green image icon which shows de server status
    */
@@ -72,6 +73,7 @@ public class StatusPanel extends JPanel {
   }
 
   /**
+   * Get the label which contains the server status text.
    *
    * @return the label which contains the status of the server as a string
    */
@@ -80,6 +82,7 @@ public class StatusPanel extends JPanel {
   }
 
   /**
+   * Get the button which starts the server when clicked.
    *
    * @return the button which starts the server
    */
@@ -88,6 +91,7 @@ public class StatusPanel extends JPanel {
   }
 
   /**
+   * Get the button which stops the server when clicked.
    *
    * @return the button which stops the server
    */

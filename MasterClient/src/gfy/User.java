@@ -40,12 +40,12 @@ public class User implements Serializable {
    *
    */
   public boolean addUser( String username, String password, UserType usertype ) {
-    if ( this.username.contains( username ) ) {
+    if ( this.getUsername().contains( username ) ) {
       return true;
     } else {
-      this.username.add( username );
-      this.password.add( password );
-      this.userType.add( usertype );
+      this.getUsername().add( username );
+      this.getPassword().add( password );
+      this.getUserType().add( usertype );
       return false;
     }
   }
@@ -62,16 +62,16 @@ public class User implements Serializable {
    */
   public boolean setUser( String username, String password, UserType usertype ) {
     int position = 0;
-    if ( this.username.contains( username ) ) {
-      for ( String u : this.username ) {
+    if ( this.getUsername().contains( username ) ) {
+      for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
           break;
         } else {
           position++;
         }
       }
-      this.password.set( position, password );
-      this.userType.set( position, usertype );
+      this.getPassword().set( position, password );
+      this.getUserType().set( position, usertype );
       return true;
     } else {
       return false;
@@ -88,17 +88,17 @@ public class User implements Serializable {
    */
   public boolean removeUser( String username ) {
     int position = 0;
-    if ( this.username.contains( username ) ) {
-      for ( String u : this.username ) {
+    if ( this.getUsername().contains( username ) ) {
+      for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
           break;
         } else {
           position++;
         }
       }
-      this.username.remove( position );
-      this.password.remove( position );
-      this.userType.remove( position );
+      this.getUsername().remove( position );
+      this.getPassword().remove( position );
+      this.getUserType().remove( position );
       return true;
     } else {
       return false;
@@ -115,15 +115,15 @@ public class User implements Serializable {
    */
   public boolean verifyCredential( String username, String password ) {
     int position = 0;
-    if ( this.username.contains( username ) ) {
-      for ( String u : this.username ) {
+    if ( this.getUsername().contains( username ) ) {
+      for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
           break;
         } else {
           position++;
         }
       }
-      String dbPassword = this.password.get( position );
+      String dbPassword = this.getPassword().get( position );
       if ( dbPassword.equals( password ) ) {
         return true;
       } else {
@@ -144,8 +144,8 @@ public class User implements Serializable {
    */
   public UserType getUserType( String username ) {
     int position = 0;
-    if ( this.username.contains( username ) ) {
-      for ( String u : this.username ) {
+    if ( this.getUsername().contains( username ) ) {
+      for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
           break;
         } else {
@@ -156,7 +156,7 @@ public class User implements Serializable {
     } else {
       return null;
     }
-    return this.userType.get( position );
+    return this.getUserType().get( position );
   }
 
   /**
@@ -168,10 +168,31 @@ public class User implements Serializable {
   public String toString() {
     String t = "";
     int y = 0;
-    for ( String x : username ) {
-      t += x + " " + password.get( y ) + " " + userType.get( y ) + "\r\n";
+    for ( String x : getUsername() ) {
+      t += x + " " + getPassword().get( y ) + " " + getUserType().get( y ) + "\r\n";
       y++;
     }
     return t;
+  }
+
+  /**
+   * @return the username
+   */
+  public ArrayList<String> getUsername() {
+    return username;
+  }
+
+  /**
+   * @return the password
+   */
+  public ArrayList<String> getPassword() {
+    return password;
+  }
+
+  /**
+   * @return the userType
+   */
+  public ArrayList<UserType> getUserType() {
+    return userType;
   }
 }
