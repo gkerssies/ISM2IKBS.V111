@@ -26,6 +26,7 @@ public class LogPanel extends JPanel {
   }
 
   /**
+   * Get the complete button which opens a dialog with logs when clicked.
    *
    * @return the button which opens a dialog with logs when you click on it
    */
