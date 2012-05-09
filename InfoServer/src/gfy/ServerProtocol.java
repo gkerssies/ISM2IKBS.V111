@@ -54,6 +54,11 @@ public class ServerProtocol extends Protocol
         super.setBusy(true);
         getDatabase();
       }
+      else if (t.equals("SET-DATABASE") )
+      {
+        super.setBusy(true);
+        setDatbase();
+      }
       else
       {
         System.out.println(t);
@@ -92,6 +97,13 @@ public class ServerProtocol extends Protocol
         super.sendObject(super.getServer().getConfig().getDatabase());
         super.setBusy(false);
   }
+  public void setDatbase()
+  {
+    Database database = (Database) super.recieveObject();
+    super.getServer().getConfig().setDatabase(database);
+    super.setBusy(false);
+  }
+  
 }
 
   
