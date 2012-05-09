@@ -21,7 +21,7 @@ public class ServerSettings extends JFrame implements ActionListener {
   private JTextField database, username, password;
   private JButton buttonCancel, buttonSave;
 
-  public ServerSettings() {
+  public ServerSettings(Database database,ClientConnection connection) {
     panel = new JPanel();
     panelLabels = new JPanel();
     panelLabels.setPreferredSize( new Dimension( 110, 140 ) );
