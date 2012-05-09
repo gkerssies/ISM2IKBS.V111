@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
 /**
- * The static log for the server application
+ * The static log for the server application.
  *
  * @author Jormen Janssen
  * @author Ido Bosman (s1047979)
@@ -18,7 +18,7 @@ public class Log {
   private static ArrayList<LogType> type = new ArrayList<LogType>();
 
   /**
-   * Adds a logitem to the static log ArrayList<>.
+   * Adds a logitem to the static log ArrayList.
    *
    * @param l the log title
    * @param j the java exeception (ex.getMessage())
@@ -43,7 +43,7 @@ public class Log {
   }
 
   /**
-   * method for returning the count of messages
+   * method for returning the count of messages.
    *
    * @return the count of curring messages in queue
    */
@@ -52,7 +52,7 @@ public class Log {
   }
 
   /**
-   * method for returning al log messages
+   * method for returning al log messages.
    *
    * @return all log items as a string
    */
