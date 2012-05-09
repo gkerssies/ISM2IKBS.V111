@@ -58,9 +58,8 @@ public class Log {
    */
   @Override
   public String toString() {
-
-    int y = 0;
     String temp = "";
+    int y = 0;
 
     try {
       for ( String t : logitem ) {
