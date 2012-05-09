@@ -1,5 +1,7 @@
 package UserInterface;
 
+import gfy.Log;
+import gfy.LogType;
 import gfy.Server;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -66,6 +68,9 @@ public class ActionHandler implements ActionListener, KeyListener {
       // Update the number of connected clients every .. seconds
       informationPanel.setConnectedClients( server.getCurrentConnectedClientsCount() );
     } else if ( ae.getSource() == startButton ) {
+      // Set frame not stoppable when clicking on the exit button in the frame
+      frame.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE );
+
       // Start the application core (the server)
       server.start();
 
@@ -84,18 +89,24 @@ public class ActionHandler implements ActionListener, KeyListener {
       // Create dialog that forces user confirmation before stopping the server
       int allowToStopServer = JOptionPane.showConfirmDialog(
               frame,
-              "Weet u zeker dat u de server wilt stoppen?",
+              "Weet u zeker dat u de server wilt stoppen en afsluiten?",
               "U staat op het punt de server te stoppen.",
               JOptionPane.YES_NO_OPTION,
               JOptionPane.WARNING_MESSAGE );
 
       // If the 'Yes' button is clicked in the confirm dialog the server will be stopped
       if ( allowToStopServer == 0 ) {
+        // Add 'server stopped' log
+        Log.addItem( "Server gestopt", "", "", LogType.Event);
+        
         // Stop the application core (the server)
         server.stopServer();
 
         // Stop the timer to refresh the number of connected clients
         timer.stop();
+        
+        // Exit the info server application
+        System.exit( 0 );
 
         startButton.setEnabled( true );
         stopButton.setEnabled( false );
