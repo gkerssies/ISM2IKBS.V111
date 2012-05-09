@@ -88,10 +88,10 @@ public abstract class Protocol
   public void sendCommand(String text)
   {
     try {
-      String strings[] = text.split(">");
-      text = strings[0];
-      objectlineout.writeUTF(text);
+      
+      objectlineout.writeUTF(text + ">");
       objectlineout.flush();
+      System.out.println( "Verzonden : " + text );
     } catch ( IOException ex ) {
       Log.addItem("Error send utf command", ex.getMessage(),"Er is een fout opgetreden tijdens het sturen van een command", LogType.Error);
       
