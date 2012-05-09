@@ -50,8 +50,8 @@ public abstract class Protocol
       {
       
       unbindStreams();
+      Log.addItem("Connectie verbreken [\"" + socket.getInetAddress() + "\"]", ex.getMessage(), "Fout tijdens het lezen van een commando", LogType.Event);
       socket.close();
-      Log.addItem("Stream ontkoppelen", ex.getMessage(), "Fout tijdens het lezen van een commando", LogType.Event);
       }
       catch(Exception exx)
       {

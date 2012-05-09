@@ -69,7 +69,7 @@ public class Client extends Thread {
     try {
       socketclient = socketserver.accept();
       ispending = false;
-      Log.addItem( "Client verbonden @ " + socketclient.getInetAddress(), "", "", LogType.Event );
+      Log.addItem( "Client verbonden [\"" + socketclient.getInetAddress().getHostAddress() + "\"]", "", "", LogType.Event );
 
       getProtocol().setServer( server );
       getProtocol().bindStreams( socketclient );
