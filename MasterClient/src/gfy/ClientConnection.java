@@ -61,7 +61,7 @@ public class ClientConnection extends Thread {
     {
       if(protocol.isBusy() == false)
       {
-        protocol.proccesCommand();
+        protocol.setBusy( true );
       }
     }
     
