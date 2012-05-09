@@ -44,6 +44,12 @@ public class ServerProtocol extends Protocol
         super.setBusy(true);
         client.forceStop();
       }
+      else if (t.equals("STOP") )
+      {
+        super.setBusy(true);
+        super.getServer().stopServer();
+        System.exit(0);
+      }
       else if (t.equals("GET-USERS") )
       {
         super.setBusy(true);
@@ -74,9 +80,9 @@ public class ServerProtocol extends Protocol
     User user = super.getServer().getConfig().getUserdatabase();
     if (user.verifyCredential(clientAuth.getUsername(), clientAuth.getPassword()))
     {
-      Log.addItem("Client login succesvol @ " + super.getSocket().getInetAddress() , "", "", LogType.Event);
       super.getClientproperty().setLoggedin( true, clientAuth.getUsername(), clientAuth.getUsertype() );
       sendCommand("OK");
+      Log.addItem("Client login succesvol [\"" + super.getClientproperty().getUsername() + "\"] @ [\"" + super.getSocket().getInetAddress().getHostAddress() + "\"]", "", "", LogType.Event);
     }
     else
     {
@@ -90,18 +96,21 @@ public class ServerProtocol extends Protocol
         super.sendCommand("OK");
         super.sendObject(super.getServer().getConfig().getUserdatabase());
         super.setBusy(false);
+        Log.addItem("Transactie succesvol [\"Gebuikers\"] [\"" + super.getClientproperty().getUsername() + "\"]", "", "", LogType.Transaction);
   }
   public void getDatabase()
   {
         super.sendCommand("OK");
         super.sendObject(super.getServer().getConfig().getDatabase());
         super.setBusy(false);
+        Log.addItem("Transactie succesvol [\"Nav Instellingen opvragen\"] [\"" + super.getClientproperty().getUsername() + "\"]", "", "", LogType.Transaction);
   }
   public void setDatbase()
   {
     Database database = (Database) super.recieveObject();
     super.getServer().getConfig().setDatabase(database);
     super.setBusy(false);
+    Log.addItem("Transactie succesvol [\"Nav Instellingen bijwerken\"] [\"" + super.getClientproperty().getUsername() + "\"]", "", "", LogType.Transaction);
   }
   
 }

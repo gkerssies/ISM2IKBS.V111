@@ -74,7 +74,7 @@ public class Log {
         // temp += "[" + type.get( y ) + "] " + t + "; " + jxception.get( y ) + "; " + friendlyerror.get( y ) + "<br />";
         y++;
       }
-    } catch ( ConcurrentModificationException ex ) {
+    } catch (Exception ex ) {
       temp += "[Error] Er is een fout opgetreden tijdens het opvragen van de logs<br />";
     }
 

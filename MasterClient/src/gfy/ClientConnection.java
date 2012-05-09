@@ -125,7 +125,14 @@ public class ClientConnection extends Thread {
    * @return the clientsocket connection status
    */
   public boolean isConnected() {
+    try
+    {
     return clientsocket.isConnected();
+    }
+    catch(NullPointerException ne)
+    {
+      return false;
+    }
   }
 
   /**

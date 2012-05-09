@@ -32,7 +32,7 @@ public class LogDialog extends JDialog implements ActionListener {
 
     setTitle( "Logs" );
     setLayout( new FlowLayout() );
-    setSize( 400, 400 );
+    setSize( 600, 400 );
     setResizable( false );
     setLocationRelativeTo( frame );
 
@@ -54,7 +54,7 @@ public class LogDialog extends JDialog implements ActionListener {
    * Create custom label that will contain the log information.
    */
   private void createLabel() {
-    label = new WrappableJLabel( 370 );
+    label = new WrappableJLabel( 570 );
     label.setBorder( new EmptyBorder( -3, 2, 0, 0 ) );
     label.setFont( new Font( Font.MONOSPACED, Font.PLAIN, 11 ) );
     label.setVerticalAlignment( SwingConstants.NORTH );
@@ -66,7 +66,7 @@ public class LogDialog extends JDialog implements ActionListener {
    */
   private void createScrollPane() {
     scrollPane = new JScrollPane( label, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER );
-    scrollPane.setPreferredSize( new Dimension( 390, 364 ) );
+    scrollPane.setPreferredSize( new Dimension( 590, 364 ) );
     scrollPane.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
 
     add( scrollPane );

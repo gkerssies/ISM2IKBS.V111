@@ -17,13 +17,20 @@ public class HomeScreen extends JFrame implements ActionListener {
 
   private JMenuBar menuBar;
   private JMenu menuClient, menuServer, menuInfo;
-  private JMenuItem itemClient, itemServer, itemInfo;
+  private JMenuItem itemClient, itemServer, itemInfo, itemServerStop;
   private JPanel panel;
   private JButton buttonAuth, buttonSQL;
   private ClientConnection clientconnetion;
 
-  public HomeScreen(ClientConnection clientconnection) {
+  public HomeScreen( ClientConnection clientconnection ) {
     this.clientconnetion = clientconnection;
+
+    if ( !clientconnection.isConnected() ) {
+      JOptionPane.showMessageDialog( this, "Kan geen verbinding maken met server", "Verbindingsfout", JOptionPane.ERROR_MESSAGE );
+
+      System.exit( 0 );
+    }
+
     menuBar = new JMenuBar();
     menuClient = new JMenu( "Client" );
     itemClient = new JMenuItem( "Client" );
@@ -32,8 +39,11 @@ public class HomeScreen extends JFrame implements ActionListener {
 
     menuServer = new JMenu( "Server" );
     itemServer = new JMenuItem( "Server" );
+    itemServerStop = new JMenuItem( "Stop Server" );
     itemServer.addActionListener( this );
+    itemServerStop.addActionListener( this );
     menuServer.add( itemServer );
+    menuServer.add( itemServerStop );
 
     menuInfo = new JMenu( "Info" );
     itemInfo = new JMenuItem( "Info" );
@@ -75,13 +85,32 @@ public class HomeScreen extends JFrame implements ActionListener {
       System.out.println( "itemClient" );
     } else if ( e.getSource() == itemServer ) {
       System.out.println( "itemServer" );
+    } else if ( e.getSource() == itemServerStop ) {
+      closeServer();
     } else if ( e.getSource() == itemInfo ) {
       System.out.println( "itemInfo" );
     } else if ( e.getSource() == buttonAuth ) {
-      
-      JFrame frame = new AuthorizationManagement(clientconnetion);
+
+      JFrame frame = new AuthorizationManagement( clientconnetion );
     } else if ( e.getSource() == buttonSQL ) {
-      JFrame frame = new ServerSettings(clientconnetion);
+      JFrame frame = new ServerSettings( clientconnetion );
     }
   }
+  public void closeServer()
+  {
+    int allowToStopServer = JOptionPane.showConfirmDialog(
+              this,
+              "Weet u zeker dat u de server wilt stoppen en afsluiten?",
+              "U staat op het punt de server te stoppen.",
+              JOptionPane.YES_NO_OPTION,
+              JOptionPane.WARNING_MESSAGE );
+
+      // If the 'Yes' button is clicked in the confirm dialog the server will be stopped
+      if ( allowToStopServer == 0 )
+      {
+        clientconnetion.sendCommand( "STOP" );
+        System.exit(0);
+      }
+  }
+  
 }
