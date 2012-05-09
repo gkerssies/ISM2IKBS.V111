@@ -78,6 +78,9 @@ public class HomeScreen extends JFrame implements ActionListener {
     } else if ( e.getSource() == itemInfo ) {
       System.out.println( "itemInfo" );
     } else if ( e.getSource() == buttonAuth ) {
+      clientconnetion.getProtocol().sendCommand("GET-USERS");
+      System.out.println(clientconnetion.getProtocol().recieveCommand());
+      
       JFrame frame = new AuthorizationManagement(clientconnetion);
     } else if ( e.getSource() == buttonSQL ) {
       JFrame frame = new ServerSettings();

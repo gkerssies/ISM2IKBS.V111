@@ -35,7 +35,7 @@ public class ClientConnection extends Thread {
   public ClientConnection( String host, int port ) {
     this.host = host;
     this.port = port;
-     protocol = new ClientProtocol();
+    
   }
   
  public ClientProtocol getProtocol()
@@ -48,9 +48,13 @@ public class ClientConnection extends Thread {
   {
     try
     {
+    
+    
     clientsocket = new Socket( "Localhost", 4444 );
-   
-      System.out.println(protocol.bindStreams(getClientsocket()));
+    protocol = new ClientProtocol();
+    protocol.bindStreams( clientsocket );
+    protocol.sendCommand("WELCOME");
+    
       
     
     while(getClientsocket().isConnected())

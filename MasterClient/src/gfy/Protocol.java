@@ -19,9 +19,9 @@ public abstract class Protocol
    
    private ObjectOutputStream objectlineout;
    private ObjectInputStream objectlinein;
+   private Socket clientsocket;
    private boolean busy = false;
-   private InputStream is;
-   private OutputStream os;
+   
   
   public abstract String getProtocol();
   public abstract void proccesCommand();
@@ -35,10 +35,10 @@ public abstract class Protocol
     String t = "CLOSE";
     try
     {
-      System.out.println( " erererererererer" );
+    
     t = objectlinein.readUTF();
-    String[] strings = t.split(">");
-    t = strings[0];
+    System.out.println( "test5" );
+    
     return t;
     }
     catch(UTFDataFormatException fault)
@@ -46,10 +46,10 @@ public abstract class Protocol
       System.out.println( "formaat fout" );
       return t;
     }
-    catch(Exception ex)
+    catch(IOException ex)
     {
       
-      System.out.println( "Fout tijdens het lezen" + ex.getMessage());
+      System.out.println( "Fout tijdens het lezen # " + ex.getMessage());
       return t;
     }
     
@@ -116,6 +116,7 @@ public abstract class Protocol
   {
     try
     {
+      System.out.println( "verbinding verbroken" );
     objectlinein.close();
     objectlineout.close();
     }
@@ -129,14 +130,15 @@ public abstract class Protocol
    * 
    * @return status the status of the streams if the stream is succesfully connected
    */
-  public boolean bindStreams(Socket clientSocket)
+  public boolean bindStreams(Socket clientsocket)
   {
     boolean bind = true;
     try
     {
-      objectlineout = new ObjectOutputStream(clientSocket.getOutputStream());
-      objectlinein = new ObjectInputStream(clientSocket.getInputStream());
-       
+      this.clientsocket = clientsocket;
+      objectlineout = new ObjectOutputStream(this.clientsocket.getOutputStream());
+      objectlinein = new ObjectInputStream(this.clientsocket.getInputStream());  
+      System.out.println("test3");
     }
     catch(IOException ex)
     {

@@ -22,9 +22,9 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
   private ClientConnection clientconnection;
 
   public AuthorizationManagement(ClientConnection clientconnection) {
-    System.out.println( "test" );
+    
     this.clientconnection = clientconnection;
-    user = clientconnection.getProtocol().getUsers();
+    //user = clientconnection.getProtocol().getUsers();
     //user.addUser( "Henk", null, UserType.beheerder );
     //user.addUser( "Jan", null, UserType.gebruiker );
     //user.addUser( "Sjaak", null, UserType.gebruiker );
