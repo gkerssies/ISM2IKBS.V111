@@ -26,8 +26,6 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     this.clientconnection = clientconnection;
     User user = clientconnection.getUser();
 
-    System.out.println( user.toString() );
-
     setLayout( new BorderLayout() );
 
     UserTable userTable = new UserTable( user, clientconnection );
@@ -62,7 +60,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
 
     setSize( 660, 540 );
     setResizable( false );
-    setTitle( "Authorisatiebeheer2" );
+    setTitle( "Authorisatiebeheer" );
     setVisible( true );
   }
 
