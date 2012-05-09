@@ -1,7 +1,10 @@
 package gfy;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The static log for the server application.
@@ -76,5 +79,32 @@ public class Log {
     }
 
     return temp;
+  }
+
+  /**
+   * Write all logs made to a file. The logs will append to the logs that
+   * already exists in the file.
+   *
+   * @throws IOException input/output error
+   */
+  public static void writeToFile() throws IOException {
+    // Clone the created logs to prevent .... error
+    ArrayList<String> cLogitem = ( ArrayList<String> ) logitem.clone();
+    ArrayList<String> cJxception = ( ArrayList<String> ) jxception.clone();
+    ArrayList<String> cFriendlyerror = ( ArrayList<String> ) friendlyerror.clone();
+    ArrayList<LogType> cType = ( ArrayList<LogType> ) type.clone();
+
+    // Open new writer which writes the logs to a file
+    BufferedWriter writer = new BufferedWriter( new FileWriter( "./resources/logs/server-log.txt", true ) );
+
+    int y = 0;
+    for ( String item : cLogitem ) {
+      writer.write( "[" + cType.get( y ) + "] " + item );
+      writer.newLine();
+      y++;
+    }
+
+    // Close the writer
+    writer.close();
   }
 }
