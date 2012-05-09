@@ -21,18 +21,12 @@ public class UserTable extends JPanel {
 
   private boolean DEBUG = false;
 
-  public UserTable(User user, ClientConnection clientConnection) {
+  public UserTable( User user, ClientConnection clientConnection ) {
     super( new GridLayout( 1, 0 ) );
 
     String[] columnNames = { "Gebruiker", "Type" };
 
-    Object[][] data = {
-      { "Kathy", "Gebruiker" },
-      { "John", "Admin" },
-      { "Sue", "Gebruiker" },
-      { "Jane", "Gebruiker" },
-      { "Joe", "Gebruiker" }
-    };
+    Object data[] = user.toArray();
 
     final JTable table = new JTable( data, columnNames );
     table.setPreferredScrollableViewportSize( new Dimension( 500, 500 ) );
