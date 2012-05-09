@@ -133,7 +133,10 @@ public class ClientConnection extends Thread {
   public void procces( String text ) {
     System.out.println( text );
   }
-  
+  /**
+   * Method for getting the user object from the server
+   * @return the user object
+   */
   public User getUser()
   {
     sendCommand("GET-USERS");
@@ -144,6 +147,23 @@ public class ClientConnection extends Thread {
     else
     {
       return new User();
+    }
+   }
+  
+  /**
+   * Method for getting the database settings from the server
+   * @return the user object
+   */
+  public Database getDatabase()
+  {
+    sendCommand("GET-DATABASE");
+    if(recieveCommand().equals("OK") )
+    {
+      return (Database) recieveObject();
+    }
+    else
+    {
+      return new Database("","",0,"","");
     }
     }
 
