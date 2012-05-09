@@ -21,7 +21,7 @@ public class UserTable extends JPanel {
 
   private boolean DEBUG = false;
 
-  public UserTable() {
+  public UserTable(User user, ClientConnection clientConnection) {
     super( new GridLayout( 1, 0 ) );
 
     String[] columnNames = { "Gebruiker", "Type" };

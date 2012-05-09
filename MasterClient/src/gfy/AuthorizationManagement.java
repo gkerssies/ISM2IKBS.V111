@@ -30,7 +30,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
 
     setLayout( new BorderLayout() );
 
-    UserTable userTable = new UserTable();
+    UserTable userTable = new UserTable(user, clientconnection);
     userTable.setOpaque( true );
     userTable.setPreferredSize( new Dimension( 500, 500 ) );
 
