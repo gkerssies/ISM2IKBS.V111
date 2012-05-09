@@ -72,7 +72,7 @@ public class InfoServer extends JFrame {
   /**
    * Creates the server. All necessery settings are set/loaded.
    */
-  public void createServer() {
+  private void createServer() {
     User users = new User();
     Database database = new Database( "Navision", "SQLSERVER", 11000, "Gebruikersnaam", "Password" );
     Config config = new Config( 4444, database, users );
@@ -82,7 +82,4 @@ public class InfoServer extends JFrame {
     // Add test user
     users.addUser( "admin", "admin", UserType.gebruiker );
   }
-
-  
- 
 }
