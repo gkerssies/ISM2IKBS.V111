@@ -46,6 +46,7 @@ public class ServerProtocol extends Protocol
       }
       else if (t.equals("GET-USERS") )
       {
+        System.out.println( "fase 2" );
         super.setBusy(true);
         getUsers();
       }
@@ -66,6 +67,7 @@ public class ServerProtocol extends Protocol
     {
       Log.addItem("Client login succesvol @ " + super.getSocket().getInetAddress() , "", "", LogType.Event);
       super.getClientproperty().setLoggedin( true, clientAuth.getUsername(), clientAuth.getUsertype() );
+      sendCommand("OK");
     }
     else
     {
@@ -76,9 +78,8 @@ public class ServerProtocol extends Protocol
   
   public void getUsers()
   {
-        System.out.println( "fase2" );
         super.sendCommand("OK");
-        super.sendObject(super.getServer().getConfig().getUserdatabase());
+        //super.sendObject(super.getServer().getConfig().getUserdatabase());
         super.setBusy(false);
   }
 }
