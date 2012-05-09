@@ -22,13 +22,19 @@ public class MasterClient {
     try
     {
       Thread.sleep(1500);
+      if (clientconnection.isConnected())
+      {
+         clientconnection.sendCommand("AUTH>");
+         Auth testauth = new Auth("admin","admin", UserType.gebruiker);
+         clientconnection.sendObject(testauth);
+         System.out.println(clientconnection.recieveCommand());
+      }
+      JFrame frame = new HomeScreen(clientconnection);
     }
     catch(Exception ex)
     {
       
     }
-    
-    
-    JFrame frame = new HomeScreen(clientconnection);
+       
   }
 }
