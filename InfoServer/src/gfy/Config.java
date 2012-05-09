@@ -55,4 +55,11 @@ public class Config {
   public User getUserdatabase() {
     return userdatabase;
   }
+
+  /**
+   * @param database the database settings to set
+   */
+  public void setDatabase( Database database ) {
+    this.database = database;
+  }
 }
