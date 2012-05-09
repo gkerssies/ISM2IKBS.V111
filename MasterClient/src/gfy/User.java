@@ -45,7 +45,7 @@ public class User implements Serializable {
     } else {
       this.getUsername().add( username );
       this.getPassword().add( password );
-      this.userType.add( usertype );
+      this.getUserType().add( usertype );
       return false;
     }
   }
@@ -71,7 +71,7 @@ public class User implements Serializable {
         }
       }
       this.getPassword().set( position, password );
-      this.userType.set( position, usertype );
+      this.getUserType().set( position, usertype );
       return true;
     } else {
       return false;
@@ -98,7 +98,7 @@ public class User implements Serializable {
       }
       this.getUsername().remove( position );
       this.getPassword().remove( position );
-      this.userType.remove( position );
+      this.getUserType().remove( position );
       return true;
     } else {
       return false;
@@ -156,7 +156,7 @@ public class User implements Serializable {
     } else {
       return null;
     }
-    return this.userType.get( position );
+    return this.getUserType().get( position );
   }
 
   /**
@@ -169,7 +169,7 @@ public class User implements Serializable {
     String t = "";
     int y = 0;
     for ( String x : getUsername() ) {
-      t += x + " " + getPassword().get( y ) + " " + userType.get( y ) + "\r\n";
+      t += x + " " + getPassword().get( y ) + " " + getUserType().get( y ) + "\r\n";
       y++;
     }
     return t;
@@ -187,5 +187,12 @@ public class User implements Serializable {
    */
   public ArrayList<String> getPassword() {
     return password;
+  }
+
+  /**
+   * @return the userType
+   */
+  public ArrayList<UserType> getUserType() {
+    return userType;
   }
 }
