@@ -40,11 +40,11 @@ public class User implements Serializable {
    *
    */
   public boolean addUser( String username, String password, UserType usertype ) {
-    if ( this.username.contains( username ) ) {
+    if ( this.getUsername().contains( username ) ) {
       return true;
     } else {
-      this.username.add( username );
-      this.password.add( password );
+      this.getUsername().add( username );
+      this.getPassword().add( password );
       this.userType.add( usertype );
       return false;
     }
@@ -62,15 +62,15 @@ public class User implements Serializable {
    */
   public boolean setUser( String username, String password, UserType usertype ) {
     int position = 0;
-    if ( this.username.contains( username ) ) {
-      for ( String u : this.username ) {
+    if ( this.getUsername().contains( username ) ) {
+      for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
           break;
         } else {
           position++;
         }
       }
-      this.password.set( position, password );
+      this.getPassword().set( position, password );
       this.userType.set( position, usertype );
       return true;
     } else {
@@ -88,16 +88,16 @@ public class User implements Serializable {
    */
   public boolean removeUser( String username ) {
     int position = 0;
-    if ( this.username.contains( username ) ) {
-      for ( String u : this.username ) {
+    if ( this.getUsername().contains( username ) ) {
+      for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
           break;
         } else {
           position++;
         }
       }
-      this.username.remove( position );
-      this.password.remove( position );
+      this.getUsername().remove( position );
+      this.getPassword().remove( position );
       this.userType.remove( position );
       return true;
     } else {
@@ -115,15 +115,15 @@ public class User implements Serializable {
    */
   public boolean verifyCredential( String username, String password ) {
     int position = 0;
-    if ( this.username.contains( username ) ) {
-      for ( String u : this.username ) {
+    if ( this.getUsername().contains( username ) ) {
+      for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
           break;
         } else {
           position++;
         }
       }
-      String dbPassword = this.password.get( position );
+      String dbPassword = this.getPassword().get( position );
       if ( dbPassword.equals( password ) ) {
         return true;
       } else {
@@ -144,8 +144,8 @@ public class User implements Serializable {
    */
   public UserType getUserType( String username ) {
     int position = 0;
-    if ( this.username.contains( username ) ) {
-      for ( String u : this.username ) {
+    if ( this.getUsername().contains( username ) ) {
+      for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
           break;
         } else {
@@ -168,10 +168,24 @@ public class User implements Serializable {
   public String toString() {
     String t = "";
     int y = 0;
-    for ( String x : username ) {
-      t += x + " " + password.get( y ) + " " + userType.get( y ) + "\r\n";
+    for ( String x : getUsername() ) {
+      t += x + " " + getPassword().get( y ) + " " + userType.get( y ) + "\r\n";
       y++;
     }
     return t;
+  }
+
+  /**
+   * @return the username
+   */
+  public ArrayList<String> getUsername() {
+    return username;
+  }
+
+  /**
+   * @return the password
+   */
+  public ArrayList<String> getPassword() {
+    return password;
   }
 }

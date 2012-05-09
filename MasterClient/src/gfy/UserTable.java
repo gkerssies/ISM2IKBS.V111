@@ -4,6 +4,7 @@
  */
 package gfy;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,9 +27,9 @@ public class UserTable extends JPanel {
 
     String[] columnNames = { "Gebruiker", "Type" };
 
-    Object data[] = user.toArray();
+    //Object data = user.getUsers();
 
-    final JTable table = new JTable( data, columnNames );
+   /* final JTable table = new JTable( data, columnNames );
     table.setPreferredScrollableViewportSize( new Dimension( 500, 500 ) );
     table.setFillsViewportHeight( true );
 
@@ -43,7 +44,7 @@ public class UserTable extends JPanel {
 
     JScrollPane scrollPane = new JScrollPane( table );
 
-    add( scrollPane );
+    add( scrollPane );*/
   }
 
   private void printDebugData( JTable table ) {
