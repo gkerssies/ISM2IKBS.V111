@@ -46,9 +46,13 @@ public class ServerProtocol extends Protocol
       }
       else if (t.equals("GET-USERS") )
       {
-        System.out.println( "fase 2" );
         super.setBusy(true);
         getUsers();
+      }
+      else if (t.equals("GET-DATABASE") )
+      {
+        super.setBusy(true);
+        getDatabase();
       }
       else
       {
@@ -79,7 +83,13 @@ public class ServerProtocol extends Protocol
   public void getUsers()
   {
         super.sendCommand("OK");
-        //super.sendObject(super.getServer().getConfig().getUserdatabase());
+        super.sendObject(super.getServer().getConfig().getUserdatabase());
+        super.setBusy(false);
+  }
+  public void getDatabase()
+  {
+        super.sendCommand("OK");
+        super.sendObject(super.getServer().getConfig().getDatabase());
         super.setBusy(false);
   }
 }

@@ -3,13 +3,14 @@
  * and open the template in the editor.
  */
 package gfy;
+import java.io.Serializable;
 
 /**
  *
  * @author Jormen Janssen
  * @version 0.1 - 26 april 2012
  */
-public class Database {
+public class Database implements Serializable{
 
   private String name;
   private String host;
