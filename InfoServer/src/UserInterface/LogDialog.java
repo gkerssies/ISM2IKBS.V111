@@ -48,7 +48,7 @@ public class LogDialog extends JDialog implements ActionListener {
     label.setVerticalAlignment( SwingConstants.NORTH );
 
     // Create scrollpane and add label with log information to the scrollpane
-    JScrollPane scrollPane = new JScrollPane( label );
+    JScrollPane scrollPane = new JScrollPane( label, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER );
     scrollPane.setPreferredSize( new Dimension( 390, 364 ) );
     scrollPane.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
     add( scrollPane );
