@@ -21,7 +21,10 @@ public class ServerSettings extends JFrame implements ActionListener {
   private JTextField database, username, password;
   private JButton buttonCancel, buttonSave;
 
-  public ServerSettings() {
+  public ServerSettings(ClientConnection connection) {
+    Database databasesettings = connection.getDatabase();
+    System.out.println(databasesettings.toString());
+    
     panel = new JPanel();
     panelLabels = new JPanel();
     panelLabels.setPreferredSize( new Dimension( 110, 140 ) );
@@ -39,9 +42,10 @@ public class ServerSettings extends JFrame implements ActionListener {
     label4.setPreferredSize( new Dimension( 100, 20 ) );
 
     connectionString = new JTextArea( 3, 15 );
-    database = new JTextField( 15 );
-    username = new JTextField( 15 );
-    password = new JTextField( 15 );
+    connectionString.setText(databasesettings.getHost() + ":" + databasesettings.getPort());
+    database = new JTextField(databasesettings.getName(), 15 );
+    username = new JTextField(databasesettings.getUsername(), 15 );
+    password = new JTextField(databasesettings.getPassword(), 15 );
 
     buttonCancel = new JButton();
     buttonCancel.setText( "Annuleren" );
