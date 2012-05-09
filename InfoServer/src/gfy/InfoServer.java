@@ -63,18 +63,31 @@ public class InfoServer extends JFrame {
    * @param args the command line arguments
    */
   public static void main( String[] args ) {
+    Log.addItem("Applicatie geladen", "", "", LogType.Event);
     InfoServer server = new InfoServer();
     server.pack();
     server.setLocationRelativeTo( server.getRootPane() ); // Center the frame
     server.setVisible( true );
+    
   }
 
   /**
    * Creates the server. All necessery settings are set/loaded.
    */
   private void createServer() {
+    
     User users = new User();
-    Database database = new Database( "Navision", "SQLSERVER", 11000, "Gebruikersnaam", "Password" );
+    Database database;
+    if(IOUtillty.databaseConfigExsist())
+    {
+      database = IOUtillty.loadDatabaseConfig();
+      Log.addItem("Database configuratie ingeladen [Server] ", "", "", LogType.Event);
+    }
+    else
+    {
+      Log.addItem("Geen database configuratie gevonden [Server]", "", "", LogType.Event);
+      database = new Database( "Navision", "SQLSERVER", 11000, "Gebruikersnaam", "Password" );
+    }
     Config config = new Config( 4444, database, users );
 
     server = new Server( config );
