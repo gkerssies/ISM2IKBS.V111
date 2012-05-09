@@ -84,7 +84,6 @@ public class Client extends Thread {
 
     } catch ( Exception ex ) {
       Log.addItem( "IO Exception @ client", ex.getMessage(), "Er is een IO fout opgetreden tijdens het opzetten van de verbinding", LogType.Error );
-      Logger.getLogger( Client.class.getName() ).log( Level.SEVERE, null, ex );
     }
 
   }
