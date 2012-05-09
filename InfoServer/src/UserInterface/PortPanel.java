@@ -21,6 +21,8 @@ public class PortPanel extends JPanel {
 
   /**
    * Constructor for the PortPanel class.
+   *
+   * @param portNumber the default portnumber that is set
    */
   public PortPanel( int portNumber ) {
     setLayout( new FlowLayout( FlowLayout.LEFT, 0, 0 ) );
@@ -37,6 +39,7 @@ public class PortPanel extends JPanel {
   }
 
   /**
+   * Get the comlete textfield the user can set the portnumber.
    *
    * @return the textfield which contains the portnumber
    */
