@@ -40,24 +40,22 @@ public class ClientConnection extends Thread {
     this.port = port;
 
   }
-  
-  public String recieveCommand()
-  {
+
+  public String recieveCommand() {
     try {
-      String[] strings = objectlinein.readUTF().split(">");
+      String[] strings = objectlinein.readUTF().split( ">" );
       String text = strings[0];
       return text;
     } catch ( IOException ex ) {
       return "FAIL";
     }
   }
-  
-   public Object recieveObject()
-  {
+
+  public Object recieveObject() {
     try {
       return objectlinein.readObject();
-    } catch (Exception ex ) {
-      System.out.println(ex.getMessage());
+    } catch ( Exception ex ) {
+      System.out.println( ex.getMessage() );
       return new Object();
     }
   }
@@ -68,11 +66,25 @@ public class ClientConnection extends Thread {
 
   /**
    * Method for sending commands to the server
+   *
    * @param text the command to send to the server
    */
   public void sendCommand( String text ) {
     try {
       objectlineout.writeUTF( text + ">" );
+      objectlineout.flush();
+    } catch ( IOException ex ) {
+      Logger.getLogger( ClientConnection.class.getName() ).log( Level.SEVERE, null, ex );
+    }
+  }
+  /**
+   * Method for sending objects to the server
+   *
+   * @param text the command to send to the server
+   */
+  public void sendObject(Object object ) {
+    try {
+      objectlineout.writeObject( object );
       objectlineout.flush();
     } catch ( IOException ex ) {
       Logger.getLogger( ClientConnection.class.getName() ).log( Level.SEVERE, null, ex );
@@ -91,13 +103,11 @@ public class ClientConnection extends Thread {
       objectlineout = new ObjectOutputStream( clientsocket.getOutputStream() );
       objectlinein = new ObjectInputStream( clientsocket.getInputStream() );
 
-      while (clientsocket.isConnected() ) {
+      while ( clientsocket.isConnected() ) {
         if ( isBlocking() == false ) {
           procces( objectlinein.readUTF() );
-        }
-        else
-        {
-          Thread.sleep(10);
+        } else {
+          Thread.sleep( 10 );
         }
       }
 
@@ -133,39 +143,39 @@ public class ClientConnection extends Thread {
   public void procces( String text ) {
     System.out.println( text );
   }
+
   /**
    * Method for getting the user object from the server
+   *
    * @return the user object
    */
-  public User getUser()
-  {
-    sendCommand("GET-USERS");
-    if(recieveCommand().equals("OK") )
-    {
-      return (User) recieveObject();
-    }
-    else
-    {
+  public User getUser() {
+    sendCommand( "GET-USERS" );
+    if ( recieveCommand().equals( "OK" ) ) {
+      return ( User ) recieveObject();
+    } else {
       return new User();
     }
-   }
-  
+  }
+
   /**
    * Method for getting the database settings from the server
    * @return the user object
    */
-  public Database getDatabase()
+  public Database getDatabase() {
+    sendCommand( "GET-DATABASE" );
+    if ( recieveCommand().equals( "OK" ) ) {
+      return ( Database ) recieveObject();
+    } else {
+      return new Database( "", "", 0, "", "" );
+    }
+  }
+  
+  public void setDatabase(Database database)
   {
-    sendCommand("GET-DATABASE");
-    if(recieveCommand().equals("OK") )
-    {
-      return (Database) recieveObject();
-    }
-    else
-    {
-      return new Database("","",0,"","");
-    }
-    }
+    sendCommand("SET-DATABASE");
+    sendObject(database);
+  }
 
   /**
    * @return the blocking status
@@ -180,5 +190,4 @@ public class ClientConnection extends Thread {
   public void setBlocking( boolean blocking ) {
     this.blocking = blocking;
   }
-  }
-
+}
