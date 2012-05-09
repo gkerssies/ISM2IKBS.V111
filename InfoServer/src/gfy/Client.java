@@ -23,6 +23,7 @@ public class Client extends Thread {
   private Protocol protocol;
   private boolean ispending;
   private ClientProperty clientproperty;
+  private boolean forcestop = false;
 
   /**
    * Constructor for new client
@@ -30,7 +31,7 @@ public class Client extends Thread {
    * @param the underlying server
    */
   public Client( Server server ) {
-    protocol = new ServerProtocol();
+    protocol = new ServerProtocol(this);
     this.server = server;
     this.socketserver = server.getServerSocket();
     ispending = true;
@@ -74,11 +75,12 @@ public class Client extends Thread {
       getProtocol().bindStreams( socketclient );
       getProtocol().setClientproperty( clientproperty );
 
-      while ( socketclient.isConnected() ) {
+      while ( socketclient.isConnected() && forcestop == false) {
         if ( getProtocol().isBusy() == false ) {
           getProtocol().proccesCommand();
         }
       }
+      socketclient.close();
 
     } catch ( Exception ex ) {
       Log.addItem( "IO Exception @ client", ex.getMessage(), "Er is een IO fout opgetreden tijdens het opzetten van de verbinding", LogType.Error );
@@ -92,5 +94,19 @@ public class Client extends Thread {
    */
   public Protocol getProtocol() {
     return protocol;
+  }
+  /**
+   * Forces the server to stop
+   */
+  public void forceStop()
+  {
+    forcestop = true;
+  }
+  /**
+   * Returns if the server is forceclosed
+   */
+  public boolean isForcedStopped()
+  {
+    return forcestop;
   }
 }

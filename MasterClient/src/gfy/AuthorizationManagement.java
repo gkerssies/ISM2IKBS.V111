@@ -19,15 +19,19 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
   private User user = new User();
   private JPanel panel = new JPanel();
   private JButton buttonAdd, buttonEdit, buttonDelete;
+  private ClientConnection clientconnection;
 
-  public AuthorizationManagement() {
-    user.addUser( "Henk", null, UserType.beheerder );
-    user.addUser( "Jan", null, UserType.gebruiker );
-    user.addUser( "Sjaak", null, UserType.gebruiker );
-    user.addUser( "Klaas", null, UserType.gebruiker );
-    user.addUser( "Piet", null, UserType.gebruiker );
+  public AuthorizationManagement(ClientConnection clientconnection) {
+    
+    this.clientconnection = clientconnection;
+    //user = clientconnection.getProtocol().getUsers();
+    //user.addUser( "Henk", null, UserType.beheerder );
+    //user.addUser( "Jan", null, UserType.gebruiker );
+    //user.addUser( "Sjaak", null, UserType.gebruiker );
+    //user.addUser( "Klaas", null, UserType.gebruiker );
+    //user.addUser( "Piet", null, UserType.gebruiker );
 
-    System.out.println( user.toString() );
+    //System.out.println( user.toString() );
 
     setLayout( new BorderLayout() );
 
@@ -63,7 +67,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
 
     setSize( 660, 540 );
     setResizable( false );
-    setTitle( "Authorisatiebeheer" );
+    setTitle( "Authorisatiebeheer2" );
     setVisible( true );
   }
 
