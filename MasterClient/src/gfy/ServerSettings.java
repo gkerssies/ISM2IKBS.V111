@@ -30,13 +30,13 @@ public class ServerSettings extends JFrame implements ActionListener {
     panelButtons = new JPanel();
 
     label1 = new JLabel( "Connectiestring" );
-    label1.setPreferredSize( new Dimension( 100, 25 ) );
+    label1.setPreferredSize( new Dimension( 100, 50 ) );
     label2 = new JLabel( "Databasenaam" );
-    label2.setPreferredSize( new Dimension( 100, 25 ) );
+    label2.setPreferredSize( new Dimension( 100, 20 ) );
     label3 = new JLabel( "Gebruikersnaam" );
-    label3.setPreferredSize( new Dimension( 100, 25 ) );
+    label3.setPreferredSize( new Dimension( 100, 20 ) );
     label4 = new JLabel( "Wachtwoord" );
-    label4.setPreferredSize( new Dimension( 100, 25 ) );
+    label4.setPreferredSize( new Dimension( 100, 20 ) );
 
     connectionString = new JTextArea( 3, 15 );
     database = new JTextField( 15 );
@@ -80,6 +80,7 @@ public class ServerSettings extends JFrame implements ActionListener {
 
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonCancel ) {
+      dispose();
     } else if ( e.getSource() == buttonSave ) {
     }
   }

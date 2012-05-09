@@ -1,7 +1,6 @@
 package UserInterface;
 
 import gfy.Log;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -20,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 public class LogDialog extends JDialog implements ActionListener {
 
   private WrappableJLabel label;
+  private JScrollPane scrollPane;
   private Timer timer;
 
   /**
@@ -37,24 +37,58 @@ public class LogDialog extends JDialog implements ActionListener {
     setLocationRelativeTo( frame );
 
     // Create a new timer to refresh every .. seconds so the number of connected clients is shown realtime
-    timer = new Timer( 400, this );
+    timer = new Timer( 300, this );
     timer.start();
 
     // Create the label for the log information
-    label = new WrappableJLabel( 370 );
-    label.setBorder( new EmptyBorder( -3, 2, 0, 0 ) );
-    label.setFont( new Font( Font.MONOSPACED, Font.PLAIN, 11 ) );
-    label.setBackground( Color.YELLOW );
-    label.setVerticalAlignment( SwingConstants.NORTH );
+    createLabel();
 
     // Create scrollpane and add label with log information to the scrollpane
-    JScrollPane scrollPane = new JScrollPane( label );
-    scrollPane.setPreferredSize( new Dimension( 390, 364 ) );
-    scrollPane.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
-    add( scrollPane );
+    createScrollPane();
 
     // Make the log dialog visible
     setVisible( true );
+  }
+
+  /**
+   * Create custom label that will contain the log information.
+   */
+  private void createLabel() {
+    label = new WrappableJLabel( 370 );
+    label.setBorder( new EmptyBorder( -3, 2, 0, 0 ) );
+    label.setFont( new Font( Font.MONOSPACED, Font.PLAIN, 11 ) );
+    label.setVerticalAlignment( SwingConstants.NORTH );
+  }
+
+  /**
+   * Create the scrollpane that contain the custom label and adds a vertical
+   * scrollbar to the left of the dialog.
+   */
+  private void createScrollPane() {
+    scrollPane = new JScrollPane( label, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER );
+    scrollPane.setPreferredSize( new Dimension( 390, 364 ) );
+    scrollPane.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
+
+    add( scrollPane );
+  }
+
+  /**
+   * Set the scrollbar from the log dialog automatically to the bottom.
+   */
+  private void setScrollBarToBottom() {
+    scrollPane.getVerticalScrollBar().setValue(
+            scrollPane.getVerticalScrollBar().getMaximum()
+            + scrollPane.getVerticalScrollBar().getVisibleAmount() );
+  }
+
+  /**
+   * Set the label text including html tags. The html tags are needed to wrap
+   * the text when it's to long to fit in the dialogscreen.
+   *
+   * @param text the log information
+   */
+  public void setLabel( String text ) {
+    label.setText( "<html>" + text + "</html>" );
   }
 
   @Override
@@ -66,10 +100,13 @@ public class LogDialog extends JDialog implements ActionListener {
 
       // Set standard text if there aren't any logs available
       if ( !logText.equals( "" ) ) {
-        label.setText( "<html>" + logText + "</html>" );
+        setLabel( logText );
       } else {
-        label.setText( "<html>Er is (nog) geen log informatie beschikbaar.</html>" );
+        setLabel( "Er is (nog) geen log informatie beschikbaar." );
       }
+
+      // Scroll automatically to the bottom of the logs
+      setScrollBarToBottom();
     }
   }
 }

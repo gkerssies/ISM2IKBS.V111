@@ -24,20 +24,25 @@ public class AddUser extends JFrame implements ActionListener {
   public AddUser() {
     panel = new JPanel();
     panelLabels = new JPanel();
-    panelLabels.setPreferredSize( new Dimension( 110, 140 ) );
+    panelLabels.setPreferredSize( new Dimension( 140, 110 ) );
     panelInput = new JPanel();
-    panelInput.setPreferredSize( new Dimension( 190, 140 ) );
+    panelInput.setPreferredSize( new Dimension( 190, 110 ) );
     panelButtons = new JPanel();
 
     label1 = new JLabel( "Gebruikersnaam" );
+    label1.setPreferredSize( new Dimension( 130, 20 ) );
     label2 = new JLabel( "Wachtwoord" );
+    label2.setPreferredSize( new Dimension( 130, 20 ) );
     label3 = new JLabel( "Bevestig wachtwoord" );
+    label3.setPreferredSize( new Dimension( 130, 20 ) );
     label4 = new JLabel( "Type gebruiker" );
+    label4.setPreferredSize( new Dimension( 130, 20 ) );
 
     username = new JTextField( 15 );
     password = new JTextField( 15 );
     confirmPassword = new JTextField( 15 );
     userType = new JComboBox();
+    userType.setPreferredSize( new Dimension( 169, 20 ) );
 
     buttonCancel = new JButton();
     buttonCancel.setText( "Annuleren" );
@@ -49,21 +54,26 @@ public class AddUser extends JFrame implements ActionListener {
     buttonSave.setPreferredSize( new Dimension( 100, 25 ) );
     buttonSave.addActionListener( this );
 
-    panel.add( label1 );
-    panel.add( label2 );
-    panel.add( label3 );
-    panel.add( label4 );
+    panel.add( panelLabels );
+    panel.add( panelInput );
+    panel.add( panelButtons );
 
-    panel.add( username );
-    panel.add( password );
-    panel.add( confirmPassword );
-    panel.add( userType );
-    panel.add( buttonCancel );
-    panel.add( buttonSave );
+    panelLabels.add( label1 );
+    panelLabels.add( label2 );
+    panelLabels.add( label3 );
+    panelLabels.add( label4 );
+
+    panelInput.add( username );
+    panelInput.add( password );
+    panelInput.add( confirmPassword );
+    panelInput.add( userType );
+
+    panelButtons.add( buttonCancel );
+    panelButtons.add( buttonSave );
 
     setLayout( new GridLayout() );
     setContentPane( panel );
-    setSize( 350, 300 );
+    setSize( 350, 190 );
     setResizable( false );
     setTitle( "Toevoegen gebruiker" );
     setVisible( true );
@@ -71,6 +81,7 @@ public class AddUser extends JFrame implements ActionListener {
 
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonCancel ) {
+      dispose();
     } else if ( e.getSource() == buttonSave ) {
     }
   }
