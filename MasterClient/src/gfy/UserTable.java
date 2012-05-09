@@ -20,16 +20,19 @@ import java.awt.event.MouseEvent;
  */
 public class UserTable extends JPanel {
 
+  private User user;
+  private Object[][] users;
   private boolean DEBUG = false;
 
   public UserTable( User user, ClientConnection clientConnection ) {
     super( new GridLayout( 1, 0 ) );
+    this.user = user;
 
     String[] columnNames = { "Gebruiker", "Type" };
 
-    //Object data = user.getUsers();
+    users = getUsers();
 
-   /* final JTable table = new JTable( data, columnNames );
+    final JTable table = new JTable( users, columnNames );
     table.setPreferredScrollableViewportSize( new Dimension( 500, 500 ) );
     table.setFillsViewportHeight( true );
 
@@ -44,7 +47,17 @@ public class UserTable extends JPanel {
 
     JScrollPane scrollPane = new JScrollPane( table );
 
-    add( scrollPane );*/
+    add( scrollPane );
+  }
+
+  private Object[][] getUsers() {
+    Object[][] data = new Object[ user.getUsername().size() ][ 1 ];
+
+    for ( int i = 0; i < user.getUsername().size(); i++ ) {
+      data[i] = new Object[] { user.getUsername().get( i ), user.getUserType().get( i ) };
+    }
+
+    return data;
   }
 
   private void printDebugData( JTable table ) {
