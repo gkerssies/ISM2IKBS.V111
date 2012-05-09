@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 public class InformationPanel extends JPanel {
 
   private JLabel connectedClientsLabel;
-  private int connectedClients;
 
   /**
    * Constructor for the InformationPanel class.
@@ -28,19 +27,11 @@ public class InformationPanel extends JPanel {
   }
 
   /**
-   *
-   * @return the number of connected clients
-   */
-  public int getConnectedClients() {
-    return connectedClients;
-  }
-
-  /**
+   * Update the number of connected clients in the label text.
    *
    * @param connectedClients the number of connected clients
    */
   public void setConnectedClients( int connectedClients ) {
-    this.connectedClients = connectedClients;
     connectedClientsLabel.setText( "Aantal verbonden clients: " + connectedClients );
   }
 }
