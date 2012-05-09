@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * The server protocol class which handles the communication and exchange of various commands and objects
  * @author Janssen-laptop
  * @version 0.2 - 08-m
  */

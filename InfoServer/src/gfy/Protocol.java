@@ -112,10 +112,6 @@ public abstract class Protocol
     }
   }
   
-  public boolean reqruireCommand()
-  {
-    return true;
-  }
   /**
    * Method for disconnecting an stream.
    *
