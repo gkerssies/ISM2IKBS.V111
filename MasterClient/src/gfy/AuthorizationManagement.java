@@ -61,6 +61,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     setSize( 660, 540 );
     setResizable( false );
     setTitle( "Authorisatiebeheer" );
+    addWindowListener(new autoCloseOnSaveAuthorizationHandler( clientconnection, user,this) );
     setVisible( true );
   }
 
