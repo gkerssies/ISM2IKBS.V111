@@ -4,12 +4,10 @@
  */
 package gfy;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
- * The server protocol class which handles the communication and exchange of various commands and objects
+ * The server protocol class which handles the communication and exchange of
+ * various commands and objects
+ *
  * @author Janssen-laptop
  * @version 0.2 - 08-m
  */
@@ -95,6 +93,6 @@ public class ServerProtocol extends Protocol {
     super.getServer().getConfig().setDatabase( database );
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [Nav Instellingen bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
-    IOUtillty.writeDatabaseConfig(database);
+    IOUtillty.writeDatabaseConfig( database );
   }
 }
