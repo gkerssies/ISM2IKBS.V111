@@ -164,6 +164,13 @@ public class ClientConnection extends Thread {
       return new User();
     }
   }
+  
+  public void setUser(User user)
+  {
+    sendCommand("SET-USERS");
+    sendObject(user);
+  }
+  
 
   /**
    * Method for getting the database settings from the server
