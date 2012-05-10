@@ -1,10 +1,9 @@
 package gfy;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The static log for the server application.
@@ -15,10 +14,10 @@ import java.util.logging.Logger;
  */
 public class Log {
 
-  private static ArrayList<String> logitem = new ArrayList<String>();
-  private static ArrayList<String> jxception = new ArrayList<String>();
-  private static ArrayList<String> friendlyerror = new ArrayList<String>();
-  private static ArrayList<LogType> type = new ArrayList<LogType>();
+  private static ArrayList<String> logitem = new ArrayList<>();
+  private static ArrayList<String> jxception = new ArrayList<>();
+  private static ArrayList<String> friendlyerror = new ArrayList<>();
+  private static ArrayList<LogType> type = new ArrayList<>();
 
   /**
    * Adds a logitem to the static log ArrayList.
