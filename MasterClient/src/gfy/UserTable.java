@@ -67,7 +67,11 @@ public class UserTable extends JPanel {
     TableModel model = table.getModel();
 
     for ( int i = 0; i < numRows; i++ ) {
-      clickedUser = (String)model.getValueAt( i, 0 );
+      clickedUser = ( String ) model.getValueAt( i, 0 );
     }
+  }
+
+  public String getClickedUser() {
+    return clickedUser;
   }
 }
