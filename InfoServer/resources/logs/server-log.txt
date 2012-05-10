@@ -1,0 +1,29 @@
+@10-05-2012 13:07:39
+[Event] Applicatie geladen
+[Event] Geen database configuratie gevonden [Server]
+[Event] Server start
+[Event] Client verbonden [127.0.0.1]
+[Event] Client login succesvol [admin] @ [127.0.0.1]
+[Transaction] Transactie succesvol [Gebuikers] [admin]
+[Transaction] Transactie succesvol [Gebruikers bijwerken] [admin]
+[Transaction] Transactie succesvol [Gebuikers] [admin]
+[Transaction] Transactie succesvol [Gebruikers bijwerken] [admin]
+[Transaction] Transactie succesvol [Nav Instellingen opvragen] [admin]
+[Transaction] Transactie succesvol [Nav Instellingen bijwerken] [admin]
+[Error] Stream fout tijdens ontvangen
+[Event] Connectie verbreken ["/127.0.0.1"]
+[Event] Server gestopt
+
+@10-05-2012 13:09:11
+[Event] Applicatie geladen
+[Event] Database configuratie ingeladen
+[Event] Geen gebruikers database gevonden
+[Event] Server start
+[Event] Client verbonden [127.0.0.1]
+[Event] Client login succesvol [admin] @ [127.0.0.1]
+[Transaction] Transactie succesvol [Gebuikers] [admin]
+[Transaction] Transactie succesvol [Gebruikers bijwerken] [admin]
+[Error] Stream fout tijdens ontvangen
+[Event] Connectie verbreken ["/127.0.0.1"]
+[Event] Server gestopt
+

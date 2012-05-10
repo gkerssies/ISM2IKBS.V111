@@ -16,7 +16,7 @@ public class IOUtillty {
    */
   public static void writeDatabaseConfig( Database database ) {
     try {
-      FileWriter fw = new FileWriter( "./config/db.cfg" );
+      FileWriter fw = new FileWriter( "./resources/config/db.cfg" );
       PrintWriter pw = new PrintWriter( fw );
       pw.println( "[Databaseconfig]" );
       pw.println( "name:" + database.getName() );
@@ -37,7 +37,17 @@ public class IOUtillty {
    * @return boolean gives true if the database config exsist
    */
   public static boolean databaseConfigExsist() {
-    File file = new File( "./config/db.cfg" );
+    File file = new File( "./resources/config/db.cfg" );
+    return file.exists();
+  }
+  
+  /**
+   * Check if there is a user database already.
+   *
+   * @return boolean gives true if the user databaseexsist
+   */
+  public static boolean userDatabaseExsist() {
+    File file = new File( "./resources/config/users.odb" );
     return file.exists();
   }
 
