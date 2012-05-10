@@ -53,7 +53,7 @@ public class IOUtillty {
     String username = "";
     String password = "";
     try {
-      FileReader fr = new FileReader( "./config/db.cfg" );
+      FileReader fr = new FileReader( "./resources/config/db.cfg" );
       BufferedReader br = new BufferedReader( fr );
       String t = br.readLine();
       while ( t != null ) {
@@ -100,5 +100,42 @@ public class IOUtillty {
     String[] t = new String[ 5 ];
     t = value.split( ":" );
     return t;
+  }
+  
+  public static void writeUserDatabase(User user)
+  {
+    try
+    {
+    FileOutputStream fo = new FileOutputStream( "./resources/config/users.odb" );
+    ObjectOutputStream oos = new ObjectOutputStream(fo);
+    oos.writeObject(user);
+    oos.close();
+    fo.close();
+    }
+    catch(Exception ex)
+    {
+      Log.addItem( "Fout tijdens opslaan [Gebruikers database]", ex.getMessage(), "", LogType.Error );
+    }
+  }
+  
+  public static User loadUserDatabase()
+  {
+    try
+    {
+    FileInputStream fi = new FileInputStream( "./resources/config/users.odb" );
+    ObjectInputStream ois = new ObjectInputStream(fi);
+    User loaduser = (User) ois.readObject();
+    ois.close();
+    fi.close();
+    return loaduser;
+    }
+    catch(Exception ex)
+    {
+      Log.addItem( "Fout tijdens opslaan [Gebruikers database]", ex.getMessage(), "", LogType.Error );
+      Log.addItem("Gebruikers database [reset]", "", "", LogType.Event);
+      User tempuser = new User();
+      tempuser.addUser("admin", "admin", UserType.gebruiker);
+      return tempuser;
+    }
   }
 }

@@ -51,6 +51,10 @@ public class ServerProtocol extends Protocol {
     } else if ( t.equals( "SET-DATABASE" ) ) {
       super.setBusy( true );
       setDatbase();
+
+    } else if ( t.equals( "SET-USERS" ) ) {
+      super.setBusy( true );
+      setUser();
     } else {
       System.out.println( t );
     }
@@ -95,4 +99,14 @@ public class ServerProtocol extends Protocol {
     Log.addItem( "Transactie succesvol [Nav Instellingen bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
     IOUtillty.writeDatabaseConfig( database );
   }
+  
+  public void setUser() {
+    User userdb = ( User ) super.recieveObject();
+    super.getServer().getConfig().setUserdatabase( userdb );
+    super.setBusy( false );
+    Log.addItem( "Transactie succesvol [Nav Instellingen bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
+    IOUtillty.writeUserDatabase( userdb );
+  }
+  
+  
 }
