@@ -4,11 +4,8 @@
  */
 package gfy;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -28,10 +25,10 @@ public class Client extends Thread {
   /**
    * Constructor for new client
    *
-   * @param the underlying server
+   * @param server the application core
    */
   public Client( Server server ) {
-    protocol = new ServerProtocol(this);
+    protocol = new ServerProtocol( this );
     this.server = server;
     this.socketserver = server.getServerSocket();
     ispending = true;
@@ -69,13 +66,13 @@ public class Client extends Thread {
     try {
       socketclient = socketserver.accept();
       ispending = false;
-      Log.addItem( "Client verbonden [\"" + socketclient.getInetAddress().getHostAddress() + "\"]", "", "", LogType.Event );
+      Log.addItem( "Client verbonden [" + socketclient.getInetAddress().getHostAddress() + "]", "", "", LogType.Event );
 
       getProtocol().setServer( server );
       getProtocol().bindStreams( socketclient );
       getProtocol().setClientproperty( clientproperty );
 
-      while ( socketclient.isConnected() && forcestop == false) {
+      while ( socketclient.isConnected() && forcestop == false ) {
         if ( getProtocol().isBusy() == false ) {
           getProtocol().proccesCommand();
         }
@@ -94,18 +91,20 @@ public class Client extends Thread {
   public Protocol getProtocol() {
     return protocol;
   }
+
   /**
    * Forces the server to stop
    */
-  public void forceStop()
-  {
+  public void forceStop() {
     forcestop = true;
   }
+
   /**
-   * Returns if the server is forceclosed
+   * Returns if the server is forceclosed.
+   *
+   * @return if the server is forced to stop
    */
-  public boolean isForcedStopped()
-  {
+  public boolean isForcedStopped() {
     return forcestop;
   }
 }
