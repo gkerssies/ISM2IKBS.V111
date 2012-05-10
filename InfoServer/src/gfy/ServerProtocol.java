@@ -82,7 +82,7 @@ public class ServerProtocol extends Protocol {
     super.sendCommand( "OK" );
     super.sendObject( super.getServer().getConfig().getUserdatabase() );
     super.setBusy( false );
-    Log.addItem( "Transactie succesvol [Gebuikers] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
+    Log.addItem( "Transactie succesvol [Gebruikers] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
   }
 
   public void getDatabase() {
