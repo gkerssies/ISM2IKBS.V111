@@ -84,8 +84,9 @@ public class IOUtillty {
       return new Database( name, host, port, username, password );
 
     } catch ( Exception ex ) {
-      System.out.println( ex.getMessage() );
-      return new Database( "Empty", "Empty", 1000, "Empty", "Empty" );
+      Log.addItem("Datbase configuratie [corrupt]", ex.getMessage(), "", LogType.Error);
+      Log.addItem("Database configuratie [reset]", "", "", LogType.Event);
+      return new Database( "Navision", "SQLSEVER", 0, "", "" );
     }
 
 
