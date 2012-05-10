@@ -73,7 +73,9 @@ public class Server extends Thread {
     }
     try {
       serversocket.close();
-
+      
+      // Add 'server stopped' log
+      Log.addItem( "Server gestopt", "", "", LogType.Event );
     } catch ( IOException ex ) {
       Log.addItem( "Server gestopt", ex.getMessage(), null, LogType.Info );
     } finally {
