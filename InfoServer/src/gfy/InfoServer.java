@@ -76,18 +76,33 @@ public class InfoServer extends JFrame {
    */
   private void createServer() {
     
-    User users = new User();
+    User users;
     Database database;
+    
     if(IOUtillty.databaseConfigExsist())
     {
       database = IOUtillty.loadDatabaseConfig();
-      Log.addItem("Database configuratie ingeladen [Server] ", "", "", LogType.Event);
+      Log.addItem("Database configuratie ingeladen", "", "", LogType.Event);
     }
     else
     {
-      Log.addItem("Geen database configuratie gevonden [Server]", "", "", LogType.Event);
+      Log.addItem("Geen database configuratie gevonden", "", "", LogType.Event);
       database = new Database( "Navision", "SQLSERVER", 11000, "Gebruikersnaam", "Password" );
     }
+    
+    if(IOUtillty.userDatabaseExsist())
+    {
+      users = IOUtillty.loadUserDatabase();
+      Log.addItem("Gebruikers database ingeladen", "", "", LogType.Event);
+    }
+    else
+    {
+      Log.addItem("Geen gebruikers database gevonden", "", "", LogType.Event);
+      users = new User();
+      users.addUser("admin","admin", UserType.beheerder);
+    }
+    
+    
     Config config = new Config( 4444, database, users );
 
     server = new Server( config );
