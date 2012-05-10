@@ -5,6 +5,7 @@
 package gfy;
 
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -18,15 +19,19 @@ public class UserSettingsPanel extends JPanel {
   private JTextField username, password, confirmPassword;
   private JComboBox userType;
   private JButton buttonCancel, buttonSave;
-  
-  public UserSettingsPanel(String action) {
-    
+  private JFrame frame;
+  private User user;
+
+  public UserSettingsPanel( String action, JFrame frame, String username ) {
+    user = new User();
+
+    this.frame = frame;
     panelLabels = new JPanel();
     panelLabels.setPreferredSize( new Dimension( 140, 110 ) );
     panelInput = new JPanel();
     panelInput.setPreferredSize( new Dimension( 190, 110 ) );
     panelButtons = new JPanel();
-    
+
     add( panelLabels );
     add( panelInput );
     add( panelButtons );
@@ -46,26 +51,21 @@ public class UserSettingsPanel extends JPanel {
     userType = new JComboBox();
     userType.setPreferredSize( new Dimension( 169, 20 ) );
 
+    if ( action == "editUser" ) {
+      this.username.setText( username );
+
+    }
+
     buttonCancel = new JButton();
     buttonCancel.setText( "Annuleren" );
     buttonCancel.setPreferredSize( new Dimension( 100, 25 ) );
-    
+    buttonCancel.addActionListener( ( ActionListener ) frame );
+
     buttonSave = new JButton();
     buttonSave.setText( "Opslaan" );
     buttonSave.setPreferredSize( new Dimension( 100, 25 ) );
-    
-    switch (action) {
-      case "addUser":
-        //buttonCancel.addActionListener( AddUser() );
-        //buttonSave.addActionListener( AddUser() );
-        break;
-        
-      case "editUser":
-        //buttonCancel.addActionListener( EditUser() );
-        //buttonSave.addActionListener( EditUser() );
-        break;
-    }
-    
+    buttonSave.addActionListener( ( ActionListener ) frame );
+
     panelLabels.add( label1 );
     panelLabels.add( label2 );
     panelLabels.add( label3 );
@@ -78,5 +78,25 @@ public class UserSettingsPanel extends JPanel {
 
     panelButtons.add( buttonCancel );
     panelButtons.add( buttonSave );
+  }
+
+  public JButton getButtonSave() {
+    return buttonSave;
+  }
+
+  /**
+   * @return the buttonCancel
+   */
+  public JButton getButtonCancel() {
+    return buttonCancel;
+  }
+
+  public boolean isUserType( UserType t ) {
+
+    //if ( user.getUserType( username ).equals( t ) ) {
+    //  return true;
+    //} else {
+      return false;
+    //}
   }
 }
