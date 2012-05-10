@@ -10,6 +10,6 @@ package gfy;
  */
 public class DeleteUser {
 
-  public DeleteUser() {
+  public DeleteUser( String username ) {
   }
 }

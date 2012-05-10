@@ -11,7 +11,6 @@ import javax.swing.*;
 /**
  *
  * @author Gerjan Kerssies
- * @version 0.1 - 03-05-2012
  */
 public class AddUser extends JFrame implements ActionListener {
 
