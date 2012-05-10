@@ -48,7 +48,7 @@ public abstract class Protocol {
       try {
 
         unbindStreams();
-        Log.addItem( "Connectie verbreken [\"" + socket.getInetAddress() + "\"]", ex.getMessage(), "Fout tijdens het lezen van een commando", LogType.Event );
+        Log.addItem( "Connectie verbreken [" + socket.getInetAddress() + "]", ex.getMessage(), "Fout tijdens het lezen van een commando", LogType.Event );
         socket.close();
       } catch ( Exception exx ) {
         Log.addItem( "Fout tijdens ontkoppelen bij IO Fout", exx.getMessage(), "", LogType.Critical );
