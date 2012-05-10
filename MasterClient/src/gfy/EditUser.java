@@ -14,10 +14,10 @@ import javax.swing.*;
  */
 public class EditUser extends JFrame implements ActionListener {
 
-  private JPanel panel;
+  private UserSettingsPanel panel;
 
   public EditUser( String username ) {
-    panel = new UserSettingsPanel("editUser");
+    this.panel = new UserSettingsPanel( "editUser", this, username );
 
     setLayout( new GridLayout() );
     setContentPane( panel );
@@ -28,5 +28,9 @@ public class EditUser extends JFrame implements ActionListener {
   }
 
   public void actionPerformed( ActionEvent e ) {
+    if ( e.getSource() == panel.getButtonCancel() ) {
+      dispose();
+    } else if ( e.getSource() == panel.getButtonSave() ) {
+    }
   }
 }
