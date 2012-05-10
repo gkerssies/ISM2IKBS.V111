@@ -19,7 +19,7 @@ public class Config {
    * Constructor for the config class
    *
    * @param serverport   the tcp port number for the TCP/IP server
-   * @param Database     the database settings for the config
+   * @param database     the database settings for the config
    * @param userdatabase the memory based userdatabase
    */
   public Config( int serverport, Database database, User userdatabase ) {
