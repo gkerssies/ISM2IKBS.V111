@@ -12,11 +12,11 @@ import javax.swing.text.TableView;
 /**
  *
  * @author Gerjan Kerssies
- * @version 0.1 - 26-04-2012
  */
 public class AuthorizationManagement extends JFrame implements ActionListener {
 
   private User user = new User();
+  private UserTable userTable;
   private JPanel panel = new JPanel();
   private JButton buttonAdd, buttonEdit, buttonDelete;
   private ClientConnection clientconnection;
@@ -28,7 +28,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
 
     setLayout( new BorderLayout() );
 
-    UserTable userTable = new UserTable( user, clientconnection );
+    userTable = new UserTable( user, clientconnection );
     userTable.setOpaque( true );
     userTable.setPreferredSize( new Dimension( 500, 500 ) );
 
@@ -64,13 +64,39 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     setVisible( true );
   }
 
+  public void openFrame( String action ) {
+    String clickedUser = userTable.getClickedUser();
+
+    if ( clickedUser != null ) {
+      switch ( action ) {
+        case "editUser":
+          JFrame frame = new EditUser( clickedUser );
+          break;
+
+        case "deleteUser":
+          DeleteUser deleteUser = new DeleteUser( clickedUser );
+          break;
+      }
+    } else {
+      switch ( action ) {
+        case "editUser":
+          JOptionPane.showMessageDialog( this, "Er is geen gebruiker geselecteerd om te aanpassen!", "Gebruiker wijzigen", JOptionPane.WARNING_MESSAGE );
+          break;
+
+        case "deleteUser":
+          JOptionPane.showMessageDialog( this, "Er is geen gebruiker geselecteerd om te verwijderen!", "Gebruiker verwijderen", JOptionPane.WARNING_MESSAGE );
+          break;
+      }
+    }
+  }
+
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonAdd ) {
       JFrame frame = new AddUser();
     } else if ( e.getSource() == buttonEdit ) {
-      //JFrame frame = new EditUser();
+      openFrame( "editUser" );
     } else if ( e.getSource() == buttonDelete ) {
-      //JFrame frame = new DeleteUser();
+      openFrame( "deleteUser" );
     }
   }
 }
