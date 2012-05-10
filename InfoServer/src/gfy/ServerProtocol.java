@@ -104,7 +104,7 @@ public class ServerProtocol extends Protocol {
     User userdb = ( User ) super.recieveObject();
     super.getServer().getConfig().setUserdatabase( userdb );
     super.setBusy( false );
-    Log.addItem( "Transactie succesvol [Nav Instellingen bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
+    Log.addItem( "Transactie succesvol [Gebruikers bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
     IOUtillty.writeUserDatabase( userdb );
   }
   
