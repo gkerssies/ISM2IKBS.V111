@@ -20,15 +20,16 @@ public class UserSettingsPanel extends JPanel {
   private JButton buttonCancel, buttonSave;
   
   public UserSettingsPanel(String action) {
-    add( panelLabels );
-    add( panelInput );
-    add( panelButtons );
     
     panelLabels = new JPanel();
     panelLabels.setPreferredSize( new Dimension( 140, 110 ) );
     panelInput = new JPanel();
     panelInput.setPreferredSize( new Dimension( 190, 110 ) );
     panelButtons = new JPanel();
+    
+    add( panelLabels );
+    add( panelInput );
+    add( panelButtons );
 
     label1 = new JLabel( "Gebruikersnaam" );
     label1.setPreferredSize( new Dimension( 130, 20 ) );
