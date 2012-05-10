@@ -60,8 +60,8 @@ public class UserSettingsPanel extends JPanel {
         break;
         
       case "editUser":
-        buttonCancel.addActionListener( EditUser() );
-        buttonSave.addActionListener( EditUser() );
+        //buttonCancel.addActionListener( EditUser() );
+        //buttonSave.addActionListener( EditUser() );
         break;
     }
     
