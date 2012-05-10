@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -22,7 +23,8 @@ public class UserTable extends JPanel {
 
   private User user;
   private Object[][] users;
-  private boolean DEBUG = false;
+  private String clickedUser;
+  private boolean DEBUG = true;
 
   public UserTable( User user, ClientConnection clientConnection ) {
     super( new GridLayout( 1, 0 ) );
@@ -40,7 +42,7 @@ public class UserTable extends JPanel {
       table.addMouseListener( new MouseAdapter() {
 
         public void mouseClicked( MouseEvent e ) {
-          printDebugData( table );
+          setClickedUser( table );
         }
       } );
     }
@@ -60,19 +62,12 @@ public class UserTable extends JPanel {
     return data;
   }
 
-  private void printDebugData( JTable table ) {
+  private void setClickedUser( JTable table ) {
     int numRows = table.getRowCount();
-    int numCols = table.getColumnCount();
-    javax.swing.table.TableModel model = table.getModel();
+    TableModel model = table.getModel();
 
-    System.out.println( "Value of data: " );
     for ( int i = 0; i < numRows; i++ ) {
-      System.out.print( "    row " + i + ":" );
-      for ( int j = 0; j < numCols; j++ ) {
-        System.out.print( "  " + model.getValueAt( i, j ) );
-      }
-      System.out.println();
+      clickedUser = (String)model.getValueAt( i, 0 );
     }
-    System.out.println( "--------------------------" );
   }
 }

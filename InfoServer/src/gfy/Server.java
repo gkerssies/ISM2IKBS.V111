@@ -4,11 +4,9 @@
  */
 package gfy;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Server core
@@ -49,7 +47,6 @@ public class Server extends Thread {
           while ( currentclient.getPendingStatus() && serversocket.isClosed() == false ) {
             Thread.sleep( 100 );
           }
-
         } catch ( Exception ex ) {
           Log.addItem( "Client socket fout", ex.getMessage(), "Er is een fout opgetreden", LogType.Error );
         }
@@ -76,9 +73,16 @@ public class Server extends Thread {
     }
     try {
       serversocket.close();
-     
+
     } catch ( IOException ex ) {
-     Log.addItem("Server gestopt", ex.getMessage(), null, LogType.Info);
+      Log.addItem( "Server gestopt", ex.getMessage(), null, LogType.Info );
+    } finally {
+      // Write all logs to a file
+      try {
+        Log.writeToFile();
+      } catch ( IOException ex ) {
+        Log.addItem( "Fout tijdens opslaan [logbestand]", "", "De logs konden niet worden weggeschreven naar het logbestand.", LogType.Error );
+      }
     }
   }
 

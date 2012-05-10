@@ -1,10 +1,12 @@
 package gfy;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Calendar;
 
 /**
  * The static log for the server application.
@@ -15,34 +17,34 @@ import java.util.logging.Logger;
  */
 public class Log {
 
-  private static ArrayList<String> logitem = new ArrayList<String>();
-  private static ArrayList<String> jxception = new ArrayList<String>();
-  private static ArrayList<String> friendlyerror = new ArrayList<String>();
-  private static ArrayList<LogType> type = new ArrayList<LogType>();
+  private static ArrayList<String> title = new ArrayList<>();
+  private static ArrayList<String> exception = new ArrayList<>();
+  private static ArrayList<String> description = new ArrayList<>();
+  private static ArrayList<LogType> type = new ArrayList<>();
 
   /**
    * Adds a logitem to the static log ArrayList.
    *
-   * @param l the log title
-   * @param j the java exeception (ex.getMessage())
-   * @param f the error explained in friendly human readable text
-   * @param t the log type (Enum UserType)
+   * @param title       the log title
+   * @param exception   the java exeception (ex.getMessage())
+   * @param description the error explained in friendly human readable text
+   * @param type        the log type (Enum UserType)
    */
-  public static void addItem( String l, String j, String f, LogType t ) {
-    logitem.add( l );
-    jxception.add( j );
-    friendlyerror.add( f );
-    type.add( t );
+  public static void addItem( String title, String exception, String description, LogType type ) {
+    Log.title.add( title );
+    Log.exception.add( exception );
+    Log.description.add( description );
+    Log.type.add( type );
   }
 
   /**
    * method for clearing al log messages.
    */
-  public static void Clear() {
-    logitem.clear();
-    jxception.clear();
-    friendlyerror.clear();
-    type.clear();
+  public static void clear() {
+    Log.title.clear();
+    Log.exception.clear();
+    Log.description.clear();
+    Log.type.clear();
   }
 
   /**
@@ -51,7 +53,7 @@ public class Log {
    * @return the count of curring messages in queue
    */
   static int getCount() {
-    return logitem.size();
+    return Log.title.size();
   }
 
   /**
@@ -65,16 +67,11 @@ public class Log {
     int y = 0;
 
     try {
-      for ( String t : logitem ) {
-        if ( !jxception.get( y ).equals( "" ) ) {
-          temp += "[" + type.get( y ) + "] " + t + "<br />";
-        } else {
-          temp += "[" + type.get( y ) + "] " + t + "<br />";
-        }
-        // temp += "[" + type.get( y ) + "] " + t + "; " + jxception.get( y ) + "; " + friendlyerror.get( y ) + "<br />";
+      for ( String t : title ) {
+        temp += "[" + type.get( y ) + "] " + t + "<br />";
         y++;
       }
-    } catch (Exception ex ) {
+    } catch ( Exception ex ) {
       temp += "[Error] Er is een fout opgetreden tijdens het opvragen van de logs<br />";
     }
 
@@ -88,21 +85,29 @@ public class Log {
    * @throws IOException input/output error
    */
   public static void writeToFile() throws IOException {
-    // Clone the created logs to prevent .... error
-    ArrayList<String> cLogitem = ( ArrayList<String> ) logitem.clone();
-    ArrayList<String> cJxception = ( ArrayList<String> ) jxception.clone();
-    ArrayList<String> cFriendlyerror = ( ArrayList<String> ) friendlyerror.clone();
+    // Clone the created logs to prevent error
+    ArrayList<String> cTitle = ( ArrayList<String> ) title.clone();
+    ArrayList<String> cException = ( ArrayList<String> ) exception.clone();
+    ArrayList<String> cDescription = ( ArrayList<String> ) description.clone();
     ArrayList<LogType> cType = ( ArrayList<LogType> ) type.clone();
 
     // Open new writer which writes the logs to a file
     BufferedWriter writer = new BufferedWriter( new FileWriter( "./resources/logs/server-log.txt", true ) );
 
+    // Add date and time to logs that will be written to file
+    DateFormat dateFormat = new SimpleDateFormat( "dd-MM-yyyy HH:mm:ss" );
+    writer.write( "@" + dateFormat.format( Calendar.getInstance().getTime() ) );
+    writer.newLine();
+
     int y = 0;
-    for ( String item : cLogitem ) {
+    for ( String item : cTitle ) {
       writer.write( "[" + cType.get( y ) + "] " + item );
       writer.newLine();
       y++;
     }
+
+    // Add whitespace between different write to file attempts
+    writer.newLine();
 
     // Close the writer
     writer.close();

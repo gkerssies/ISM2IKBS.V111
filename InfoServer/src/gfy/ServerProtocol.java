@@ -4,10 +4,6 @@
  */
 package gfy;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * The server protocol class which handles the communication and exchange of
  * various commands and objects
@@ -74,10 +70,10 @@ public class ServerProtocol extends Protocol {
     if ( user.verifyCredential( clientAuth.getUsername(), clientAuth.getPassword() ) ) {
       super.getClientproperty().setLoggedin( true, clientAuth.getUsername(), clientAuth.getUsertype() );
       sendCommand( "OK" );
-      Log.addItem( "Client login succesvol [\"" + super.getClientproperty().getUsername() + "\"] @ [\"" + super.getSocket().getInetAddress().getHostAddress() + "\"]", "", "", LogType.Event );
+      Log.addItem( "Client login succesvol [" + super.getClientproperty().getUsername() + "] @ [" + super.getSocket().getInetAddress().getHostAddress() + "]", "", "", LogType.Event );
     } else {
       sendCommand( "ERROR" );
-      Log.addItem( "Client login mislukt [\"" + "Authenticatie fout" + "\"] @ [\"" + super.getSocket().getInetAddress().getHostAddress() + "\"]", "", "", LogType.Event );
+      Log.addItem( "Client login mislukt [Authenticatie fout] @ [" + super.getSocket().getInetAddress().getHostAddress() + "]", "", "", LogType.Event );
     }
     super.setBusy( false );
   }
@@ -86,29 +82,21 @@ public class ServerProtocol extends Protocol {
     super.sendCommand( "OK" );
     super.sendObject( super.getServer().getConfig().getUserdatabase() );
     super.setBusy( false );
-    Log.addItem( "Transactie succesvol [\"Gebuikers\"] [\"" + super.getClientproperty().getUsername() + "\"]", "", "", LogType.Transaction );
+    Log.addItem( "Transactie succesvol [Gebuikers] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
   }
 
   public void getDatabase() {
     super.sendCommand( "OK" );
     super.sendObject( super.getServer().getConfig().getDatabase() );
     super.setBusy( false );
-    Log.addItem( "Transactie succesvol [\"Nav Instellingen opvragen\"] [\"" + super.getClientproperty().getUsername() + "\"]", "", "", LogType.Transaction );
+    Log.addItem( "Transactie succesvol [Nav Instellingen opvragen] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
   }
 
   public void setDatbase() {
     Database database = ( Database ) super.recieveObject();
     super.getServer().getConfig().setDatabase( database );
     super.setBusy( false );
-    Log.addItem( "Transactie succesvol [\"Nav Instellingen bijwerken\"] [\"" + super.getClientproperty().getUsername() + "\"]", "", "", LogType.Transaction );
+    Log.addItem( "Transactie succesvol [Nav Instellingen bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
     IOUtillty.writeDatabaseConfig( database );
-  }
-
-  public void setUser() {
-    User userdb = ( User ) super.recieveObject();
-    super.getServer().getConfig().setUserdatabase( userdb );
-    super.setBusy( false );
-    Log.addItem( "Transactie succesvol [\"Gebruikers bijwerken\"] [\"" + super.getClientproperty().getUsername() + "\"]", "", "", LogType.Transaction );
-    IOUtillty.writeUserDatabase( userdb );
   }
 }
