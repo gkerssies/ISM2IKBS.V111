@@ -9,7 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The server protocol class which handles the communication and exchange of various commands and objects
+ * The server protocol class which handles the communication and exchange of
+ * various commands and objects
+ *
  * @author Janssen-laptop
  * @version 0.2 - 08-m
  */
@@ -53,6 +55,10 @@ public class ServerProtocol extends Protocol {
     } else if ( t.equals( "SET-DATABASE" ) ) {
       super.setBusy( true );
       setDatbase();
+
+    } else if ( t.equals( "SET-USERS" ) ) {
+      super.setBusy( true );
+      setUser();
     } else {
       System.out.println( t );
     }
@@ -95,6 +101,14 @@ public class ServerProtocol extends Protocol {
     super.getServer().getConfig().setDatabase( database );
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [\"Nav Instellingen bijwerken\"] [\"" + super.getClientproperty().getUsername() + "\"]", "", "", LogType.Transaction );
-    IOUtillty.writeDatabaseConfig(database);
+    IOUtillty.writeDatabaseConfig( database );
+  }
+
+  public void setUser() {
+    User userdb = ( User ) super.recieveObject();
+    super.getServer().getConfig().setUserdatabase( userdb );
+    super.setBusy( false );
+    Log.addItem( "Transactie succesvol [\"Gebruikers bijwerken\"] [\"" + super.getClientproperty().getUsername() + "\"]", "", "", LogType.Transaction );
+    IOUtillty.writeUserDatabase( userdb );
   }
 }

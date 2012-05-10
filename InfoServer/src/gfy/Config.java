@@ -62,4 +62,11 @@ public class Config {
   public void setDatabase( Database database ) {
     this.database = database;
   }
+
+  /**
+   * @param userdatabase the userdatabase to set
+   */
+  public void setUserdatabase( User userdatabase ) {
+    this.userdatabase = userdatabase;
+  }
 }
