@@ -1,15 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketAddress;
-import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,13 +26,12 @@ public class ClientConnection extends Thread {
   /**
    * Constructor for the client connection.
    *
-   * @param Host the host ipadress
-   * @param Port the server port application
+   * @param host the host ip-adress
+   * @param port the server port
    */
   public ClientConnection( String host, int port ) {
     this.host = host;
     this.port = port;
-
   }
 
   public String recieveCommand() {
@@ -77,12 +70,13 @@ public class ClientConnection extends Thread {
       Logger.getLogger( ClientConnection.class.getName() ).log( Level.SEVERE, null, ex );
     }
   }
+
   /**
    * Method for sending objects to the server
    *
-   * @param text the command to send to the server
+   * @param object the object to send
    */
-  public void sendObject(Object object ) {
+  public void sendObject( Object object ) {
     try {
       objectlineout.writeObject( object );
       objectlineout.flush();
@@ -94,8 +88,6 @@ public class ClientConnection extends Thread {
   @Override
   public void run() {
     try {
-
-
       clientsocket = new Socket( host, port );
       System.out.println( "fase" );
 
@@ -110,13 +102,11 @@ public class ClientConnection extends Thread {
           Thread.sleep( 10 );
         }
       }
-
     } catch ( IOException ex ) {
       System.out.println( ex.getMessage() );
     } catch ( Exception ex ) {
       System.out.println( "Fout tijdens verbinden" + ex.getCause() );
     }
-
   }
 
   /**
@@ -125,12 +115,9 @@ public class ClientConnection extends Thread {
    * @return the clientsocket connection status
    */
   public boolean isConnected() {
-    try
-    {
-    return clientsocket.isConnected();
-    }
-    catch(NullPointerException ne)
-    {
+    try {
+      return clientsocket.isConnected();
+    } catch ( NullPointerException ne ) {
       return false;
     }
   }
@@ -145,7 +132,7 @@ public class ClientConnection extends Thread {
   /**
    * handles every messages
    *
-   * @param the command
+   * @param text textstring to print
    */
   public void procces( String text ) {
     System.out.println( text );
@@ -164,16 +151,15 @@ public class ClientConnection extends Thread {
       return new User();
     }
   }
-  
-  public void setUser(User user)
-  {
-    sendCommand("SET-USERS");
-    sendObject(user);
+
+  public void setUser( User user ) {
+    sendCommand( "SET-USERS" );
+    sendObject( user );
   }
-  
 
   /**
    * Method for getting the database settings from the server
+   *
    * @return the user object
    */
   public Database getDatabase() {
@@ -184,11 +170,10 @@ public class ClientConnection extends Thread {
       return new Database( "", "", 0, "", "" );
     }
   }
-  
-  public void setDatabase(Database database)
-  {
-    sendCommand("SET-DATABASE");
-    sendObject(database);
+
+  public void setDatabase( Database database ) {
+    sendCommand( "SET-DATABASE" );
+    sendObject( database );
   }
 
   /**
