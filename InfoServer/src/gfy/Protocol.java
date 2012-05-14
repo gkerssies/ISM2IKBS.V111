@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Protocol base class
@@ -90,7 +84,7 @@ public abstract class Protocol {
   /**
    * Method for sending an object to a client
    *
-   * @param object the sending object
+   * @param o the opbject to send to a client
    */
   public void sendObject( Object o ) {
     try {
@@ -122,6 +116,8 @@ public abstract class Protocol {
   }
 
   /**
+   *
+   * @param clientSocket
    *
    * @return status the status of the streams if the stream is succesfully
    *         connected
