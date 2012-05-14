@@ -1,6 +1,8 @@
 package gfy;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sun.font.TrueTypeFont;
 import sun.invoke.empty.Empty;
 
@@ -52,12 +54,21 @@ public class DatabaseUtility {
   public ResultSet getDataFromSql() {
     try {
       stmt = connection.createStatement();
-      resultset  = stmt.executeQuery( "SELECT * FROM [dbo].[User Role]" );
+      resultset  = stmt.executeQuery(Query);
       return resultset;
     } catch ( Exception ex ) {
       Log.addItem( "SQL query fout", Query, Query, LogType.Info );
       return null;
 
+    }
+  }
+  
+  public void close()
+  {
+    try {
+      connection.close();
+    } catch ( SQLException ex ) {
+      Log.addItem("Fout tijdens Sql verbinding sluiten", ex.getMessage(), "", LogType.Error);
     }
   }
   

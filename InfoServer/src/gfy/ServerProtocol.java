@@ -98,20 +98,23 @@ public class ServerProtocol extends Protocol {
   public void getNavResult() {
     
     int t = Integer.parseInt(super.recieveCommand());
-    
+    boolean match = false;
     for(NavQuery nq : super.getServer().getConfig().getNavqueryoverview().getNavQueries())
     {
       if (nq.getId() == t)
       {
+        match = true;
         super.sendCommand( "OK" );
         DatabaseUtility db = new DatabaseUtility(super.getServer().getConfig().getDatabase());
         db.setQuery(nq.getSqlquery());
         NavQueryResultSet nvrs = new NavQueryResultSet( db.getDataFromSql(), db.getMetaDataFromSql());
         super.sendObject(nvrs);
+        db.close();
       }
     }
+    System.out.println( match );
+    //super.sendObject( super.getServer().getConfig().getNavqueryoverview());
     
-    super.sendObject( super.getServer().getConfig().getNavqueryoverview());
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [Navision query resultaat] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
   }

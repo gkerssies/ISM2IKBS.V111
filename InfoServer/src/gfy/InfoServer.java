@@ -79,7 +79,9 @@ public class InfoServer extends JFrame {
 
     NavQueryOverview navision = new NavQueryOverview();
     NavQuery navGebruikers = new NavQuery(0, "Overzicht gebruikersgroepen", "Overzicht van alle gebruikers", "Select * from [dbo].[User Role]");
+    NavQuery navBedrijf = new NavQuery(1, "Overzicht bedrijven", "Overzicht van alle bedrijven", "Select * from [dbo].[Company]");
     navision.addNavQuery( navGebruikers );
+    navision.addNavQuery( navBedrijf );
     
     
     int serverPort = 0;
