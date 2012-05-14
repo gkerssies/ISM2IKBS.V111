@@ -33,7 +33,7 @@ public class IOUtillty {
   }
 
   /**
-   * Write the global configuration settings to ./config/global.cfg.
+   * Write the port configuration settings to ./config/port.cfg.
    *
    * @param serverPort the portnumber that is given to the server
    */
@@ -51,9 +51,9 @@ public class IOUtillty {
   }
 
   /**
-   * Check if there is a global configuration file already.
+   * Check if there is a port configuration file already.
    *
-   * @return boolean gives true if the global configuration file exsist
+   * @return boolean gives true if the port configuration file exsist
    */
   public static boolean portConfigExsist() {
     File file = new File( "./resources/config/port.cfg" );
