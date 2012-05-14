@@ -5,7 +5,7 @@
 package gfy;
 
 /**
- * The client protocol class extends the protocol classs
+ * The client protocol class extends the protocol class
  *
  * @author Janssen-laptop
  */
@@ -20,7 +20,7 @@ public class ClientProtocol extends Protocol {
     String t = super.recieveCommand();
     System.out.println( t );
     if ( t.equals( "UPDATE" ) ) {
-      System.out.println( "works" );
+      System.out.println( "It works!" );
     } else {
       System.out.println( t );
     }

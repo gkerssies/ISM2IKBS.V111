@@ -1,6 +1,7 @@
 package view.overview;
 
 import UserInterface.WrappableJLabel;
+import gfy.ClientConnection;
 import gfy.NavQuery;
 import gfy.NavQueryOverview;
 import java.awt.BorderLayout;
@@ -92,28 +93,6 @@ public class OverviewFrame extends JFrame {
                                       "Een beschrijving waarbij je toch begint te denken dat het wellicht handig is om een wrappable JLabel te hebben" ) );
     pack();
     setSize( getWidth() + 15, getHeight() );
-  }
-
-  /**
-   * Constructor.
-   *
-   * @param q The NavQueryOverview to pass through to the frame. The
-   * overviewPanel contents are made with the NavQueryOverview.
-   */
-  public OverviewFrame( NavQueryOverview q ) {
-    super();
-    this.navQueryOverview = q;
-    navQueryOverview.addNavQuery( new NavQuery( 0, "Titel", "Toelichting" ) );
-
-    /*
-     * To do: getter maken voor de arrayList navQueries in
-     * NavQueryOverview.java.
-     * Toestemming nodig van Jormen ivm serializable.
-     */
-    navQueries = navQueryOverview.getNavQueries();
-
-    setup();
-    pack();
   }
 
   /**

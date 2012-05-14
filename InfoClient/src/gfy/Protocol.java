@@ -97,11 +97,11 @@ public abstract class Protocol {
    */
   public void unbindStreams() {
     try {
-      System.out.println( "verbinding verbroken" );
+      System.out.println( "Verbinding verbroken." );
       objectlinein.close();
       objectlineout.close();
     } catch ( Exception ex ) {
-      System.out.println( "Fout tijdens het verbreken van de verbinding" + ex.getMessage() );
+      System.out.println( "Fout tijdens het verbreken van de verbinding: " + ex.getMessage() );
     }
   }
 

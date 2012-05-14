@@ -10,6 +10,8 @@ import view.login.LoginFrame;
  */
 public class Main {
 
+  public static ClientConnection clientConnection;
+
   public Main() {
     JFrame frame = new LoginFrame();
     frame.setVisible( true );
@@ -20,5 +22,9 @@ public class Main {
    */
   public static void main( String[] args ) {
     new Main();
+  }
+
+  public static void setClientConnection( ClientConnection clientConnection ) {
+    Main.clientConnection = clientConnection;
   }
 }

@@ -33,7 +33,6 @@ public class ClientConnection extends Thread {
   public ClientConnection( String host, int port ) {
     this.host = host;
     this.port = port;
-
   }
 
   public String recieveCommand() {
@@ -91,8 +90,12 @@ public class ClientConnection extends Thread {
   public void run() {
     try {
       clientsocket = new Socket( host, port );
-      System.out.println( "fase" );
-      System.out.println( clientsocket.isConnected() );
+      System.out.println( "Initialized socket..." );
+      if ( clientsocket.isConnected() ) {
+        System.out.println( "Client connected..." );
+      } else {
+        System.out.println( "Client not connected." );
+      }
       objectlineout = new ObjectOutputStream( clientsocket.getOutputStream() );
       objectlinein = new ObjectInputStream( clientsocket.getInputStream() );
 
