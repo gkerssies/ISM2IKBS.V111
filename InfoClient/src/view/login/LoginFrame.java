@@ -23,6 +23,7 @@ public class LoginFrame extends JFrame implements ActionListener {
   private JTextField usernameField;
   private JPasswordField passwordField;
   private JButton cancelButton, loginButton;
+  private ClientConnection clientConnection;
 
   /**
    * Default constructor. Assembles the frame.
@@ -133,7 +134,7 @@ public class LoginFrame extends JFrame implements ActionListener {
    *         without errors.
    */
   private int initializeConnection( String username, String password ) {
-    ClientConnection clientConnection = new ClientConnection( "localhost", 4444 );
+    clientConnection = new ClientConnection( "localhost", 4444 );
     clientConnection.start();
     try {
       Thread.sleep( 1500 );
@@ -152,7 +153,7 @@ public class LoginFrame extends JFrame implements ActionListener {
   }
 
   private void openOverviewWindow() {
-    JFrame overviewFrame = new OverviewFrame();
+    JFrame overviewFrame = new OverviewFrame(clientConnection);
     this.setVisible( false );
     overviewFrame.setVisible( true );
   }

@@ -25,7 +25,7 @@ public class NavQueryOverview implements Serializable {
    * @param nq object with detailled query data
    */
   public void addNavQuery( NavQuery nq ) {
-    navQueries.add( nq );
+    getNavQueries().add( nq );
   }
 
   /**
@@ -33,6 +33,13 @@ public class NavQueryOverview implements Serializable {
    * @param nq object with detailled query data
    */
   public void deleteNavQuery( NavQuery nq ) {
-    navQueries.remove( nq );
+    getNavQueries().remove( nq );
+  }
+
+  /**
+   * @return the navQueries
+   */
+  public ArrayList<NavQuery> getNavQueries() {
+    return navQueries;
   }
 }

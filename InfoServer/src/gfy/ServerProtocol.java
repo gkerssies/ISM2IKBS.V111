@@ -46,6 +46,10 @@ public class ServerProtocol extends Protocol {
     } else if ( t.equals( "SET-DATABASE" ) ) {
       super.setBusy( true );
       setDatbase();
+      
+    } else if ( t.equals( "GET-NAV-OVERVIEW" ) ) {
+      super.setBusy( true );
+      setDatbase();
 
     } else if ( t.equals( "SET-USERS" ) ) {
       super.setBusy( true );
@@ -78,6 +82,13 @@ public class ServerProtocol extends Protocol {
     super.sendObject( super.getServer().getConfig().getUserdatabase() );
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [Gebruikers] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
+  }
+  
+  public void getNavOverview() {
+    super.sendCommand( "OK" );
+    super.sendObject( super.getServer().getConfig().getNavqueryoverview());
+    super.setBusy( false );
+    Log.addItem( "Transactie succesvol [Navision query overzicht] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
   }
 
   public void getDatabase() {

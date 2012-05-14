@@ -15,7 +15,7 @@ public class JormenTest
     System.out.println( "begin" );
     Database dbSettings = IOUtillty.loadDatabaseConfig();
     User user = IOUtillty.loadUserDatabase();
-    Config config = new Config(4444, dbSettings, user);
+    Config config = new Config(4444, dbSettings, user,new NavQueryOverview());
     Server server = new Server(config);
     //server.start();
     try
