@@ -1,5 +1,9 @@
 package view.login;
 
+import gfy.Auth;
+import gfy.ClientConnection;
+import gfy.Main;
+import gfy.UserType;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -114,10 +118,42 @@ public class LoginFrame extends JFrame implements ActionListener {
       System.out.println( "Application shutting down - cancelButton was clicked." );
       System.exit( 0 );
     } else if ( e.getSource() == loginButton ) {
-      System.out.println( "LoginButton was clicked." );
-      JFrame overviewFrame = new OverviewFrame();
-      this.setVisible( false );
-      overviewFrame.setVisible( true );
+      System.out.println( "LoginButton was clicked. Attempting to login..." );
+      initializeConnection( usernameField.getText(), new String( passwordField.getPassword() ) );
     }
+  }
+
+  /**
+   * Initializes the connection to the info server.
+   *
+   * @param username The username to attempt to log in with.
+   * @param password The password to attempt to log in with.
+   *
+   * @return The error code. Returns 0 when the connection was established
+   *         without errors.
+   */
+  private int initializeConnection( String username, String password ) {
+    ClientConnection clientConnection = new ClientConnection( "localhost", 4444 );
+    clientConnection.start();
+    try {
+      Thread.sleep( 1500 );
+      if ( clientConnection.isConnected() ) {
+        clientConnection.sendCommand( "AUTH>" );
+        Auth authentication = new Auth( username, password, UserType.gebruiker );
+        clientConnection.sendObject( authentication );
+        System.out.println( clientConnection.recieveCommand() );
+      }
+    } catch ( Exception ex ) {
+      System.out.println( "Er is iets fout gegaan tijdens het maken van de verbinding." );
+    }
+    Main.setClientConnection( clientConnection );
+    openOverviewWindow();
+    return 0;
+  }
+
+  private void openOverviewWindow() {
+    JFrame overviewFrame = new OverviewFrame();
+    this.setVisible( false );
+    overviewFrame.setVisible( true );
   }
 }

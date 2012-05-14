@@ -33,6 +33,84 @@ public class IOUtillty {
   }
 
   /**
+   * Write the port configuration settings to ./config/port.cfg.
+   *
+   * @param serverPort the portnumber that is given to the server
+   */
+  public static void writePortConfig( int serverPort ) {
+    try {
+      FileWriter fw = new FileWriter( "./resources/config/port.cfg" );
+      PrintWriter pw = new PrintWriter( fw );
+      pw.println( "[Globalconfig]" );
+      pw.println( "port:" + serverPort );
+      pw.close();
+      fw.close();
+    } catch ( IOException ioe ) {
+      Log.addItem( "Fout tijdens opslaan [Globale Configuratie]", ioe.getMessage(), "", LogType.Error );
+    }
+  }
+
+  /**
+   * Check if there is a port configuration file already.
+   *
+   * @return boolean gives true if the port configuration file exsist
+   */
+  public static boolean portConfigExsist() {
+    File file = new File( "./resources/config/port.cfg" );
+    return file.exists();
+  }
+
+  /**
+   * Load the port settings from ./config/port.cfg.
+   *
+   * @return the server portnumber
+   */
+  public static int loadPortConfig() {
+    int port = 0;
+
+    try {
+      FileReader fr = new FileReader( "./resources/config/port.cfg" );
+      BufferedReader br = new BufferedReader( fr );
+      String t = br.readLine();
+      while ( t != null ) {
+        if ( !t.startsWith( "[" ) ) {
+          String[] c = getKeyValue( t );
+
+          switch ( c[0] ) {
+            case "port":
+              port = Integer.parseInt( c[1] );
+              break;
+          }
+
+        }
+        t = br.readLine();
+      }
+
+      // If portnumber is out of range, reset it to prevent error later
+      if ( port > 1024 && port < 49151  ) {
+        return port;
+      } else {
+        Log.addItem( "Poort configuratie [corrupt]", "", "", LogType.Error );
+        Log.addItem( "Poort configuratie [reset]", "", "", LogType.Event );
+
+        // Write portnumber '0' to file (portnumber reset)
+        writePortConfig( 0 );
+
+        return 0;
+      }
+
+    } catch ( Exception ex ) {
+      Log.addItem( "Poort configuratie [corrupt]", ex.getMessage(), "", LogType.Error );
+      Log.addItem( "Poort configuratie [reset]", "", "", LogType.Event );
+
+      // Write portnumber '0' to file (portnumber reset)
+      writePortConfig( 0 );
+
+      return 0;
+    }
+  }
+
+  /**
    * Check if there is a database already.
    *
    * @return boolean gives true if the database config exsist
@@ -99,8 +177,6 @@ public class IOUtillty {
       Log.addItem( "Database configuratie [reset]", "", "", LogType.Event );
       return new Database( "Navision", "SQLSEVER", 0, "", "" );
     }
-
-
   }
 
   /**
