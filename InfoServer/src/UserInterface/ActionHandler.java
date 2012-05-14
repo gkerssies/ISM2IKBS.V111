@@ -1,5 +1,6 @@
 package UserInterface;
 
+import gfy.IOUtillty;
 import gfy.Log;
 import gfy.LogType;
 import gfy.Server;
@@ -78,7 +79,8 @@ public class ActionHandler implements ActionListener, KeyListener {
         // Change serverport
         server.getConfig().setServerport( port );
 
-        // TODO: Code here to save portnumber to file
+        // Save portnumber to the port-configuration file
+        IOUtillty.writePortConfig( port );
       }
 
       // Start the application core (the server)
