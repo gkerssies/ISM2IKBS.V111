@@ -2,6 +2,7 @@ package view.overview;
 
 import UserInterface.WrappableJLabel;
 import gfy.ClientConnection;
+import gfy.Main;
 import gfy.NavQuery;
 import gfy.NavQueryOverview;
 import java.awt.BorderLayout;
@@ -72,8 +73,13 @@ public class OverviewFrame extends JFrame {
     @Override
     public void actionPerformed( ActionEvent e ) {
       if ( e.getSource() == button ) {
+        clientConnection = Main.clientConnection;
         System.out.println( "button inside QueryPanel " + id + " was clicked." );
-        new DataviewFrame().setVisible( true);
+        String t = Integer.toString(id);
+        
+        
+        
+        new DataviewFrame(clientConnection.getNavisionQueryResultset(t)).setVisible( true);
       }
     }
   }
@@ -81,20 +87,20 @@ public class OverviewFrame extends JFrame {
   private JScrollPane scrollPane;
   private NavQueryOverview navQueryOverview;
   private ArrayList<NavQuery> navQueries;
- private  ClientConnection clientconnection;
+  private  ClientConnection clientconnection;
   
   /**
    * Default constructor. Generates a few panels for testing.
    */
-  public OverviewFrame(ClientConnection clientconnection) {
+  public OverviewFrame() {
     super();
     setup();
-    this.clientconnection = clientconnection;
+    this.clientconnection = Main.clientConnection; 
     
     int n= 0;
     for(NavQuery nq : clientconnection.getNavisionQueryOverview().getNavQueries())
     {
-       contentPanel.add( new QueryPanel( n, nq.getTitle(), nq.getDescription() ) );
+      contentPanel.add( new QueryPanel( n, nq.getTitle(), nq.getDescription() ) );
        n++;
     }
     

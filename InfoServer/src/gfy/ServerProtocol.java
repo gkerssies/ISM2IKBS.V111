@@ -49,7 +49,11 @@ public class ServerProtocol extends Protocol {
       
     } else if ( t.equals( "GET-NAV-OVERVIEW" ) ) {
       super.setBusy( true );
-      setDatbase();
+      getNavOverview();
+      
+    }else if ( t.equals( "GET-NAV-RESULT" ) ) {
+      super.setBusy( true );
+      getNavResult();
 
     } else if ( t.equals( "SET-USERS" ) ) {
       super.setBusy( true );
@@ -89,6 +93,27 @@ public class ServerProtocol extends Protocol {
     super.sendObject( super.getServer().getConfig().getNavqueryoverview());
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [Navision query overzicht] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
+  }
+  
+  public void getNavResult() {
+    
+    int t = Integer.parseInt(super.recieveCommand());
+    
+    for(NavQuery nq : super.getServer().getConfig().getNavqueryoverview().getNavQueries())
+    {
+      if (nq.getId() == t)
+      {
+        super.sendCommand( "OK" );
+        DatabaseUtility db = new DatabaseUtility(super.getServer().getConfig().getDatabase());
+        db.setQuery(nq.getSqlquery());
+        NavQueryResultSet nvrs = new NavQueryResultSet( db.getDataFromSql(), db.getMetaDataFromSql());
+        super.sendObject(nvrs);
+      }
+    }
+    
+    super.sendObject( super.getServer().getConfig().getNavqueryoverview());
+    super.setBusy( false );
+    Log.addItem( "Transactie succesvol [Navision query resultaat] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
   }
 
   public void getDatabase() {

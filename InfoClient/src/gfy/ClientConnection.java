@@ -164,6 +164,17 @@ public class ClientConnection extends Thread {
       return new NavQueryOverview();
     }
   }
+  
+  public NavQueryResultSet getNavisionQueryResultset(String navid) {
+    sendCommand( "GET-NAV-RESULT" );
+    sendCommand(navid);
+    if ( recieveCommand().equals( "OK" ) ) {
+      return ( NavQueryResultSet ) recieveObject();
+    } else {
+      return null;
+    }
+  }
+  
 
   public void setDatabase( Database database ) {
     sendCommand( "SET-DATABASE" );

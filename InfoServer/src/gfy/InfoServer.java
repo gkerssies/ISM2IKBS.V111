@@ -111,7 +111,7 @@ public class InfoServer extends JFrame {
     }
 
 
-    Config config = new Config( serverPort, database, users ,new NavQueryOverview());
+    Config config = new Config( serverPort, database, users ,navision);
 
     server = new Server( config );
 
