@@ -1,8 +1,6 @@
 package UserInterface;
 
 import gfy.IOUtillty;
-import gfy.Log;
-import gfy.LogType;
 import gfy.Server;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
