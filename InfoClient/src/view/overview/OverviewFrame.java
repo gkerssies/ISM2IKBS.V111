@@ -30,6 +30,7 @@ public class OverviewFrame extends JFrame {
     private JLabel titleLabel;
     private WrappableJLabel descriptionLabel;
     private JButton button;
+    private ClientConnection clientConnection;
 
     /**
      * Default constructor.
@@ -80,17 +81,26 @@ public class OverviewFrame extends JFrame {
   private JScrollPane scrollPane;
   private NavQueryOverview navQueryOverview;
   private ArrayList<NavQuery> navQueries;
-
+ private  ClientConnection clientconnection;
+  
   /**
    * Default constructor. Generates a few panels for testing.
    */
-  public OverviewFrame() {
+  public OverviewFrame(ClientConnection clientconnection) {
     super();
     setup();
-    contentPanel.add( new QueryPanel( 0, "Testtitel", "Testbeschrijving" ) );
-    contentPanel.add( new QueryPanel( 1, "Nog een titel", "Nog een beschrijving, maar dan een iets langere." ) );
-    contentPanel.add( new QueryPanel( 2, "Weer een query",
-                                      "Een beschrijving waarbij je toch begint te denken dat het wellicht handig is om een wrappable JLabel te hebben" ) );
+    this.clientconnection = clientconnection;
+    
+    int n= 0;
+    for(NavQuery nq : clientconnection.getNavisionQueryOverview().getNavQueries())
+    {
+       contentPanel.add( new QueryPanel( n, nq.getTitle(), nq.getDescription() ) );
+       n++;
+    }
+    
+    //contentPanel.add( new QueryPanel( 1, "Nog een titel", "Nog een beschrijving, maar dan een iets langere." ) );
+   // contentPanel.add( new QueryPanel( 2, "Weer een query",
+   //  "Een beschrijving waarbij je toch begint te denken dat het wellicht handig is om een wrappable JLabel te hebben" ) );
     pack();
     setSize( getWidth() + 15, getHeight() );
   }
