@@ -71,6 +71,16 @@ public class ActionHandler implements ActionListener, KeyListener {
       // Set frame not stoppable when clicking on the exit button in the frame
       frame.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE );
 
+      // Convert filled in portnumber (string) to usable portnumber (int)
+      // try-catch not necessary because only int characters are allowed in portTextField
+      int port = Integer.parseInt( portTextField.getText() );
+      if ( port != server.getConfig().getServerport() ) {
+        // Change serverport
+        server.getConfig().setServerport( port );
+
+        // TODO: Code here to save portnumber to file
+      }
+
       // Start the application core (the server)
       server.start();
 
