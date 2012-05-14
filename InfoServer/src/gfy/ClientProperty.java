@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 /**
@@ -30,7 +26,8 @@ public class ClientProperty {
   }
 
   /**
-   * @param the usertype
+   * @param t the type of user
+   *
    * @return if the usertype is a specified user type
    */
   public boolean isUserType( UserType t ) {
@@ -44,6 +41,8 @@ public class ClientProperty {
 
   /**
    * @param loggedin the loggedin to set
+   * @param username the username of the user
+   * @param usertype the type of user
    */
   public void setLoggedin( boolean loggedin, String username, UserType usertype ) {
     this.loggedin = loggedin;

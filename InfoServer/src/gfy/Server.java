@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 import java.io.IOException;
@@ -44,6 +40,7 @@ public class Server extends Thread {
           currentclient = new Client( this );
           client.add( currentclient );
           currentclient.start();
+
           while ( currentclient.getPendingStatus() && serversocket.isClosed() == false ) {
             Thread.sleep( 100 );
           }
@@ -71,9 +68,10 @@ public class Server extends Thread {
     for ( Client myclient : client ) {
       myclient.getProtocol().unbindStreams();
     }
+
     try {
       serversocket.close();
-      
+
       // Add 'server stopped' log
       Log.addItem( "Server gestopt", "", "", LogType.Event );
     } catch ( IOException ex ) {
@@ -99,13 +97,14 @@ public class Server extends Thread {
    * @return the number of connected clients
    */
   public int getCurrentConnectedClientsCount() {
-
     int i = 0;
+
     for ( Client myclient : client ) {
       if ( myclient.isConnected() && myclient.isForcedStopped() != true ) {
         i++;
       }
     }
+
     return i;
   }
 }
