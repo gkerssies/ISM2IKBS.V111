@@ -1,18 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
-import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
 /**
@@ -41,6 +35,7 @@ public class UserTable extends JPanel {
     if ( DEBUG ) {
       table.addMouseListener( new MouseAdapter() {
 
+        @Override
         public void mouseClicked( MouseEvent e ) {
           setClickedUser( table );
         }

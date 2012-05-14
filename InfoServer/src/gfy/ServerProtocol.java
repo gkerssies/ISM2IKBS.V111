@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 /**
@@ -17,7 +13,6 @@ public class ServerProtocol extends Protocol {
 
   @Override
   public String getProtocol() {
-
     return "Server";
   }
 
@@ -49,6 +44,10 @@ public class ServerProtocol extends Protocol {
       super.setBusy( true );
       getDatabase();
     } else if ( t.equals( "SET-DATABASE" ) ) {
+      super.setBusy( true );
+      setDatbase();
+      
+    } else if ( t.equals( "GET-NAV-OVERVIEW" ) ) {
       super.setBusy( true );
       setDatbase();
 
@@ -84,6 +83,13 @@ public class ServerProtocol extends Protocol {
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [Gebruikers] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
   }
+  
+  public void getNavOverview() {
+    super.sendCommand( "OK" );
+    super.sendObject( super.getServer().getConfig().getNavqueryoverview());
+    super.setBusy( false );
+    Log.addItem( "Transactie succesvol [Navision query overzicht] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
+  }
 
   public void getDatabase() {
     super.sendCommand( "OK" );
@@ -99,7 +105,7 @@ public class ServerProtocol extends Protocol {
     Log.addItem( "Transactie succesvol [Nav Instellingen bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
     IOUtillty.writeDatabaseConfig( database );
   }
-  
+
   public void setUser() {
     User userdb = ( User ) super.recieveObject();
     super.getServer().getConfig().setUserdatabase( userdb );
@@ -107,6 +113,4 @@ public class ServerProtocol extends Protocol {
     Log.addItem( "Transactie succesvol [Gebruikers bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
     IOUtillty.writeUserDatabase( userdb );
   }
-  
-  
 }

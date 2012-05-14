@@ -1,13 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.text.TableView;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,7 +15,7 @@ import javax.swing.text.TableView;
  */
 public class AuthorizationManagement extends JFrame implements ActionListener {
 
-  private User user = new User();
+  private User user;
   private UserTable userTable;
   private JPanel panel = new JPanel();
   private JButton buttonAdd, buttonEdit, buttonDelete;
@@ -24,7 +24,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
   public AuthorizationManagement( ClientConnection clientconnection ) {
 
     this.clientconnection = clientconnection;
-    User user = clientconnection.getUser();
+    user = clientconnection.getUser();
 
     setLayout( new BorderLayout() );
 
@@ -61,7 +61,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     setSize( 660, 540 );
     setResizable( false );
     setTitle( "Authorisatiebeheer" );
-    addWindowListener(new autoCloseOnSaveAuthorizationHandler( clientconnection, user,this) );
+    addWindowListener( new autoCloseOnSaveAuthorizationHandler( clientconnection, user, this ) );
     setVisible( true );
   }
 
@@ -71,11 +71,11 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     if ( clickedUser != null ) {
       switch ( action ) {
         case "editUser":
-          JFrame frame = new EditUser( clickedUser );
+          JFrame frame = new EditUser( user, clickedUser, this );
           break;
 
         case "deleteUser":
-          DeleteUser deleteUser = new DeleteUser( clickedUser );
+          DeleteUser deleteUser = new DeleteUser( user, clickedUser, this );
           break;
       }
     } else {
@@ -91,9 +91,10 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     }
   }
 
+  @Override
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonAdd ) {
-      JFrame frame = new AddUser();
+      JFrame frame = new AddUser( user, this );
     } else if ( e.getSource() == buttonEdit ) {
       openFrame( "editUser" );
     } else if ( e.getSource() == buttonDelete ) {

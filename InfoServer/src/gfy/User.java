@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
-import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -55,8 +51,7 @@ public class User implements Serializable {
    *
    * @param username the username from user that is edited
    * @param password the new password
-   * @param userType the new usertype
-   *
+   * @param usertype the type of user
    * @return returns true if the user is succesfully modified
    *
    */

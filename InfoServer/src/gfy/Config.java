@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 /**
@@ -16,6 +12,7 @@ public class Config {
   private int serverport;
   private Database database;
   private User userdatabase;
+  private NavQueryOverview navqueryoverview;
 
   /**
    * Constructor for the config class
@@ -24,10 +21,11 @@ public class Config {
    * @param database     the database settings for the config
    * @param userdatabase the memory based userdatabase
    */
-  public Config( int serverport, Database database, User userdatabase ) {
+  public Config( int serverport, Database database, User userdatabase,NavQueryOverview nqo) {
     this.serverport = serverport;
     this.database = database;
     this.userdatabase = userdatabase;
+    this.navqueryoverview = nqo;
   }
 
   /**
@@ -71,5 +69,19 @@ public class Config {
    */
   public void setUserdatabase( User userdatabase ) {
     this.userdatabase = userdatabase;
+  }
+
+  /**
+   * @return the navqueryoverview
+   */
+  public NavQueryOverview getNavqueryoverview() {
+    return navqueryoverview;
+  }
+
+  /**
+   * @param navqueryoverview the navqueryoverview to set
+   */
+  public void setNavqueryoverview( NavQueryOverview navqueryoverview ) {
+    this.navqueryoverview = navqueryoverview;
   }
 }

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 /**
@@ -10,6 +6,13 @@ package gfy;
  */
 public class DeleteUser {
 
-  public DeleteUser( String username ) {
+  private User user;
+  private AuthorizationManagement authorizationManagement;
+
+  public DeleteUser( User user, String username, AuthorizationManagement authorizationManagement ) {
+    this.user = user;
+    this.authorizationManagement = authorizationManagement;
+
+    user.removeUser( username );
   }
 }

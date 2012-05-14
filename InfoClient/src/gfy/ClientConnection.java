@@ -155,6 +155,15 @@ public class ClientConnection extends Thread {
       return new Database( "", "", 0, "", "" );
     }
   }
+  
+  public NavQueryOverview getNavisionQueryOverview() {
+    sendCommand( "GET-NAV-OVERVIEW" );
+    if ( recieveCommand().equals( "OK" ) ) {
+      return ( NavQueryOverview ) recieveObject();
+    } else {
+      return new NavQueryOverview();
+    }
+  }
 
   public void setDatabase( Database database ) {
     sendCommand( "SET-DATABASE" );

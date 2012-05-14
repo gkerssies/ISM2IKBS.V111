@@ -1,6 +1,7 @@
 package gfy;
 
 import UserInterface.*;
+import com.sun.corba.se.impl.orb.ParserTable;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -63,47 +64,54 @@ public class InfoServer extends JFrame {
    * @param args the command line arguments
    */
   public static void main( String[] args ) {
-    Log.addItem("Applicatie geladen", "", "", LogType.Event);
+    Log.addItem( "Applicatie geladen", "", "", LogType.Event );
     InfoServer server = new InfoServer();
     server.pack();
     server.setLocationRelativeTo( server.getRootPane() ); // Center the frame
     server.setVisible( true );
-    
+
   }
 
   /**
    * Creates the server. All necessery settings are set/loaded.
    */
   private void createServer() {
+
+    NavQueryOverview navision = new NavQueryOverview();
+    NavQuery navGebruikers = new NavQuery(0, "Overzicht gebruikersgroepen", "Overzicht van alle gebruikers", "Select * from [dbo].[User Role]");
+    navision.addNavQuery( navGebruikers );
     
+    
+    int serverPort = 0;
     User users;
     Database database;
-    
-    if(IOUtillty.databaseConfigExsist())
-    {
-      database = IOUtillty.loadDatabaseConfig();
-      Log.addItem("Database configuratie ingeladen", "", "", LogType.Event);
+
+    if ( IOUtillty.portConfigExsist() ) {
+      serverPort = IOUtillty.loadPortConfig();
+      Log.addItem( "Poort configuratiebestand ingeladen", "", "", LogType.Event );
+    } else {
+      Log.addItem( "Geen poort configuratie bestand gevonden", "", "", LogType.Event );
     }
-    else
-    {
-      Log.addItem("Geen database configuratie gevonden", "", "", LogType.Event);
+
+    if ( IOUtillty.databaseConfigExsist() ) {
+      database = IOUtillty.loadDatabaseConfig();
+      Log.addItem( "Database configuratie ingeladen", "", "", LogType.Event );
+    } else {
+      Log.addItem( "Geen database configuratie gevonden", "", "", LogType.Event );
       database = new Database( "Navision", "SQLSERVER", 11000, "Gebruikersnaam", "Password" );
     }
-    
-    if(IOUtillty.userDatabaseExsist())
-    {
+
+    if ( IOUtillty.userDatabaseExsist() ) {
       users = IOUtillty.loadUserDatabase();
-      Log.addItem("Gebruikers database ingeladen", "", "", LogType.Event);
-    }
-    else
-    {
-      Log.addItem("Geen gebruikers database gevonden", "", "", LogType.Event);
+      Log.addItem( "Gebruikers database ingeladen", "", "", LogType.Event );
+    } else {
+      Log.addItem( "Geen gebruikers database gevonden", "", "", LogType.Event );
       users = new User();
-      users.addUser("admin","admin", UserType.beheerder);
+      users.addUser( "admin", "admin", UserType.beheerder );
     }
-    
-    
-    Config config = new Config( 4444, database, users );
+
+
+    Config config = new Config( serverPort, database, users ,new NavQueryOverview());
 
     server = new Server( config );
 

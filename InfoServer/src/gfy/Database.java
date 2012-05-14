@@ -1,8 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
+
 import java.io.Serializable;
 
 /**
@@ -10,7 +7,7 @@ import java.io.Serializable;
  * @author Jormen Janssen
  * @version 0.1 - 26 april 2012
  */
-public class Database implements Serializable{
+public class Database implements Serializable {
 
   private String name;
   private String host;
@@ -69,13 +66,14 @@ public class Database implements Serializable{
   public String getPassword() {
     return password;
   }
-  
+
   /**
    * method for database settings (Development purpose!!!)
-   * @return the complete database setting 
+   *
+   * @return the complete database setting
    */
   @Override
-  public String toString(){
+  public String toString() {
     return name + " " + host + " " + port + " " + username + " " + password;
   }
 }

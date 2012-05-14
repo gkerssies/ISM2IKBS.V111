@@ -1,15 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 import java.io.Serializable;
 
 /**
+ * List of user types.
  *
  * @author Janssen-laptop
  */
-public enum UserType implements Serializable{
-  beheerder,gebruiker
+public enum UserType implements Serializable {
+
+  beheerder, gebruiker
 }

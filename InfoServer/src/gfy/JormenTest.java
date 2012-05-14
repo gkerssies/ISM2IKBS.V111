@@ -13,12 +13,24 @@ public class JormenTest
   public static void main( String[] args ) {
     
     System.out.println( "begin" );
-   // Database dbSettings = IOUtillty.loadDatabaseConfig();
-    User test = new User();
-    test.addUser("aap", "test", UserType.gebruiker);
-    IOUtillty.writeUserDatabase( test );
-    User testje2 = IOUtillty.loadUserDatabase();
-    System.out.println(testje2.toString());
+    Database dbSettings = IOUtillty.loadDatabaseConfig();
+    User user = IOUtillty.loadUserDatabase();
+    Config config = new Config(4444, dbSettings, user,new NavQueryOverview());
+    Server server = new Server(config);
+    //server.start();
+    try
+    {
+      Thread.sleep(800);
+      DatabaseUtility db = new DatabaseUtility(dbSettings);
+      db.setQuery("Select * from [dbo].[User Role]");
+      NavQueryResultSet nqrs = new NavQueryResultSet(db.getDataFromSql(), db.getMetaDataFromSql());
+      System.out.println(nqrs.toString());
+      JFrametest x = new JFrametest(nqrs.getRow(), nqrs.getColumns());
+    }
+    catch(Exception ex)
+    {
+      
+    }
    
   }
 }

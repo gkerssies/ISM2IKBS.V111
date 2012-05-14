@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 
 /**
  *
@@ -14,10 +11,14 @@ import javax.swing.*;
  */
 public class AddUser extends JFrame implements ActionListener {
 
+  private User user;
+  private AuthorizationManagement authorizationManagement;
   private UserSettingsPanel panel;
 
-  public AddUser() {
-    this.panel = new UserSettingsPanel( "addUser", this, "" );
+  public AddUser( User user, AuthorizationManagement authorizationManagement ) {
+    this.user = user;
+    this.authorizationManagement = authorizationManagement;
+    this.panel = new UserSettingsPanel( null, "addUser", this, "" );
 
     setLayout( new GridLayout() );
     setContentPane( panel );
@@ -27,10 +28,21 @@ public class AddUser extends JFrame implements ActionListener {
     setVisible( true );
   }
 
+  public void save() {
+    if ( panel.getUserType().getSelectedItem() == "beheerder" ) {
+      user.addUser( panel.getUsername().getText(), panel.getPassword().getText(), UserType.beheerder );
+    } else {
+      user.addUser( panel.getUsername().getText(), panel.getPassword().getText(), UserType.gebruiker );
+    }
+  }
+
+  @Override
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == panel.getButtonCancel() ) {
       dispose();
     } else if ( e.getSource() == panel.getButtonSave() ) {
+      save();
+      dispose();
     }
   }
 }
