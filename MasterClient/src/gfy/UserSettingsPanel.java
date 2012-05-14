@@ -22,8 +22,8 @@ public class UserSettingsPanel extends JPanel {
   private JFrame frame;
   private User user;
 
-  public UserSettingsPanel( String action, JFrame frame, String username ) {
-    user = new User();
+  public UserSettingsPanel( User user, String action, JFrame frame, String username ) {
+    this.user = user;
 
     this.frame = frame;
     panelLabels = new JPanel();
@@ -48,12 +48,23 @@ public class UserSettingsPanel extends JPanel {
     this.username = new JTextField( 15 );
     password = new JTextField( 15 );
     confirmPassword = new JTextField( 15 );
-    userType = new JComboBox();
+
+    String[] types = { "gebruiker", "beheerder" };
+    userType = new JComboBox( types );
     userType.setPreferredSize( new Dimension( 169, 20 ) );
 
     if ( action == "editUser" ) {
       this.username.setText( username );
 
+      switch ( user.getUserType( username ) ) {
+        case gebruiker:
+          userType.setSelectedItem( 0 );
+          break;
+
+        case beheerder:
+          userType.setSelectedItem( 1 );
+          break;
+      }
     }
 
     buttonCancel = new JButton();
@@ -80,6 +91,34 @@ public class UserSettingsPanel extends JPanel {
     panelButtons.add( buttonSave );
   }
 
+  /**
+   * @return the username
+   */
+  public JTextField getUsername() {
+    return username;
+  }
+
+  /**
+   * @return the password
+   */
+  public JTextField getPassword() {
+    return password;
+  }
+
+  /**
+   * @return the confirmPassword
+   */
+  public JTextField getConfirmPassword() {
+    return confirmPassword;
+  }
+
+  /**
+   * @return the userType
+   */
+  public JComboBox getUserType() {
+    return userType;
+  }
+
   public JButton getButtonSave() {
     return buttonSave;
   }
@@ -89,14 +128,5 @@ public class UserSettingsPanel extends JPanel {
    */
   public JButton getButtonCancel() {
     return buttonCancel;
-  }
-
-  public boolean isUserType( UserType t ) {
-
-    //if ( user.getUserType( username ).equals( t ) ) {
-    //  return true;
-    //} else {
-      return false;
-    //}
   }
 }
