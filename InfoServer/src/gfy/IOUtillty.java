@@ -4,6 +4,7 @@ import java.io.*;
 
 /**
  * Utility IO Class for loading, saving and other IO functionality.
+ *
  * @author Janssen-laptop
  * @version 0.1 - 9 mei 2012
  */
@@ -40,7 +41,7 @@ public class IOUtillty {
     File file = new File( "./resources/config/db.cfg" );
     return file.exists();
   }
-  
+
   /**
    * Check if there is a user database already.
    *
@@ -94,13 +95,14 @@ public class IOUtillty {
       return new Database( name, host, port, username, password );
 
     } catch ( Exception ex ) {
-      Log.addItem("Datbase configuratie [corrupt]", ex.getMessage(), "", LogType.Error);
-      Log.addItem("Database configuratie [reset]", "", "", LogType.Event);
+      Log.addItem( "Datbase configuratie [corrupt]", ex.getMessage(), "", LogType.Error );
+      Log.addItem( "Database configuratie [reset]", "", "", LogType.Event );
       return new Database( "Navision", "SQLSEVER", 0, "", "" );
     }
 
 
   }
+
   /**
    * split a string in two parts by key and value.
    *
@@ -111,40 +113,32 @@ public class IOUtillty {
     t = value.split( ":" );
     return t;
   }
-  
-  public static void writeUserDatabase(User user)
-  {
-    try
-    {
-    FileOutputStream fo = new FileOutputStream( "./resources/config/users.odb" );
-    ObjectOutputStream oos = new ObjectOutputStream(fo);
-    oos.writeObject(user);
-    oos.close();
-    fo.close();
-    }
-    catch(Exception ex)
-    {
+
+  public static void writeUserDatabase( User user ) {
+    try {
+      FileOutputStream fo = new FileOutputStream( "./resources/config/users.odb" );
+      ObjectOutputStream oos = new ObjectOutputStream( fo );
+      oos.writeObject( user );
+      oos.close();
+      fo.close();
+    } catch ( Exception ex ) {
       Log.addItem( "Fout tijdens opslaan [Gebruikers database]", ex.getMessage(), "", LogType.Error );
     }
   }
-  
-  public static User loadUserDatabase()
-  {
-    try
-    {
-    FileInputStream fi = new FileInputStream( "./resources/config/users.odb" );
-    ObjectInputStream ois = new ObjectInputStream(fi);
-    User loaduser = (User) ois.readObject();
-    ois.close();
-    fi.close();
-    return loaduser;
-    }
-    catch(Exception ex)
-    {
-      Log.addItem( "Fout tijdens opslaan [Gebruikers database]", ex.getMessage(), "", LogType.Error );
-      Log.addItem("Gebruikers database [reset]", "", "", LogType.Event);
+
+  public static User loadUserDatabase() {
+    try {
+      FileInputStream fi = new FileInputStream( "./resources/config/users.odb" );
+      ObjectInputStream ois = new ObjectInputStream( fi );
+      User loaduser = ( User ) ois.readObject();
+      ois.close();
+      fi.close();
+      return loaduser;
+    } catch ( Exception ex ) {
+      Log.addItem( "Fout tijdens inlezen [Gebruikers database]", ex.getMessage(), "", LogType.Error );
+      Log.addItem( "Gebruikers database [reset]", "", "", LogType.Event );
       User tempuser = new User();
-      tempuser.addUser("admin", "admin", UserType.gebruiker);
+      tempuser.addUser( "admin", "admin", UserType.gebruiker );
       return tempuser;
     }
   }
