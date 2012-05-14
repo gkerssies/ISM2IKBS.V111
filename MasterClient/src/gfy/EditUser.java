@@ -14,10 +14,14 @@ import javax.swing.*;
  */
 public class EditUser extends JFrame implements ActionListener {
 
+  private User user;
+  private AuthorizationManagement authorizationManagement;
   private UserSettingsPanel panel;
 
-  public EditUser( String username ) {
-    this.panel = new UserSettingsPanel( "editUser", this, username );
+  public EditUser( User user, String username, AuthorizationManagement authorizationManagement ) {
+    this.user = user;
+    this.authorizationManagement = authorizationManagement;
+    this.panel = new UserSettingsPanel( this.user, "editUser", this, username );
 
     setLayout( new GridLayout() );
     setContentPane( panel );
@@ -27,10 +31,20 @@ public class EditUser extends JFrame implements ActionListener {
     setVisible( true );
   }
 
+  public void save() {
+    if ( panel.getUserType().getSelectedItem() == "beheerder" ) {
+      user.setUser( panel.getUsername().getText(), panel.getPassword().getText(), UserType.beheerder );
+    } else {
+      user.setUser( panel.getUsername().getText(), panel.getPassword().getText(), UserType.gebruiker );
+    }
+  }
+
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == panel.getButtonCancel() ) {
       dispose();
     } else if ( e.getSource() == panel.getButtonSave() ) {
+      save();
+      dispose();
     }
   }
 }

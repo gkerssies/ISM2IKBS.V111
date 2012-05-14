@@ -4,12 +4,21 @@
  */
 package gfy;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Gerjan Kerssies
  */
 public class DeleteUser {
 
-  public DeleteUser( String username ) {
+  private User user;
+  private AuthorizationManagement authorizationManagement;
+
+  public DeleteUser( User user, String username, AuthorizationManagement authorizationManagement ) {
+    this.user = user;
+    this.authorizationManagement = authorizationManagement;
+
+    user.removeUser( username );
   }
 }
