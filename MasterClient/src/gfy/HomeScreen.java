@@ -1,11 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -80,6 +78,7 @@ public class HomeScreen extends JFrame implements ActionListener {
     setVisible( true );
   }
 
+  @Override
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == itemClient ) {
       System.out.println( "itemClient" );
@@ -96,21 +95,19 @@ public class HomeScreen extends JFrame implements ActionListener {
       JFrame frame = new ServerSettings( clientconnetion );
     }
   }
-  public void closeServer()
-  {
-    int allowToStopServer = JOptionPane.showConfirmDialog(
-              this,
-              "Weet u zeker dat u de server op afstand wilt stoppen en afsluiten?\nAlle verbonden clients worden ook afgesloten.\nDe server kan niet weer worden gestart op afstand.",
-              "U staat op het punt de server te stoppen.",
-              JOptionPane.YES_NO_OPTION,
-              JOptionPane.WARNING_MESSAGE );
 
-      // If the 'Yes' button is clicked in the confirm dialog the server will be stopped
-      if ( allowToStopServer == 0 )
-      {
-        clientconnetion.sendCommand( "STOP" );
-        System.exit(0);
-      }
+  public void closeServer() {
+    int allowToStopServer = JOptionPane.showConfirmDialog(
+            this,
+            "Weet u zeker dat u de server op afstand wilt stoppen en afsluiten?\nAlle verbonden clients worden ook afgesloten.\nDe server kan niet weer worden gestart op afstand.",
+            "U staat op het punt de server te stoppen.",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE );
+
+    // If the 'Yes' button is clicked in the confirm dialog the server will be stopped
+    if ( allowToStopServer == 0 ) {
+      clientconnetion.sendCommand( "STOP" );
+      System.exit( 0 );
+    }
   }
-  
 }
