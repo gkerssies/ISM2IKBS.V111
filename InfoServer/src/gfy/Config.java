@@ -5,7 +5,9 @@
 package gfy;
 
 /**
- * Config class for the server configuration holds : Global settings, Navison Settings and the user database.
+ * Config class for the server configuration holds : Global settings, Navison
+ * Settings and the user database.
+ *
  * @author Jormen Janssen
  * @version 0.1 - 26 april 2012
  */
@@ -39,6 +41,7 @@ public class Config {
    * @param serverport the serverport to set
    */
   public void setServerport( int serverport ) {
+    Log.addItem( "Server poort veranderd (" + this.serverport + " > " + serverport + ")", "", "", LogType.Event );
     this.serverport = serverport;
   }
 
