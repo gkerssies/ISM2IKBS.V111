@@ -31,8 +31,8 @@ public class OverviewFrame extends JFrame {
     private JLabel titleLabel;
     private WrappableJLabel descriptionLabel;
     private JButton button;
-    private ClientConnection clientConnection;
-
+    private ClientConnection clientconnection;
+    private NavQueryOverview nqo;
     /**
      * Default constructor.
      */
@@ -50,6 +50,8 @@ public class OverviewFrame extends JFrame {
      */
     public QueryPanel( int id, String title, String description ) {
       super();
+      clientconnection = Main.clientConnection;
+      nqo = clientconnection.getNavisionQueryOverview();
       this.id = id;
 
       this.setBorder( new CompoundBorder(ViewBorders.LINE_GRAY_1PX_EMPTY_2PX, ViewBorders.EMPTY_2PX));
@@ -73,13 +75,19 @@ public class OverviewFrame extends JFrame {
     @Override
     public void actionPerformed( ActionEvent e ) {
       if ( e.getSource() == button ) {
-        clientConnection = Main.clientConnection;
+       
         System.out.println( "button inside QueryPanel " + id + " was clicked." );
         String t = Integer.toString(id);
+        NavQuery current = new NavQuery( id, "", "", "" );
+        for(NavQuery nq : clientconnection.getNavisionQueryOverview().getNavQueries())
+        {
+          if (nq.getId() == id)
+          {
+            current = nq;
+          }
+        }
         
-        
-        
-        new DataviewFrame(clientConnection.getNavisionQueryResultset(t)).setVisible( true);
+        new DataviewFrame(clientconnection.getNavisionQueryResultset(t),current).setVisible( true);
       }
     }
   }
