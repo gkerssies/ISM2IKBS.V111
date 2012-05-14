@@ -1,8 +1,7 @@
 package view.dataview;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import gfy.NavQueryResultSet;
+import javax.swing.*;
 
 /**
  *
@@ -11,18 +10,27 @@ import javax.swing.JTabbedPane;
 public class DataviewFrame extends JFrame {
 
   private JTabbedPane tabbedPane;
+  private NavQueryResultSet nqrs;
 
-  public DataviewFrame() {
+  public DataviewFrame(NavQueryResultSet nqrs) {
     super();
+    this.nqrs = nqrs;
     setup();
+    
   }
 
   private void setup() {
+    
+    JTable table = new JTable( nqrs.getRow(), nqrs.getRow());
+    JScrollPane scrollPane = new JScrollPane(table);
+    scrollPane.add(table);
+    
     tabbedPane = new JTabbedPane();
     JPanel testPanel = new JPanel();
+    testPanel.add(scrollPane);
     JPanel testPanel2 = new JPanel();
-    tabbedPane.addTab( "TestPanel", testPanel);
-    tabbedPane.addTab( "TestPanel 2", testPanel2);
+    tabbedPane.addTab( "Data", testPanel);
+    tabbedPane.addTab( "Grafiek", testPanel2);
     add(tabbedPane);
   }
 

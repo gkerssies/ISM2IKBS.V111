@@ -143,17 +143,19 @@ public class LoginFrame extends JFrame implements ActionListener {
         Auth authentication = new Auth( username, password, UserType.gebruiker );
         clientConnection.sendObject( authentication );
         System.out.println( clientConnection.recieveCommand() );
+        Main.setClientConnection( clientConnection );
+        openOverviewWindow();
       }
     } catch ( Exception ex ) {
       System.out.println( "Er is iets fout gegaan tijdens het maken van de verbinding." );
     }
-    Main.setClientConnection( clientConnection );
-    openOverviewWindow();
+    
+    
     return 0;
   }
 
   private void openOverviewWindow() {
-    JFrame overviewFrame = new OverviewFrame(clientConnection);
+    JFrame overviewFrame = new OverviewFrame();
     this.setVisible( false );
     overviewFrame.setVisible( true );
   }
