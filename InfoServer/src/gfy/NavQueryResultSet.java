@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.Vector;
-import sun.security.x509.RDN;
 
 public class NavQueryResultSet implements Serializable {
 

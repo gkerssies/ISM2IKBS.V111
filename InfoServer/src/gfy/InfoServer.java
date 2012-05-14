@@ -1,6 +1,7 @@
 package gfy;
 
 import UserInterface.*;
+import com.sun.corba.se.impl.orb.ParserTable;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -76,6 +77,11 @@ public class InfoServer extends JFrame {
    */
   private void createServer() {
 
+    NavQueryOverview navision = new NavQueryOverview();
+    NavQuery navGebruikers = new NavQuery(0, "Overzicht gebruikersgroepen", "Overzicht van alle gebruikers", "Select * from [dbo].[User Role]");
+    navision.addNavQuery( navGebruikers );
+    
+    
     int serverPort = 0;
     User users;
     Database database;
@@ -105,7 +111,7 @@ public class InfoServer extends JFrame {
     }
 
 
-    Config config = new Config( serverPort, database, users );
+    Config config = new Config( serverPort, database, users ,new NavQueryOverview());
 
     server = new Server( config );
 
