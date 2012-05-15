@@ -28,9 +28,9 @@ public class LogDialog extends JDialog implements ActionListener {
    * @param frame the server application frame
    */
   public LogDialog( JFrame frame ) {
-    
+
     super( frame, true );
-     
+
     setTitle( "Logs" );
     setLayout( new FlowLayout() );
     setSize( 600, 400 );
@@ -69,7 +69,7 @@ public class LogDialog extends JDialog implements ActionListener {
     scrollPane = new JScrollPane( label, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER );
     scrollPane.setPreferredSize( new Dimension( 590, 364 ) );
     scrollPane.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
-    scrollPane.getVerticalScrollBar().addMouseListener(new StopScrollingHandler(timer) );
+    scrollPane.getVerticalScrollBar().addMouseListener( new StopScrollingHandler( timer ) );
     add( scrollPane );
   }
 
