@@ -1,6 +1,8 @@
 package gfy;
 
-import javax.swing.JFrame;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 
 /**
  * De master client.
@@ -17,18 +19,18 @@ public class MasterClient {
   public static void main( String[] args ) {
     ClientConnection clientconnection = new ClientConnection( "localhost", 4444 );
     clientconnection.start();
-    try {
-      Thread.sleep( 1500 );
-
-      if ( clientconnection.isConnected() ) {
-        clientconnection.sendCommand( "AUTH>" );
-        Auth testauth = new Auth( "admin", "admin", UserType.gebruiker );
-        clientconnection.sendObject( testauth );
-        System.out.println( clientconnection.recieveCommand() );
+    try
+    {
+      Thread.sleep(1500);
+      if (clientconnection.isConnected())
+      {
+         //clientconnection.sendCommand("AUTH>");
+         //Auth testauth = new Auth("admin","admin", UserType.gebruiker);
+         //clientconnection.sendObject(testauth);
+         //System.out.println(clientconnection.recieveCommand());
       }
-
-      JFrame frame = new HomeScreen( clientconnection );
-    } catch ( Exception ex ) {
+      LoginFrame frame = new LoginFrame( clientconnection );
+      frame.setVisible( true );
     }
   }
 }

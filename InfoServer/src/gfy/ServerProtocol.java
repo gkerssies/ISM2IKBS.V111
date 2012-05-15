@@ -112,7 +112,7 @@ public class ServerProtocol extends Protocol {
         db.close();
       }
     }
-    System.out.println( match );
+   // System.out.println( match );
     //super.sendObject( super.getServer().getConfig().getNavqueryoverview());
     
     super.setBusy( false );

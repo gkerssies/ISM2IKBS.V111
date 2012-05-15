@@ -76,7 +76,7 @@ public class OverviewFrame extends JFrame {
     public void actionPerformed( ActionEvent e ) {
       if ( e.getSource() == button ) {
        
-        System.out.println( "button inside QueryPanel " + id + " was clicked." );
+     //   System.out.println( "button inside QueryPanel " + id + " was clicked." );
         String t = Integer.toString(id);
         NavQuery current = new NavQuery( id, "", "", "" );
         for(NavQuery nq : clientconnection.getNavisionQueryOverview().getNavQueries())
