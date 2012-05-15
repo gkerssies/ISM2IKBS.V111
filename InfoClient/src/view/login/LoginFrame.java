@@ -35,6 +35,7 @@ public class LoginFrame extends JFrame implements ActionListener {
     setDefaultCloseOperation( EXIT_ON_CLOSE );
     pack();
     setResizable( false );
+    setLocationRelativeTo( getRootPane() );
   }
 
   /**

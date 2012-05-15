@@ -33,6 +33,7 @@ public class OverviewFrame extends JFrame {
     private JButton button;
     private ClientConnection clientconnection;
     private NavQueryOverview nqo;
+
     /**
      * Default constructor.
      */
@@ -54,7 +55,7 @@ public class OverviewFrame extends JFrame {
       nqo = clientconnection.getNavisionQueryOverview();
       this.id = id;
 
-      this.setBorder( new CompoundBorder(ViewBorders.LINE_GRAY_1PX_EMPTY_2PX, ViewBorders.EMPTY_2PX));
+      this.setBorder( new CompoundBorder( ViewBorders.LINE_GRAY_1PX_EMPTY_2PX, ViewBorders.EMPTY_2PX ) );
 
       titleLabel = new JLabel( title );
       titleLabel.setFont( new Font( Font.SANS_SERIF, Font.BOLD, 13 ) );
@@ -75,19 +76,17 @@ public class OverviewFrame extends JFrame {
     @Override
     public void actionPerformed( ActionEvent e ) {
       if ( e.getSource() == button ) {
-       
-     //   System.out.println( "button inside QueryPanel " + id + " was clicked." );
-        String t = Integer.toString(id);
+
+        //   System.out.println( "button inside QueryPanel " + id + " was clicked." );
+        String t = Integer.toString( id );
         NavQuery current = new NavQuery( id, "", "", "" );
-        for(NavQuery nq : clientconnection.getNavisionQueryOverview().getNavQueries())
-        {
-          if (nq.getId() == id)
-          {
+        for ( NavQuery nq : clientconnection.getNavisionQueryOverview().getNavQueries() ) {
+          if ( nq.getId() == id ) {
             current = nq;
           }
         }
-        
-        new DataviewFrame(clientconnection.getNavisionQueryResultset(t),current).setVisible( true);
+
+        new DataviewFrame( clientconnection.getNavisionQueryResultset( t ), current ).setVisible( true );
       }
     }
   }
@@ -95,28 +94,28 @@ public class OverviewFrame extends JFrame {
   private JScrollPane scrollPane;
   private NavQueryOverview navQueryOverview;
   private ArrayList<NavQuery> navQueries;
-  private  ClientConnection clientconnection;
-  
+  private ClientConnection clientconnection;
+
   /**
    * Default constructor. Generates a few panels for testing.
    */
   public OverviewFrame() {
     super();
     setup();
-    this.clientconnection = Main.clientConnection; 
-    
-    int n= 0;
-    for(NavQuery nq : clientconnection.getNavisionQueryOverview().getNavQueries())
-    {
+    this.clientconnection = Main.clientConnection;
+
+    int n = 0;
+    for ( NavQuery nq : clientconnection.getNavisionQueryOverview().getNavQueries() ) {
       contentPanel.add( new QueryPanel( n, nq.getTitle(), nq.getDescription() ) );
-       n++;
+      n++;
     }
-    
+
     //contentPanel.add( new QueryPanel( 1, "Nog een titel", "Nog een beschrijving, maar dan een iets langere." ) );
-   // contentPanel.add( new QueryPanel( 2, "Weer een query",
-   //  "Een beschrijving waarbij je toch begint te denken dat het wellicht handig is om een wrappable JLabel te hebben" ) );
+    // contentPanel.add( new QueryPanel( 2, "Weer een query",
+    //  "Een beschrijving waarbij je toch begint te denken dat het wellicht handig is om een wrappable JLabel te hebben" ) );
     pack();
     setSize( getWidth() + 15, getHeight() );
+    setLocationRelativeTo( getRootPane() );
   }
 
   /**

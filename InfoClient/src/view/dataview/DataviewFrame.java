@@ -1,7 +1,7 @@
 package view.dataview;
 
-import gfy.NavQueryResultSet;
 import gfy.NavQuery;
+import gfy.NavQueryResultSet;
 import java.awt.FlowLayout;
 import javax.swing.*;
 
@@ -22,6 +22,8 @@ public class DataviewFrame extends JFrame {
     this.nvq = nvq;
     setup();
     
+    pack();
+    setLocationRelativeTo( getRootPane() );
   }
 
   private void setup() {
