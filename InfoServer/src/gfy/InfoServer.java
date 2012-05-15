@@ -1,7 +1,6 @@
 package gfy;
 
 import UserInterface.*;
-import com.sun.corba.se.impl.orb.ParserTable;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
