@@ -28,7 +28,6 @@ public class LogDialog extends JDialog implements ActionListener {
    * @param frame the server application frame
    */
   public LogDialog( JFrame frame ) {
-
     super( frame, true );
 
     setTitle( "Logs" );
