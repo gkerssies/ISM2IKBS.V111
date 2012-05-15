@@ -100,7 +100,7 @@ public class HomeScreen extends JFrame implements ActionListener {
     int allowToStopServer = JOptionPane.showConfirmDialog(
             this,
             "Weet u zeker dat u de server op afstand wilt stoppen en afsluiten?\nAlle verbonden clients worden ook afgesloten.\nDe server kan niet weer worden gestart op afstand.",
-            "U staat op het punt de server te stoppen.",
+            "U staat op het punt de server te stoppen",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.WARNING_MESSAGE );
 

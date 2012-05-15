@@ -100,7 +100,7 @@ public class ActionHandler implements ActionListener, KeyListener {
       int allowToStopServer = JOptionPane.showConfirmDialog(
               frame,
               "Weet u zeker dat u de server wilt stoppen en afsluiten?",
-              "U staat op het punt de server te stoppen.",
+              "U staat op het punt de server te stoppen",
               JOptionPane.YES_NO_OPTION,
               JOptionPane.WARNING_MESSAGE );
 
