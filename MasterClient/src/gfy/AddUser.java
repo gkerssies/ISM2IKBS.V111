@@ -25,6 +25,7 @@ public class AddUser extends JFrame implements ActionListener {
     setSize( 350, 190 );
     setResizable( false );
     setTitle( "Toevoegen gebruiker" );
+    setLocationRelativeTo( getRootPane() );
     setVisible( true );
   }
 

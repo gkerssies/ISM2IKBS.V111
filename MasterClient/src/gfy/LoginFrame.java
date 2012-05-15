@@ -29,8 +29,9 @@ public class LoginFrame extends JFrame implements ActionListener {
     add( contentPanel );
     setTitle( "Master client - Inloggen" );
     setDefaultCloseOperation( EXIT_ON_CLOSE );
-    pack();
     setResizable( false );
+    pack();
+    setLocationRelativeTo( getRootPane() );
   }
 
   /**

@@ -75,6 +75,8 @@ public class HomeScreen extends JFrame implements ActionListener {
     setResizable( false );
     setTitle( "Master Client" );
     setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+    pack();
+    setLocationRelativeTo( getRootPane() );
     setVisible( true );
   }
 

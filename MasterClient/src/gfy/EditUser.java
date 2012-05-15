@@ -25,6 +25,7 @@ public class EditUser extends JFrame implements ActionListener {
     setSize( 350, 190 );
     setResizable( false );
     setTitle( "Aanpassen gebruiker" );
+    setLocationRelativeTo( getRootPane() );
     setVisible( true );
   }
 
