@@ -79,6 +79,7 @@ public class ServerSettings extends JFrame implements ActionListener {
     setSize( 330, 220 );
     setResizable( false );
     setTitle( "Serverinstellingen" );
+    setLocationRelativeTo( getRootPane() );
     setVisible( true );
   }
 
