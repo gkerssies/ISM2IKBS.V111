@@ -80,8 +80,10 @@ public class InfoServer extends JFrame {
     NavQueryOverview navision = new NavQueryOverview();
     NavQuery navGebruikers = new NavQuery(0, "Overzicht gebruikersgroepen", "Overzicht van alle gebruikers", "Select * from [dbo].[User Role]");
     NavQuery navBedrijf = new NavQuery(1, "Overzicht bedrijven", "Overzicht van alle bedrijven", "Select * from [dbo].[Company]");
+    NavQuery navCountCustomers1 = new NavQuery( 2, "Aantal klanten", "Per serviceregiocode en plaats", "SELECT [Service Zone Code], COUNT( [timestamp] ) AS aantal FROM [Demo Database NAV (5-0)].[dbo].[CRONUS Nederland BV$Customer] GROUP BY ([Service Zone Code]) ORDER BY aantal");
     navision.addNavQuery( navGebruikers );
     navision.addNavQuery( navBedrijf );
+    navision.addNavQuery( navCountCustomers1);
     
     
     int serverPort = 0;
