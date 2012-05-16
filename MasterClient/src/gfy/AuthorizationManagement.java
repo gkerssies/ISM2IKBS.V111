@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -22,20 +23,20 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
   private ClientConnection clientconnection;
 
   public AuthorizationManagement( ClientConnection clientconnection ) {
-    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    setDefaultCloseOperation( DISPOSE_ON_CLOSE );
     this.clientconnection = clientconnection;
     buildView();
-    
+
   }
-  public void buildView()
-  {
+
+  public void buildView() {
     user = clientconnection.getUser();
-    
+
     setLayout( new BorderLayout() );
     userTable = new UserTable( user, clientconnection );
     userTable.setOpaque( true );
     userTable.setPreferredSize( new Dimension( 500, 500 ) );
-    
+
     JPanel panelButtons = new JPanel();
     panelButtons.setPreferredSize( new Dimension( 140, 500 ) );
 
@@ -71,14 +72,14 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     setVisible( true );
   }
 
-  public void openFrame( String action ) {
-    String clickedUser = userTable.getClickedUser();
+  public void openFrame( String action,String click ) {
+    String clickedUser = click;
 
     if ( clickedUser != null ) {
       switch ( action ) {
         case "editUser":
           JFrame frame = new EditUser( user, clickedUser, this );
-          frame.addWindowListener(new autoReloadonWindowCloseHandler( this ) );
+          frame.addWindowListener( new autoReloadonWindowCloseHandler( this ) );
           break;
 
         case "deleteUser":
@@ -103,22 +104,20 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonAdd ) {
       JFrame frame = new AddUser( user, this );
-      frame.addWindowListener(new autoReloadonWindowCloseHandler( this ) );
+      frame.addWindowListener( new autoReloadonWindowCloseHandler( this ) );
     } else if ( e.getSource() == buttonEdit ) {
-      openFrame( "editUser" );
-      
+      openFrame( "editUser",userTable.getClickedUser() );
+
     } else if ( e.getSource() == buttonDelete ) {
-      openFrame( "deleteUser" );
+      openFrame( "deleteUser","" );
     }
   }
-  public void reload()
-  {
+  /**
+ * Reloads the panel
+ */
+  public void reload() {
     System.out.println( "test" );
-    panel = new JPanel();
-   
-    buildView();
-    setContentPane(panel);
-    panel.repaint();
-    repaint();
+    new AuthorizationManagement( clientconnection );
+    this.dispose();
   }
 }
