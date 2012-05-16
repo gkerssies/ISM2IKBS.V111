@@ -85,7 +85,7 @@ public class HomeScreen extends JFrame implements ActionListener {
     if ( e.getSource() == itemClient ) {
       System.out.println( "itemClient" );
     } else if ( e.getSource() == itemServer ) {
-      System.out.println( "itemServer" );
+      new BackupScreen();
     } else if ( e.getSource() == itemServerStop ) {
       closeServer();
     } else if ( e.getSource() == itemInfo ) {
