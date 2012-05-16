@@ -67,4 +67,32 @@ public class CustomListBackupOptions extends JPanel {
       }
     }
   }
+
+  /**
+   * @return the cbLogs
+   */
+  public JCheckBox getCbLogs() {
+    return cbLogs;
+  }
+
+  /**
+   * @return the cbUsers
+   */
+  public JCheckBox getCbUsers() {
+    return cbUsers;
+  }
+
+  /**
+   * @return the cbSettings
+   */
+  public JCheckBox getCbSettings() {
+    return cbSettings;
+  }
+
+  /**
+   * @return the cbNavision
+   */
+  public JCheckBox getCbNavision() {
+    return cbNavision;
+  }
 }
