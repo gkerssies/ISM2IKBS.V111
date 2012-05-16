@@ -26,13 +26,15 @@ public class CustomListBackupRestoreStart extends JPanel {
 
     startButton = new JButton( "Start backup" );
     cancelButton = new JButton( "Stop backup" );
-
+    
+    startButton.addActionListener( event );
+    
     event.addObject( startButton, "START" );
     event.addObject( cancelButton, "STOP" );
 
     //   buttonPanel.add(cancelButton);
     buttonPanel.add( startButton );
-
+    
     this.add( buttonPanel, BorderLayout.EAST );
   }
 
@@ -41,6 +43,13 @@ public class CustomListBackupRestoreStart extends JPanel {
    */
   public void setType( String type ) {
     this.type = type;
-    startButton.setText("Start " + type);
+    getStartButton().setText("Start " + type);
+  }
+
+  /**
+   * @return the startButton
+   */
+  public JButton getStartButton() {
+    return startButton;
   }
 }
