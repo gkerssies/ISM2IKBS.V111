@@ -1,10 +1,12 @@
 package gfy;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Cursor;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -54,20 +56,26 @@ public class HomeScreen extends JFrame implements ActionListener {
 
     setJMenuBar( menuBar );
 
-    panel = new JPanel();
+    panel = new JPanel( new BorderLayout() );
+    panel.setBorder( new EmptyBorder( 5, 5, 5, 5 ) );
 
     buttonAuth = new JButton();
-    buttonAuth.setText( "Authorisatiebeheer" );
-    buttonAuth.setPreferredSize( new Dimension( 160, 30 ) );
+    buttonAuth.setText( "Autorisatiebeheer" );
+    buttonAuth.setMargin( new Insets( 10, 45, 10, 45 ) );
+    buttonAuth.setFocusPainted( false );
+    buttonAuth.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
     buttonAuth.addActionListener( this );
 
     buttonSQL = new JButton();
-    buttonSQL.setText( "SQL Beheer" );
-    buttonSQL.setPreferredSize( new Dimension( 160, 30 ) );
+    buttonSQL.setText( "SQL beheer" );
+    buttonSQL.setMargin( new Insets( 10, 45, 10, 45 ) );
+    buttonSQL.setFocusPainted( false );
+    buttonSQL.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
     buttonSQL.addActionListener( this );
 
-    panel.add( buttonAuth );
-    panel.add( buttonSQL );
+    panel.add( buttonAuth, BorderLayout.NORTH );
+    panel.add( Box.createVerticalStrut( 5 ), BorderLayout.CENTER );
+    panel.add( buttonSQL, BorderLayout.SOUTH );
 
     setLayout( new BorderLayout() );
     setContentPane( panel );
