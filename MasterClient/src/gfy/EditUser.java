@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 
 /**
  *
@@ -28,6 +25,7 @@ public class EditUser extends JFrame implements ActionListener {
     setSize( 350, 190 );
     setResizable( false );
     setTitle( "Aanpassen gebruiker" );
+    setLocationRelativeTo( getRootPane() );
     setVisible( true );
   }
 
@@ -39,6 +37,7 @@ public class EditUser extends JFrame implements ActionListener {
     }
   }
 
+  @Override
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == panel.getButtonCancel() ) {
       dispose();

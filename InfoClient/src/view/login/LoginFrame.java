@@ -35,6 +35,7 @@ public class LoginFrame extends JFrame implements ActionListener {
     setDefaultCloseOperation( EXIT_ON_CLOSE );
     pack();
     setResizable( false );
+    setLocationRelativeTo( getRootPane() );
   }
 
   /**
@@ -137,30 +138,23 @@ public class LoginFrame extends JFrame implements ActionListener {
     clientConnection = new ClientConnection( "localhost", 4444 );
     clientConnection.start();
     try {
-      Thread.sleep(750 );
+      Thread.sleep( 750 );
       if ( clientConnection.isConnected() ) {
         clientConnection.sendCommand( "AUTH>" );
         Auth authentication = new Auth( username, password, UserType.gebruiker );
         clientConnection.sendObject( authentication );
         String Auth = clientConnection.recieveCommand();
-        if (Auth.equals("OK") )
-        {
+        if ( Auth.equals( "OK" ) ) {
           Main.setClientConnection( clientConnection );
           openOverviewWindow();
+        } else {
+          JOptionPane.showMessageDialog( this, "Gebruikersnaam/wachtwoord niet correct ingevuld.", "Authenticatie fout!", JOptionPane.ERROR_MESSAGE );
         }
-        else
-        {
-          JOptionPane.showMessageDialog( this,"Gebruikersnaam/ wachtwoord niet correct ingevuld", "Authenticatie fout!", JOptionPane.ERROR_MESSAGE );
-        }
-                
-                
-        
       }
     } catch ( Exception ex ) {
       System.out.println( "Er is iets fout gegaan tijdens het maken van de verbinding." );
     }
-    
-    
+
     return 0;
   }
 

@@ -1,11 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -23,10 +21,10 @@ public class ServerSettings extends JFrame implements ActionListener {
   private Database databasesettings;
   private ClientConnection connection;
 
-  public ServerSettings(ClientConnection connection) {
+  public ServerSettings( ClientConnection connection ) {
     this.databasesettings = connection.getDatabase();
     this.connection = connection;
-    
+
     panel = new JPanel();
     panelLabels = new JPanel();
     panelLabels.setPreferredSize( new Dimension( 110, 140 ) );
@@ -44,10 +42,10 @@ public class ServerSettings extends JFrame implements ActionListener {
     label4.setPreferredSize( new Dimension( 100, 20 ) );
 
     connectionString = new JTextArea( 3, 15 );
-    connectionString.setText(databasesettings.getHost() + ":" + databasesettings.getPort());
-    database = new JTextField(databasesettings.getName(), 15 );
-    username = new JTextField(databasesettings.getUsername(), 15 );
-    password = new JTextField(databasesettings.getPassword(), 15 );
+    connectionString.setText( databasesettings.getHost() + ":" + databasesettings.getPort() );
+    database = new JTextField( databasesettings.getName(), 15 );
+    username = new JTextField( databasesettings.getUsername(), 15 );
+    password = new JTextField( databasesettings.getPassword(), 15 );
 
     buttonCancel = new JButton();
     buttonCancel.setText( "Annuleren" );
@@ -81,29 +79,25 @@ public class ServerSettings extends JFrame implements ActionListener {
     setSize( 330, 220 );
     setResizable( false );
     setTitle( "Serverinstellingen" );
+    setLocationRelativeTo( getRootPane() );
     setVisible( true );
   }
-  
+
+  @Override
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonCancel ) {
       dispose();
-    } else if ( e.getSource() == buttonSave ) 
-    {
-      String[] t = new String[5];
-      t = connectionString.getText().split(":");
-      
-      try
-      {
-        databasesettings = new Database(database.getText(),t[0], Integer.parseInt(t[1]), username.getText(), password.getText());
-        connection.setDatabase(databasesettings);
+    } else if ( e.getSource() == buttonSave ) {
+      String[] t = new String[ 5 ];
+      t = connectionString.getText().split( ":" );
+
+      try {
+        databasesettings = new Database( database.getText(), t[0], Integer.parseInt( t[1] ), username.getText(), password.getText() );
+        connection.setDatabase( databasesettings );
         dispose();
+      } catch ( Exception ex ) {
+        JOptionPane.showMessageDialog( this, "De database connectie string is niet juist ingevuld.\nCorrect input formaat \"Server:port\"" );
       }
-      catch(Exception ex)
-      {
-        JOptionPane.showMessageDialog(this, "De database connectie string is niet juist ingevuld.\nCorrect input formaat \"Server:port\"");
-      }
-      
-      
     }
   }
 }

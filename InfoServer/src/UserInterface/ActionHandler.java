@@ -1,8 +1,6 @@
 package UserInterface;
 
 import gfy.IOUtillty;
-import gfy.Log;
-import gfy.LogType;
 import gfy.Server;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -102,7 +100,7 @@ public class ActionHandler implements ActionListener, KeyListener {
       int allowToStopServer = JOptionPane.showConfirmDialog(
               frame,
               "Weet u zeker dat u de server wilt stoppen en afsluiten?",
-              "U staat op het punt de server te stoppen.",
+              "U staat op het punt de server te stoppen",
               JOptionPane.YES_NO_OPTION,
               JOptionPane.WARNING_MESSAGE );
 

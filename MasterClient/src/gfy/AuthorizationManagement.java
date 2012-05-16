@@ -1,13 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.text.TableView;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -66,6 +66,8 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     setResizable( false );
     setTitle( "Authorisatiebeheer" );
     addWindowListener( new autoCloseOnSaveAuthorizationHandler( clientconnection, user, this ) );
+    pack();
+    setLocationRelativeTo( getRootPane() );
     setVisible( true );
   }
 
@@ -97,6 +99,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     }
   }
 
+  @Override
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonAdd ) {
       JFrame frame = new AddUser( user, this );

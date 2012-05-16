@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
-import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -60,8 +56,9 @@ public class User implements Serializable {
    * @return returns true if the user is succesfully modified
    *
    */
-  public boolean setUser( String username, String password, UserType usertype ) {
+  public boolean setUser( String username, String password, UserType userType ) {
     int position = 0;
+
     if ( this.getUsername().contains( username ) ) {
       for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
@@ -70,8 +67,10 @@ public class User implements Serializable {
           position++;
         }
       }
+
       this.getPassword().set( position, password );
-      this.getUserType().set( position, usertype );
+      this.getUserType().set( position, userType );
+
       return true;
     } else {
       return false;
@@ -88,6 +87,7 @@ public class User implements Serializable {
    */
   public boolean removeUser( String username ) {
     int position = 0;
+
     if ( this.getUsername().contains( username ) ) {
       for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
@@ -96,9 +96,11 @@ public class User implements Serializable {
           position++;
         }
       }
+
       this.getUsername().remove( position );
       this.getPassword().remove( position );
       this.getUserType().remove( position );
+
       return true;
     } else {
       return false;
@@ -115,6 +117,7 @@ public class User implements Serializable {
    */
   public boolean verifyCredential( String username, String password ) {
     int position = 0;
+
     if ( this.getUsername().contains( username ) ) {
       for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
@@ -123,13 +126,14 @@ public class User implements Serializable {
           position++;
         }
       }
+
       String dbPassword = this.getPassword().get( position );
+
       if ( dbPassword.equals( password ) ) {
         return true;
       } else {
         return false;
       }
-
     } else {
       return false;
     }
@@ -144,6 +148,7 @@ public class User implements Serializable {
    */
   public UserType getUserType( String username ) {
     int position = 0;
+
     if ( this.getUsername().contains( username ) ) {
       for ( String u : this.getUsername() ) {
         if ( u.equals( username ) ) {
@@ -152,10 +157,10 @@ public class User implements Serializable {
           position++;
         }
       }
-
     } else {
       return null;
     }
+
     return this.getUserType().get( position );
   }
 
@@ -168,10 +173,12 @@ public class User implements Serializable {
   public String toString() {
     String t = "";
     int y = 0;
+
     for ( String x : getUsername() ) {
       t += x + " " + getPassword().get( y ) + " " + getUserType().get( y ) + "\r\n";
       y++;
     }
+
     return t;
   }
 

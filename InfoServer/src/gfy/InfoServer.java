@@ -1,7 +1,6 @@
 package gfy;
 
 import UserInterface.*;
-import com.sun.corba.se.impl.orb.ParserTable;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -69,7 +68,6 @@ public class InfoServer extends JFrame {
     server.pack();
     server.setLocationRelativeTo( server.getRootPane() ); // Center the frame
     server.setVisible( true );
-
   }
 
   /**

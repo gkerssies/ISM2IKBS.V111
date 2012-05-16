@@ -1,14 +1,10 @@
 package gfy;
 
-import gfy.Auth;
-import gfy.ClientConnection;
-import gfy.UserType;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
 
 /**
  * The loginframe.
@@ -27,14 +23,15 @@ public class LoginFrame extends JFrame implements ActionListener {
   /**
    * Default constructor. Assembles the frame.
    */
-  public LoginFrame(ClientConnection clientconnection) {
+  public LoginFrame( ClientConnection clientconnection ) {
     this.clientconnection = clientconnection;
     contentPanel( loginForm( usernameForm(), passwordForm() ), buttonPanel() );
     add( contentPanel );
     setTitle( "Master client - Inloggen" );
     setDefaultCloseOperation( EXIT_ON_CLOSE );
-    pack();
     setResizable( false );
+    pack();
+    setLocationRelativeTo( getRootPane() );
   }
 
   /**
@@ -134,34 +131,25 @@ public class LoginFrame extends JFrame implements ActionListener {
    *         without errors.
    */
   private int initializeConnection( String username, String password ) {
-    
+
     try {
-      Thread.sleep(750 );
+      Thread.sleep( 750 );
       if ( clientconnection.isConnected() ) {
         clientconnection.sendCommand( "AUTH>" );
         Auth authentication = new Auth( username, password, UserType.gebruiker );
         clientconnection.sendObject( authentication );
         String Auth = clientconnection.recieveCommand();
-        if (Auth.equals("OK") )
-        {
-          JFrame frame = new HomeScreen(clientconnection);
+        if ( Auth.equals( "OK" ) ) {
+          JFrame frame = new HomeScreen( clientconnection );
           dispose();
+        } else {
+          JOptionPane.showMessageDialog( this, "Gebruikersnaam/wachtwoord niet correct ingevuld.", "Authenticatie fout!", JOptionPane.ERROR_MESSAGE );
         }
-        else
-        {
-          JOptionPane.showMessageDialog( this,"Gebruikersnaam/ wachtwoord niet correct ingevuld", "Authenticatie fout!", JOptionPane.ERROR_MESSAGE );
-        }
-                
-                
-        
       }
     } catch ( Exception ex ) {
       System.out.println( "Er is iets fout gegaan tijdens het maken van de verbinding." );
     }
-    
-    
+
     return 0;
   }
 }
-
-  

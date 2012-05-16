@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 import java.awt.Dimension;
@@ -53,7 +49,7 @@ public class UserSettingsPanel extends JPanel {
     userType = new JComboBox( types );
     userType.setPreferredSize( new Dimension( 169, 20 ) );
 
-    if ( action == "editUser" ) {
+    if ( action.equals( "editUser" ) ) {
       this.username.setText( username );
 
       switch ( user.getUserType( username ) ) {
