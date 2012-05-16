@@ -48,9 +48,23 @@ public class CustomEventHandlerBackup implements ActionListener {
        {
          backupScreen.setRestoreGUI();
        }
-       if(myObjectsMarker.get( c ).equals("BACKUP") )
+       else if(myObjectsMarker.get( c ).equals("BACKUP") )
        {
          backupScreen.setBackupGUI();
+       }
+       else if(myObjectsMarker.get( c ).equals("START") )
+       {
+         backupScreen.getBackupOptions().disableAllCheckboxes();
+         backupScreen.getStartpanel().getStartButton().setText("Wachten ...");
+         backupScreen.getStartpanel().getStartButton().setEnabled(false);
+         backupScreen.setJOBGUI();
+          backupScreen.getUpdateProgressTimer().start();
+       }
+       else if(myObjectsMarker.get( c ).equals("TIMER") )
+       {
+         backupScreen.getJobProgressPanel().getProgress().setValue(
+         backupScreen.getJobProgressPanel().getProgress().getValue() + 1
+         );
        }
       }
       else
