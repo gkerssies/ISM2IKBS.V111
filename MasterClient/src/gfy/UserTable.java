@@ -92,6 +92,5 @@ public class UserTable extends JPanel {
    */
   public void setUser( User user ) {
     this.user = user;
-    System.out.println(user.toString());
   }
 }
