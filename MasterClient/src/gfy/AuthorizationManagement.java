@@ -22,16 +22,20 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
   private ClientConnection clientconnection;
 
   public AuthorizationManagement( ClientConnection clientconnection ) {
-
+    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     this.clientconnection = clientconnection;
+    buildView();
+    
+  }
+  public void buildView()
+  {
     user = clientconnection.getUser();
-
+    
     setLayout( new BorderLayout() );
-
     userTable = new UserTable( user, clientconnection );
     userTable.setOpaque( true );
     userTable.setPreferredSize( new Dimension( 500, 500 ) );
-
+    
     JPanel panelButtons = new JPanel();
     panelButtons.setPreferredSize( new Dimension( 140, 500 ) );
 
@@ -72,10 +76,12 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
       switch ( action ) {
         case "editUser":
           JFrame frame = new EditUser( user, clickedUser, this );
+          frame.addWindowListener(new autoReloadonWindowCloseHandler( this ) );
           break;
 
         case "deleteUser":
           DeleteUser deleteUser = new DeleteUser( user, clickedUser, this );
+          reload();
           break;
       }
     } else {
@@ -94,10 +100,22 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonAdd ) {
       JFrame frame = new AddUser( user, this );
+      frame.addWindowListener(new autoReloadonWindowCloseHandler( this ) );
     } else if ( e.getSource() == buttonEdit ) {
       openFrame( "editUser" );
+      
     } else if ( e.getSource() == buttonDelete ) {
       openFrame( "deleteUser" );
     }
+  }
+  public void reload()
+  {
+    System.out.println( "test" );
+    panel = new JPanel();
+   
+    buildView();
+    setContentPane(panel);
+    panel.repaint();
+    repaint();
   }
 }
