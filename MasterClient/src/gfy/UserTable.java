@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 import javax.swing.text.TabExpander;
 
@@ -20,34 +21,42 @@ public class UserTable extends JPanel {
   private Object[][] users;
   private String clickedUser;
   private boolean DEBUG = true;
+  private CustomTable table;
 
   public UserTable( User user, ClientConnection clientConnection ) {
     super( new GridLayout( 1, 0 ) );
-    this.user = user;
+     this.user = user;
+    
+    buildTable();
+    JScrollPane scrollPane = new JScrollPane( table );
+    add( scrollPane );
+  }
+
+  protected void buildTable()
+  {
+    
+   
 
     String[] columnNames = { "Gebruiker", "Type" };
 
     users = getUsers();
 
-    final JTable table = new JTable( users, columnNames );
+    table = new CustomTable( users, columnNames );
+    
+    
+    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     table.setPreferredScrollableViewportSize( new Dimension( 500, 500 ) );
     table.setFillsViewportHeight( true );
 
-    if ( DEBUG ) {
+  
       table.addMouseListener( new MouseAdapter() {
 
-        @Override
         public void mouseClicked( MouseEvent e ) {
           setClickedUser( table );
         }
       } );
-    }
-
-    JScrollPane scrollPane = new JScrollPane( table );
-
-    add( scrollPane );
+    
   }
-
   private Object[][] getUsers() {
     Object[][] data = new Object[ user.getUsername().size() ][ 1 ];
 
@@ -59,15 +68,30 @@ public class UserTable extends JPanel {
   }
 
   private void setClickedUser( JTable table ) {
+    try
+    {
     int numRows = table.getRowCount();
     TableModel model = table.getModel();
 
     for ( int i = 0; i < numRows; i++ ) {
-      clickedUser = ( String ) model.getValueAt( i, 0 );
+      clickedUser = ( String ) model.getValueAt(table.getSelectedRow(), 0 );
+    }
+    }
+    catch(Exception ex)
+    {
+      clickedUser = null;
     }
   }
 
   public String getClickedUser() {
     return clickedUser;
+  }
+
+  /**
+   * @param user the user to set
+   */
+  public void setUser( User user ) {
+    this.user = user;
+    System.out.println(user.toString());
   }
 }
