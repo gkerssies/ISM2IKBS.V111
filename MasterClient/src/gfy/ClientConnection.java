@@ -189,4 +189,14 @@ public class ClientConnection extends Thread {
   public void setBlocking( boolean blocking ) {
     this.blocking = blocking;
   }
+  
+  public NavQueryOverview getNavisionQueryOverview() {
+    sendCommand( "GET-NAV-OVERVIEW" );
+    if ( recieveCommand().equals( "OK" ) ) {
+      return ( NavQueryOverview ) recieveObject();
+    } else {
+      return new NavQueryOverview();
+    }
+  }
+  
 }

@@ -2,6 +2,7 @@ package gfy;
 
 import java.awt.BorderLayout;
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 
 /**
  *
@@ -18,24 +19,30 @@ public class BackupScreen extends JFrame {
   private CustomListBackupRestoreStart startpanel;
   private CustomListJobProgress jobProgressPanel;
   private Timer updateProgressTimer;
+  private JFileChooser fchooser;
+  private ClientConnection clientConnection;
 
-  public BackupScreen() {
+  public BackupScreen( ClientConnection clientConnection ) {
+    this.clientConnection = clientConnection;
+    fchooser = new JFileChooser();
+    fchooser.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
+
     customevent = new CustomEventHandlerBackup( this );
-    updateProgressTimer = new Timer(100,customevent);
-    
+    updateProgressTimer = new Timer( 100, customevent );
+
     setTitle( "Backup / herstel van server" );
     setSize( 425, 275 );
     backupOptions = new CustomListBackupOptions();
     backupType = new CustomListBackupType( getCustomevent() );
     restorePanel = new CustomListRestore();
     startpanel = new CustomListBackupRestoreStart( getCustomevent() );
-    jobProgressPanel = new CustomListJobProgress(customevent,1);
-    
-    
+    jobProgressPanel = new CustomListJobProgress( customevent, 1 );
+
+
     setLayout( new BorderLayout() );
-    
-    customevent.addObject(updateProgressTimer,"TIMER");
-    
+
+    customevent.addObject( updateProgressTimer, "TIMER" );
+
     add( backupOptions, BorderLayout.CENTER );
     add( backupType, BorderLayout.NORTH );
     add( startpanel, BorderLayout.SOUTH );
@@ -44,11 +51,21 @@ public class BackupScreen extends JFrame {
     setVisible( true );
   }
 
+  public String chooseDirectory() {
+    fchooser.showSaveDialog( this );
+    try {
+      return fchooser.getSelectedFile().getAbsolutePath();
+    } catch ( Exception ex ) {
+      System.out.println( "IO FOUT Tijdens Selectie" );
+      return fchooser.getCurrentDirectory().getAbsolutePath();
+    }
+  }
+
   public void setRestoreGUI() {
     remove( getBackupOptions() );
     add( getRestorePanel(), BorderLayout.CENTER );
-    startpanel.setType("Herstel");
-    jobProgressPanel.setType(1);
+    startpanel.setType( "Herstel" );
+    jobProgressPanel.setType( 1 );
     this.pack();
     repaint();
   }
@@ -56,24 +73,23 @@ public class BackupScreen extends JFrame {
   public void setBackupGUI() {
     remove( getRestorePanel() );
     add( getBackupOptions(), BorderLayout.CENTER );
-    startpanel.setType("Backup");
+    startpanel.setType( "Backup" );
     this.pack();
     repaint();
   }
-  
+
   public void setJOBGUI() {
     System.out.println( "test" );
     remove( restorePanel );
-    remove( backupType);
+    remove( backupType );
 
-   
-    
+
+
     add( jobProgressPanel, BorderLayout.NORTH );
-  
+
     this.pack();
     repaint();
   }
-  
 
   /**
    * @return the backupOptions
@@ -130,6 +146,11 @@ public class BackupScreen extends JFrame {
   public CustomListJobProgress getJobProgressPanel() {
     return jobProgressPanel;
   }
-}
 
- 
+  /**
+   * @return the clientConnection
+   */
+  public ClientConnection getClientConnection() {
+    return clientConnection;
+  }
+}
