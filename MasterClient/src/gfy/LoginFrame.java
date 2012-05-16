@@ -74,7 +74,7 @@ public class LoginFrame extends JFrame implements ActionListener {
   private JPanel usernameForm() {
     usernameForm = new JPanel( new FlowLayout( FlowLayout.RIGHT ) );
     usernameLabel = new JLabel( "Gebruikersnaam" );
-    usernameField = new JTextField( 20 );
+    usernameField = new JTextField("admin", 20 );
     usernameForm.add( usernameLabel );
     usernameForm.add( usernameField );
     return usernameForm;
