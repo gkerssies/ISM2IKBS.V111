@@ -33,6 +33,7 @@ public class BackupScreen extends JFrame {
     add( backupType, BorderLayout.NORTH );
     add( startpanel, BorderLayout.SOUTH );
     pack();
+    setLocationRelativeTo( getRootPane() );
     setVisible( true );
   }
 
