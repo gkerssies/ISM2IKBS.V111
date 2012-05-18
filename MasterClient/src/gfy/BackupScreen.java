@@ -21,9 +21,11 @@ public class BackupScreen extends JFrame {
   private Timer updateProgressTimer;
   private JFileChooser fchooser;
   private ClientConnection clientConnection;
+  private int backuptype;
 
   public BackupScreen( ClientConnection clientConnection ) {
     this.clientConnection = clientConnection;
+    backuptype = 0;
     fchooser = new JFileChooser();
     fchooser.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
 
@@ -152,5 +154,19 @@ public class BackupScreen extends JFrame {
    */
   public ClientConnection getClientConnection() {
     return clientConnection;
+  }
+
+  /**
+   * @return the backuptype
+   */
+  public int getBackuptype() {
+    return backuptype;
+  }
+
+  /**
+   * @param backuptype the backuptype to set
+   */
+  public void setBackuptype( int backuptype ) {
+    this.backuptype = backuptype;
   }
 }

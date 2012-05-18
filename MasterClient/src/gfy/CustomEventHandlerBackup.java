@@ -42,9 +42,13 @@ public class CustomEventHandlerBackup implements ActionListener {
       if ( t.equals( e.getSource() ) ) {
         if ( myObjectsMarker.get( c ).equals( "RESTORE" ) ) {
           backupScreen.setRestoreGUI();
+          backupScreen.setBackuptype(1);
         } else if ( myObjectsMarker.get( c ).equals( "BACKUP" ) ) {
           backupScreen.setBackupGUI();
+          backupScreen.setBackuptype(0);
         } else if ( myObjectsMarker.get( c ).equals( "START" ) ) {
+          if(backupScreen.getBackuptype() == 0)
+          {
           String dir = backupScreen.chooseDirectory();
           bw = new BackupWorker( dir,
                                               backupScreen.getClientConnection(),
@@ -53,6 +57,11 @@ public class CustomEventHandlerBackup implements ActionListener {
                                               backupScreen.getBackupOptions().getCbSettings().isSelected(),
                                               backupScreen.getBackupOptions().getCbNavision().isSelected() );
           bw.start();
+          }
+          else if(backupScreen.getBackuptype() == 1)
+          {
+            
+          }
 
           backupScreen.getBackupOptions().disableAllCheckboxes();
           backupScreen.getBackupOptions().clearAllCheckboxes();
