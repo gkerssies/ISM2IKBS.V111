@@ -1,6 +1,6 @@
 package UserInterface;
 
-import gfy.IOUtillty;
+import gfy.IOUtililty;
 import gfy.Server;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -78,7 +78,7 @@ public class ActionHandler implements ActionListener, KeyListener {
         server.getConfig().setServerport( port );
 
         // Save portnumber to the port-configuration file
-        IOUtillty.writePortConfig( port );
+        IOUtililty.writePortConfig( port );
       }
 
       // Start the application core (the server)

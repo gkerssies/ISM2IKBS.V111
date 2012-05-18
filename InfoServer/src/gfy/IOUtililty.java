@@ -8,7 +8,7 @@ import java.io.*;
  * @author Janssen-laptop
  * @version 0.1 - 9 mei 2012
  */
-public class IOUtillty {
+public class IOUtililty {
 
   /**
    * Write the database settings to ./config/db.cfg.
@@ -170,6 +170,8 @@ public class IOUtillty {
         }
         t = br.readLine();
       }
+      br.close();
+      fr.close();
       return new Database( name, host, port, username, password );
 
     } catch ( Exception ex ) {
@@ -201,6 +203,8 @@ public class IOUtillty {
       Log.addItem( "Fout tijdens opslaan [Gebruikers database]", ex.getMessage(), "", LogType.Error );
     }
   }
+  
+   
 
   public static User loadUserDatabase() {
     try {

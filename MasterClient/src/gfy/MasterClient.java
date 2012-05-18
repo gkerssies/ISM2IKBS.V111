@@ -22,10 +22,9 @@ public class MasterClient {
     try {
       Thread.sleep( 1500 );
       if ( clientconnection.isConnected() ) {
-        //clientconnection.sendCommand("AUTH>");
-        //Auth testauth = new Auth("admin","admin", UserType.gebruiker);
-        //clientconnection.sendObject(testauth);
-        //System.out.println(clientconnection.recieveCommand());
+      } else {
+        JOptionPane.showMessageDialog( new EmptyFrame(), "Er kan geen verbindingen worden gemaakt met de server.", "Verbindings fout", JOptionPane.ERROR_MESSAGE );
+        System.exit(0);
       }
 
       LoginFrame frame = new LoginFrame( clientconnection );

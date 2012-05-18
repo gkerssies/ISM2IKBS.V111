@@ -58,6 +58,11 @@ public class ServerProtocol extends Protocol {
     } else if ( t.equals( "SET-USERS" ) ) {
       super.setBusy( true );
       setUser();
+      
+    }else if ( t.equals( "GET-LOGS" ) ) {
+      super.setBusy( true );
+      getLog();
+      
     } else {
       System.out.println( t );
     }
@@ -131,7 +136,7 @@ public class ServerProtocol extends Protocol {
     super.getServer().getConfig().setDatabase( database );
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [Nav Instellingen bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
-    IOUtillty.writeDatabaseConfig( database );
+    IOUtililty.writeDatabaseConfig( database );
   }
 
   public void setUser() {
@@ -139,6 +144,17 @@ public class ServerProtocol extends Protocol {
     super.getServer().getConfig().setUserdatabase( userdb );
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [Gebruikers bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
-    IOUtillty.writeUserDatabase( userdb );
+    IOUtililty.writeUserDatabase( userdb );
   }
+  
+  public void getLog() {
+    LogView lview = new LogView();
+    lview.loadLogfile();
+    super.sendObject(lview);
+    super.setBusy( false );
+    Log.addItem( "Transactie succesvol [Log inlezen] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
+    
+  }
+  
+  
 }

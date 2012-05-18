@@ -1,8 +1,8 @@
-package gfy;
+package BackupRestore;
 
+import gfy.ClientConnection;
 import java.awt.BorderLayout;
 import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
 
 /**
  *
@@ -21,9 +21,11 @@ public class BackupScreen extends JFrame {
   private Timer updateProgressTimer;
   private JFileChooser fchooser;
   private ClientConnection clientConnection;
+  private int backuptype;
 
   public BackupScreen( ClientConnection clientConnection ) {
     this.clientConnection = clientConnection;
+    backuptype = 0;
     fchooser = new JFileChooser();
     fchooser.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
 
@@ -33,9 +35,9 @@ public class BackupScreen extends JFrame {
     setTitle( "Backup / herstel van server" );
     setSize( 425, 275 );
     backupOptions = new CustomListBackupOptions();
-    backupType = new CustomListBackupType( getCustomevent() );
-    restorePanel = new CustomListRestore();
-    startpanel = new CustomListBackupRestoreStart( getCustomevent() );
+    backupType = new CustomListBackupType( customevent );
+    restorePanel = new CustomListRestore( customevent );
+    startpanel = new CustomListBackupRestoreStart( customevent );
     jobProgressPanel = new CustomListJobProgress( customevent, 1 );
 
 
@@ -50,9 +52,19 @@ public class BackupScreen extends JFrame {
     setLocationRelativeTo( getRootPane() );
     setVisible( true );
   }
-
+  
+   /**
+    * File directory choosers
+   * @return the directory
+   */
   public String chooseDirectory() {
-    fchooser.showSaveDialog( this );
+
+    if ( backuptype == 0 ) {
+      fchooser.showSaveDialog( this );
+    } else {
+      fchooser.showOpenDialog( this );
+    }
+
     try {
       return fchooser.getSelectedFile().getAbsolutePath();
     } catch ( Exception ex ) {
@@ -70,10 +82,20 @@ public class BackupScreen extends JFrame {
     repaint();
   }
 
+  public void setRestoreGUI2() {
+    remove( getRestorePanel() );
+    add( getBackupOptions(), BorderLayout.CENTER );
+    startpanel.setType( "Herstel" );
+    this.pack();
+    repaint();
+  }
+
   public void setBackupGUI() {
     remove( getRestorePanel() );
     add( getBackupOptions(), BorderLayout.CENTER );
     startpanel.setType( "Backup" );
+    backupOptions.enableAllCheckboxes();
+    backupOptions.checkAllCheckboxes();
     this.pack();
     repaint();
   }
@@ -152,5 +174,19 @@ public class BackupScreen extends JFrame {
    */
   public ClientConnection getClientConnection() {
     return clientConnection;
+  }
+
+  /**
+   * @return the backuptype
+   */
+  public int getBackuptype() {
+    return backuptype;
+  }
+
+  /**
+   * @param backuptype the backuptype to set
+   */
+  public void setBackuptype( int backuptype ) {
+    this.backuptype = backuptype;
   }
 }
