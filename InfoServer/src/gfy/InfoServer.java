@@ -88,23 +88,23 @@ public class InfoServer extends JFrame {
     User users;
     Database database;
 
-    if ( IOUtillty.portConfigExsist() ) {
-      serverPort = IOUtillty.loadPortConfig();
+    if ( IOUtililty.portConfigExsist() ) {
+      serverPort = IOUtililty.loadPortConfig();
       Log.addItem( "Poort configuratiebestand ingeladen", "", "", LogType.Event );
     } else {
       Log.addItem( "Geen poort configuratie bestand gevonden", "", "", LogType.Event );
     }
 
-    if ( IOUtillty.databaseConfigExsist() ) {
-      database = IOUtillty.loadDatabaseConfig();
+    if ( IOUtililty.databaseConfigExsist() ) {
+      database = IOUtililty.loadDatabaseConfig();
       Log.addItem( "Database configuratie ingeladen", "", "", LogType.Event );
     } else {
       Log.addItem( "Geen database configuratie gevonden", "", "", LogType.Event );
       database = new Database( "Navision", "SQLSERVER", 11000, "Gebruikersnaam", "Password" );
     }
 
-    if ( IOUtillty.userDatabaseExsist() ) {
-      users = IOUtillty.loadUserDatabase();
+    if ( IOUtililty.userDatabaseExsist() ) {
+      users = IOUtililty.loadUserDatabase();
       Log.addItem( "Gebruikers database ingeladen", "", "", LogType.Event );
     } else {
       Log.addItem( "Geen gebruikers database gevonden", "", "", LogType.Event );

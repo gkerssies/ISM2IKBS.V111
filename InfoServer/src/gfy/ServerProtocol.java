@@ -131,7 +131,7 @@ public class ServerProtocol extends Protocol {
     super.getServer().getConfig().setDatabase( database );
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [Nav Instellingen bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
-    IOUtillty.writeDatabaseConfig( database );
+    IOUtililty.writeDatabaseConfig( database );
   }
 
   public void setUser() {
@@ -139,6 +139,6 @@ public class ServerProtocol extends Protocol {
     super.getServer().getConfig().setUserdatabase( userdb );
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [Gebruikers bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
-    IOUtillty.writeUserDatabase( userdb );
+    IOUtililty.writeUserDatabase( userdb );
   }
 }
