@@ -1,4 +1,4 @@
-package gfy;
+package BackupRestore;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -18,7 +18,9 @@ public class CustomListRestore extends JPanel {
   private JButton backupLoad;
   private JPanel loadPanel;
 
-  public CustomListRestore() {
+  public CustomListRestore(CustomEventHandlerBackup event) {
+    
+    
     
     loadPanel =  new JPanel(new FlowLayout());
     
@@ -27,7 +29,8 @@ public class CustomListRestore extends JPanel {
     setLayout(new BorderLayout());
     backupLoad = new JButton("Backup zoeken ...");
     loadPanel.add(backupLoad);
-    
+    event.addObject(backupLoad,"LOADBACKUP");
+    backupLoad.addActionListener(event);
     this.add(loadPanel,BorderLayout.WEST);
 
   }

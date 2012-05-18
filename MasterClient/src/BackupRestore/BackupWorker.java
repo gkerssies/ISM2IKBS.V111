@@ -1,11 +1,15 @@
-package gfy;
+package BackupRestore;
+
+import gfy.ClientConnection;
+import gfy.IOUtililty;
+import sun.rmi.log.ReliableLog;
 
 /**
  * This class handles the backup in the background
  *
  * @author Janssen-laptop
  */
-public class RestoreWorker extends Thread {
+public class BackupWorker extends Thread {
 
   private boolean jLOG;
   private boolean jUsers;
@@ -19,7 +23,7 @@ public class RestoreWorker extends Thread {
   private ClientConnection clientConnection;
   private String directory;
 
-  public RestoreWorker( String directory, ClientConnection clientConnection, boolean jLOG, boolean jUsers, boolean jSettings, boolean jNavision ) {
+  public BackupWorker( String directory, ClientConnection clientConnection, boolean jLOG, boolean jUsers, boolean jSettings, boolean jNavision ) {
     this.clientConnection = clientConnection;
 
     this.jLOGDone = false;
@@ -47,45 +51,42 @@ public class RestoreWorker extends Thread {
 
     if ( jLOG == true ) {
       jLOG = false;
+      System.out.println(" here is johnny" + clientConnection.getLogView().getOldLog());
+      IOUtililty.writeLogFile(clientConnection.getLogView(), directory);
+      
       jLOGDone = true;
     }
 
-    try {
-      Thread.sleep( 1000 );
-    } catch ( Exception ex ) {
-    }
-
     if ( jSettings ) {
+      try {
+        Thread.sleep( 1000 );
+      } catch ( Exception ex ) {
+      }
       jSettings = false;
       IOUtililty.writeDatabaseConfig( clientConnection.getDatabase(), directory );
       jSettingsDone = true;
     }
 
-    try {
-      Thread.sleep( 2000 );
-    } catch ( Exception ex ) {
-    }
-
     if ( jUsers ) {
+      try {
+        Thread.sleep( 2000 );
+      } catch ( Exception ex ) {
+      }
       jSettings = false;
       IOUtililty.writeUserDatabase( clientConnection.getUser(), directory );
-      jSettingsDone = true;
+      jUsersDone = true;
     }
 
-    try {
-      Thread.sleep( 150 );
-    } catch ( Exception ex ) {
-    }
-    
     if ( jNavision ) {
+      try {
+        Thread.sleep( 150 );
+      } catch ( Exception ex ) {
+      }
       jNavision = false;
       IOUtililty.writeNavisionInfo( clientConnection.getNavisionQueryOverview(), directory );
       jNavisionDone = true;
     }
-
-
-
-
+    
   }
 
   /**

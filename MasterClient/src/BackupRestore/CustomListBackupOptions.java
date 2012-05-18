@@ -1,4 +1,4 @@
-package gfy;
+package BackupRestore;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -67,6 +67,17 @@ public class CustomListBackupOptions extends JPanel {
       }
     }
   }
+  
+  public void checkAllCheckboxes() {
+    for ( Component t : checkboxPanel.getComponents() ) {
+      if ( t.getClass().getSimpleName().equals( "JCheckBox" ) ) {
+        JCheckBox current = ( JCheckBox ) t;
+        current.setSelected( true );
+      }
+    }
+  }
+  
+  
 
   /**
    * @return the cbLogs

@@ -15,9 +15,9 @@ public class IOUtililty {
    *
    * @param database the database to write
    */
-  public static void writeDatabaseConfig( Database database,String location ) {
+  public static void writeDatabaseConfig( Database database, String location ) {
     try {
-      FileWriter fw = new FileWriter(location + "/db.cfg" );
+      FileWriter fw = new FileWriter( location + "/db.cfg" );
       PrintWriter pw = new PrintWriter( fw );
       pw.println( "[Databaseconfig]" );
       pw.println( "name:" + database.getName() );
@@ -28,7 +28,22 @@ public class IOUtililty {
       pw.close();
       fw.close();
     } catch ( IOException ioe ) {
-      
+    }
+  }
+
+  /**
+   * Write the database settings to ./config/db.cfg.
+   *
+   * @param WriteLogFile the logfile to write
+   */
+  public static void writeLogFile( LogView lview, String location ) {
+    try {
+      FileWriter fw = new FileWriter( location + "/log.txt" );
+      PrintWriter pw = new PrintWriter( fw );
+      pw.println( lview.getOldLog() + "\r\n" + lview.getCurrentLog() );
+      pw.close();
+      fw.close();
+    } catch ( IOException ioe ) {
     }
   }
 
@@ -46,7 +61,6 @@ public class IOUtililty {
       pw.close();
       fw.close();
     } catch ( IOException ioe ) {
-      
     }
   }
 
@@ -87,10 +101,10 @@ public class IOUtililty {
       }
 
       // If portnumber is out of range, reset it to prevent error later
-      if ( port > 1024 && port < 49151  ) {
+      if ( port > 1024 && port < 49151 ) {
         return port;
       } else {
-        
+
 
         // Write portnumber '0' to file (portnumber reset)
         writePortConfig( 0 );
@@ -99,7 +113,7 @@ public class IOUtililty {
       }
 
     } catch ( Exception ex ) {
-      
+
       // Write portnumber '0' to file (portnumber reset)
       writePortConfig( 0 );
 
@@ -114,6 +128,18 @@ public class IOUtililty {
    */
   public static boolean databaseConfigExsist() {
     File file = new File( "./resources/config/db.cfg" );
+    return file.exists();
+  }
+
+  /**
+   * Check if a file exsists
+   *
+   * @param file the file
+   * @param location the directory
+   * @return boolean gives true if the file exsist
+   */
+  public static boolean FileExsist(String f,String location) {
+    File file = new File( location + "/" + f );
     return file.exists();
   }
 
@@ -170,11 +196,60 @@ public class IOUtililty {
       return new Database( name, host, port, username, password );
 
     } catch ( Exception ex ) {
-     
+
+      return new Database( "Navision", "SQLSEVER", 0, "", "" );
+    }
+  }
+  
+  /**
+   * Load all database settings from a config
+   * @param the directory
+   * @return Database the new databaseconfig
+   */
+  public static Database loadDatabaseConfig(String location) {
+    String name = "";
+    String host = "";
+    int port = 0;
+    String username = "";
+    String password = "";
+    try {
+      FileReader fr = new FileReader(location + "/db.cfg" );
+      BufferedReader br = new BufferedReader( fr );
+      String t = br.readLine();
+      while ( t != null ) {
+        if ( !t.startsWith( "[" ) ) {
+          String[] c = getKeyValue( t );
+
+          switch ( c[0] ) {
+            case "name":
+              name = c[1];
+              break;
+            case "host":
+              host = c[1];
+              break;
+            case "port":
+              port = Integer.parseInt( c[1] );
+              break;
+            case "username":
+              username = c[1];
+              break;
+            case "password":
+              password = c[1];
+              break;
+          }
+
+        }
+        t = br.readLine();
+      }
+      return new Database( name, host, port, username, password );
+
+    } catch ( Exception ex ) {
+
       return new Database( "Navision", "SQLSEVER", 0, "", "" );
     }
   }
 
+  
   /**
    * split a string in two parts by key and value.
    *
@@ -186,7 +261,7 @@ public class IOUtililty {
     return t;
   }
 
-  public static void writeUserDatabase(User user, String directory) {
+  public static void writeUserDatabase( User user, String directory ) {
     try {
       System.out.println( directory + "/users.odb" );
       FileOutputStream fo = new FileOutputStream( directory + "/users.odb" );
@@ -195,11 +270,11 @@ public class IOUtililty {
       oos.close();
       fo.close();
     } catch ( Exception ex ) {
-      System.out.println(ex.getMessage());
+      System.out.println( ex.getMessage() );
     }
   }
-  
-  public static void writeNavisionInfo(NavQueryOverview nav, String directory) {
+
+  public static void writeNavisionInfo( NavQueryOverview nav, String directory ) {
     try {
       System.out.println( directory + "/navision.odb" );
       FileOutputStream fo = new FileOutputStream( directory + "/navision.odb" );
@@ -208,10 +283,9 @@ public class IOUtililty {
       oos.close();
       fo.close();
     } catch ( Exception ex ) {
-      System.out.println(ex.getMessage());
+      System.out.println( ex.getMessage() );
     }
   }
-  
 
   public static User loadUserDatabase() {
     try {
@@ -222,7 +296,24 @@ public class IOUtililty {
       fi.close();
       return loaduser;
     } catch ( Exception ex ) {
-      
+
+      User tempuser = new User();
+      tempuser.addUser( "admin", "admin", UserType.gebruiker );
+      return tempuser;
+    }
+  }
+
+
+ public static User loadUserDatabase(String location) {
+    try {
+      FileInputStream fi = new FileInputStream(location + "/users.odb" );
+      ObjectInputStream ois = new ObjectInputStream( fi );
+      User loaduser = ( User ) ois.readObject();
+      ois.close();
+      fi.close();
+      return loaduser;
+    } catch ( Exception ex ) {
+
       User tempuser = new User();
       tempuser.addUser( "admin", "admin", UserType.gebruiker );
       return tempuser;

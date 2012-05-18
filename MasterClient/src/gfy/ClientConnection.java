@@ -170,6 +170,12 @@ public class ClientConnection extends Thread {
       return new Database( "", "", 0, "", "" );
     }
   }
+  
+  public LogView getLogView() {
+    sendCommand( "GET-LOGS" );
+    return ( LogView ) recieveObject();
+    
+  }
 
   public void setDatabase( Database database ) {
     sendCommand( "SET-DATABASE" );

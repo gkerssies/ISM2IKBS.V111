@@ -1,11 +1,14 @@
-package gfy;
+package BackupRestore;
+
+import gfy.ClientConnection;
+import gfy.IOUtililty;
 
 /**
  * This class handles the backup in the background
  *
  * @author Janssen-laptop
  */
-public class BackupWorker extends Thread {
+public class RestoreWorker extends Thread {
 
   private boolean jLOG;
   private boolean jUsers;
@@ -19,7 +22,7 @@ public class BackupWorker extends Thread {
   private ClientConnection clientConnection;
   private String directory;
 
-  public BackupWorker( String directory, ClientConnection clientConnection, boolean jLOG, boolean jUsers, boolean jSettings, boolean jNavision ) {
+  public RestoreWorker( String directory, ClientConnection clientConnection, boolean jLOG, boolean jUsers, boolean jSettings, boolean jNavision ) {
     this.clientConnection = clientConnection;
 
     this.jLOGDone = false;
@@ -57,7 +60,7 @@ public class BackupWorker extends Thread {
 
     if ( jSettings ) {
       jSettings = false;
-      IOUtililty.writeDatabaseConfig( clientConnection.getDatabase(), directory );
+      clientConnection.setDatabase(IOUtililty.loadDatabaseConfig(directory));
       jSettingsDone = true;
     }
 
@@ -68,8 +71,8 @@ public class BackupWorker extends Thread {
 
     if ( jUsers ) {
       jSettings = false;
-      IOUtililty.writeUserDatabase( clientConnection.getUser(), directory );
-      jSettingsDone = true;
+      clientConnection.setUser(IOUtililty.loadUserDatabase( directory ) );
+      jUsersDone = true;
     }
 
     try {
@@ -79,7 +82,7 @@ public class BackupWorker extends Thread {
     
     if ( jNavision ) {
       jNavision = false;
-      IOUtililty.writeNavisionInfo( clientConnection.getNavisionQueryOverview(), directory );
+      //IOUtililty.writeNavisionInfo( clientConnection.getNavisionQueryOverview(), directory );
       jNavisionDone = true;
     }
 
