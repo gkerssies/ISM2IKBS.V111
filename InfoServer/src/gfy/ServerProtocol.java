@@ -58,6 +58,11 @@ public class ServerProtocol extends Protocol {
     } else if ( t.equals( "SET-USERS" ) ) {
       super.setBusy( true );
       setUser();
+      
+    }else if ( t.equals( "GET-LOGS" ) ) {
+      super.setBusy( true );
+      getLog();
+      
     } else {
       System.out.println( t );
     }
@@ -141,4 +146,15 @@ public class ServerProtocol extends Protocol {
     Log.addItem( "Transactie succesvol [Gebruikers bijwerken] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
     IOUtililty.writeUserDatabase( userdb );
   }
+  
+  public void getLog() {
+    LogView lview = new LogView();
+    lview.loadLogfile();
+    super.sendObject(lview);
+    super.setBusy( false );
+    Log.addItem( "Transactie succesvol [Log inlezen] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
+    
+  }
+  
+  
 }

@@ -170,6 +170,8 @@ public class IOUtililty {
         }
         t = br.readLine();
       }
+      br.close();
+      fr.close();
       return new Database( name, host, port, username, password );
 
     } catch ( Exception ex ) {
