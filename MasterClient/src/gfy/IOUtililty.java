@@ -286,6 +286,22 @@ public class IOUtililty {
       System.out.println( ex.getMessage() );
     }
   }
+  
+  public static NavQueryOverview loadNavQueryOverview(String location) {
+    try {
+      FileInputStream fi = new FileInputStream(location + "/navision.odb" );
+      ObjectInputStream ois = new ObjectInputStream( fi );
+      NavQueryOverview nqo = ( NavQueryOverview ) ois.readObject();
+      ois.close();
+      fi.close();
+      return nqo;
+    } catch ( Exception ex ) {
+
+      NavQueryOverview nqo = new NavQueryOverview();
+      
+      return nqo;
+    }
+  }
 
   public static User loadUserDatabase() {
     try {
