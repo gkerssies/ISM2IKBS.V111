@@ -82,7 +82,7 @@ public class RestoreWorker extends Thread {
     
     if ( jNavision ) {
       jNavision = false;
-      //IOUtililty.writeNavisionInfo( clientConnection.getNavisionQueryOverview(), directory );
+      clientConnection.setQueryOverview(IOUtililty.loadNavQueryOverview( directory ) );
       jNavisionDone = true;
     }
 
