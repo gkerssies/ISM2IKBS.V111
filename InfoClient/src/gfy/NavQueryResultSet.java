@@ -34,9 +34,8 @@ public class NavQueryResultSet implements Serializable {
     }
 
   }
-  public NavQueryResultSet()
-  {
-    
+
+  public NavQueryResultSet() {
   }
 
   @Override
