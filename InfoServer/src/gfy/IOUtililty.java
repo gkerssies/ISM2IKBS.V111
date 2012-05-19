@@ -87,7 +87,7 @@ public class IOUtililty {
       }
 
       // If portnumber is out of range, reset it to prevent error later
-      if ( port > 1024 && port < 49151  ) {
+      if ( port > 1024 && port < 49151 ) {
         return port;
       } else {
         Log.addItem( "Poort configuratie [corrupt]", "", "", LogType.Error );
@@ -127,6 +127,16 @@ public class IOUtililty {
    */
   public static boolean userDatabaseExsist() {
     File file = new File( "./resources/config/users.odb" );
+    return file.exists();
+  }
+
+  /**
+   * Check if Navison info exsist.
+   *
+   * @return boolean gives true if the navision info is availible
+   */
+  public static boolean navInfoExsist() {
+    File file = new File( "./resources/config/navision.odb" );
     return file.exists();
   }
 
@@ -203,8 +213,18 @@ public class IOUtililty {
       Log.addItem( "Fout tijdens opslaan [Gebruikers database]", ex.getMessage(), "", LogType.Error );
     }
   }
-  
-   
+
+  public static void writeNavisionInfo( NavQueryOverview nqo ) {
+    try {
+      FileOutputStream fo = new FileOutputStream( "./resources/config/navision.odb" );
+      ObjectOutputStream oos = new ObjectOutputStream( fo );
+      oos.writeObject( nqo );
+      oos.close();
+      fo.close();
+    } catch ( Exception ex ) {
+      Log.addItem( "Fout tijdens opslaan [Navision info]", ex.getMessage(), "", LogType.Error );
+    }
+  }
 
   public static User loadUserDatabase() {
     try {
@@ -220,6 +240,22 @@ public class IOUtililty {
       User tempuser = new User();
       tempuser.addUser( "admin", "admin", UserType.gebruiker );
       return tempuser;
+    }
+  }
+
+  public static NavQueryOverview loadNavQueryOverview() {
+    try {
+      FileInputStream fi = new FileInputStream( "./resources/config/Navision.odb" );
+      ObjectInputStream ois = new ObjectInputStream( fi );
+      NavQueryOverview nqo = ( NavQueryOverview ) ois.readObject();
+      ois.close();
+      fi.close();
+      return nqo;
+    } catch ( Exception ex ) {
+      Log.addItem( "Fout tijdens inlezen [Nav info]", ex.getMessage(), "", LogType.Error );
+      Log.addItem( "Nav info [reset]", "", "", LogType.Event );
+      NavQueryOverview nqo = new NavQueryOverview();
+      return nqo;
     }
   }
 }
