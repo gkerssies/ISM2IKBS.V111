@@ -17,7 +17,7 @@ public class AddUser extends JFrame implements ActionListener {
   private UserSettingsPanel panel;
 
   /**
-   * Constructor for the InformationPanel class.
+   * Constructor for the AddUser class.
    *
    * @param user                    the User object
    * @param authorizationManagement the AuthorizationManagement object
