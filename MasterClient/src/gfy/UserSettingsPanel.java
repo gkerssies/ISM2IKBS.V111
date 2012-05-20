@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
+ * Creates a JPanel with all the input fields to add or edit a user. This panel
+ * is used by JFrame AddUser and EditUser.
  *
  * @author Gerjan Kerssies
  */
@@ -18,6 +20,14 @@ public class UserSettingsPanel extends JPanel {
   private JFrame frame;
   private User user;
 
+  /**
+   * Constructor for the UserSettingsPanel class.
+   *
+   * @param user     the User object
+   * @param action   the action of the panel (can be addUser or editUser)
+   * @param frame    the frame where this panel is inside
+   * @param username (only if action is editUser)
+   */
   public UserSettingsPanel( User user, String action, JFrame frame, String username ) {
     this.user = user;
 
@@ -88,39 +98,42 @@ public class UserSettingsPanel extends JPanel {
   }
 
   /**
-   * @return the username
+   * @return the username (JTextField)
    */
   public JTextField getUsername() {
     return username;
   }
 
   /**
-   * @return the password
+   * @return the password (JTextField)
    */
   public JTextField getPassword() {
     return password;
   }
 
   /**
-   * @return the confirmPassword
+   * @return the confirmPassword (JTextField)
    */
   public JTextField getConfirmPassword() {
     return confirmPassword;
   }
 
   /**
-   * @return the userType
+   * @return the userType (JComboBox)
    */
   public JComboBox getUserType() {
     return userType;
   }
 
+  /**
+   * @return the buttonSave (JButton)
+   */
   public JButton getButtonSave() {
     return buttonSave;
   }
 
   /**
-   * @return the buttonCancel
+   * @return the buttonCancel (JButton)
    */
   public JButton getButtonCancel() {
     return buttonCancel;
