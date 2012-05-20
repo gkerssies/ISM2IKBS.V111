@@ -6,7 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 /**
- *
+ * Creates a JFrame which a user can be edited.
+ * 
  * @author Gerjan Kerssies
  */
 public class EditUser extends JFrame implements ActionListener {
@@ -15,6 +16,13 @@ public class EditUser extends JFrame implements ActionListener {
   private AuthorizationManagement authorizationManagement;
   private UserSettingsPanel panel;
 
+  /**
+   * Constructor for the InformationPanel class.
+   * 
+   * @param user the User object
+   * @param username the username of the clicked user
+   * @param authorizationManagement the AuthorizationManagement object
+   */
   public EditUser( User user, String username, AuthorizationManagement authorizationManagement ) {
     this.user = user;
     this.authorizationManagement = authorizationManagement;
@@ -29,6 +37,9 @@ public class EditUser extends JFrame implements ActionListener {
     setVisible( true );
   }
 
+  /**
+   * Save the changed user settings to the User object.
+   */
   public void save() {
     if ( panel.getUserType().getSelectedItem() == "beheerder" ) {
       user.setUser( panel.getUsername().getText(), panel.getPassword().getText(), UserType.beheerder );
