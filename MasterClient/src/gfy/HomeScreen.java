@@ -19,10 +19,10 @@ public class HomeScreen extends JFrame implements ActionListener {
 
   private JMenuBar menuBar;
   private JMenu menuClient, menuServer, menuInfo;
-  private JMenuItem itemClient, itemServer, itemInfo, itemServerStop;
+  private JMenuItem itemClient, itemSettings, itemLog, itemBackup, itemInfo, itemServerStop;
   private JPanel panel;
   private JButton buttonAuth, buttonSQL;
-  private ClientConnection clientconnetion;
+  private ClientConnection clientConnection;
 
   /**
    * Constructor for the HomeScreen class. Add all components to the JFrame,
@@ -31,7 +31,7 @@ public class HomeScreen extends JFrame implements ActionListener {
    * @param clientconnection the connection Object with the client.
    */
   public HomeScreen( ClientConnection clientconnection ) {
-    this.clientconnetion = clientconnection;
+    this.clientConnection = clientconnection;
 
     if ( !clientconnection.isConnected() ) {
       JOptionPane.showMessageDialog( this, "Kan geen verbinding maken met server", "Verbindingsfout", JOptionPane.ERROR_MESSAGE );
@@ -46,11 +46,17 @@ public class HomeScreen extends JFrame implements ActionListener {
     menuClient.add( itemClient );
 
     menuServer = new JMenu( "Server" );
-    itemServer = new JMenuItem( "Server" );
+    itemSettings = new JMenuItem( "Serverinstellingen" );
+    itemLog = new JMenuItem( "Serverlog" );
+    itemBackup = new JMenuItem( "Backup en herstel" );
     itemServerStop = new JMenuItem( "Stop Server" );
-    itemServer.addActionListener( this );
+    itemSettings.addActionListener( this );
+    itemLog.addActionListener( this );
+    itemBackup.addActionListener( this );
     itemServerStop.addActionListener( this );
-    menuServer.add( itemServer );
+    menuServer.add( itemSettings );
+    menuServer.add( itemLog );
+    menuServer.add( itemBackup );
     menuServer.add( itemServerStop );
 
     menuInfo = new JMenu( "Info" );
@@ -100,17 +106,20 @@ public class HomeScreen extends JFrame implements ActionListener {
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == itemClient ) {
       System.out.println( "itemClient" );
-    } else if ( e.getSource() == itemServer ) {
-      new BackupScreen( clientconnetion );
+    } else if ( e.getSource() == itemSettings ) {
+      JFrame frame = new ServerSettings( clientConnection );
+    } else if ( e.getSource() == itemLog ) {
+      System.out.println( "itemLog" );
+    } else if ( e.getSource() == itemBackup ) {
+      new BackupScreen( clientConnection );
     } else if ( e.getSource() == itemServerStop ) {
       closeServer();
     } else if ( e.getSource() == itemInfo ) {
       System.out.println( "itemInfo" );
     } else if ( e.getSource() == buttonAuth ) {
-
-      JFrame frame = new AuthorizationManagement( clientconnetion );
+      JFrame frame = new AuthorizationManagement( clientConnection );
     } else if ( e.getSource() == buttonSQL ) {
-      JFrame frame = new ServerSettings( clientconnetion );
+      JFrame frame = new SQLManagement( clientConnection );
     }
   }
 
@@ -128,7 +137,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 
     // If the 'Yes' button is clicked in the confirm dialog the server will be stopped
     if ( allowToStopServer == 0 ) {
-      clientconnetion.sendCommand( "STOP" );
+      clientConnection.sendCommand( "STOP" );
       System.exit( 0 );
     }
   }

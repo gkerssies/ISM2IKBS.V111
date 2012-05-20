@@ -14,7 +14,8 @@ public class UserSettingsPanel extends JPanel {
 
   private JPanel panelLabels, panelInput, panelButtons;
   private JLabel label1, label2, label3, label4;
-  private JTextField username, password, confirmPassword;
+  private JTextField username;
+  private JPasswordField password, confirmPassword;
   private JComboBox userType;
   private JButton buttonCancel, buttonSave;
   private JFrame frame;
@@ -52,8 +53,8 @@ public class UserSettingsPanel extends JPanel {
     label4.setPreferredSize( new Dimension( 130, 20 ) );
 
     this.username = new JTextField( 15 );
-    password = new JTextField( 15 );
-    confirmPassword = new JTextField( 15 );
+    password = new JPasswordField( 15 );
+    confirmPassword = new JPasswordField( 15 );
 
     String[] types = { "gebruiker", "beheerder" };
     userType = new JComboBox( types );
