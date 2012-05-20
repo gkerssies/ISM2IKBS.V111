@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 import java.awt.Dimension;
@@ -28,16 +24,16 @@ public class SQLManagement extends JFrame implements ActionListener {
    */
   public SQLManagement( ClientConnection connection ) {
     this.connection = connection;
-    
+
     panel = new JPanel();
-    
+
     buttonAdd = new JButton();
     buttonAdd.setText( "Toevoegen" );
     buttonAdd.setPreferredSize( new Dimension( 110, 25 ) );
     buttonAdd.addActionListener( this );
-    
+
     panel.add( buttonAdd );
-    
+
     setLayout( new GridLayout( 4, 1 ) );
     setContentPane( panel );
     setSize( 350, 500 );
