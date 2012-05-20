@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 /**
  * Creates a JFrame which a user can be edited.
- * 
+ *
  * @author Gerjan Kerssies
  */
 public class EditUser extends JFrame implements ActionListener {
@@ -18,9 +18,9 @@ public class EditUser extends JFrame implements ActionListener {
 
   /**
    * Constructor for the InformationPanel class.
-   * 
-   * @param user the User object
-   * @param username the username of the clicked user
+   *
+   * @param user                    the User object
+   * @param username                the username of the clicked user
    * @param authorizationManagement the AuthorizationManagement object
    */
   public EditUser( User user, String username, AuthorizationManagement authorizationManagement ) {
