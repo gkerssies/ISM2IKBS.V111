@@ -4,11 +4,11 @@
  */
 package gfy;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Create a JFrame which can edit query's.
@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 public class SQLManagement extends JFrame implements ActionListener {
 
   private JPanel panel;
+  private JButton buttonAdd;
   private ClientConnection connection;
 
   /**
@@ -30,9 +31,16 @@ public class SQLManagement extends JFrame implements ActionListener {
     
     panel = new JPanel();
     
+    buttonAdd = new JButton();
+    buttonAdd.setText( "Toevoegen" );
+    buttonAdd.setPreferredSize( new Dimension( 110, 25 ) );
+    buttonAdd.addActionListener( this );
+    
+    panel.add( buttonAdd );
+    
     setLayout( new GridLayout( 4, 1 ) );
     setContentPane( panel );
-    setSize( 330, 220 );
+    setSize( 350, 500 );
     setResizable( false );
     setTitle( "SQL beheer" );
     setLocationRelativeTo( getRootPane() );
@@ -41,5 +49,8 @@ public class SQLManagement extends JFrame implements ActionListener {
 
   @Override
   public void actionPerformed( ActionEvent e ) {
+    if ( e.getSource() == buttonAdd ) {
+      JFrame frame = new AddNavQuery();
+    }
   }
 }
