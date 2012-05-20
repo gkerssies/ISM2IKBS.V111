@@ -26,7 +26,7 @@ public class ServerSettings extends JFrame implements ActionListener {
    * Constructor for the ServerSettings class. Add all components to the JFrame,
    * including panels.
    *
-   * @param connection the connection Object with the client.
+   * @param connection the connection Object with the client
    */
   public ServerSettings( ClientConnection connection ) {
     this.databasesettings = connection.getDatabase();
