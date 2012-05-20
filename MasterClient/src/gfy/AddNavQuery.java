@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gfy;
 
 import java.awt.GridLayout;
@@ -16,7 +12,7 @@ import javax.swing.*;
  */
 public class AddNavQuery extends JFrame implements ActionListener {
 
-  private JPanel panel;
+  private JPanel panel, panelLabels, panelInput;
   
   /**
    * Constructor for the AddNavQuery class.
