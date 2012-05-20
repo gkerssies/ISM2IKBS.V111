@@ -2,7 +2,7 @@ package gfy;
 
 /**
  * Removes the selected user.
- * 
+ *
  * @author Gerjan Kerssies
  */
 public class DeleteUser {
@@ -11,9 +11,9 @@ public class DeleteUser {
   private AuthorizationManagement authorizationManagement;
 
   /**
-   * Constructor for the DeleteUser class.
-   * Removes the selected user ftom the User object.
-   * 
+   * Constructor for the DeleteUser class. Removes the selected user from the
+   * User object.
+   *
    * @param user                    the User object
    * @param username                the username of the clicked user
    * @param authorizationManagement the AuthorizationManagement object
