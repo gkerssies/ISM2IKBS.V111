@@ -17,7 +17,7 @@ public class EditUser extends JFrame implements ActionListener {
   private UserSettingsPanel panel;
 
   /**
-   * Constructor for the InformationPanel class.
+   * Constructor for the EditUser class.
    *
    * @param user                    the User object
    * @param username                the username of the clicked user
