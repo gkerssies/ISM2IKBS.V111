@@ -46,7 +46,7 @@ public class SQLManagement extends JFrame implements ActionListener {
   @Override
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonAdd ) {
-      JFrame frame = new AddNavQuery();
+      JFrame frame = new AddNavQuery( this );
     }
   }
 }
