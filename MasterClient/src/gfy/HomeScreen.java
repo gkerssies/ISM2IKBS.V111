@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 /**
+ * Creates the HomeScreen JFrame. From this frame, other frames can be opened.
  *
  * @author Gerjan Kerssies
  * @version 0.1 - 26-04-2012
@@ -23,6 +24,12 @@ public class HomeScreen extends JFrame implements ActionListener {
   private JButton buttonAuth, buttonSQL;
   private ClientConnection clientconnetion;
 
+  /**
+   * Constructor for the HomeScreen class. Add all components to the JFrame,
+   * including panels.
+   *
+   * @param clientconnection the connection Object with the client.
+   */
   public HomeScreen( ClientConnection clientconnection ) {
     this.clientconnetion = clientconnection;
 
@@ -94,7 +101,7 @@ public class HomeScreen extends JFrame implements ActionListener {
     if ( e.getSource() == itemClient ) {
       System.out.println( "itemClient" );
     } else if ( e.getSource() == itemServer ) {
-      new BackupScreen(clientconnetion);
+      new BackupScreen( clientconnetion );
     } else if ( e.getSource() == itemServerStop ) {
       closeServer();
     } else if ( e.getSource() == itemInfo ) {
@@ -107,6 +114,10 @@ public class HomeScreen extends JFrame implements ActionListener {
     }
   }
 
+  /**
+   * Closes the server. After the 'Yes' button is clicked, the server will be
+   * stopped en closed.
+   */
   public void closeServer() {
     int allowToStopServer = JOptionPane.showConfirmDialog(
             this,
