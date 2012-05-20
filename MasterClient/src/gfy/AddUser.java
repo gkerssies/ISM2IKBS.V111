@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 /**
  * Creates a JFrame which a user can be added.
- * 
+ *
  * @author Gerjan Kerssies
  */
 public class AddUser extends JFrame implements ActionListener {
@@ -18,8 +18,8 @@ public class AddUser extends JFrame implements ActionListener {
 
   /**
    * Constructor for the InformationPanel class.
-   * 
-   * @param user the User object
+   *
+   * @param user                    the User object
    * @param authorizationManagement the AuthorizationManagement object
    */
   public AddUser( User user, AuthorizationManagement authorizationManagement ) {
