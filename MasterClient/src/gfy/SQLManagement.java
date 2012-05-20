@@ -4,9 +4,11 @@
  */
 package gfy;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Create a JFrame which can edit query's.
@@ -15,6 +17,7 @@ import javax.swing.JFrame;
  */
 public class SQLManagement extends JFrame implements ActionListener {
 
+  private JPanel panel;
   private ClientConnection connection;
 
   /**
@@ -24,6 +27,16 @@ public class SQLManagement extends JFrame implements ActionListener {
    */
   public SQLManagement( ClientConnection connection ) {
     this.connection = connection;
+    
+    panel = new JPanel();
+    
+    setLayout( new GridLayout( 4, 1 ) );
+    setContentPane( panel );
+    setSize( 330, 220 );
+    setResizable( false );
+    setTitle( "SQL beheer" );
+    setLocationRelativeTo( getRootPane() );
+    setVisible( true );
   }
 
   @Override
