@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.table.TableModel;
 
 /**
+ * Creates a JFrame with a overview of all users. From this frame, users can be
+ * added, edited and deleted, by selecting a user in the table and clicking on
+ * the desired button.
  *
  * @author Gerjan Kerssies
  */
@@ -22,6 +25,11 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
   private JButton buttonAdd, buttonEdit, buttonDelete;
   private ClientConnection clientconnection;
 
+  /**
+   * Constructor for the AuthorizationManagement class.
+   *
+   * @param clientconnection the connection Object with the client.
+   */
   public AuthorizationManagement( ClientConnection clientconnection ) {
     setDefaultCloseOperation( DISPOSE_ON_CLOSE );
     this.clientconnection = clientconnection;
@@ -29,6 +37,9 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
 
   }
 
+  /**
+   * Add all components to the JFrame, including panels.
+   */
   public void buildView() {
     user = clientconnection.getUser();
 
@@ -72,7 +83,14 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
     setVisible( true );
   }
 
-  public void openFrame( String action,String click ) {
+  /**
+   * Opens the frame after a button is clicked. Can open the following frames:
+   * EditUser, DeleteUser. When no user is clicked, then an message is shown.
+   *
+   * @param action the action (can be editUser or deleteUser)
+   * @param click  the selected user of UserSettingsPanel
+   */
+  public void openFrame( String action, String click ) {
     String clickedUser = click;
 
     if ( clickedUser != null ) {
@@ -106,15 +124,16 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
       JFrame frame = new AddUser( user, this );
       frame.addWindowListener( new autoReloadonWindowCloseHandler( this ) );
     } else if ( e.getSource() == buttonEdit ) {
-      openFrame( "editUser",userTable.getClickedUser() );
+      openFrame( "editUser", userTable.getClickedUser() );
 
     } else if ( e.getSource() == buttonDelete ) {
-      openFrame( "deleteUser","" );
+      openFrame( "deleteUser", "" );
     }
   }
+
   /**
- * Reloads the panel
- */
+   * Reloads the panel.
+   */
   public void reload() {
     System.out.println( "test" );
     new AuthorizationManagement( clientconnection );
