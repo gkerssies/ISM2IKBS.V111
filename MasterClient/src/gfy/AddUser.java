@@ -39,21 +39,22 @@ public class AddUser extends JFrame implements ActionListener {
 
   /**
    * Save the new user to the User object.
+   *
    * @return boolean is het user object is saved
    */
   public boolean save() {
     if ( panel.getPassword().getText().equals( "" ) ) {
-      
-      JOptionPane.showMessageDialog(panel, "Wachtwoord veld kan niet leeg zijn", "Validatie fout", JOptionPane.INFORMATION_MESSAGE);
+
+      JOptionPane.showMessageDialog( panel, "Wachtwoord veld kan niet leeg zijn", "Validatie fout", JOptionPane.INFORMATION_MESSAGE );
       return false;
     } else {
-     
+
       if ( panel.getUserType().getSelectedItem() == "beheerder" ) {
         user.addUser( panel.getUsername().getText(), panel.getPassword().getText(), UserType.beheerder );
       } else {
         user.addUser( panel.getUsername().getText(), panel.getPassword().getText(), UserType.gebruiker );
       }
-       return true;
+      return true;
     }
   }
 
@@ -62,9 +63,8 @@ public class AddUser extends JFrame implements ActionListener {
     if ( e.getSource() == panel.getButtonCancel() ) {
       dispose();
     } else if ( e.getSource() == panel.getButtonSave() ) {
-      if (save())
-      {
-      dispose();
+      if ( save() ) {
+        dispose();
       }
     }
   }
