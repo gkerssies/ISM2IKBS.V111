@@ -1,5 +1,9 @@
 package gfy;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -10,6 +14,10 @@ import javax.swing.*;
  */
 public class NavQueryPanel extends JPanel {
 
+  private JLabel title, description;
+  private JButton buttonEdit, buttonDelete;
+  private ImageIcon editIcon = new ImageIcon( "./resources/images/status-red.png" );
+  private ImageIcon deleteIcon = new ImageIcon( "./resources/images/status-red.png" );
   private NavQuery navQuery;
   private JFrame frame;
 
@@ -22,5 +30,22 @@ public class NavQueryPanel extends JPanel {
   public NavQueryPanel( NavQuery navQuery, JFrame frame ) {
     this.navQuery = navQuery;
     this.frame = frame;
+
+    title = new JLabel( this.navQuery.getTitle() );
+    description = new JLabel( this.navQuery.getDescription() );
+
+    buttonEdit = new JButton(editIcon);
+    buttonEdit.addActionListener( ( ActionListener ) frame );
+
+    buttonDelete = new JButton(deleteIcon);
+    buttonDelete.addActionListener( ( ActionListener ) frame );
+
+    add( title );
+    add( buttonEdit );
+    add( description );
+    add( buttonDelete );
+
+    setLayout( new GridLayout( 2, 2 ) );
+    setPreferredSize( new Dimension( 330, 60 ) );
   }
 }
