@@ -44,7 +44,7 @@ public class DataviewFrame extends JFrame {
     if (nvq.getId() == 0)
     {
        gp = new GraphPanel(nqrs,nvq,2,1);
-       gp = new GraphPanel(nqrs,nvq,2,2);
+       gp2 = new GraphPanel(nqrs,nvq,2,2);
     }
     else
     {
