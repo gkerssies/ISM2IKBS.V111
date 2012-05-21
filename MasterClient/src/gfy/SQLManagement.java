@@ -32,7 +32,7 @@ public class SQLManagement extends JFrame implements ActionListener {
     queryPanel = new ArrayList<NavQueryPanel>();
 
     for ( NavQuery nq : nqo.getNavQueries() ) {
-      NavQueryPanel navQueryPanel = new NavQueryPanel( nq, this );
+      NavQueryPanel navQueryPanel = new NavQueryPanel( nq, this, nqo );
       queryPanel.add( index, navQueryPanel );
       index++;
     }
