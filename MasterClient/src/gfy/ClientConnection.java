@@ -86,9 +86,6 @@ public class ClientConnection extends Thread {
   public void run() {
     try {
       clientsocket = new Socket( host, port );
-      System.out.println( "fase" );
-
-      System.out.println( clientsocket.isConnected() );
       objectlineout = new ObjectOutputStream( clientsocket.getOutputStream() );
       objectlinein = new ObjectInputStream( clientsocket.getInputStream() );
 
