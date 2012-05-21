@@ -22,10 +22,7 @@ public class HomeScreen extends JFrame implements ActionListener {
   private JMenu menuClient, menuServer, menuInfo;
   private JMenuItem itemClient, itemSettings, itemLog, itemBackup, itemInfo, itemServerStop;
   private JPanel panel;
-  private JButton buttonAuth, buttonSQL,ButtonBackupRestore;
-  private ClientConnection clientConnection;
-
-  private JButton buttonAuth, buttonSQL;
+  private JButton buttonAuth, buttonSQL, ButtonBackupRestore;
   private ClientConnection clientConnection;
 
   /**
@@ -90,7 +87,7 @@ public class HomeScreen extends JFrame implements ActionListener {
     buttonSQL.setFocusPainted( false );
     buttonSQL.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
     buttonSQL.addActionListener( this );
-    
+
     ButtonBackupRestore = new JButton();
     ButtonBackupRestore.setText( "Backup / Herstel" );
     ButtonBackupRestore.setMargin( new Insets( 10, 45, 10, 45 ) );
@@ -101,7 +98,7 @@ public class HomeScreen extends JFrame implements ActionListener {
     panel.add( buttonAuth, BorderLayout.NORTH );
     //panel.add( Box.createVerticalStrut( 5 ), BorderLayout.CENTER );
     panel.add( buttonSQL, BorderLayout.CENTER );
-    panel.add(ButtonBackupRestore,BorderLayout.SOUTH);
+    panel.add( ButtonBackupRestore, BorderLayout.SOUTH );
 
     setLayout( new BorderLayout() );
     setContentPane( panel );
@@ -118,8 +115,6 @@ public class HomeScreen extends JFrame implements ActionListener {
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == itemClient ) {
       System.out.println( "itemClient" );
-    } else if ( e.getSource() == itemServer ) {
-      InfoFrame frame = new InfoFrame(clientConnection);
     } else if ( e.getSource() == itemSettings ) {
       JFrame frame = new ServerSettings( clientConnection );
     } else if ( e.getSource() == itemLog ) {
@@ -135,7 +130,7 @@ public class HomeScreen extends JFrame implements ActionListener {
     } else if ( e.getSource() == buttonSQL ) {
       JFrame frame = new ServerSettings( clientConnection );
     } else if ( e.getSource() == ButtonBackupRestore ) {
-     new BackupScreen(clientConnection);
+      new BackupScreen( clientConnection );
       JFrame frame = new SQLManagement( clientConnection );
     }
   }
