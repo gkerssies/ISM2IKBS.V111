@@ -135,7 +135,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
    * Reloads the panel.
    */
   public void reload() {
-    System.out.println( "test" );
+    
     new AuthorizationManagement( clientconnection );
     this.dispose();
   }
