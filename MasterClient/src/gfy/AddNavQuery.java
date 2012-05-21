@@ -26,7 +26,7 @@ public class AddNavQuery extends JFrame implements ActionListener {
     this.sqlManagement = sqlManagement;
     this.nqo = nqo;
 
-    panel = new NavQuerySettingsPanel( "addNavQuery", this, 0 );
+    panel = new NavQuerySettingsPanel( "addNavQuery", this, null );
 
     setLayout( new GridLayout( 4, 1 ) );
     setContentPane( panel );
