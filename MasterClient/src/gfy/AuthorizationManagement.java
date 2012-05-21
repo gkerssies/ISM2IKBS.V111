@@ -127,7 +127,7 @@ public class AuthorizationManagement extends JFrame implements ActionListener {
       openFrame( "editUser", userTable.getClickedUser() );
 
     } else if ( e.getSource() == buttonDelete ) {
-      openFrame( "deleteUser", "" );
+      openFrame( "deleteUser",userTable.getClickedUser() );
     }
   }
 
