@@ -5,14 +5,15 @@ import java.io.Serializable;
 /**
  * @author Janssen-laptop
  * @author Ido Bosman (s1047979)
- * @version 0.1 - 8 mei 2012
+ * @version 0.2 - 16 mei 2012
  */
 public class NavQuery implements Serializable {
 
   private int id;
   private String title;
   private String description;
-  private String sqlquery;
+  private String sqlQuery;
+  private boolean builtInQuery;
   /**
    * Constructor for the NavQuery class.
    *
@@ -24,7 +25,7 @@ public class NavQuery implements Serializable {
     this.id = id;
     this.title = title;
     this.description = description;
-    this.sqlquery = navqry;
+    this.sqlQuery = navqry;
   }
 
   /**
@@ -68,9 +69,16 @@ public class NavQuery implements Serializable {
   }
 
   /**
-   * @return the sqlquery
+   * @return the sqlQuery
    */
   public String getSqlquery() {
-    return sqlquery;
+    return sqlQuery;
+  }
+
+  /**
+   * @return if the query is built-in
+   */
+  public boolean isBuiltInQuery() {
+    return builtInQuery;
   }
 }
