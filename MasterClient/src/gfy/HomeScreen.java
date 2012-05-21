@@ -22,7 +22,7 @@ public class HomeScreen extends JFrame implements ActionListener {
   private JMenu menuClient, menuServer, menuInfo;
   private JMenuItem itemClient, itemSettings, itemLog, itemBackup, itemInfo, itemServerStop;
   private JPanel panel;
-  private JButton buttonAuth, buttonSQL, ButtonBackupRestore;
+  private JButton buttonAuth, buttonSQL, buttonSQLMAN;
   private ClientConnection clientConnection;
 
   /**
@@ -88,17 +88,17 @@ public class HomeScreen extends JFrame implements ActionListener {
     buttonSQL.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
     buttonSQL.addActionListener( this );
 
-    ButtonBackupRestore = new JButton();
-    ButtonBackupRestore.setText( "Backup / Herstel" );
-    ButtonBackupRestore.setMargin( new Insets( 10, 45, 10, 45 ) );
-    ButtonBackupRestore.setFocusPainted( false );
-    ButtonBackupRestore.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
-    ButtonBackupRestore.addActionListener( this );
+    buttonSQLMAN = new JButton();
+    buttonSQLMAN.setText( "SQL Query beheer" );
+    buttonSQLMAN.setMargin( new Insets( 10, 45, 10, 45 ) );
+    buttonSQLMAN.setFocusPainted( false );
+    buttonSQLMAN.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+    buttonSQLMAN.addActionListener( this );
 
     panel.add( buttonAuth, BorderLayout.NORTH );
     //panel.add( Box.createVerticalStrut( 5 ), BorderLayout.CENTER );
     panel.add( buttonSQL, BorderLayout.CENTER );
-    panel.add( ButtonBackupRestore, BorderLayout.SOUTH );
+    panel.add( buttonSQLMAN, BorderLayout.SOUTH );
 
     setLayout( new BorderLayout() );
     setContentPane( panel );
@@ -129,8 +129,8 @@ public class HomeScreen extends JFrame implements ActionListener {
       JFrame frame = new AuthorizationManagement( clientConnection );
     } else if ( e.getSource() == buttonSQL ) {
       JFrame frame = new ServerSettings( clientConnection );
-    } else if ( e.getSource() == ButtonBackupRestore ) {
-      new BackupScreen( clientConnection );
+    } else if ( e.getSource() == buttonSQLMAN ) {
+      
       JFrame frame = new SQLManagement( clientConnection );
     }
   }
