@@ -22,17 +22,17 @@ public class StopScrollingHandler implements MouseListener{
 
   @Override
   public void mouseClicked( MouseEvent e ) {
-    timer.start();
+    timer.stop();
   }
 
   @Override
   public void mousePressed( MouseEvent e ) {
-    timer.start();
+    timer.stop();
   }
 
   @Override
   public void mouseReleased( MouseEvent e ) {
-    timer.start();
+    
   }
 
   @Override
