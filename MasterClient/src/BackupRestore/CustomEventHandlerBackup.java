@@ -50,6 +50,12 @@ public class CustomEventHandlerBackup implements ActionListener {
           case "START":
             if ( backupScreen.getBackuptype() == 0 ) {
               String dir = backupScreen.chooseDirectory();
+              if ( dir == null ) {
+                
+                break;
+              }
+              
+
               bw = new BackupWorker( dir,
                                      backupScreen.getClientConnection(),
                                      backupScreen.getBackupOptions().getCbLogs().isSelected(),
@@ -65,8 +71,9 @@ public class CustomEventHandlerBackup implements ActionListener {
                       backupScreen.getBackupOptions().getCbUsers().isSelected(),
                       backupScreen.getBackupOptions().getCbSettings().isSelected(),
                       backupScreen.getBackupOptions().getCbNavision().isSelected() );
+              rw.start();
             }
-            rw.start();
+            
             backupScreen.getBackupOptions().disableAllCheckboxes();
             backupScreen.getBackupOptions().clearAllCheckboxes();
             backupScreen.getStartpanel().getStartButton().setText( "Wachten ..." );

@@ -75,15 +75,7 @@ public class InfoServer extends JFrame {
    */
   private void createServer() {
 
-    NavQueryOverview navision = new NavQueryOverview();
-    NavQuery navGebruikers = new NavQuery(0, "Overzicht gebruikersgroepen", "Overzicht van alle gebruikers", "Select * from [dbo].[User Role]");
-    NavQuery navBedrijf = new NavQuery(1, "Overzicht bedrijven", "Overzicht van alle bedrijven", "Select * from [dbo].[Company]");
-    NavQuery navCountCustomers1 = new NavQuery( 2, "Aantal klanten", "Per serviceregiocode en plaats", "SELECT [Service Zone Code], COUNT( [timestamp] ) AS aantal FROM [Demo Database NAV (5-0)].[dbo].[CRONUS Nederland BV$Customer] GROUP BY ([Service Zone Code]) ORDER BY aantal");
-    navision.addNavQuery( navGebruikers );
-    navision.addNavQuery( navBedrijf );
-    navision.addNavQuery( navCountCustomers1);
-    
-    
+    NavQueryOverview navision;
     int serverPort = 0;
     User users;
     Database database;
@@ -93,6 +85,20 @@ public class InfoServer extends JFrame {
       Log.addItem( "Poort configuratiebestand ingeladen", "", "", LogType.Event );
     } else {
       Log.addItem( "Geen poort configuratie bestand gevonden", "", "", LogType.Event );
+    }
+
+    if ( IOUtililty.navInfoExsist() ) {
+      navision = IOUtililty.loadNavQueryOverview();
+      Log.addItem( "Navision configuratie ingeladen", "", "", LogType.Event );
+    } else {
+      Log.addItem( "Geen Navision configuratie gevonden", "", "", LogType.Event );
+      navision = new NavQueryOverview();
+      NavQuery navGebruikers = new NavQuery( 0, "Overzicht gebruikersgroepen", "Overzicht van alle gebruikers", "Select * from [dbo].[User Role]" );
+      NavQuery navBedrijf = new NavQuery( 1, "Overzicht bedrijven", "Overzicht van alle bedrijven", "Select * from [dbo].[Company]" );
+      NavQuery navCountCustomers1 = new NavQuery( 2, "Aantal klanten", "Per serviceregiocode en plaats", "SELECT [Service Zone Code], COUNT( [timestamp] ) AS aantal FROM [Demo Database NAV (5-0)].[dbo].[CRONUS Nederland BV$Customer] GROUP BY ([Service Zone Code]) ORDER BY aantal" );
+      navision.addNavQuery( navGebruikers );
+      navision.addNavQuery( navBedrijf );
+      navision.addNavQuery( navCountCustomers1 );
     }
 
     if ( IOUtililty.databaseConfigExsist() ) {
@@ -113,7 +119,7 @@ public class InfoServer extends JFrame {
     }
 
 
-    Config config = new Config( serverPort, database, users ,navision);
+    Config config = new Config( serverPort, database, users, navision );
 
     server = new Server( config );
 

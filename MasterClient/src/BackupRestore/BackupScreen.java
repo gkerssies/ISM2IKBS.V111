@@ -69,7 +69,7 @@ public class BackupScreen extends JFrame {
       return fchooser.getSelectedFile().getAbsolutePath();
     } catch ( Exception ex ) {
       System.out.println( "IO FOUT Tijdens Selectie" );
-      return fchooser.getCurrentDirectory().getAbsolutePath();
+      return null;
     }
   }
 

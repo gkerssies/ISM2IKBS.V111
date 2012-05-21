@@ -51,9 +51,7 @@ public class BackupWorker extends Thread {
 
     if ( jLOG == true ) {
       jLOG = false;
-      System.out.println(" here is johnny" + clientConnection.getLogView().getOldLog());
       IOUtililty.writeLogFile(clientConnection.getLogView(), directory);
-      
       jLOGDone = true;
     }
 

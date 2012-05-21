@@ -20,7 +20,6 @@ public class ClientConnection extends Thread {
   private ObjectInputStream objectlinein;
   private String host;
   private int port;
-  private ClientProtocol protocol;
   private boolean blocking = true;
 
   /**
@@ -53,9 +52,7 @@ public class ClientConnection extends Thread {
     }
   }
 
-  public ClientProtocol getProtocol() {
-    return this.protocol;
-  }
+
 
   /**
    * Method for sending commands to the server
@@ -174,6 +171,12 @@ public class ClientConnection extends Thread {
   public LogView getLogView() {
     sendCommand( "GET-LOGS" );
     return ( LogView ) recieveObject();
+  }
+  
+  public void setQueryOverview(NavQueryOverview nqo)
+  {
+    sendCommand("SET-NAV-OVERVIEW");
+    sendObject(nqo);
     
   }
 
@@ -203,6 +206,11 @@ public class ClientConnection extends Thread {
     } else {
       return new NavQueryOverview();
     }
+  }
+  public serverInfo getInfo()
+  {
+    sendCommand("GET-INFO");
+    return (serverInfo) recieveObject();
   }
   
 }

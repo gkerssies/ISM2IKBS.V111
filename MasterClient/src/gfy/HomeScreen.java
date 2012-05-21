@@ -1,6 +1,7 @@
 package gfy;
 
 import BackupRestore.BackupScreen;
+import InfoScreen.InfoFrame;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Insets;
@@ -20,11 +21,11 @@ public class HomeScreen extends JFrame implements ActionListener {
   private JMenu menuClient, menuServer, menuInfo;
   private JMenuItem itemClient, itemServer, itemInfo, itemServerStop;
   private JPanel panel;
-  private JButton buttonAuth, buttonSQL;
-  private ClientConnection clientconnetion;
+  private JButton buttonAuth, buttonSQL,ButtonBackupRestore;
+  private ClientConnection clientConnection;
 
   public HomeScreen( ClientConnection clientconnection ) {
-    this.clientconnetion = clientconnection;
+    this.clientConnection = clientconnection;
 
     if ( !clientconnection.isConnected() ) {
       JOptionPane.showMessageDialog( this, "Kan geen verbinding maken met server", "Verbindingsfout", JOptionPane.ERROR_MESSAGE );
@@ -73,14 +74,22 @@ public class HomeScreen extends JFrame implements ActionListener {
     buttonSQL.setFocusPainted( false );
     buttonSQL.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
     buttonSQL.addActionListener( this );
+    
+    ButtonBackupRestore = new JButton();
+    ButtonBackupRestore.setText( "Backup / Herstel" );
+    ButtonBackupRestore.setMargin( new Insets( 10, 45, 10, 45 ) );
+    ButtonBackupRestore.setFocusPainted( false );
+    ButtonBackupRestore.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+    ButtonBackupRestore.addActionListener( this );
 
     panel.add( buttonAuth, BorderLayout.NORTH );
-    panel.add( Box.createVerticalStrut( 5 ), BorderLayout.CENTER );
-    panel.add( buttonSQL, BorderLayout.SOUTH );
+    //panel.add( Box.createVerticalStrut( 5 ), BorderLayout.CENTER );
+    panel.add( buttonSQL, BorderLayout.CENTER );
+    panel.add(ButtonBackupRestore,BorderLayout.SOUTH);
 
     setLayout( new BorderLayout() );
     setContentPane( panel );
-    setSize( 210, 150 );
+    setSize( 210, 400 );
     setResizable( false );
     setTitle( "Master Client" );
     setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -94,16 +103,18 @@ public class HomeScreen extends JFrame implements ActionListener {
     if ( e.getSource() == itemClient ) {
       System.out.println( "itemClient" );
     } else if ( e.getSource() == itemServer ) {
-      new BackupScreen(clientconnetion);
+      InfoFrame frame = new InfoFrame(clientConnection);
     } else if ( e.getSource() == itemServerStop ) {
       closeServer();
     } else if ( e.getSource() == itemInfo ) {
       System.out.println( "itemInfo" );
     } else if ( e.getSource() == buttonAuth ) {
-
-      JFrame frame = new AuthorizationManagement( clientconnetion );
+      JFrame frame = new AuthorizationManagement( clientConnection );
     } else if ( e.getSource() == buttonSQL ) {
-      JFrame frame = new ServerSettings( clientconnetion );
+      JFrame frame = new ServerSettings( clientConnection );
+    }
+    else if ( e.getSource() == ButtonBackupRestore ) {
+     new BackupScreen(clientConnection);
     }
   }
 
@@ -117,7 +128,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 
     // If the 'Yes' button is clicked in the confirm dialog the server will be stopped
     if ( allowToStopServer == 0 ) {
-      clientconnetion.sendCommand( "STOP" );
+      clientConnection.sendCommand( "STOP" );
       System.exit( 0 );
     }
   }
