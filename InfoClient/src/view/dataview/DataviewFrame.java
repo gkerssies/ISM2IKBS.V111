@@ -38,15 +38,22 @@ public class DataviewFrame extends JFrame {
     JPanel datatable = new JPanel();
     datatable.setLayout(new FlowLayout());
     scrollPane.add(datatable);
+    GraphPanel gp = null;
+     GraphPanel gp2 = null;
     
-    
-    
-    
-    
-    
-    
+    if (nvq.getId() == 0)
+    {
+       gp = new GraphPanel(nqrs,nvq,2,1);
+       gp = new GraphPanel(nqrs,nvq,2,2);
+    }
+    else
+    {
+      gp = new GraphPanel(nqrs,nvq,1,1);
+      gp2 = new GraphPanel(nqrs,nvq,1,2);
+    }
     tabbedPane.addTab( "Data", scrollPane);
-    tabbedPane.addTab( "Grafiek", datatable);
+    tabbedPane.addTab( "Grafiek (Staaf diagram)", gp);
+    tabbedPane.addTab( "Grafiek (Taart diagram)", gp2);
     add(tabbedPane);
   }
 
