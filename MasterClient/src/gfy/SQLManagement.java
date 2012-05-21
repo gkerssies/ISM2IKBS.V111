@@ -45,24 +45,42 @@ public class SQLManagement extends JFrame implements ActionListener {
     buttonAdd.addActionListener( this );
 
     panel.add( buttonAdd );
-    
-    for (NavQueryPanel nqp : queryPanel) {
+
+    for ( NavQueryPanel nqp : queryPanel ) {
       panel.add( nqp );
     }
 
     setLayout( new GridLayout( 4, 1 ) );
     setContentPane( panel );
-    setSize( 350, 500 );
+    setSize( 500, 500 );
     setResizable( false );
     setTitle( "SQL beheer" );
+    addWindowListener( new autoCloseOnSaveAuthorizationHandler( connection, nqo, this ) );
     setLocationRelativeTo( getRootPane() );
     setVisible( true );
+  }
+
+  /**
+   * Get the maximun id of the NavQueries.
+   *
+   * @return int maximum id
+   */
+  public int getMaxId() {
+    int i = 0;
+
+    for ( NavQuery nq : nqo.getNavQueries() ) {
+      if ( nq.getId() > i ) {
+        i = nq.getId();
+      }
+    }
+
+    return i;
   }
 
   @Override
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonAdd ) {
-      JFrame frame = new AddNavQuery( this );
+      JFrame frame = new AddNavQuery( this, nqo );
     }
   }
 }
