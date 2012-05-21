@@ -11,12 +11,20 @@ public class autoCloseOnSaveAuthorizationHandler implements WindowListener {
 
   private AuthorizationManagement am;
   private User user;
+  private SQLManagement sqlm;
+  private NavQueryOverview nqo;
   private ClientConnection connection;
 
   public autoCloseOnSaveAuthorizationHandler( ClientConnection connection, User user, AuthorizationManagement am ) {
     this.connection = connection;
     this.user = user;
     this.am = am;
+  }
+  
+  public autoCloseOnSaveAuthorizationHandler(ClientConnection connection, NavQueryOverview nqo, SQLManagement sqlm) {
+    this.connection = connection;
+    this.nqo = nqo;
+    this.sqlm = sqlm;
   }
 
   @Override
@@ -25,7 +33,12 @@ public class autoCloseOnSaveAuthorizationHandler implements WindowListener {
 
   @Override
   public void windowClosing( WindowEvent e ) {
-    connection.setUser( user );
+    if (user != null) {
+      connection.setUser( user );
+    }
+    else if (nqo != null) {
+      connection.setQueryOverview( nqo );
+    }
   }
 
   @Override

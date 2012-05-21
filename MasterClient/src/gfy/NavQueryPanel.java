@@ -2,7 +2,9 @@ package gfy;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
@@ -12,14 +14,16 @@ import javax.swing.*;
  *
  * @author Gerjan Kerssies
  */
-public class NavQueryPanel extends JPanel {
+public class NavQueryPanel extends JPanel implements ActionListener {
 
+  private JPanel panelText, panelButtons;
   private JLabel title, description;
   private JButton buttonEdit, buttonDelete;
-  private ImageIcon editIcon = new ImageIcon( "./resources/images/status-red.png" );
-  private ImageIcon deleteIcon = new ImageIcon( "./resources/images/status-red.png" );
+  private ImageIcon editIcon = new ImageIcon( "./resources/images/bewerken.gif" );
+  private ImageIcon deleteIcon = new ImageIcon( "./resources/images/verwijderen.gif" );
   private NavQuery navQuery;
-  private JFrame frame;
+  private NavQueryOverview nqo;
+  private SQLManagement frame;
 
   /**
    * Constructor for the NavQueryPanel class.
@@ -27,25 +31,48 @@ public class NavQueryPanel extends JPanel {
    * @param navQuery the NavQuery
    * @param frame    the frame where this panel is inside
    */
-  public NavQueryPanel( NavQuery navQuery, JFrame frame ) {
+  public NavQueryPanel( NavQuery navQuery, SQLManagement frame, NavQueryOverview nqo ) {
     this.navQuery = navQuery;
+    this.nqo = nqo;
     this.frame = frame;
+    System.out.println( this.navQuery.getId() );
+    panelText = new JPanel();
+    panelText.setPreferredSize( new Dimension( 350, 50 ) );
+    panelButtons = new JPanel();
+    panelButtons.setPreferredSize( new Dimension( 20, 50 ) );
+    panelButtons = new JPanel();
+
+    add( panelText );
+    add( panelButtons );
 
     title = new JLabel( this.navQuery.getTitle() );
     description = new JLabel( this.navQuery.getDescription() );
 
-    buttonEdit = new JButton(editIcon);
-    buttonEdit.addActionListener( ( ActionListener ) frame );
+    buttonEdit = new JButton( editIcon );
+    buttonEdit.addActionListener( ( ActionListener ) this );
 
-    buttonDelete = new JButton(deleteIcon);
-    buttonDelete.addActionListener( ( ActionListener ) frame );
+    if ( this.navQuery.isBuiltInQuery() == false ) {
+      buttonDelete = new JButton( deleteIcon );
+      buttonDelete.addActionListener( ( ActionListener ) this );
+    }
 
-    add( title );
-    add( buttonEdit );
-    add( description );
-    add( buttonDelete );
+    panelText.add( title );
+    panelText.add( description );
 
-    setLayout( new GridLayout( 2, 2 ) );
-    setPreferredSize( new Dimension( 330, 60 ) );
+    panelButtons.add( buttonEdit );
+    if ( this.navQuery.isBuiltInQuery() == false ) {
+      panelButtons.add( buttonDelete );
+    }
+
+    setLayout( new FlowLayout() );
+  }
+
+  @Override
+  public void actionPerformed( ActionEvent e ) {
+    if ( e.getSource() == buttonEdit ) {
+      JFrame editFrame = new EditNavQuery( frame, nqo, this.navQuery );
+    } else if ( e.getSource() == buttonDelete ) {
+      DeleteNavQuery deleteFrame = new DeleteNavQuery( frame, nqo, this.navQuery );
+    }
   }
 }
