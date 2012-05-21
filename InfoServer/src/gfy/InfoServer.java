@@ -95,7 +95,7 @@ public class InfoServer extends JFrame {
       navision = new NavQueryOverview();
       NavQuery navGebruikers = new NavQuery( 0, "Aantal Klanten", "per serviceregiocode en plaats", "SELECT [Service Zone Code] AS [Serviceregiocode],[City] AS [Plaats],COUNT(*) AS [Aantal klanten]FROM [Demo Database NAV (5-0)].[dbo].[CRONUS Nederland BV$Customer] GROUP BY [Service Zone Code],[City] ORDER BY [Serviceregiocode],[Plaats]" );
       
-      NavQuery navBedrijf = new NavQuery( 1, "Aantal klanten ", "per verkoper", "SELECT COUNT(*) AS [Aantal klanten] FROM [Demo Database NAV (5-0)].[dbo].[CRONUS Nederland BV$Customer] WHERE [Salesperson Code] IS NOT NULL;" );
+      NavQuery navBedrijf = new NavQuery( 1, "Aantal klanten ", "per verkoper", "SELECT [CRONUS Nederland BV$Salesperson_Purchaser].Name as Naam, COUNT([CRONUS Nederland BV$Customer].Name) AS Aantal FROM [CRONUS Nederland BV$Customer] INNER JOIN [CRONUS Nederland BV$Salesperson_Purchaser] ON [CRONUS Nederland BV$Customer].[Salesperson Code] = [CRONUS Nederland BV$Salesperson_Purchaser].Code GROUP BY [CRONUS Nederland BV$Salesperson_Purchaser].Code ,[CRONUS Nederland BV$Salesperson_Purchaser].Name" );
       NavQuery navCountCustomers1 = new NavQuery( 2, "Soorten rekeningen", "per leverancier", "SELECT [Vendor].[Name] AS [Leverancier], COUNT(Code) AS [Aantal soorten bankrekeningen] FROM [Demo Database NAV (5-0)].[dbo].[CRONUS Nederland BV$Vendor Bank Account] AS [Vendor Bank Account] JOIN [Demo Database NAV (5-0)].[dbo].[CRONUS Nederland BV$Vendor] AS [Vendor] ON [Vendor Bank Account].[Vendor No_] = [Vendor].[No_] GROUP BY	[Vendor].[Name]" );
       navision.addNavQuery( navGebruikers );
       navision.addNavQuery( navBedrijf );
