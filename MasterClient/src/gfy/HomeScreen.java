@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 /**
+ * Creates the HomeScreen JFrame. From this frame, other frames can be opened.
  *
  * @author Gerjan Kerssies
  * @version 0.1 - 26-04-2012
@@ -19,11 +20,20 @@ public class HomeScreen extends JFrame implements ActionListener {
 
   private JMenuBar menuBar;
   private JMenu menuClient, menuServer, menuInfo;
-  private JMenuItem itemClient, itemServer, itemInfo, itemServerStop;
+  private JMenuItem itemClient, itemSettings, itemLog, itemBackup, itemInfo, itemServerStop;
   private JPanel panel;
   private JButton buttonAuth, buttonSQL,ButtonBackupRestore;
   private ClientConnection clientConnection;
 
+  private JButton buttonAuth, buttonSQL;
+  private ClientConnection clientConnection;
+
+  /**
+   * Constructor for the HomeScreen class. Add all components to the JFrame,
+   * including panels.
+   *
+   * @param clientconnection the connection Object with the client.
+   */
   public HomeScreen( ClientConnection clientconnection ) {
     this.clientConnection = clientconnection;
 
@@ -40,11 +50,17 @@ public class HomeScreen extends JFrame implements ActionListener {
     menuClient.add( itemClient );
 
     menuServer = new JMenu( "Server" );
-    itemServer = new JMenuItem( "Server" );
+    itemSettings = new JMenuItem( "Serverinstellingen" );
+    itemLog = new JMenuItem( "Serverlog" );
+    itemBackup = new JMenuItem( "Backup en herstel" );
     itemServerStop = new JMenuItem( "Stop Server" );
-    itemServer.addActionListener( this );
+    itemSettings.addActionListener( this );
+    itemLog.addActionListener( this );
+    itemBackup.addActionListener( this );
     itemServerStop.addActionListener( this );
-    menuServer.add( itemServer );
+    menuServer.add( itemSettings );
+    menuServer.add( itemLog );
+    menuServer.add( itemBackup );
     menuServer.add( itemServerStop );
 
     menuInfo = new JMenu( "Info" );
@@ -104,6 +120,12 @@ public class HomeScreen extends JFrame implements ActionListener {
       System.out.println( "itemClient" );
     } else if ( e.getSource() == itemServer ) {
       InfoFrame frame = new InfoFrame(clientConnection);
+    } else if ( e.getSource() == itemSettings ) {
+      JFrame frame = new ServerSettings( clientConnection );
+    } else if ( e.getSource() == itemLog ) {
+      System.out.println( "itemLog" );
+    } else if ( e.getSource() == itemBackup ) {
+      new BackupScreen( clientConnection );
     } else if ( e.getSource() == itemServerStop ) {
       closeServer();
     } else if ( e.getSource() == itemInfo ) {
@@ -112,12 +134,16 @@ public class HomeScreen extends JFrame implements ActionListener {
       JFrame frame = new AuthorizationManagement( clientConnection );
     } else if ( e.getSource() == buttonSQL ) {
       JFrame frame = new ServerSettings( clientConnection );
-    }
-    else if ( e.getSource() == ButtonBackupRestore ) {
+    } else if ( e.getSource() == ButtonBackupRestore ) {
      new BackupScreen(clientConnection);
+      JFrame frame = new SQLManagement( clientConnection );
     }
   }
 
+  /**
+   * Closes the server. After the 'Yes' button is clicked, the server will be
+   * stopped en closed.
+   */
   public void closeServer() {
     int allowToStopServer = JOptionPane.showConfirmDialog(
             this,

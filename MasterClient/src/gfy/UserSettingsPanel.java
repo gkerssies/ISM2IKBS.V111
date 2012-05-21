@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
+ * Creates a JPanel with all the input fields to add or edit a user. This panel
+ * is used by JFrame AddUser and EditUser.
  *
  * @author Gerjan Kerssies
  */
@@ -12,12 +14,21 @@ public class UserSettingsPanel extends JPanel {
 
   private JPanel panelLabels, panelInput, panelButtons;
   private JLabel label1, label2, label3, label4;
-  private JTextField username, password, confirmPassword;
+  private JTextField username;
+  private JPasswordField password, confirmPassword;
   private JComboBox userType;
   private JButton buttonCancel, buttonSave;
   private JFrame frame;
   private User user;
 
+  /**
+   * Constructor for the UserSettingsPanel class.
+   *
+   * @param user     the User object
+   * @param action   the action of the panel (can be addUser or editUser)
+   * @param frame    the frame where this panel is inside
+   * @param username (only if action is editUser)
+   */
   public UserSettingsPanel( User user, String action, JFrame frame, String username ) {
     this.user = user;
 
@@ -42,8 +53,8 @@ public class UserSettingsPanel extends JPanel {
     label4.setPreferredSize( new Dimension( 130, 20 ) );
 
     this.username = new JTextField( 15 );
-    password = new JTextField( 15 );
-    confirmPassword = new JTextField( 15 );
+    password = new JPasswordField( 15 );
+    confirmPassword = new JPasswordField( 15 );
 
     String[] types = { "gebruiker", "beheerder" };
     userType = new JComboBox( types );
@@ -88,39 +99,42 @@ public class UserSettingsPanel extends JPanel {
   }
 
   /**
-   * @return the username
+   * @return the username (JTextField)
    */
   public JTextField getUsername() {
     return username;
   }
 
   /**
-   * @return the password
+   * @return the password (JTextField)
    */
   public JTextField getPassword() {
     return password;
   }
 
   /**
-   * @return the confirmPassword
+   * @return the confirmPassword (JTextField)
    */
   public JTextField getConfirmPassword() {
     return confirmPassword;
   }
 
   /**
-   * @return the userType
+   * @return the userType (JComboBox)
    */
   public JComboBox getUserType() {
     return userType;
   }
 
+  /**
+   * @return the buttonSave (JButton)
+   */
   public JButton getButtonSave() {
     return buttonSave;
   }
 
   /**
-   * @return the buttonCancel
+   * @return the buttonCancel (JButton)
    */
   public JButton getButtonCancel() {
     return buttonCancel;

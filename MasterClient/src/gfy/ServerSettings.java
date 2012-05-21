@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
+ * Creates a JFrame which can edit the server settings.
  *
  * @author Gerjan Kerssies
  * @version 0.1 - 03-05-2012
@@ -21,6 +22,12 @@ public class ServerSettings extends JFrame implements ActionListener {
   private Database databasesettings;
   private ClientConnection connection;
 
+  /**
+   * Constructor for the ServerSettings class. Add all components to the JFrame,
+   * including panels.
+   *
+   * @param connection the connection Object with the client
+   */
   public ServerSettings( ClientConnection connection ) {
     this.databasesettings = connection.getDatabase();
     this.connection = connection;

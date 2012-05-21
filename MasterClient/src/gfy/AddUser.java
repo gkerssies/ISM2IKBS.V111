@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 /**
+ * Creates a JFrame which a user can be added.
  *
  * @author Gerjan Kerssies
  */
@@ -15,6 +16,12 @@ public class AddUser extends JFrame implements ActionListener {
   private AuthorizationManagement authorizationManagement;
   private UserSettingsPanel panel;
 
+  /**
+   * Constructor for the AddUser class.
+   *
+   * @param user                    the User object
+   * @param authorizationManagement the AuthorizationManagement object
+   */
   public AddUser( User user, AuthorizationManagement authorizationManagement ) {
     this.user = user;
     this.authorizationManagement = authorizationManagement;
@@ -29,6 +36,9 @@ public class AddUser extends JFrame implements ActionListener {
     setVisible( true );
   }
 
+  /**
+   * Save the new user to the User object.
+   */
   public void save() {
     if ( panel.getUserType().getSelectedItem() == "beheerder" ) {
       user.addUser( panel.getUsername().getText(), panel.getPassword().getText(), UserType.beheerder );
