@@ -84,4 +84,21 @@ public class Config {
   public void setNavqueryoverview( NavQueryOverview navqueryoverview ) {
     this.navqueryoverview = navqueryoverview;
   }
+  
+  /**
+   * Check os version
+   * @return if the os is windows or mac
+   */
+   public static int checkWinMac(){
+        String os   = System.getProperty("os.name");
+        
+        if(os.startsWith("Win", 0)){
+            return 1;
+        } else if(os.startsWith("Mac", 0)){
+            return 2;
+        } else{
+            return 0;
+        }
+    }
+  
 }

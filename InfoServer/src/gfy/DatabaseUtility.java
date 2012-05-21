@@ -26,11 +26,22 @@ public class DatabaseUtility {
    */
   public DatabaseUtility( Database database ) {
     this.database = database;
-    this.connectionstring = "jdbc:sqlserver://" + database.getHost() + ":" + database.getPort() + ";databaseName=" + ";integratedSecurity=false;";
-
+    
+    String con = "";
+    
+    if ( Config.checkWinMac() == 1 ) {
+        con = "jdbc:sqlserver://";
+      } else if ( Config.checkWinMac() == 2 ) {
+        con = "jdbc:jtds:sqlserver://";
+      }
+    
+    this.connectionstring = con + database.getHost() + ":" + database.getPort() + ";databaseName=" + ";integratedSecurity=false;";
     try {
-      Class.forName( "com.microsoft.sqlserver.jdbc.SQLServerDriver" );
-      connection = DriverManager.getConnection( connectionstring, database.getUsername(), database.getPassword() );
+      if ( Config.checkWinMac() == 1 ) {
+        Class.forName( "com.microsoft.sqlserver.jdbc.SQLServerDriver" );
+      } else if ( Config.checkWinMac() == 2 ) {
+        Class.forName( "net.sourceforge.jtds.jdbc.Driver" );
+      }
     } catch ( Exception ex ) {
       Log.addItem( "SQL connectie fout", ex.getMessage(), "Fout tijdens verbinden sql", LogType.Error );
       System.out.println( ex.getMessage() );
