@@ -99,24 +99,27 @@ public class GraphPanel extends JPanel {
       for ( int y = 0; y < t.size(); y++ ) {
         String title = "";
         Double value = 150.00;
-        if ( y == 0 ) {
+        if ( y == 1 ) {
           title = t.get( y );
         }
         if ( y == 2 ) {
           value = Double.parseDouble( t.get( y ) );
           GraphItem gi = new GraphItem( title, value, getRandomColor() );
           graphItem.add( gi );
+          System.out.println(value);
         }
 
 
       }
 
     }
-
+    
     BarChart bc = new BarChart(nvq.getTitle(), graphItem );
+     System.out.println(graphItem);
     Legend lg = new Legend( graphItem );
     this.add( lg, BorderLayout.SOUTH );
     this.add( bc, BorderLayout.CENTER );
+    
 
   }
   
@@ -142,7 +145,6 @@ public class GraphPanel extends JPanel {
           sales = Double.parseDouble( t.get( y ) );
           GraphItem gi = new GraphItem( salesman, sales, getRandomColor() );
           graphItem.add( gi );
-          System.out.println( "here " + sales );
         }
 
 

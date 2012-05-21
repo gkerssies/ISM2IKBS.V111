@@ -17,4 +17,9 @@ public class GraphItem {
     this.value = value;
     this.color = color;
   }
+  @Override
+  public String toString()
+  {
+    return this.title + " " + this.value +  " " + this.color;
+  }
 }
