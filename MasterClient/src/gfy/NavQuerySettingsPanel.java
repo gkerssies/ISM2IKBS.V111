@@ -18,6 +18,7 @@ public class NavQuerySettingsPanel extends JPanel {
   private JTextArea description, query;
   private JButton buttonCancel, buttonSave;
   private JFrame frame;
+  private NavQuery nquery;
 
   /**
    * Constructor for the NavQuerySettingsPanel class.
@@ -25,9 +26,11 @@ public class NavQuerySettingsPanel extends JPanel {
    * @param action the action of the panel (can be addNavQuery or editNavQuery)
    * @param frame  the frame where this panel is inside
    * @param id     the id of the NavQuery to edit
+   * @param nquery         the NavQuery to edit
    */
-  public NavQuerySettingsPanel( String action, JFrame frame, int id ) {
+  public NavQuerySettingsPanel( String action, JFrame frame, NavQuery nquery ) {
     this.frame = frame;
+    this.nquery = nquery;
 
     panelLabels = new JPanel();
     panelLabels.setPreferredSize( new Dimension( 100, 205 ) );
@@ -53,6 +56,9 @@ public class NavQuerySettingsPanel extends JPanel {
     query.setLineWrap( true );
 
     if ( action.equals( "editNavQuery" ) ) {
+      title.setText( this.nquery.getTitle() );
+      description.setText( this.nquery.getDescription() );
+      query.setText( this.nquery.getSqlquery() );
     }
 
     buttonCancel = new JButton();
