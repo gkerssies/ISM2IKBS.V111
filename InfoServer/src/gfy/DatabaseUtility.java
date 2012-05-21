@@ -35,16 +35,19 @@ public class DatabaseUtility {
         con = "jdbc:jtds:sqlserver://";
       }
     
-    this.connectionstring = con + database.getHost() + ":" + database.getPort() + ";databaseName=" + ";integratedSecurity=false;";
+    this.connectionstring = con + database.getHost() + ":" + database.getPort() + ";databaseName=" + database.getName() + ";integratedSecurity=false;";
     try {
       if ( Config.checkWinMac() == 1 ) {
         Class.forName( "com.microsoft.sqlserver.jdbc.SQLServerDriver" );
       } else if ( Config.checkWinMac() == 2 ) {
         Class.forName( "net.sourceforge.jtds.jdbc.Driver" );
       }
+      connection = DriverManager.getConnection( connectionstring, database.getUsername(), database.getPassword() );
     } catch ( Exception ex ) {
+      System.out.println(this.connectionstring);
       Log.addItem( "SQL connectie fout", ex.getMessage(), "Fout tijdens verbinden sql", LogType.Error );
       System.out.println( ex.getMessage() );
+      System.out.println(hasConnection());
     }
   }
 
@@ -68,6 +71,7 @@ public class DatabaseUtility {
       resultset  = stmt.executeQuery(Query);
       return resultset;
     } catch ( Exception ex ) {
+      System.out.println(this.connectionstring);
       Log.addItem( "SQL query fout", Query, Query, LogType.Info );
       return null;
 
