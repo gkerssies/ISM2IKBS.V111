@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -16,6 +17,9 @@ public class SQLManagement extends JFrame implements ActionListener {
   private JPanel panel;
   private JButton buttonAdd;
   private ClientConnection connection;
+  private NavQueryOverview nqo;
+  private ArrayList<NavQueryPanel> queryPanel;
+  private int index;
 
   /**
    * Constructor for the SQLManagement class.
@@ -24,6 +28,14 @@ public class SQLManagement extends JFrame implements ActionListener {
    */
   public SQLManagement( ClientConnection connection ) {
     this.connection = connection;
+    nqo = connection.getNavisionQueryOverview();
+    queryPanel = new ArrayList<NavQueryPanel>();
+
+    for ( NavQuery nq : nqo.getNavQueries() ) {
+      NavQueryPanel navQueryPanel = new NavQueryPanel( nq, this );
+      queryPanel.add( index, navQueryPanel );
+      index++;
+    }
 
     panel = new JPanel();
 
@@ -33,6 +45,10 @@ public class SQLManagement extends JFrame implements ActionListener {
     buttonAdd.addActionListener( this );
 
     panel.add( buttonAdd );
+    
+    for (NavQueryPanel nqp : queryPanel) {
+      panel.add( nqp );
+    }
 
     setLayout( new GridLayout( 4, 1 ) );
     setContentPane( panel );
