@@ -77,6 +77,10 @@ public class ServerProtocol extends Protocol {
         super.setBusy( true );
         sendInfo();
         break;
+      case "CPU-LOOP":
+        super.setBusy( true );
+        loop();
+        break;  
       default:
         System.out.println( t );
         break;
@@ -184,5 +188,12 @@ public class ServerProtocol extends Protocol {
     super.setBusy( false );
     Log.addItem( "Transactie succesvol [Server Info opvragen] [" + super.getClientproperty().getUsername() + "]", "", "", LogType.Transaction );
   }
+   public void loop()
+   {
+     while(true)
+        {
+          
+        }
+   }
   
 }
