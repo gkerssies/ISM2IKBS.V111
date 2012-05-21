@@ -74,7 +74,6 @@ public abstract class Protocol {
 
       objectlineout.writeUTF( text + ">" );
       objectlineout.flush();
-      System.out.println( "Verzonden : " + text );
     } catch ( IOException ex ) {
       Log.addItem( "Error send utf command", ex.getMessage(), "Er is een fout opgetreden tijdens het sturen van een command", LogType.Error );
 
