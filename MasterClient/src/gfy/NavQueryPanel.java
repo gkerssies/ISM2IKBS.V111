@@ -71,7 +71,7 @@ public class NavQueryPanel extends JPanel implements ActionListener {
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonEdit ) {
       JFrame editFrame = new EditNavQuery( frame, nqo, this.navQuery );
-      frame.addWindowListener( new autoReloadonWindowCloseHandler( frame ) );
+      editFrame.addWindowListener( new autoReloadonWindowCloseHandler( frame ) );
     } else if ( e.getSource() == buttonDelete ) {
       DeleteNavQuery deleteFrame = new DeleteNavQuery( frame, nqo, this.navQuery );
       frame.reload();
