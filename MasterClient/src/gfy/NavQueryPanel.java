@@ -35,7 +35,7 @@ public class NavQueryPanel extends JPanel implements ActionListener {
     this.navQuery = navQuery;
     this.nqo = nqo;
     this.frame = frame;
-    System.out.println( this.navQuery.getId() );
+
     panelText = new JPanel();
     panelText.setPreferredSize( new Dimension( 350, 50 ) );
     panelButtons = new JPanel();
@@ -71,8 +71,10 @@ public class NavQueryPanel extends JPanel implements ActionListener {
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonEdit ) {
       JFrame editFrame = new EditNavQuery( frame, nqo, this.navQuery );
+      frame.addWindowListener( new autoReloadonWindowCloseHandler( frame ) );
     } else if ( e.getSource() == buttonDelete ) {
       DeleteNavQuery deleteFrame = new DeleteNavQuery( frame, nqo, this.navQuery );
+      frame.reload();
     }
   }
 }
