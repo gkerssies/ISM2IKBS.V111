@@ -14,6 +14,7 @@ public class NavQuery implements Serializable {
   private String description;
   private String sqlQuery;
   private boolean builtInQuery;
+
   /**
    * Constructor for the NavQuery class.
    *
@@ -21,7 +22,7 @@ public class NavQuery implements Serializable {
    * @param title       the title from the NavQuery object
    * @param description the description from the NavQuery object
    */
-  public NavQuery( int id, String title, String description,String navqry,boolean builtin) {
+  public NavQuery( int id, String title, String description, String navqry, boolean builtin ) {
     this.id = id;
     this.title = title;
     this.description = description;
@@ -82,6 +83,13 @@ public class NavQuery implements Serializable {
    */
   public String getSqlquery() {
     return sqlQuery;
+  }
+
+  /**
+   * @param builtin buildin query
+   */
+  public void setBuildInQuery( boolean builtin ) {
+    this.builtInQuery = builtin;
   }
 
   /**
