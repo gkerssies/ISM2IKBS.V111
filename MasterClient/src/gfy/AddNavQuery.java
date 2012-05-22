@@ -11,7 +11,7 @@ import javax.swing.*;
  * @author Gerjan Kerssies
  */
 public class AddNavQuery extends JFrame implements ActionListener {
-
+  
   private SQLManagement sqlManagement;
   private NavQuerySettingsPanel panel;
   private NavQueryOverview nqo;
@@ -25,9 +25,9 @@ public class AddNavQuery extends JFrame implements ActionListener {
   public AddNavQuery( SQLManagement sqlManagement, NavQueryOverview nqo ) {
     this.sqlManagement = sqlManagement;
     this.nqo = nqo;
-
+    
     panel = new NavQuerySettingsPanel( "addNavQuery", this, null );
-
+    
     setLayout( new GridLayout( 4, 1 ) );
     setContentPane( panel );
     setSize( 310, 280 );
@@ -54,12 +54,13 @@ public class AddNavQuery extends JFrame implements ActionListener {
       return false;
     } else {
       int id = sqlManagement.getMaxId() + 1;
-      NavQuery nq = new NavQuery( id, panel.getTitle().getText(), panel.getDescription().getText(), panel.getQuery().getText(),false );
+      NavQuery nq = new NavQuery( id, panel.getTitle().getText(), panel.getDescription().getText(), panel.getQuery().getText(), false );
+      nq.setBuildInQuery( false );
       nqo.addNavQuery( nq );
       return true;
     }
   }
-
+  
   @Override
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == panel.getButtonCancel() ) {
