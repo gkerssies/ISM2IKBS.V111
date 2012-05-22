@@ -26,7 +26,11 @@ public class autoReloadonWindowCloseHandler implements WindowListener {
 
   @Override
   public void windowClosing( WindowEvent e ) {
-    authman.reload();
+    if ( authman != null ) {
+      authman.reload();
+    } else if ( sqlman != null ) {
+      sqlman.reload();
+    }
   }
 
   @Override
