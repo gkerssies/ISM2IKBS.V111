@@ -54,7 +54,7 @@ public class AddNavQuery extends JFrame implements ActionListener {
       return false;
     } else {
       int id = sqlManagement.getMaxId() + 1;
-      NavQuery nq = new NavQuery( id, panel.getTitle().getText(), panel.getDescription().getText(), panel.getQuery().getText() );
+      NavQuery nq = new NavQuery( id, panel.getTitle().getText(), panel.getDescription().getText(), panel.getQuery().getText(),false );
       nqo.addNavQuery( nq );
       return true;
     }
