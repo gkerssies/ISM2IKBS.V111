@@ -21,11 +21,12 @@ public class NavQuery implements Serializable {
    * @param title       the title from the NavQuery object
    * @param description the description from the NavQuery object
    */
-  public NavQuery( int id, String title, String description,String navqry) {
+  public NavQuery( int id, String title, String description,String navqry,boolean builtin) {
     this.id = id;
     this.title = title;
     this.description = description;
     this.sqlQuery = navqry;
+    this.builtInQuery = true;
   }
 
   /**
