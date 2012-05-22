@@ -70,6 +70,14 @@ public class NavQuery implements Serializable {
   }
 
   /**
+   *
+   * @param query the query from the NavQuery object
+   */
+  public void setSqlquery( String query ) {
+    sqlQuery = query;
+  }
+
+  /**
    * @return the sqlQuery
    */
   public String getSqlquery() {

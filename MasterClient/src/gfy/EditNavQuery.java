@@ -53,7 +53,7 @@ public class EditNavQuery extends JFrame implements ActionListener {
       JOptionPane.showMessageDialog( panel, "Query veld kan niet leeg zijn", "Validatie fout", JOptionPane.INFORMATION_MESSAGE );
       return false;
     } else {
-
+      nqo.editNavQuery( query.getId(), panel.getTitle().getText(), panel.getDescription().getText(), panel.getQuery().getText());
       return true;
     }
   }

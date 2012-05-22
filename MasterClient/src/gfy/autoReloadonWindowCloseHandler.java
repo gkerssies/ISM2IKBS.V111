@@ -10,9 +10,14 @@ import java.awt.event.WindowListener;
 public class autoReloadonWindowCloseHandler implements WindowListener {
 
   private AuthorizationManagement authman;
+  private SQLManagement sqlman;
 
   public autoReloadonWindowCloseHandler( AuthorizationManagement authman ) {
     this.authman = authman;
+  }
+
+  public autoReloadonWindowCloseHandler( SQLManagement sqlman ) {
+    this.sqlman = sqlman;
   }
 
   @Override
@@ -26,7 +31,11 @@ public class autoReloadonWindowCloseHandler implements WindowListener {
 
   @Override
   public void windowClosed( WindowEvent e ) {
-    authman.reload();
+    if ( authman != null ) {
+      authman.reload();
+    } else if ( sqlman != null ) {
+      sqlman.reload();
+    }
   }
 
   @Override
@@ -50,5 +59,12 @@ public class autoReloadonWindowCloseHandler implements WindowListener {
    */
   public AuthorizationManagement getAuthman() {
     return authman;
+  }
+
+  /**
+   * @return the authman
+   */
+  public SQLManagement getSqlman() {
+    return sqlman;
   }
 }

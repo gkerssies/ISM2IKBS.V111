@@ -27,11 +27,19 @@ public class SQLManagement extends JFrame implements ActionListener {
    * @param connection the connection Object with the client
    */
   public SQLManagement( ClientConnection connection ) {
+    setDefaultCloseOperation( DISPOSE_ON_CLOSE );
     this.connection = connection;
     nqo = connection.getNavisionQueryOverview();
     queryPanel = new ArrayList<NavQueryPanel>();
+    buildView();
+  }
 
+  /**
+   * Add all components to the JFrame, including panels.
+   */
+  public void buildView() {
     for ( NavQuery nq : nqo.getNavQueries() ) {
+      System.out.println( "hier" );
       NavQueryPanel navQueryPanel = new NavQueryPanel( nq, this, nqo );
       queryPanel.add( index, navQueryPanel );
       index++;
@@ -81,6 +89,15 @@ public class SQLManagement extends JFrame implements ActionListener {
   public void actionPerformed( ActionEvent e ) {
     if ( e.getSource() == buttonAdd ) {
       JFrame frame = new AddNavQuery( this, nqo );
+      frame.addWindowListener( new autoReloadonWindowCloseHandler( this ) );
     }
+  }
+
+  /**
+   * Reloads the panel.
+   */
+  public void reload() {
+    new SQLManagement( connection );
+    this.dispose();
   }
 }
