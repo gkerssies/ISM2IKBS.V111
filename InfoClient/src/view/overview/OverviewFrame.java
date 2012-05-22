@@ -79,7 +79,7 @@ public class OverviewFrame extends JFrame {
 
         //   System.out.println( "button inside QueryPanel " + id + " was clicked." );
         String t = Integer.toString( id );
-        NavQuery current = new NavQuery( id, "", "", "" );
+        NavQuery current = new NavQuery( id, "", "", "",false );
         for ( NavQuery nq : clientconnection.getNavisionQueryOverview().getNavQueries() ) {
           if ( nq.getId() == id ) {
             current = nq;
