@@ -32,6 +32,16 @@ public class NavQueryOverview implements Serializable {
    *
    * @param nq object with detailed query data
    */
+  public void editNavQuery( int index, String title, String description, String query ) {
+    getNavQueries().get( index ).setTitle( title );
+    getNavQueries().get( index ).setTitle( description );
+    getNavQueries().get( index ).setSqlquery( query );
+  }
+
+  /**
+   *
+   * @param nq object with detailed query data
+   */
   public void deleteNavQuery( NavQuery nq ) {
     getNavQueries().remove( nq );
   }
