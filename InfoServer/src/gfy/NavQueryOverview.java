@@ -34,7 +34,7 @@ public class NavQueryOverview implements Serializable {
    */
   public void editNavQuery( int index, String title, String description, String query ) {
     getNavQueries().get( index ).setTitle( title );
-    getNavQueries().get( index ).setTitle( description );
+    getNavQueries().get( index ).setDescription( description );
     getNavQueries().get( index ).setSqlquery( query );
   }
 
